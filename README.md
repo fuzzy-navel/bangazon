@@ -5,11 +5,7 @@
 
 The one and only, Bangazon!
 
----
-
 ## Technology
-
----
 
 * C#
 
