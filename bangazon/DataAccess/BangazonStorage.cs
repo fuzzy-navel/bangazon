@@ -40,5 +40,24 @@ namespace bangazon.DataAccess
                 return ProductTypes;
             }
         }
+
+        public string GetProductTypeById(int id)
+        {
+            using (var db = new SqlConnection(ConnectionInfo))
+            {
+                db.Open();
+
+                var command = db.CreateCommand();
+                command.CommandText = @"SELECT *
+                                        FROM product_types
+                                        WHERE id = @id";
+
+                command.Parameters.AddWithValue("@id", id);
+
+                var categoryName = command.ExecuteScalar().ToString();
+
+                return categoryName;
+            }
+        }
     }
 }
