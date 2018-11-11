@@ -15,6 +15,17 @@ namespace bangazon.Controllers
     [Route("api/controller")]
     public class OrderController : ControllerBase
     {
+        private readonly OrderStorage _orders;
 
+        public OrderController(IConfiguration config)
+        {
+            _orders = new OrderStorage(config);
+        }
+
+        [HttpGet("orders")]
+        public IActionResult GetOrders()
+        {
+            return Ok(_orders.GetOrders());
+        }
     }
 }
