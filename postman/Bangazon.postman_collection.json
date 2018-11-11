@@ -53,6 +53,130 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "AddNewProduct()",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://localhost:44398/api/product?category=1&price=101&title=FancyObject234&description=Something great&quantity=32&owner_id=5",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44398",
+					"path": [
+						"api",
+						"product"
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "1"
+						},
+						{
+							"key": "price",
+							"value": "101"
+						},
+						{
+							"key": "title",
+							"value": "FancyObject234"
+						},
+						{
+							"key": "description",
+							"value": "Something great"
+						},
+						{
+							"key": "quantity",
+							"value": "32"
+						},
+						{
+							"key": "owner_id",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCustomers()",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://localhost:44398/api/customer",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44398",
+					"path": [
+						"api",
+						"customer"
+					]
+				},
+				"description": "Gets all the customers"
+			},
+			"response": []
+		},
+		{
+			"name": "GetCustomerById()",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://localhost:44398/api/customer/5",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44398",
+					"path": [
+						"api",
+						"customer",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllProductTypes()",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://localhost:44398/api/producttype",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44398",
+					"path": [
+						"api",
+						"producttype"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
