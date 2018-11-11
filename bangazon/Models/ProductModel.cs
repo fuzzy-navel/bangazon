@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace bangazon.Models
 {
-    public class ProductModel
+    public class Product
     {
         public int Category { get; set; }
         public decimal Price { get; set; }

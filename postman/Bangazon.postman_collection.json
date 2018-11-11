@@ -1,0 +1,58 @@
+{
+	"info": {
+		"_postman_id": "425c7f53-a8d3-4ec6-9d90-c8eaa1c5c852",
+		"name": "Bangazon",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetAllProducts()",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://localhost:44398/api/product",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44398",
+					"path": [
+						"api",
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetSingleProduct()",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://localhost:44398/api/product/5",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44398",
+					"path": [
+						"api",
+						"product",
+						"5"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
