@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "425c7f53-a8d3-4ec6-9d90-c8eaa1c5c852",
+		"_postman_id": "6d4e8fa5-af0e-465d-97d7-92f26ce055a0",
 		"name": "Bangazon",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -173,6 +173,98 @@
 					"path": [
 						"api",
 						"producttype"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCustomerandProduct()",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://localhost:44398/api/Customer/3?include=products",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44398",
+					"path": [
+						"api",
+						"Customer",
+						"3"
+					],
+					"query": [
+						{
+							"key": "include",
+							"value": "products"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCustomerandPayments",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://localhost:44398/api/Customer/3?include=payments",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44398",
+					"path": [
+						"api",
+						"Customer",
+						"3"
+					],
+					"query": [
+						{
+							"key": "include",
+							"value": "payments"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetCustomerByQuery()",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://localhost:44398/api/customer?q=b",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44398",
+					"path": [
+						"api",
+						"customer"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "b"
+						}
 					]
 				}
 			},
