@@ -23,5 +23,20 @@ namespace bangazon.DataAccess
         return result;
       }
     }
+
+    public IEnumerable<Customer> GetCustomerById(int id)
+    {
+      using (var connection = new SqlConnection(conString))
+      {
+        connection.Open();
+
+        var result = connection.Query<Customer>(@"select * 
+                                from customer as c
+                                where c.id = @id", new {id = id});
+
+        return result;
+      }
+
+    }
   }
 }
