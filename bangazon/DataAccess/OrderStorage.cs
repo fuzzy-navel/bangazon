@@ -31,5 +31,21 @@ namespace bangazon.DataAccess
                 return result1.ToList();
             }
         }
+
+        public List<Order> GetOrderById(int id)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+
+                var result2 = connection.Query<Order>(@"SELECT * 
+                                                       FROM orders as o
+                                                       WHERE o.id = @id" 
+                                                      );
+                return result2.ToList();
+
+            }
+        }
+
     }
 }

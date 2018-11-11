@@ -27,5 +27,11 @@ namespace bangazon.Controllers
         {
             return Ok(_orders.GetOrders());
         }
+
+        [HttpGet("orderById")]
+        public IActionResult GetOrderById(int id)
+        {
+            return Ok(_orders.GetOrderById(id));
+        }
     }
 }
