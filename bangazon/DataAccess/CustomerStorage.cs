@@ -53,5 +53,21 @@ namespace bangazon.DataAccess
         return result;
       }
     }
+
+    public IEnumerable<CustomerandPayment> GetCustomerandPayments(int id)
+    {
+      using (var connection = new SqlConnection(conString))
+      {
+        connection.Open();
+
+        var result = connection.Query<CustomerandPayment>(@"select * 
+                                from customer as c
+                                join payment_type as p
+                                on p.customer_id = c.id
+                                where c.id = @id", new {id = id});
+
+        return result;
+      }
+    }
   }
 }

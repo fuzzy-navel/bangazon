@@ -33,6 +33,10 @@ namespace bangazon.Controllers
         {
           return Ok(_storage.GetCustomerandProduct(id));
         }
+        else if (include == "payments")
+        {
+          return Ok(_storage.GetCustomerandPayments(id));
+        }
         else
         {
           return Ok(_storage.GetCustomerById(id));
