@@ -21,9 +21,16 @@ namespace bangazon.Controllers
       }
 
       [HttpGet]
-      public IActionResult GetCustomers()
+      public IActionResult GetCustomers([FromQuery] string q)
       {
-        return Ok(_storage.GetCustomers());
+        if (q != null)
+        {
+          return Ok(_storage.GetCustomerQuery(q));
+        }
+        else
+        {
+          return Ok(_storage.GetCustomers());
+        }
       }
 
       [HttpGet("{id}")]
@@ -32,6 +39,10 @@ namespace bangazon.Controllers
         if (include == "products")
         {
           return Ok(_storage.GetCustomerandProduct(id));
+        }
+        else if (include == "payments")
+        {
+          return Ok(_storage.GetCustomerandPayments(id));
         }
         else
         {
