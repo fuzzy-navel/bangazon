@@ -36,7 +36,22 @@ namespace bangazon.DataAccess
 
         return result;
       }
+    }
 
+    public IEnumerable<CustomerandProduct> GetCustomerandProduct(int id)
+    {
+      using (var connection = new SqlConnection(conString))
+      {
+        connection.Open();
+
+        var result = connection.Query<CustomerandProduct>(@"select * 
+                                from customer as c
+                                join product as p
+                                on p.owner_id = c.id
+                                where c.id = @id", new {id = id});
+
+        return result;
+      }
     }
   }
 }
