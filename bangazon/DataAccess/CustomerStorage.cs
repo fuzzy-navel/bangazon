@@ -69,5 +69,21 @@ namespace bangazon.DataAccess
         return result;
       }
     }
+
+    public IEnumerable<Customer> GetCustomerQuery(string query)
+    {
+      using (var connection = new SqlConnection(conString))
+      {
+        connection.Open();
+
+        var result = connection.Query<Customer>(@"select * 
+                                from customer as c
+                                where c.first_name Like @query
+	                                or c.last_name Like @query
+	                                or c.active Like @query
+	                                or c.id Like @query", new {query = "%" + query + "%"});
+        return result;
+      }
+    }
   }
 }

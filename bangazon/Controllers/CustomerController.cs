@@ -21,9 +21,16 @@ namespace bangazon.Controllers
       }
 
       [HttpGet]
-      public IActionResult GetCustomers()
+      public IActionResult GetCustomers([FromQuery] string q)
       {
-        return Ok(_storage.GetCustomers());
+        if (q != null)
+        {
+          return Ok(_storage.GetCustomerQuery(q));
+        }
+        else
+        {
+          return Ok(_storage.GetCustomers());
+        }
       }
 
       [HttpGet("{id}")]
