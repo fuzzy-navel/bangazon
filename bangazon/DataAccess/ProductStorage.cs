@@ -33,5 +33,18 @@ namespace bangazon.DataAccess
                 return result;
             }
         }
+
+        public bool AddNewProduct(int category, decimal price, string title, string description, int quantity, int owner_id)
+        {
+            using (var db = new SqlConnection(ConnectionInfo))
+            {
+                db.Open();
+                var result = db.Execute(
+                        @"insert into [dbo].product([category], [price], [title], [description], [quantity], [owner_id])
+                        VALUES (@Category, @Price, @Title, @Description, @Quantity, @Owner_Id)", new {category, price, title, description, quantity, owner_id }
+                );
+                return result == 1;
+            }
+        }
     }
 }

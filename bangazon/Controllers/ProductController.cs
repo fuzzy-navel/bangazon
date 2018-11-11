@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using bangazon.DataAccess;
+using bangazon.Models;
 
 namespace bangazon.Controllers
 {
@@ -30,5 +31,12 @@ namespace bangazon.Controllers
         {
             return Ok(_storage.GetSingleProduct(id));
         }
+
+        [HttpPost]
+        public IActionResult AddNewProduct(int category, decimal price, string title, string description, int quantity, int owner_id)
+        {
+            return Ok(_storage.AddNewProduct(category, price, title, description, quantity, owner_id));
+        }
+
     }
 }
