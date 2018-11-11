@@ -25,5 +25,12 @@ namespace bangazon.Controllers
       {
         return Ok(_storage.GetCustomers());
       }
+
+      [HttpGet("{id}")]
+      public IActionResult GetCustomerById(int id)
+      {
+        return Ok(_storage.GetCustomerById(id));
+      }
+
     }
 }
