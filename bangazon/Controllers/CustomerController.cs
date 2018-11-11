@@ -27,9 +27,16 @@ namespace bangazon.Controllers
       }
 
       [HttpGet("{id}")]
-      public IActionResult GetCustomerById(int id)
+      public IActionResult GetCustomerById(int id, [FromQuery] string include)
       {
-        return Ok(_storage.GetCustomerById(id));
+        if (include == "products")
+        {
+          return Ok(_storage.GetCustomerandProduct(id));
+        }
+        else
+        {
+          return Ok(_storage.GetCustomerById(id));
+        }
       }
 
     }
