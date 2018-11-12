@@ -85,5 +85,19 @@ namespace bangazon.DataAccess
         return result;
       }
     }
+
+    public bool AddCustomer(Customer customer)
+    {
+      using (var connection = new SqlConnection(conString))
+      {
+        connection.Open();
+
+        var result = connection.Execute(@"INSERT INTO [dbo].[customer]([first_name],[last_name],[date_joined],[active])
+                             VALUES (@first_name,@last_name,@date_joined,@active)", customer);
+
+        return result == 1;
+      }
+    }
+
   }
 }
