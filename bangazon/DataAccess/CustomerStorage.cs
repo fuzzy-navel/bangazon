@@ -99,5 +99,19 @@ namespace bangazon.DataAccess
       }
     }
 
+    public bool UpdateCustomer(Customer customer, int id)
+    {
+      using (var connection = new SqlConnection(conString))
+      {
+        connection.Open();
+
+        var result = connection.Execute(@"UPDATE [dbo].[customer]
+                                 SET [first_name] = @first_name, [last_name] = @last_name, [date_joined] = @date_joined, [active] = @active
+                                 WHERE customer.id = @id", new {id, first_name = customer.first_name, last_name = customer.last_name, date_joined = customer.date_joined, active = customer.active});
+
+        return result == 1;
+      }
+    }
+
   }
 }
