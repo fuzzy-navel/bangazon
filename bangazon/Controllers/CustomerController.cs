@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using bangazon.DataAccess;
+using bangazon.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -21,15 +22,39 @@ namespace bangazon.Controllers
       }
 
       [HttpGet]
-      public IActionResult GetCustomers()
+      public IActionResult GetCustomers([FromQuery] string q)
       {
-        return Ok(_storage.GetCustomers());
+        if (q != null)
+        {
+          return Ok(_storage.GetCustomerQuery(q));
+        }
+        else
+        {
+          return Ok(_storage.GetCustomers());
+        }
       }
 
       [HttpGet("{id}")]
-      public IActionResult GetCustomerById(int id)
+      public IActionResult GetCustomerById(int id, [FromQuery] string include)
       {
-        return Ok(_storage.GetCustomerById(id));
+        if (include == "products")
+        {
+          return Ok(_storage.GetCustomerandProduct(id));
+        }
+        else if (include == "payments")
+        {
+          return Ok(_storage.GetCustomerandPayments(id));
+        }
+        else
+        {
+          return Ok(_storage.GetCustomerById(id));
+        }
+      }
+
+      [HttpPost]
+      public IActionResult AddCustomer(Customer customer)
+      {
+        return Ok(_storage.AddCustomer(customer));
       }
 
     }
