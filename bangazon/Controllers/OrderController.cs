@@ -36,55 +36,55 @@ namespace bangazon.Controllers
         }
 
         //#2
-        [HttpGet("orderById")]
+        [HttpGet("orderById/{id}")]
         public IActionResult GetOrderById(int id)
         {
             return Ok(_orders.GetOrderById(id));
         }
 
         // #3
-        [HttpPost("addOrder")]
-        public IActionResult PostOrder(Order order)
-        {
-            var success = _insertOrder.PostOrder(1, true, false, 1);
-            if (success)
-            {
-                return Ok();
-            }
-            else
-            {
-                return BadRequest(new { Message = "Order was not added." });
-            }
-        }
+        //[HttpPost("addOrder")]
+        //public IActionResult PostOrder(Order order)
+        //{
+        //    var success = _insertOrder.PostOrder(1, true, false, 1);
+        //    if (success)
+        //    {
+        //        return Ok();
+        //    }
+        //    else
+        //    {
+        //        return BadRequest(new { Message = "Order was not added." });
+        //    }
+        //}
 
         // #4
-        [HttpPut("updatePayment")]
-        public IActionResult UpdatePaymentType(Order order)
-        {
-            var success = _updatePayment.UpdatePaymentTypeId(1, 2);
-            if (success)
-            {
-                return Ok();
-            }
-            else
-            {
-                return BadRequest(new { Message = "Payment type update was unsuccessful." });
-            }
-        }
+        //[HttpPut("updatePayment")]
+        //public IActionResult UpdatePaymentType(Order order)
+        //{
+        //    var success = _updatePayment.UpdatePaymentTypeId(1, 2);
+        //    if (success)
+        //    {
+        //        return Ok();
+        //    }
+        //    else
+        //    {
+        //        return BadRequest(new { Message = "Payment type update was unsuccessful." });
+        //    }
+        //}
 
         // #5
-        [HttpDelete("deleteOrder")]
-        public IActionResult DeleteOrder(Order order)
-        {
-            var success = _deleteOrder.DeleteOrderById(1);
-            if (success)
-            {
-                return Ok();
-            }
-            else
-            {
-                return BadRequest(new { Message = "No Orders found with that ID." });
-            }
-        }
+        //[HttpDelete("deleteOrder")]
+        //public IActionResult DeleteOrder(Order order)
+        //{
+        //    var success = _deleteOrder.DeleteOrderById(1);
+        //    if (success)
+        //    {
+        //        return Ok();
+        //    }
+        //    else
+        //    {
+        //        return BadRequest(new { Message = "No Orders found with that ID." });
+        //    }
+        //}
     }
 }
