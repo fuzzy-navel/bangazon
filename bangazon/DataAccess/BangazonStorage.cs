@@ -72,5 +72,19 @@ namespace bangazon.DataAccess
                 return result == 1;
             }
         }
+
+        public bool UpdateProductType(string category, int id)
+        {
+            using (var db = new SqlConnection(ConnectionInfo))
+            {
+                db.Open();
+
+                var result = db.Execute(@"Update product_types
+                                          SET category = @Category
+                                          WHERE id = @Id", new { category, id });
+
+                return result == 1;
+            }
+        }
     }
 }

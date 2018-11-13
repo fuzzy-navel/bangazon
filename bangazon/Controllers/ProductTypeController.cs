@@ -37,5 +37,11 @@ namespace bangazon.Controllers
         {
             return Ok(_storage.AddProductType(category));
         }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateProductType([FromBody] string category, int id)
+        {
+            return Ok(_storage.UpdateProductType(category, id));
+        }
     }
 }
