@@ -51,10 +51,6 @@ namespace bangazon.DataAccess
         {
             using (var db = new SqlConnection(ConnectionInfo))
             {
-                //var result = connection.Execute(@"UPDATE [dbo].[customer]
-                //             SET [first_name] = @first_name, [last_name] = @last_name, [date_joined] = @date_joined, [active] = @active
-                //             WHERE customer.id = @id", new { id, first_name = customer.first_name, last_name = customer.last_name, date_joined = customer.date_joined, active = customer.active });
-
                 db.Open();
                 var result = db.Execute(@"UPDATE [dbo].[product]
                     SET [category] = @category, [price] = @price, [title] = @title, [description] = @description, [quantity] = @quantity, [owner_id] = @owner_id
@@ -62,7 +58,15 @@ namespace bangazon.DataAccess
                     new { id, category, price, title, description, quantity, owner_id }
                 );
                 return result == 1;
+            }
+        }
 
+        public bool DeleteProduct(int id)
+        {
+            using (var db = new SqlConnection(ConnectionInfo))
+            {
+                db.Open();
+                var result = db.Execute()
             }
         }
     }

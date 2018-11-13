@@ -54,6 +54,11 @@ namespace bangazon.Controllers
 
         // Delete Product
         // API example: 
+        [HttpDelete("{id}")]
+        public IActionResult DeleteProduct(int id)
+        {
+            return Ok(_storage.DeleteProduct(id));
+        }
 
     }
 }
