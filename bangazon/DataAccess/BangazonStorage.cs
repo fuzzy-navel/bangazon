@@ -79,9 +79,21 @@ namespace bangazon.DataAccess
             {
                 db.Open();
 
-                var result = db.Execute(@"Update product_types
+                var result = db.Execute(@"Update [dbo].product_types
                                           SET category = @Category
                                           WHERE id = @Id", new { category, id });
+
+                return result == 1;
+            }
+        }
+
+        public bool DeleteProductType(int id)
+        {
+            using (var db = new SqlConnection(ConnectionInfo))
+            {
+                db.Open();
+
+                var result = db.Execute(@"DELETE FROM [dbo].product_types WHERE id = @Id", new { id });
 
                 return result == 1;
             }

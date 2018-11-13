@@ -43,5 +43,11 @@ namespace bangazon.Controllers
         {
             return Ok(_storage.UpdateProductType(category, id));
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteProductType(int id)
+        {
+            return Ok(_storage.DeleteProductType(id));
+        }
     }
 }
