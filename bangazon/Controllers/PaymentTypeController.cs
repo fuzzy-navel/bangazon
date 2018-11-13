@@ -23,5 +23,11 @@ namespace bangazon.Controllers
         {
             return Ok(_storage.GetAllPaymentTypes());
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetPaymentType(int id)
+        {
+            return Ok(_storage.GetPaymentType(id));
+        }
     }
 }

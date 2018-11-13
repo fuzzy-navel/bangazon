@@ -24,5 +24,18 @@ namespace bangazon.DataAccess
             }
 
         }
+
+        public IEnumerable<PaymentType> GetPaymentType(int id)
+        {
+            using (var connection = new SqlConnection(ConnectionInfo))
+            {
+                connection.Open();
+                var result = connection.Query<PaymentType>(@"select * 
+                                                           from payment_type p 
+                                                           where p.id = @id", new { id = id });
+                return result;
+            }
+        }
+
     }
 }
