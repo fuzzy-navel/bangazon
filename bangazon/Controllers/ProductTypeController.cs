@@ -31,5 +31,11 @@ namespace bangazon.Controllers
         {
             return Ok(_storage.GetProductTypeById(id));
         }
+
+        [HttpPost]
+        public IActionResult AddAProductType([FromBody] string category)
+        {
+            return Ok(_storage.AddProductType(category));
+        }
     }
 }
