@@ -53,7 +53,7 @@ namespace bangazon.Controllers
         }
 
         // Delete Product
-        // API example: 
+        // API example: https://localhost:44398/api/product/5
         [HttpDelete("{id}")]
         public IActionResult DeleteProduct(int id)
         {

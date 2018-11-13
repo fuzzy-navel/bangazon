@@ -66,7 +66,8 @@ namespace bangazon.DataAccess
             using (var db = new SqlConnection(ConnectionInfo))
             {
                 db.Open();
-                var result = db.Execute()
+                var result = db.Execute(@"DELETE FROM [dbo].product WHERE id = @Id", new { id });
+                return result == 1;
             }
         }
     }
