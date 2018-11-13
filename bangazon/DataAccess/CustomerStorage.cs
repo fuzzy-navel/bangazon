@@ -44,7 +44,7 @@ namespace bangazon.DataAccess
       {
         connection.Open();
 
-        var result = connection.Query<CustomerandProduct>(@"select * 
+        var result = connection.Query<CustomerandProduct>(@"select first_name, last_name, date_joined, active, c.id as customer_id, category, price, title, description, quantity, owner_id, p.id as product_id 
                                 from customer as c
                                 join product as p
                                 on p.owner_id = c.id
@@ -60,7 +60,7 @@ namespace bangazon.DataAccess
       {
         connection.Open();
 
-        var result = connection.Query<CustomerandPayment>(@"select * 
+        var result = connection.Query<CustomerandPayment>(@"select first_name, last_name, date_joined, active, c.id as customer_id, account_number, p.id as payment_id
                                 from customer as c
                                 join payment_type as p
                                 on p.customer_id = c.id
