@@ -53,5 +53,51 @@ namespace bangazon.DataAccess
         return result;
       }
     }
+
+    public IEnumerable<CustomerandPayment> GetCustomerandPayments(int id)
+    {
+      using (var connection = new SqlConnection(conString))
+      {
+        connection.Open();
+
+        var result = connection.Query<CustomerandPayment>(@"select * 
+                                from customer as c
+                                join payment_type as p
+                                on p.customer_id = c.id
+                                where c.id = @id", new {id = id});
+
+        return result;
+      }
+    }
+
+    public IEnumerable<Customer> GetCustomerQuery(string query)
+    {
+      using (var connection = new SqlConnection(conString))
+      {
+        connection.Open();
+
+        var result = connection.Query<Customer>(@"select * 
+                                from customer as c
+                                where c.first_name Like @query
+	                                or c.last_name Like @query
+	                                or c.active Like @query
+	                                or c.id Like @query", new {query = "%" + query + "%"});
+        return result;
+      }
+    }
+
+    public bool AddCustomer(Customer customer)
+    {
+      using (var connection = new SqlConnection(conString))
+      {
+        connection.Open();
+
+        var result = connection.Execute(@"INSERT INTO [dbo].[customer]([first_name],[last_name],[date_joined],[active])
+                             VALUES (@first_name,@last_name,@date_joined,@active)", customer);
+
+        return result == 1;
+      }
+    }
+
   }
 }
