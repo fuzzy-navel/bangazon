@@ -10,9 +10,8 @@ using Microsoft.Extensions.Configuration;
 
 namespace bangazon.Controllers
 {
-    //[Route("api/[controller]")]
-    //[ApiController]
-    [Route("api/controller")]
+    [Route("api/[controller]")]
+    [ApiController]
     public class OrderController : ControllerBase
     {
         private readonly OrderStorage _orders;
@@ -43,19 +42,20 @@ namespace bangazon.Controllers
         }
 
         // #3
-        //[HttpPost("addOrder")]
-        //public IActionResult PostOrder(Order order)
-        //{
-        //    var success = _insertOrder.PostOrder(1, true, false, 1);
-        //    if (success)
-        //    {
-        //        return Ok();
-        //    }
-        //    else
-        //    {
-        //        return BadRequest(new { Message = "Order was not added." });
-        //    }
-        //}
+        [HttpPost("addOrder")]
+        public IActionResult PostOrder(Order order)
+        {
+            return Ok(_insertOrder.PostOrder(order));
+            //var success = _insertOrder.PostOrder(1, true, false, 1);
+            //if (success)
+            //{
+                //return Ok();
+            //}
+            //else
+            //{
+            //    return BadRequest(new { Message = "Order was not added." });
+            //}
+        }
 
         // #4
         //[HttpPut("updatePayment")]

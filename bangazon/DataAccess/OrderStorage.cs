@@ -55,6 +55,18 @@ namespace bangazon.DataAccess
             }
         }
         // 3) INSERT A NEW ORDER
+        public bool PostOrder(Order order)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var result3 = connection.Execute(@" INSERT INTO [dbo].[orders]([customer_id], [order_status], [can_complete], [payment_type_id])
+                                                    VALUES(@CustomerId, @OrderStatus, @CanComplete, @PaymentTypeId)", order );
+
+
+                return result3 == 1;
+            }
+        }
         //public bool PostOrder(int customer_id, bool order_status, bool can_complete, int payment_type)
         //{
         //    using (var connection = new SqlConnection(ConnectionString))

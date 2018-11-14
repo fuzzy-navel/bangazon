@@ -7,10 +7,10 @@ namespace bangazon.Models
 {
     public class Order
     {
-        public int CustomerId;
-        public bool OrderStatus;
-        public bool CanComplete;
-        public int PaymentTypeId;
+        public int CustomerId { get; set; }
+        public bool OrderStatus { get; set; }
+        public bool CanComplete { get; set; }
+        public int PaymentTypeId { get; set; }
         public int Id;
 
     }
