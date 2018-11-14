@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Threading.Tasks;
 using bangazon.Models;
+using Dapper;
 
 namespace bangazon.DataAccess
 {
@@ -57,6 +58,44 @@ namespace bangazon.DataAccess
                 var categoryName = command.ExecuteScalar().ToString();
 
                 return categoryName;
+            }
+        }
+
+        public bool AddProductType(string category)
+        {
+            using (var db = new SqlConnection(ConnectionInfo))
+            {
+                db.Open();
+
+                var result = db.Execute(@"insert into [dbo].product_types([category]) VALUES (@Category)", new { category });
+
+                return result == 1;
+            }
+        }
+
+        public bool UpdateProductType(string category, int id)
+        {
+            using (var db = new SqlConnection(ConnectionInfo))
+            {
+                db.Open();
+
+                var result = db.Execute(@"Update [dbo].product_types
+                                          SET category = @Category
+                                          WHERE id = @Id", new { category, id });
+
+                return result == 1;
+            }
+        }
+
+        public bool DeleteProductType(int id)
+        {
+            using (var db = new SqlConnection(ConnectionInfo))
+            {
+                db.Open();
+
+                var result = db.Execute(@"DELETE FROM [dbo].product_types WHERE id = @Id", new { id });
+
+                return result == 1;
             }
         }
     }
