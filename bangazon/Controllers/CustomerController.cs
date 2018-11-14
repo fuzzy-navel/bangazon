@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using bangazon.DataAccess;
+using bangazon.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -48,6 +49,12 @@ namespace bangazon.Controllers
         {
           return Ok(_storage.GetCustomerById(id));
         }
+      }
+
+      [HttpPost]
+      public IActionResult AddCustomer(Customer customer)
+      {
+        return Ok(_storage.AddCustomer(customer));
       }
 
     }

@@ -7,10 +7,9 @@ namespace bangazon.Models
 {
   public class Customer
   {
-    public string first_name;
-    public string last_name;
-    public DateTime date_joined;
-    public bool active;
-    public int Id;
+    public string first_name {get; set;}
+    public string last_name { get; set; }
+    public DateTime date_joined { get; set; }
+    public bool active { get; set; }
   }
 }
