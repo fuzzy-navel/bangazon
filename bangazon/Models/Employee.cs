@@ -7,9 +7,9 @@ namespace bangazon.Models
 {
   public class Employee
   {
-    public string name { get; set;}
+    public string employee_name { get; set;}
+    public int employee_id { get; set; }
     public bool is_supervisor { get; set;}
-    public int department_id { get; set; }
-    public int id { get; set; }
+    public string department_name { get; set;}
   }
 }
