@@ -40,7 +40,6 @@ namespace bangazon.DataAccess
             }
         }
 
-        // public bool AddNewProduct(int category, decimal price, string title, string description, int quantity, int owner_id)
         public bool AddNewProduct(Product product)
         {
             using (var db = new SqlConnection(ConnectionString))
@@ -55,7 +54,8 @@ namespace bangazon.DataAccess
             }
         }
 
-        public bool UpdateProduct(int id, int category, decimal price, string title, string description, int quantity, int owner_id)
+        // public bool UpdateProduct(int id, int category, decimal price, string title, string description, int quantity, int owner_id)
+        public bool UpdateProduct(int id, Product product)
         {
             using (var db = new SqlConnection(ConnectionString))
             {
@@ -63,7 +63,7 @@ namespace bangazon.DataAccess
                 var result = db.Execute(@"UPDATE [dbo].[product]
                     SET [category] = @category, [price] = @price, [title] = @title, [description] = @description, [quantity] = @quantity, [owner_id] = @owner_id
                     WHERE id = @id", 
-                    new { id, category, price, title, description, quantity, owner_id }
+                    product
                 );
                 return result == 1;
             }
