@@ -45,6 +45,7 @@ namespace bangazon.DataAccess
             using (var db = new SqlConnection(ConnectionString))
             {
                 db.Open();
+
                 var result = db.Execute(
                         @"insert into [dbo].product([category], [price], [title], [description], [quantity], [owner_id])
                         VALUES (@Category, @Price, @Title, @Description, @Quantity, @Owner_Id)", new {category, price, title, description, quantity, owner_id }
