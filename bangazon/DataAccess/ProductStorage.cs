@@ -63,7 +63,15 @@ namespace bangazon.DataAccess
                 var result = db.Execute(@"UPDATE [dbo].[product]
                     SET [category] = @category, [price] = @price, [title] = @title, [description] = @description, [quantity] = @quantity, [owner_id] = @owner_id
                     WHERE id = @id", 
-                    product
+                    new {
+                        id,
+                        category = product.Category,
+                        price = product.Price,
+                        title = product.Title,
+                        description = product.Description,
+                        quantity = product.Quantity,
+                        owner_id = product.Owner_Id,
+                    }
                 );
                 return result == 1;
             }
