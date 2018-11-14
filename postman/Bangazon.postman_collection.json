@@ -1,108 +1,158 @@
 {
 	"info": {
-		"_postman_id": "6d4e8fa5-af0e-465d-97d7-92f26ce055a0",
+		"_postman_id": "f8ea7c78-c390-4ea8-9776-aaf74b545077",
 		"name": "Bangazon",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "GetAllProducts()",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "https://localhost:44398/api/product",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "44398",
-					"path": [
-						"api",
-						"product"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GetSingleProduct()",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "https://localhost:44398/api/product/5",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "44398",
-					"path": [
-						"api",
-						"product",
-						"5"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "AddNewProduct()",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "https://localhost:44398/api/product?category=1&price=101&title=FancyObject234&description=Something great&quantity=32&owner_id=5",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "44398",
-					"path": [
-						"api",
-						"product"
-					],
-					"query": [
-						{
-							"key": "category",
-							"value": "1"
+			"name": "Product",
+			"item": [
+				{
+					"name": "GetAllProducts()",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
 						},
-						{
-							"key": "price",
-							"value": "101"
-						},
-						{
-							"key": "title",
-							"value": "FancyObject234"
-						},
-						{
-							"key": "description",
-							"value": "Something great"
-						},
-						{
-							"key": "quantity",
-							"value": "32"
-						},
-						{
-							"key": "owner_id",
-							"value": "5"
+						"url": {
+							"raw": "https://localhost:44398/api/product",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44398",
+							"path": [
+								"api",
+								"product"
+							]
 						}
+<<<<<<< HEAD
 					]
 				}
 			},
 			"response": []
+=======
+					},
+					"response": []
+				},
+				{
+					"name": "GetSingleProduct()",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:44398/api/product/5",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44398",
+							"path": [
+								"api",
+								"product",
+								"5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "AddNewProduct()",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"category\": 1,\n\t\"price\": 100.99,\n\t\"title\": \"Guzzoline\",\n\t\"description\": \"Mad Max\",\n\t\"quantity\": 1,\n\t\"owner_id\": 4\n}"
+						},
+						"url": {
+							"raw": "https://localhost:44398/api/product",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44398",
+							"path": [
+								"api",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateProduct()",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"category\": 1,\n\t\"price\": 100.99,\n\t\"title\": \"Guzzoline432324324343432\",\n\t\"description\": \"Mad Max243432432432432432\",\n\t\"quantity\": 1,\n\t\"owner_id\": 4\n}"
+						},
+						"url": {
+							"raw": "https://localhost:44398/api/product/8",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44398",
+							"path": [
+								"api",
+								"product",
+								"8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteProduct()",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:44398/api/product/14",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44398",
+							"path": [
+								"api",
+								"product",
+								"14"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+>>>>>>> master
 		},
 		{
 			"name": "GetCustomers()",
@@ -341,6 +391,7 @@
 			"response": []
 		},
 		{
+<<<<<<< HEAD
 			"name": "AddCustomer",
 			"event": [
 				{
@@ -356,6 +407,9 @@
 					}
 				}
 			],
+=======
+			"name": "AddPaymentType()",
+>>>>>>> master
 			"request": {
 				"method": "POST",
 				"header": [
@@ -368,6 +422,7 @@
 				],
 				"body": {
 					"mode": "raw",
+<<<<<<< HEAD
 					"raw": "{\n        \"first_name\": \"Todd\",\n        \"last_name\": \"Jenkins\",\n        \"date_joined\": \"2018-11-11T00:00:00\",\n        \"active\": false,\n\n}"
 				},
 				"url": {
@@ -479,6 +534,12 @@
 				},
 				"url": {
 					"raw": "https://localhost:44398/api/employee",
+=======
+					"raw": "{\n\t\"account_number\": 323232,\n\t\"customer_id\": 5,\n\t\"active\": 1,\n\t\"title\": \"testttt\"\n}"
+				},
+				"url": {
+					"raw": "https://localhost:44398/api/paymenttype",
+>>>>>>> master
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -486,7 +547,11 @@
 					"port": "44398",
 					"path": [
 						"api",
+<<<<<<< HEAD
 						"employee"
+=======
+						"paymenttype"
+>>>>>>> master
 					]
 				}
 			},

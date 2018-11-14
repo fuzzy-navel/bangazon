@@ -9,6 +9,8 @@ namespace bangazon.Models
     {
         public int account_number { get; set; }
         public int customer_id { get; set; }
+        public bool active { get; set; }
+        public string title { get; set; }
         public int id { get; set; }
     }
 }
