@@ -12,5 +12,7 @@ namespace bangazon.Models
     public DateTime date_joined;
     public bool active;
     public int account_number;
+    public int customer_id { get; set;}
+    public int payment_id {get; set;}
   }
 }
