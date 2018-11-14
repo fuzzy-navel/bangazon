@@ -16,5 +16,7 @@ namespace bangazon.Models
     public string description;
     public int quantity;
     public int owner_id;
+    public int customer_id {get; set;}
+    public int product_id {get; set;}
   }
 }
