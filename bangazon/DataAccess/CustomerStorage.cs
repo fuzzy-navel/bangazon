@@ -44,7 +44,7 @@ namespace bangazon.DataAccess
       {
         connection.Open();
 
-        var result = connection.Query<CustomerandProduct>(@"select * 
+        var result = connection.Query<CustomerandProduct>(@"select first_name, last_name, date_joined, active, c.id as customer_id, category, price, title, description, quantity, owner_id, p.id as product_id 
                                 from customer as c
                                 join product as p
                                 on p.owner_id = c.id
@@ -60,7 +60,7 @@ namespace bangazon.DataAccess
       {
         connection.Open();
 
-        var result = connection.Query<CustomerandPayment>(@"select * 
+        var result = connection.Query<CustomerandPayment>(@"select first_name, last_name, date_joined, active, c.id as customer_id, account_number, p.id as payment_id
                                 from customer as c
                                 join payment_type as p
                                 on p.customer_id = c.id
@@ -94,6 +94,20 @@ namespace bangazon.DataAccess
 
         var result = connection.Execute(@"INSERT INTO [dbo].[customer]([first_name],[last_name],[date_joined],[active])
                              VALUES (@first_name,@last_name,@date_joined,@active)", customer);
+
+        return result == 1;
+      }
+    }
+
+    public bool UpdateCustomer(Customer customer, int id)
+    {
+      using (var connection = new SqlConnection(conString))
+      {
+        connection.Open();
+
+        var result = connection.Execute(@"UPDATE [dbo].[customer]
+                                 SET [first_name] = @first_name, [last_name] = @last_name, [date_joined] = @date_joined, [active] = @active
+                                 WHERE customer.id = @id", new {id, first_name = customer.first_name, last_name = customer.last_name, date_joined = customer.date_joined, active = customer.active});
 
         return result == 1;
       }
