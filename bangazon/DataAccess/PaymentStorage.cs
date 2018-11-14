@@ -10,11 +10,11 @@ namespace bangazon.DataAccess
 {
     public class PaymentStorage
     {
-        private const string ConnectionInfo = "Server = (local); Database=Bangazon; Trusted_Connection=True";
+        private const string ConnectionSting = "Server = (local); Database=Bangazon; Trusted_Connection=True";
 
        public IEnumerable<PaymentType>GetAllPaymentTypes()
         {
-            using (var connection = new SqlConnection(ConnectionInfo))
+            using (var connection = new SqlConnection(ConnectionSting))
             {
                 connection.Open();
                 var result = connection.Query<PaymentType>(@"select * from payment_type");
@@ -27,7 +27,7 @@ namespace bangazon.DataAccess
 
         public IEnumerable<PaymentType> GetPaymentType(int id)
         {
-            using (var connection = new SqlConnection(ConnectionInfo))
+            using (var connection = new SqlConnection(ConnectionSting))
             {
                 connection.Open();
                 var result = connection.Query<PaymentType>(@"select * 
