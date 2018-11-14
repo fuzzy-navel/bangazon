@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using bangazon.DataAccess;
 using bangazon.Models;
+using Microsoft.Extensions.Configuration;
+
 
 namespace bangazon.Controllers
 {
@@ -15,9 +17,10 @@ namespace bangazon.Controllers
     {
         private readonly ProductStorage _storage;
 
-        public ProductController()
+
+        public ProductController(IConfiguration config)
         {
-            _storage = new ProductStorage();
+            _storage = new ProductStorage(config);
         }
 
         // Get All Products

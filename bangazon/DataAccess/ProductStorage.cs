@@ -5,16 +5,22 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 using bangazon.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace bangazon.DataAccess
 {
     public class ProductStorage
     {
-        private const string ConnectionInfo = "Server = (local); Database=Bangazon; Trusted_Connection=True";
+        private readonly string ConnectionString;
+
+        public ProductStorage(IConfiguration config)
+        {
+            ConnectionString = config.GetSection("ConnectionString").Value;
+        }
 
         public IEnumerable<Product> GetAllProducts()
         {
-            using (var connection = new SqlConnection(ConnectionInfo))
+            using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
                 var result = connection.Query<Product>(@"select * from product");
@@ -24,7 +30,7 @@ namespace bangazon.DataAccess
 
         public IEnumerable<Product> GetSingleProduct(int id)
         {
-            using (var connection = new SqlConnection(ConnectionInfo))
+            using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
                 var result = connection.Query<Product>(@"select * 
@@ -36,7 +42,7 @@ namespace bangazon.DataAccess
 
         public bool AddNewProduct(int category, decimal price, string title, string description, int quantity, int owner_id)
         {
-            using (var db = new SqlConnection(ConnectionInfo))
+            using (var db = new SqlConnection(ConnectionString))
             {
                 db.Open();
                 var result = db.Execute(
@@ -49,7 +55,7 @@ namespace bangazon.DataAccess
 
         public bool UpdateProduct(int id, int category, decimal price, string title, string description, int quantity, int owner_id)
         {
-            using (var db = new SqlConnection(ConnectionInfo))
+            using (var db = new SqlConnection(ConnectionString))
             {
                 db.Open();
                 var result = db.Execute(@"UPDATE [dbo].[product]
@@ -63,7 +69,7 @@ namespace bangazon.DataAccess
 
         public bool DeleteProduct(int id)
         {
-            using (var db = new SqlConnection(ConnectionInfo))
+            using (var db = new SqlConnection(ConnectionString))
             {
                 db.Open();
                 var result = db.Execute(@"DELETE FROM [dbo].product WHERE id = @Id", new { id });
