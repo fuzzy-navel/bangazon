@@ -43,8 +43,8 @@ namespace bangazon.DataAccess
             {
                 connection.Open();
 
-                var result = connection.Execute(@"INSERT INTO [dbo].[payment_type]([account_number], [customer_id])
-                                                  VALUES (@account_number, @customer_id)", payment);
+                var result = connection.Execute(@"INSERT INTO [dbo].[payment_type]([account_number], [customer_id], [active], [title])
+                                                  VALUES (@account_number, @customer_id, @active, @title)", payment);
 
                 return result == 1;
             }
