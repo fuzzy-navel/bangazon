@@ -24,5 +24,11 @@ namespace bangazon.Controllers
         {
             return Ok(_storage.GetAllDepartments());
         }
+
+        [HttpGet("{id}")]
+        public IActionResult GetDepartmentById(int id)
+        {
+            return Ok(_storage.GetDepartmentById(id));
+        }
     }
 }

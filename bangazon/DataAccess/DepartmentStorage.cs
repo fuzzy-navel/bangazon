@@ -50,5 +50,43 @@ namespace bangazon.DataAccess
                 return AllDepartments;
             }
         }
+
+        public Department GetDepartmentById(int id)
+        {
+            using (var db = new SqlConnection(ConnectionInfo))
+            {
+                db.Open();
+
+                var command = db.CreateCommand();
+                command.CommandText = @"SELECT *
+                                        FROM [dbo].department
+                                        WHERE id = @Id";
+
+                command.Parameters.AddWithValue("@Id", id);
+
+                var reader = command.ExecuteReader();
+
+                int supervisorId;
+                var result = new Department();
+
+                while (reader.Read())
+                {
+                    if (DBNull.Value.Equals(reader["supervisor_id"]))
+                    {
+                        supervisorId = 0;
+                    }
+                    else
+                    {
+                        supervisorId = (int)reader["supervisor_id"];
+                    }
+
+                    result.Name = reader["name"].ToString();
+                    result.Budget = (int)reader["expense_budget"];
+                    result.SupervisorId = supervisorId;
+                    result.Id = (int)reader["id"];
+                }
+                return result;
+            }
+        }
     }
 }
