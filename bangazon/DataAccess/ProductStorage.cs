@@ -40,15 +40,16 @@ namespace bangazon.DataAccess
             }
         }
 
-        public bool AddNewProduct(int category, decimal price, string title, string description, int quantity, int owner_id)
+        // public bool AddNewProduct(int category, decimal price, string title, string description, int quantity, int owner_id)
+        public bool AddNewProduct(Product product)
         {
             using (var db = new SqlConnection(ConnectionString))
             {
                 db.Open();
 
                 var result = db.Execute(
-                        @"insert into [dbo].product([category], [price], [title], [description], [quantity], [owner_id])
-                        VALUES (@Category, @Price, @Title, @Description, @Quantity, @Owner_Id)", new {category, price, title, description, quantity, owner_id }
+                        @"insert into [dbo].[product]([category], [price], [title], [description], [quantity], [owner_id])
+                        VALUES (@category, @price, @title, @description, @quantity, @owner_id)", product
                 );
                 return result == 1;
             }

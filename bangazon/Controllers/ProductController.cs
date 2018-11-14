@@ -17,7 +17,6 @@ namespace bangazon.Controllers
     {
         private readonly ProductStorage _storage;
 
-
         public ProductController(IConfiguration config)
         {
             _storage = new ProductStorage(config);
@@ -42,9 +41,10 @@ namespace bangazon.Controllers
         // Add New Product
         // API example: https://localhost:44398/api/product?category=1&price=101&title=FancyObject234&description=Something great&quantity=32&owner_id=5
         [HttpPost]
-        public IActionResult AddNewProduct(int category, decimal price, string title, string description, int quantity, int owner_id)
+        // public IActionResult AddNewProduct(int category, decimal price, string title, string description, int quantity, int owner_id)
+        public IActionResult AddNewProduct(Product product)
         {
-            return Ok(_storage.AddNewProduct(category, price, title, description, quantity, owner_id));
+            return Ok(_storage.AddNewProduct(product));
         }
 
         // Update Product
