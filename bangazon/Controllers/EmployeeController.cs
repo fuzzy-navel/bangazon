@@ -26,5 +26,11 @@ namespace bangazon.Controllers
       {
         return Ok(_storage.GetEmployees());
       }
+
+      [HttpGet("{id}")]
+      public IActionResult GetEmployee(int id)
+      {
+        return Ok(_storage.GetEmployee(id));
+      }
     }
 }
