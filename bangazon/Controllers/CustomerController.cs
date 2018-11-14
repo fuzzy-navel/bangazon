@@ -57,5 +57,11 @@ namespace bangazon.Controllers
         return Ok(_storage.AddCustomer(customer));
       }
 
+      [HttpPut("{id}")]
+      public IActionResult UpdateCustomer(Customer customer, int id)
+      {
+        return Ok(_storage.UpdateCustomer(customer, id));
+      }
+
     }
 }
