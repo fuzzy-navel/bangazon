@@ -41,5 +41,18 @@ namespace bangazon.DataAccess
         return result;
       }
     }
+
+    public bool AddEmployee(EmployeeTemplate employee)
+    {
+      using (var db = new SqlConnection(conString))
+      {
+        var result = db.Execute(@"insert into employee
+                        ([name],[is_supervisor], [department_id])
+                        values
+                        (@name, @is_supervisor, @department_id)", employee);
+
+        return result == 1;
+      }
+    }
   }
 }
