@@ -54,7 +54,6 @@ namespace bangazon.DataAccess
             }
         }
 
-        // public bool UpdateProduct(int id, int category, decimal price, string title, string description, int quantity, int owner_id)
         public bool UpdateProduct(int id, Product product)
         {
             using (var db = new SqlConnection(ConnectionString))

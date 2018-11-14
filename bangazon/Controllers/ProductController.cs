@@ -8,7 +8,6 @@ using bangazon.DataAccess;
 using bangazon.Models;
 using Microsoft.Extensions.Configuration;
 
-
 namespace bangazon.Controllers
 {
     [Route("api/[controller]")]
@@ -48,7 +47,7 @@ namespace bangazon.Controllers
         }
 
         // Update Product
-        // API example: https://localhost:44398/api/product/6/?category=1&price=101111&title=UPDATED!!&description=Something great&quantity=32&owner_id=5
+        // API example: https://localhost:44398/api/product/8 ...[need to add in a JSON object here]
         [HttpPut("{id}")]
         public IActionResult UpdateProduct(int id, Product product)
         {
