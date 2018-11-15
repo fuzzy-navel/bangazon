@@ -28,5 +28,13 @@ namespace bangazon.Controllers
         {
             return Ok(_storage.GetAllTrainingPrograms());
         }
+
+        // Get Single Training Program
+        // API example: 
+        [HttpGet("{id}")]
+        public IActionResult GetSingleTrainingProgram(int id)
+        {
+            return Ok(_storage.GetSingleTrainingProgram(id));
+        }
     }
 }

@@ -27,5 +27,19 @@ namespace bangazon.DataAccess
                 return result;
             }
         }
+
+        public IEnumerable<TrainingProgram> GetSingleTrainingProgram(int id)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var result = connection.Query<TrainingProgram>(
+                    @"SELECT *
+                    FROM training_programs as tp
+                    WHERE tp.id = @id", new { id }    
+                );
+                return result;
+            }
+        }
     }
 }
