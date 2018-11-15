@@ -14,6 +14,11 @@ namespace bangazon.Controllers
     [ApiController]
     public class TrainingProgramController : ControllerBase
     {
+        private readonly TrainingProgramStorage _storage;
 
+        public TrainingProgramController(IConfiguration config)
+        {
+            _storage = new TrainingProgramStorage(config);
+        }
     }
 }
