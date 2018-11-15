@@ -6,6 +6,7 @@ using bangazon.DataAccess;
 using bangazon.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace bangazon.Controllers
 {
@@ -16,9 +17,9 @@ namespace bangazon.Controllers
 
       private readonly CustomerStorage _storage;
 
-      public CustomerController()
+      public CustomerController(IConfiguration config)
       {
-        _storage = new CustomerStorage();
+        _storage = new CustomerStorage(config);
       }
 
       [HttpGet]
