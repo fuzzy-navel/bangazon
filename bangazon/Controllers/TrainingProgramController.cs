@@ -20,5 +20,13 @@ namespace bangazon.Controllers
         {
             _storage = new TrainingProgramStorage(config);
         }
+
+        // Get All Training Programs
+        // API example: https://localhost:44398/api/trainingprogram
+        [HttpGet]
+        public IActionResult GetAllTrainingPrograms()
+        {
+            return Ok(_storage.GetAllTrainingPrograms());
+        }
     }
 }
