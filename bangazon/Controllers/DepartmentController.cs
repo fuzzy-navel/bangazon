@@ -20,14 +20,14 @@ namespace bangazon.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllDepartments([FromQuery] string employees)
+        public IActionResult GetAllDepartments([FromQuery] string includes)
         {
-            if(employees == null)
-            {
-                return Ok(_storage.GetAllDepartments());
-            } else
+            if(includes == "employees")
             {
                 return Ok(_storage.GetDepartmentsWithEmployees());
+            } else
+            {
+                return Ok(_storage.GetAllDepartments());
             }
             
         }

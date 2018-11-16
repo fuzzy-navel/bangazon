@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Dapper;
 using bangazon.Models;
 using System.Data.SqlClient;
+using bangazon.DataAccess;
 
 namespace bangazon.DataAccess
 {
@@ -54,6 +55,7 @@ namespace bangazon.DataAccess
         public List<DepartmentAndEmployees> GetDepartmentsWithEmployees()
         {
             List<DepartmentAndEmployees> departmentsAndEmployees = new List<DepartmentAndEmployees>();
+            List<Employee> employees = new List<Employee>();
 
             using (var db = new SqlConnection(ConnectionInfo))
             {
@@ -86,31 +88,34 @@ namespace bangazon.DataAccess
 
                     departmentsAndEmployees.Add(dAndE);
                 }
+            }
 
-                command.CommandText = @"SELECT *
-                                        FROM [dbo].employee";
-
-                while (reader.Read())
+            using (var database = new SqlConnection(ConnectionInfo))
                 {
-                    int departmentId = (int)reader["department_id"];
+                    database.Open();
 
-                    var employee = new Employee()
-                    {
-                        employee_name = reader["name"].ToString(),
-                        is_supervisor = (bool)reader["is_supervisor"],
-                        department_name = "WIP",
-                        employee_id = (int)reader["id"]
-                    };
+                var command = database.CreateCommand();
+                    command.CommandText = @"SELECT *
+                                            FROM [dbo].employee";
 
-                    foreach(DepartmentAndEmployees department in departmentsAndEmployees)
+                var reader = command.ExecuteReader();
+
+                    while (reader.Read())
                     {
-                        if(department.Id == departmentId)
+
+                        var employee = new Employee()
                         {
-                            department.Employees.Add(employee);
-                        }
+                            employee_name = reader["name"].ToString(),
+                            is_supervisor = (bool)reader["is_supervisor"],
+                            department_name = "WIP",
+                            department_id = (int)reader["department_id"],
+                            employee_id = (int)reader["id"]
+                        };
+
+                        employees.Add(employee);
                     }
                 }
-            }
+
             return departmentsAndEmployees;
         }
 
