@@ -46,15 +46,7 @@ namespace bangazon.Controllers
         public IActionResult PostOrder(Order order)
         {
             return Ok(_insertOrder.PostOrder(order));
-            //var success = _insertOrder.PostOrder(1, true, false, 1);
-            //if (success)
-            //{
-                //return Ok();
-            //}
-            //else
-            //{
-            //    return BadRequest(new { Message = "Order was not added." });
-            //}
+            
         }
 
         // #4

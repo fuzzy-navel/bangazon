@@ -67,16 +67,7 @@ namespace bangazon.DataAccess
                 return result3 == 1;
             }
         }
-        //public bool PostOrder(int customer_id, bool order_status, bool can_complete, int payment_type)
-        //{
-        //    using (var connection = new SqlConnection(ConnectionString))
-        //    {
-        //        connection.Open();
-        //        string sql = "INSERT INTO orders(CustomerId, OrderStatus, CanComplete, PaymentTypeId) VALUES(@CustomerId, @OrderStatus, @CanComplete, @PaymentTypeId)";
-        //        var result3 = connection.Execute(sql, new { CustomerId = customer_id, OrderStatus = order_status, CanComplete = can_complete, PaymentTypeId = payment_type });
-        //        return result3 == 1;
-        //    }
-        //}
+        
 
         // 4) UPDATE PAYMENT TYPE OF AN ORDER
         //public bool UpdatePaymentTypeId(int customer_id, int payment_type_id)
