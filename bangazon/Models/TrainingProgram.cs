@@ -9,6 +9,7 @@ namespace bangazon.Models
     {
         public DateTime Start_Date { get; set; }
         public DateTime End_Date { get; set; }
+        public int Max_Attendees { get; set; }
         public int Id { get; set; }
     }
 }

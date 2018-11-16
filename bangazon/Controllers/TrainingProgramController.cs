@@ -38,11 +38,11 @@ namespace bangazon.Controllers
         }
 
         // Post New Training Program
-        // API example:
+        // API example: https://localhost:44398/api/trainingprogram ...[need to add in a JSON object here]
         [HttpPost]
         public IActionResult AddNewTrainingProgram(TrainingProgram trainingProgram)
         {
-
+            return Ok(_storage.AddNewTrainingProgram(trainingProgram));
         }
     }
 }

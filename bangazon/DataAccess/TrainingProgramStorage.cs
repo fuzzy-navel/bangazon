@@ -23,7 +23,7 @@ namespace bangazon.DataAccess
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                var result = connection.Query<TrainingProgram>(@"select * from training_programs");
+                var result = connection.Query<TrainingProgram>(@"SELECT * FROM training_programs");
                 return result;
             }
         }
@@ -35,10 +35,23 @@ namespace bangazon.DataAccess
                 connection.Open();
                 var result = connection.Query<TrainingProgram>(
                     @"SELECT *
-                    FROM training_programs as tp
+                    FROM training_programs AS tp
                     WHERE tp.id = @id", new { id }    
                 );
                 return result;
+            }
+        }
+
+        public bool AddNewTrainingProgram(TrainingProgram trainingProgram)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var result = connection.Execute(
+                        @"INSERT into [dbo].[training_programs]([start_date], [end_date], [max_attendees])
+                        VALUES (@start_date, @end_date, @max_attendees)", trainingProgram
+                );
+                return result == 1;
             }
         }
     }
