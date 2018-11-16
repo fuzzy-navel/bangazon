@@ -19,45 +19,31 @@ namespace bangazon.Controllers
             _storage = new PaymentStorage();
         }
 
+        //Gat a List of all payment types
         [HttpGet]
-        public IActionResult GetAllPaymentTypes()
+        public IActionResult GetListOfPayments()
         {
             return Ok(_storage.GetAllPaymentTypes());
         }
-
+        //Get payment type by id
         [HttpGet("{id}")]
-        public IActionResult GetPaymentType(int id)
+        public IActionResult GetOnePaymentById(int id)
         {
             return Ok(_storage.GetPaymentType(id));
         }
 
         //Add
         [HttpPost]
-        public IActionResult AddPayment(PaymentType payment)
+        public IActionResult AddAPaymentToCustomer(PaymentType payment)
         {
             return Ok(_storage.AddPayment(payment));
         }
 
-        //[HttpDelete("{id}")]
-        //public IActionResult DeletePayment(int id)
-        //{
-        //    var payment = _storage.GetPaymentType(id);
-
-        //    if (payment == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var removePayment = _storage.DeletePayment(id);
-
-        //    if(removePayment)
-        //    {
-        //        return Ok();
-        //    }
-
-        //    return BadRequest(new { Message = "Payment not successfully deleted" });
-        //}
-
-
+        //Update
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, PaymentType payment)
+        {
+            return Ok(_storage.UpdatePayment(id, payment));
+        }
     }
 }
