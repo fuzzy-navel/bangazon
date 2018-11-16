@@ -169,5 +169,73 @@ namespace bangazon.DataAccess
                 return result;
             }
         }
+
+        public DepartmentAndEmployees GetDepartmentByIdWithEmployees(int id)
+        {
+            var departmentAndEmployees = new DepartmentAndEmployees();
+            departmentAndEmployees.Employees = new List<Employee>();
+
+            using (var db = new SqlConnection(ConnectionInfo))
+            {
+                db.Open();
+
+                var command = db.CreateCommand();
+                command.CommandText = @"SELECT *
+                                        FROM [dbo].department
+                                        WHERE id = @Id";
+
+                command.Parameters.AddWithValue("@Id", id);
+
+                var reader = command.ExecuteReader();
+
+                int supervisorId;
+
+                while (reader.Read())
+                {
+                    if (DBNull.Value.Equals(reader["supervisor_id"]))
+                    {
+                        supervisorId = 0;
+                    }
+                    else
+                    {
+                        supervisorId = (int)reader["supervisor_id"];
+                    }
+
+                    departmentAndEmployees.Name = reader["name"].ToString();
+                    departmentAndEmployees.Budget = (int)reader["expense_budget"];
+                    departmentAndEmployees.SupervisorId = supervisorId;
+                    departmentAndEmployees.Id = (int)reader["id"];
+                }
+            }
+            using (var database = new SqlConnection(ConnectionInfo))
+            {
+                database.Open();
+
+                var command = database.CreateCommand();
+                command.CommandText = @"SELECT *
+                                        FROM [dbo].employee
+                                        WHERE department_id = @Id";
+
+                command.Parameters.AddWithValue("@Id", id);
+
+                var reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+
+                    var employee = new Employee()
+                    {
+                        employee_name = reader["name"].ToString(),
+                        is_supervisor = (bool)reader["is_supervisor"],
+                        department_name = "WIP",
+                        department_id = (int)reader["department_id"],
+                        employee_id = (int)reader["id"]
+                    };
+
+                    departmentAndEmployees.Employees.Add(employee);
+                }
+            }
+            return departmentAndEmployees;
+        }
     }
 }

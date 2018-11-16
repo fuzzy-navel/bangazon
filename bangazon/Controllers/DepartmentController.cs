@@ -33,9 +33,16 @@ namespace bangazon.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult GetDepartmentById(int id)
+        public IActionResult GetDepartmentById(int id, [FromQuery] string includes)
         {
-            return Ok(_storage.GetDepartmentById(id));
+            if(includes == "employees")
+            {
+                return Ok(_storage.GetDepartmentByIdWithEmployees(id));
+            }
+            else
+            {
+                return Ok(_storage.GetDepartmentById(id));
+            }
         }
     }
 }
