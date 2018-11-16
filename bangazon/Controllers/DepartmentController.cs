@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using bangazon.DataAccess;
+using bangazon.Models;
 
 namespace bangazon.Controllers
 {
@@ -43,6 +44,12 @@ namespace bangazon.Controllers
             {
                 return Ok(_storage.GetDepartmentById(id));
             }
+        }
+
+        [HttpPost]
+        public IActionResult AddDepartment(Department department)
+        {
+            return Ok(_storage.AddADepartment(department));
         }
     }
 }

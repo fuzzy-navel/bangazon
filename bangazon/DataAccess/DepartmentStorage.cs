@@ -237,5 +237,19 @@ namespace bangazon.DataAccess
             }
             return departmentAndEmployees;
         }
+
+        public bool AddADepartment(Department department)
+        {
+            using (var db = new SqlConnection(ConnectionInfo))
+            {
+                db.Open();
+
+                var result = db.Execute(@"INSERT INTO [dbo].department (name, expense_budget, supervisor_id)
+                                        VALUES(@Name, @Expense_Budget, @Supervisor_Id)", new { Name = department.Name, Expense_Budget = department.Budget, Supervisor_Id = department.SupervisorId });
+
+                return result == 1;
+                
+            }
+        }
     }
 }
