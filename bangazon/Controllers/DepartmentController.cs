@@ -51,5 +51,11 @@ namespace bangazon.Controllers
         {
             return Ok(_storage.AddADepartment(department));
         }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateDepartment(int id, Department department)
+        {
+            return Ok(_storage.UpdateADepartment(id, department));
+        }
     }
 }

@@ -251,5 +251,19 @@ namespace bangazon.DataAccess
                 
             }
         }
+
+        public bool UpdateADepartment(int id, Department department)
+        {
+            using (var db = new SqlConnection(ConnectionInfo))
+            {
+                db.Open();
+
+                var result = db.Execute(@"UPDATE [dbo].department
+                                          SET [name] = @Name, [expense_budget] = @Expense_Budget, [supervisor_id] = @Supervisor_Id
+                                          WHERE id = @Id", new { Name = department.Name, Expense_Budget = department.Budget, Supervisor_Id = department.SupervisorId, Id = id });
+
+                return result == 1;
+            }
+        }
     }
 }
