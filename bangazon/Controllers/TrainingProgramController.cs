@@ -30,11 +30,19 @@ namespace bangazon.Controllers
         }
 
         // Get Single Training Program
-        // API example: 
+        // API example: https://localhost:44398/api/trainingprogram/3
         [HttpGet("{id}")]
         public IActionResult GetSingleTrainingProgram(int id)
         {
             return Ok(_storage.GetSingleTrainingProgram(id));
+        }
+
+        // Post New Training Program
+        // API example:
+        [HttpPost]
+        public IActionResult AddNewTrainingProgram(TrainingProgram trainingProgram)
+        {
+
         }
     }
 }
