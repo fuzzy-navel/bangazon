@@ -54,5 +54,17 @@ namespace bangazon.DataAccess
                 return result == 1;
             }
         }
+
+        public bool DeleteTrainingProgram(int id)
+        {
+            var currentDateTime = new DateTime.Now.ToString("MM/dd/yyyy H:mm");
+
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var result = connection.Execute(@"DELETE FROM [dbo].training_programs WHERE id = @id", new { id });
+                return result == 1;
+            }
+        }
     }
 }

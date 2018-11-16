@@ -44,5 +44,13 @@ namespace bangazon.Controllers
         {
             return Ok(_storage.AddNewTrainingProgram(trainingProgram));
         }
+
+        // Delete Training Program
+        // API exampe: 
+        [HttpDelete("{id}")]
+        public IActionResult DeleteTrainingProgram(int id)
+        {
+            return Ok(_storage.DeleteTrainingProgram(id));
+        }
     }
 }
