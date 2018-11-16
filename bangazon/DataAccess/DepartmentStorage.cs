@@ -116,6 +116,19 @@ namespace bangazon.DataAccess
                     }
                 }
 
+            foreach(DepartmentAndEmployees department in departmentsAndEmployees)
+            {
+                department.Employees = new List<Employee>();
+
+                foreach (Employee employee in employees)
+                {
+                    if(employee.department_id == department.Id)
+                    {
+                        department.Employees.Add(employee);
+                    }
+                }
+            }
+
             return departmentsAndEmployees;
         }
 
