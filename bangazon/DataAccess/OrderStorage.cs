@@ -74,29 +74,29 @@ namespace bangazon.DataAccess
 
 
         // 4) UPDATE AN ORDER
-        public bool UpdateOrderInfo(int id, Order order)
-        {
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
+        //public bool UpdateOrderInfo(int id, Order order)
+        //{
+        //    using (var connection = new SqlConnection(ConnectionString))
+        //    {
+        //        connection.Open();
                 
-                var result4 = connection.Execute(@"UPDATE [dbo].[orders]
-                                                    SET [customer_id] = @CustomerId, 
-                                                        [order_status] = @OrderStatus, 
-                                                        [can_complete] = @CanComplete, 
-                                                        [payment_type_id] = @PaymentTypeId
-                                                    WHERE id = @id",
-                                                    new
-                                                    {
-                                                        id,
-                                                        customer_id = order.CustomerId,
-                                                        order_status = order.OrderStatus,
-                                                        can_complete = order.CanComplete,
-                                                        payment_type_id = order.PaymentTypeId,
-                                                    });
-                return result4 == 1;
-            }
-        }
+        //        var result4 = connection.Execute(@"UPDATE [dbo].[orders]
+        //                                            SET [customer_id] = @CustomerId, 
+        //                                                [order_status] = @OrderStatus, 
+        //                                                [can_complete] = @CanComplete, 
+        //                                                [payment_type_id] = @PaymentTypeId
+        //                                            WHERE id = @Id",
+        //                                            new
+        //                                            {
+        //                                                id,
+        //                                                customer_id = order.CustomerId,
+        //                                                order_status = order.OrderStatus,
+        //                                                can_complete = order.CanComplete,
+        //                                                payment_type_id = order.PaymentTypeId,
+        //                                            });
+        //        return result4 == 1;
+        //    }
+        //}
 
          // 5) DELETE AN ORDER
         public bool DeleteOrderById(int id)
