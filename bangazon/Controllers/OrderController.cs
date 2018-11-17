@@ -50,12 +50,12 @@ namespace bangazon.Controllers
         }
 
         // #4
-        //[HttpPut("{id}")]
-        //public IActionResult UpdateOrder(int id, Order order)
-        //{
-        //    return Ok(_updateOrder.UpdateOrderInfo(id, order));
+        [HttpPut("{id}")]
+        public IActionResult UpdateOrder(int id, Order order)
+        {
+            return Ok(_updateOrder.UpdateOrderInfo(id, order));
 
-        //}
+        }
 
         // #5
         [HttpDelete("{id}")]
