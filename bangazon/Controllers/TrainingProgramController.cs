@@ -24,17 +24,32 @@ namespace bangazon.Controllers
         // Get All Training Programs
         // API example: https://localhost:44398/api/trainingprogram
         [HttpGet]
-        public IActionResult GetAllTrainingPrograms()
+        public IActionResult GetAllTrainingPrograms([FromQuery] string completed)
         {
-            return Ok(_storage.GetAllTrainingPrograms());
+            if (completed == "false")
+            {
+                // starts today or in the future
+                return Ok(_storage.GetAllTrainingProgramsTodayOrFuture());
+            }
+            else
+            {
+                return Ok(_storage.GetAllTrainingPrograms());
+            }
         }
 
         // Get Single Training Program
         // API example: https://localhost:44398/api/trainingprogram/3
         [HttpGet("{id}")]
-        public IActionResult GetSingleTrainingProgram(int id)
+        public IActionResult GetSingleTrainingProgram(int id, [FromQuery] string completed)
         {
-            return Ok(_storage.GetSingleTrainingProgram(id));
+            if (completed == "false")
+            {
+                // starts today or in the future
+                return Ok(_storage.GetSingleTrainingProgramTodayOrFuture(id));
+            }
+            else {
+                return Ok(_storage.GetSingleTrainingProgram(id));
+            }
         }
 
         // Post New Training Program
