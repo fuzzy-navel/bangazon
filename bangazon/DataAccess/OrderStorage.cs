@@ -109,5 +109,23 @@ namespace bangazon.DataAccess
             }
         }
 
+        // 6) ENDPOINT TO RETRIEVE ORDERS USING THE '?can_complete=false' 
+        //AND 'can_complete=true' QUERY STRING PARAMETERS 
+        //public List<Order> QueryOrders(string input)
+        //{
+        //    using (var connection = new SqlConnection(ConnectionString))
+        //    {
+        //        connection.Open();
+        //        var result1 = connection.Query<Order>(@"SELECT 
+        //                                                CustomerId = customer_id, 
+        //                                                OrderStatus = order_status, 
+        //                                                CanComplete = can_complete,
+        //                                                PaymentTypeId = payment_type_id, 
+        //                                                Id = id 
+        //                                              FROM orders
+        //                                              WHERE can_complete = @input");
+        //        return result1.ToList();
+        //    }
+        //}
     }
 }
