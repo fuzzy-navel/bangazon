@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using bangazon.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -28,6 +29,12 @@ namespace bangazon.Controllers
         public IActionResult GetComputerById(int id)
         {
             return Ok(_storage.GetComputerById(id));
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, Computer computer)
+        {
+            return Ok(_storage.UpdateComputer(id, computer));
         }
     }
 }

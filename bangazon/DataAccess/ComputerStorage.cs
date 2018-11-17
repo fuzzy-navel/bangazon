@@ -34,5 +34,26 @@ namespace bangazon.Controllers
                 return result;
             }
         }
+
+        public bool UpdateComputer(int id, Computer computer)
+        {
+            using(var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var result4 = connection.Execute(@"Update computer
+                                                SET purchase_date = @purchase_date, decommissioned = @decommissioned, employee_id = @employee_id, in_use = @in_use, is_malfunctioning = @is_malfunctioning
+                                                Where id = @id",    
+                                                new
+                                                { id,
+                                                    computer.purchase_date,
+                                                    computer.decommissioned,
+                                                    computer.employee_id,
+                                                    computer.in_use,
+                                                    computer.is_malfunctioning});
+
+
+                return result4 == 1;
+            }
+        }
     }
 }
