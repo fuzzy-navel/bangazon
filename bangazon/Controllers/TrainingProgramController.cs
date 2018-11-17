@@ -46,11 +46,19 @@ namespace bangazon.Controllers
         }
 
         // Delete Training Program
-        // API exampe: https://localhost:44398/api/trainingprogram/3/
+        // API example: https://localhost:44398/api/trainingprogram/3/
         [HttpDelete("{id}")]
         public IActionResult DeleteTrainingProgram(int id)
         {
             return Ok(_storage.DeleteTrainingProgram(id));
+        }
+
+        // Update Training Program
+        // API example: https://localhost:44398/api/trainingprogram ...[need to add in a JSON object here]
+        [HttpPut("{id}")]
+        public IActionResult UpdateTrainingProgram(int id, TrainingProgram trainingProgram)
+        {
+            return Ok(_storage.UpdateTrainingProgram(id, trainingProgram));
         }
     }
 }

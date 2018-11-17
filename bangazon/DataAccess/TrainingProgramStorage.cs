@@ -73,5 +73,25 @@ namespace bangazon.DataAccess
                 return result == 1;
             }
         }
+
+        public bool UpdateTrainingProgram(int id, TrainingProgram trainingProgram)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var result = connection.Execute(
+                    @"UPDATE [dbo].[training_programs]
+                    SET [start_date] = @start_date, [end_date] = @end_date, [max_attendees] = @max_attendees
+                    WHERE id = @id",
+                    new {
+                        trainingProgram.Start_Date,
+                        trainingProgram.End_Date,
+                        trainingProgram.Max_Attendees,
+                        id
+                    }
+                );
+                return result == 1;
+            }
+        }
     }
 }
