@@ -23,7 +23,11 @@ namespace bangazon.DataAccess
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                var result = connection.Query<TrainingProgram>(@"SELECT * FROM training_programs");
+                var result = connection.Query<TrainingProgram>(
+                    @"SELECT *, EmployeeName = employee.name 
+                    FROM training_programs 
+                    JOIN employee_training_program_pair ON employee_training_program_pair.training_program_id = training_programs.id
+	                    JOIN employee ON employee.id = employee_training_program_pair.employee_id");
                 return result;
             }
         }
@@ -34,9 +38,11 @@ namespace bangazon.DataAccess
             {
                 connection.Open();
                 var result = connection.Query<TrainingProgram>(
-                    @"SELECT *
-                    FROM training_programs AS tp
-                    WHERE tp.id = @id", new { id }    
+                    @"SELECT *, EmployeeName = employee.name 
+                    FROM training_programs
+                    JOIN employee_training_program_pair ON employee_training_program_pair.training_program_id = training_programs.id
+	                    JOIN employee ON employee.id = employee_training_program_pair.employee_id
+                    WHERE training_programs.id = @id", new { id }    
                 );
                 return result;
             }
@@ -57,7 +63,7 @@ namespace bangazon.DataAccess
 
         public bool DeleteTrainingProgram(int id)
         {
-            var currentDateTime = new DateTime.Now.ToString("MM/dd/yyyy H:mm");
+            // var currentDateTime = new DateTime.Now.ToString("MM/dd/yyyy H:mm");
 
             using (var connection = new SqlConnection(ConnectionString))
             {

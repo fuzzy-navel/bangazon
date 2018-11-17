@@ -11,5 +11,6 @@ namespace bangazon.Models
         public DateTime End_Date { get; set; }
         public int Max_Attendees { get; set; }
         public int Id { get; set; }
+        public string EmployeeName { get; set; }
     }
 }
