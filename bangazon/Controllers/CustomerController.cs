@@ -23,13 +23,13 @@ namespace bangazon.Controllers
       }
 
       [HttpGet]
-      public IActionResult GetCustomers([FromQuery] string q, [FromQuery] string active)
+      public IActionResult GetCustomers([FromQuery] string q, [FromQuery] string activeOrders)
       {
-        if (q != null && active == null)
+        if (q != null && activeOrders == null)
         {
           return Ok(_storage.GetCustomerQuery(q));
         }
-        else if (q == null && active == "false")
+        else if (q == null && activeOrders == "false")
         {
           return Ok(_storage.GetInactiveCustomers());
         }
