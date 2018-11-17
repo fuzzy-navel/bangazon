@@ -22,7 +22,11 @@ namespace bangazon.DataAccess
     {
       using (var db = new SqlConnection(conString))
       {
+<<<<<<< HEAD
         var result = db.Query<Employee>(@"select e.name as employee_name, e.id as employee_id , is_supervisor, d.name as department_name 
+=======
+        var result = database.Query<Employee>(@"select e.name as employee_name, e.id as employee_id , is_supervisor, e.department_id, d.name as department_name 
+>>>>>>> master
                             from employee as e
                             left join department as d on e.department_id = d.id");
 
