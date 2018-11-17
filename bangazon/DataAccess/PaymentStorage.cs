@@ -50,16 +50,16 @@ namespace bangazon.DataAccess
             }
         }
 
-        //public bool DeletePayment(int paymentId)
-        //{
-        //    using (var connection = new SqlConnection(ConnectionString))
-        //    {
-        //        connection.Open();
+        public bool DeletePayment(int paymentId)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
 
-        //        var result = connection.Execute("Delete from payment_type Where id = @id and not exists(select * from orders where orders.payment_type_id = @id)",new { id = paymentId } );
+                var result = connection.Execute("@Delete from [dbo].payment_type Where id = @id", new {paymentId});
 
-        //        return result == 1;
-        //    }
-        //}
+                return result == 1;
+            }
+        }
     }
 }
