@@ -46,7 +46,7 @@ namespace bangazon.Controllers
         }
 
         // Delete Training Program
-        // API exampe: 
+        // API exampe: https://localhost:44398/api/trainingprogram/3/
         [HttpDelete("{id}")]
         public IActionResult DeleteTrainingProgram(int id)
         {

@@ -63,7 +63,7 @@ namespace bangazon.DataAccess
 
         public bool DeleteTrainingProgram(int id)
         {
-            // var currentDateTime = new DateTime.Now.ToString("MM/dd/yyyy H:mm");
+            var currentDateTime = DateTime.Now.ToString("M/d/yyyy");
 
             using (var connection = new SqlConnection(ConnectionString))
             {
