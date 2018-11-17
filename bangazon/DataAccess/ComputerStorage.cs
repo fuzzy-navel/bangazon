@@ -34,5 +34,17 @@ namespace bangazon.Controllers
                 return result;
             }
         }
+
+        public bool AddComputer(Computer computer)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var result3 = connection.Execute(@"Insert into [dbo].[computer]([id], [purchased_date], [decomissioned], [employee_id], [in_use], [is_malfunctioning])
+                                                 VALUES (@id, @purchased_date, @decomissioned, @employee_id, @in_use, @is_malfunctioning)", computer);
+
+                return result3 == 1;
+            }
+        }
     }
 }

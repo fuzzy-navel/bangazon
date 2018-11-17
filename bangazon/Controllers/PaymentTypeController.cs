@@ -37,27 +37,5 @@ namespace bangazon.Controllers
         {
             return Ok(_storage.AddPayment(payment));
         }
-
-        //[HttpDelete("{id}")]
-        //public IActionResult DeletePayment(int id)
-        //{
-        //    var payment = _storage.GetPaymentType(id);
-
-        //    if (payment == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    var removePayment = _storage.DeletePayment(id);
-
-        //    if(removePayment)
-        //    {
-        //        return Ok();
-        //    }
-
-        //    return BadRequest(new { Message = "Payment not successfully deleted" });
-        //}
-
-
     }
 }
