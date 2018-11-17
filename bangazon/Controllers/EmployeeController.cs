@@ -39,5 +39,11 @@ namespace bangazon.Controllers
       {
         return Ok(_storage.AddEmployee(employee));
       }
+
+      [HttpPut("{id}")]
+      public IActionResult UpdateEmployee(EmployeeTemplate employee, int id)
+      {
+        return Ok(_storage.UpdateEmployee(employee, id));
+      }
     }
 }

@@ -54,5 +54,17 @@ namespace bangazon.DataAccess
         return result == 1;
       }
     }
+
+    public bool UpdateEmployee(EmployeeTemplate employee, int id)
+    {
+      using (var db = new SqlConnection(conString))
+      {
+        var result = db.Execute(@"update employee
+                        set [name] = @name, [is_supervisor] = @is_supervisor, [department_id] = @department_id
+                        where employee.id = @id",new {id = id, name = employee.name, is_supervisor = employee.is_supervisor, department_id = employee.department_id});
+
+        return result == 1;
+      }
+    }
   }
 }
