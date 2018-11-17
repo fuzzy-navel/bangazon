@@ -39,21 +39,11 @@ namespace bangazon.Controllers
             return Ok(_storage.AddPayment(payment));
         }
 
-<<<<<<< HEAD
-        [HttpDelete("{id}")]
-        public IActionResult DeletePayment(int id)
-        {
-            return Ok(_storage.DeletePayment(id));
-        }
-
-
-=======
         //Update
         [HttpPut("{id}")]
         public IActionResult Update(int id, PaymentType payment)
         {
             return Ok(_storage.UpdatePayment(id, payment));
         }
->>>>>>> 8c6952be1c02e674378a4c84ce35ff4cd43961bb
     }
 }

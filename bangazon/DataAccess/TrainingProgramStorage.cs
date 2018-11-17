@@ -24,7 +24,7 @@ namespace bangazon.DataAccess
             {
                 connection.Open();
                 var result = connection.Query<TrainingProgram>(
-                    @"SELECT *, EmployeeName = employee.name 
+                    @"SELECT *, EmployeeName = employee.name
                     FROM training_programs 
                     JOIN employee_training_program_pair ON employee_training_program_pair.training_program_id = training_programs.id
 	                    JOIN employee ON employee.id = employee_training_program_pair.employee_id");
