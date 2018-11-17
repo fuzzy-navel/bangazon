@@ -50,13 +50,17 @@ namespace bangazon.DataAccess
             }
         }
 
-        public bool DeletePayment(int paymentId)
+        public bool UpdatePayment(int id, PaymentType payment)
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
 
                 var result = connection.Execute("@Delete from [dbo].payment_type Where id = @id", new {paymentId});
+
+                var result = connection.Execute(@"UPDATE payment_type
+                                                SET account_number = @account_number, active = @active, title = @title
+                                                Where id = @id", payment);
 
                 return result == 1;
             }

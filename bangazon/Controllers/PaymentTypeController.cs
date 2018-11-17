@@ -19,25 +19,27 @@ namespace bangazon.Controllers
             _storage = new PaymentStorage();
         }
 
+        //Gat a List of all payment types
         [HttpGet]
-        public IActionResult GetAllPaymentTypes()
+        public IActionResult GetListOfPayments()
         {
             return Ok(_storage.GetAllPaymentTypes());
         }
-
+        //Get payment type by id
         [HttpGet("{id}")]
-        public IActionResult GetPaymentType(int id)
+        public IActionResult GetOnePaymentById(int id)
         {
             return Ok(_storage.GetPaymentType(id));
         }
 
         //Add
         [HttpPost]
-        public IActionResult AddPayment(PaymentType payment)
+        public IActionResult AddAPaymentToCustomer(PaymentType payment)
         {
             return Ok(_storage.AddPayment(payment));
         }
 
+<<<<<<< HEAD
         [HttpDelete("{id}")]
         public IActionResult DeletePayment(int id)
         {
@@ -45,5 +47,13 @@ namespace bangazon.Controllers
         }
 
 
+=======
+        //Update
+        [HttpPut("{id}")]
+        public IActionResult Update(int id, PaymentType payment)
+        {
+            return Ok(_storage.UpdatePayment(id, payment));
+        }
+>>>>>>> 8c6952be1c02e674378a4c84ce35ff4cd43961bb
     }
 }
