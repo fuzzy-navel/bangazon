@@ -40,8 +40,8 @@ namespace bangazon.Controllers
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                var result3 = connection.Execute(@"Insert into [dbo].[computer]([id], [purchased_date], [decomissioned], [employee_id], [in_use], [is_malfunctioning])
-                                                 VALUES (@id, @purchased_date, @decomissioned, @employee_id, @in_use, @is_malfunctioning)", computer);
+                var result3 = connection.Execute(@"Insert into [dbo].[computer]([purchase_date], [decommissioned], [employee_id], [in_use], [is_malfunctioning])
+                                                 VALUES (@purchase_date, @decommissioned, @employee_id, @in_use, @is_malfunctioning)", computer);
 
                 return result3 == 1;
             }
