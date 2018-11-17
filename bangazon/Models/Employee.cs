@@ -11,5 +11,6 @@ namespace bangazon.Models
     public int employee_id { get; set; }
     public bool is_supervisor { get; set;}
     public string department_name { get; set;}
+    public int department_id { get; set; }
   }
 }
