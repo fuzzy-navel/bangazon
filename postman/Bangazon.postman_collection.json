@@ -29,12 +29,6 @@
 								"product"
 							]
 						}
-<<<<<<< HEAD
-					]
-				}
-			},
-			"response": []
-=======
 					},
 					"response": []
 				},
@@ -152,24 +146,254 @@
 					"response": []
 				}
 			]
->>>>>>> master
+		},
+		{
+			"name": "TrainingProgram",
+			"item": [
+				{
+					"name": "SingleTrainingProgramNotCompletedYet()",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:44398/api/trainingprogram/4?completed=false",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44398",
+							"path": [
+								"api",
+								"trainingprogram",
+								"4"
+							],
+							"query": [
+								{
+									"key": "completed",
+									"value": "false"
+								}
+							]
+						},
+						"description": "https://localhost:44398/api/trainingprogram/4?completed=false"
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllTrainingProgramsNotCompletedYet()",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:44398/api/trainingprogram?completed=false",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44398",
+							"path": [
+								"api",
+								"trainingprogram"
+							],
+							"query": [
+								{
+									"key": "completed",
+									"value": "false"
+								}
+							]
+						},
+						"description": "https://localhost:44398/api/trainingprogram?completed=false"
+					},
+					"response": []
+				},
+				{
+					"name": "GetAllTrainingPrograms",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:44398/api/trainingprogram",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44398",
+							"path": [
+								"api",
+								"trainingprogram"
+							]
+						},
+						"description": "https://localhost:44398/api/trainingprogram"
+					},
+					"response": []
+				},
+				{
+					"name": "GetSingleTrainingProgram",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:44398/api/trainingprogram/3",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44398",
+							"path": [
+								"api",
+								"trainingprogram",
+								"3"
+							]
+						},
+						"description": "https://localhost:44398/api/trainingprogram/3"
+					},
+					"response": []
+				},
+				{
+					"name": "AddNewTrainingProgram",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"start_date\": \"2019-06-02 00:00:00.000\",\n\t\"end_date\": \"2019-06-04 00:00:00.000\",\n\t\"max_attendees\": 33\n}"
+						},
+						"url": {
+							"raw": "https://localhost:44398/api/trainingprogram",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44398",
+							"path": [
+								"api",
+								"trainingprogram"
+							]
+						},
+						"description": "https://localhost:44398/api/trainingprogram/3"
+					},
+					"response": []
+				},
+				{
+					"name": "UpdateTrainingProgram",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"start_date\": \"2019-08-02 00:00:00.000\",\n\t\"end_date\": \"2019-08-04 00:00:00.000\",\n\t\"max_attendees\": 3333\n}"
+						},
+						"url": {
+							"raw": "https://localhost:44398/api/trainingprogram/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44398",
+							"path": [
+								"api",
+								"trainingprogram",
+								"4"
+							]
+						},
+						"description": "https://localhost:44398/api/trainingprogram/3"
+					},
+					"response": []
+				},
+				{
+					"name": "DeleteTrainingProgram",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://localhost:44398/api/trainingprogram/4",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "44398",
+							"path": [
+								"api",
+								"trainingprogram",
+								"4"
+							]
+						},
+						"description": "https://localhost:44398/api/trainingprogram/4"
+					},
+					"response": []
+				}
+			]
 		},
 		{
 			"name": "GetCustomers()",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "f853c819-34fb-4e7a-9397-0e0c79a9e834",
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -178,7 +402,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "https://localhost:44398/api/Customer",
+					"raw": "https://localhost:44398/api/customer",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -186,7 +410,7 @@
 					"port": "44398",
 					"path": [
 						"api",
-						"Customer"
+						"customer"
 					]
 				},
 				"description": "Gets all the customers"
@@ -195,20 +419,6 @@
 		},
 		{
 			"name": "GetCustomerById()",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "bfb9bfc6-7986-49a9-8758-d4f71c04a96a",
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -217,7 +427,7 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "https://localhost:44398/api/customer/15",
+					"raw": "https://localhost:44398/api/customer/5",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -226,7 +436,7 @@
 					"path": [
 						"api",
 						"customer",
-						"15"
+						"5"
 					]
 				}
 			},
@@ -258,20 +468,6 @@
 		},
 		{
 			"name": "GetCustomerandProduct()",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "2f5cd18d-3b59-44d5-8995-bf5d9cf81160",
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -303,20 +499,6 @@
 		},
 		{
 			"name": "GetCustomerandPayments",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "8a114439-0234-4bd2-8af2-6044895f2f8a",
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -348,20 +530,6 @@
 		},
 		{
 			"name": "GetCustomerByQuery()",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "4f776a43-5ae9-4ea0-a2be-594216523022",
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
 			"request": {
 				"method": "GET",
 				"header": [],
@@ -391,25 +559,7 @@
 			"response": []
 		},
 		{
-<<<<<<< HEAD
-			"name": "AddCustomer",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "a6564d63-f80e-41eb-9ccd-5950ba19827b",
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-=======
 			"name": "AddPaymentType()",
->>>>>>> master
 			"request": {
 				"method": "POST",
 				"header": [
@@ -422,124 +572,10 @@
 				],
 				"body": {
 					"mode": "raw",
-<<<<<<< HEAD
-					"raw": "{\n        \"first_name\": \"Todd\",\n        \"last_name\": \"Jenkins\",\n        \"date_joined\": \"2018-11-11T00:00:00\",\n        \"active\": false,\n\n}"
-				},
-				"url": {
-					"raw": "https://localhost:44398/api/customer/?",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "44398",
-					"path": [
-						"api",
-						"customer",
-						""
-					],
-					"query": [
-						{
-							"key": "first_name",
-							"value": "Todd",
-							"disabled": true
-						},
-						{
-							"key": "last_name",
-							"value": "Jenkins",
-							"disabled": true
-						},
-						{
-							"key": "date_joined",
-							"value": "2018-11-11",
-							"disabled": true
-						},
-						{
-							"key": "active",
-							"value": "true",
-							"disabled": true
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "UpdateCustomer()",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "4dbb6d2b-acca-4244-8b01-e1bfd61a9f7e",
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"first_name\": \"Barry\",\n    \"last_name\": \"Russell\",\n    \"date_joined\": \"2018-12-02T00:00:00\",\n    \"active\": true\n}"
-				},
-				"url": {
-					"raw": "https://localhost:44398/api/customer/3",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "44398",
-					"path": [
-						"api",
-						"customer",
-						"3"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GetEmployees()",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "7f116ec2-1298-4fb0-b8bd-d925e18da7a4",
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "https://localhost:44398/api/employee",
-=======
 					"raw": "{\n\t\"account_number\": 323232,\n\t\"customer_id\": 5,\n\t\"active\": 1,\n\t\"title\": \"testttt\"\n}"
 				},
 				"url": {
 					"raw": "https://localhost:44398/api/paymenttype",
->>>>>>> master
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -547,11 +583,7 @@
 					"port": "44398",
 					"path": [
 						"api",
-<<<<<<< HEAD
-						"employee"
-=======
 						"paymenttype"
->>>>>>> master
 					]
 				}
 			},
