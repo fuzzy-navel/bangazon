@@ -23,12 +23,13 @@ namespace bangazon.Controllers
 
         // Get All Training Programs
         // API example: https://localhost:44398/api/trainingprogram
+        // API example: https://localhost:44398/api/trainingprogram?completed=false
         [HttpGet]
         public IActionResult GetAllTrainingPrograms([FromQuery] string completed)
         {
             if (completed == "false")
             {
-                // starts today or in the future
+                // Training starts today or in the future
                 return Ok(_storage.GetAllTrainingProgramsTodayOrFuture());
             }
             else
@@ -39,12 +40,13 @@ namespace bangazon.Controllers
 
         // Get Single Training Program
         // API example: https://localhost:44398/api/trainingprogram/3
+        // API example: https://localhost:44398/api/trainingprogram/2?completed=false
         [HttpGet("{id}")]
         public IActionResult GetSingleTrainingProgram(int id, [FromQuery] string completed)
         {
             if (completed == "false")
             {
-                // starts today or in the future
+                // Training starts today or in the future
                 return Ok(_storage.GetSingleTrainingProgramTodayOrFuture(id));
             }
             else {

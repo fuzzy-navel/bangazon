@@ -32,6 +32,21 @@ namespace bangazon.DataAccess
             }
         }
 
+        public IEnumerable<TrainingProgram> GetAllTrainingProgramsTodayOrFuture()
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var result = connection.Query<TrainingProgram>(
+                    @"SELECT *, EmployeeName = employee.name 
+                    FROM training_programs 
+                    JOIN employee_training_program_pair ON employee_training_program_pair.training_program_id = training_programs.id
+	                    JOIN employee ON employee.id = employee_training_program_pair.employee_id
+                    WHERE start_date >= getDate()");
+                return result;
+            }
+        }
+
         public IEnumerable<TrainingProgram> GetSingleTrainingProgram(int id)
         {
             using (var connection = new SqlConnection(ConnectionString))
@@ -43,6 +58,22 @@ namespace bangazon.DataAccess
                     JOIN employee_training_program_pair ON employee_training_program_pair.training_program_id = training_programs.id
 	                    JOIN employee ON employee.id = employee_training_program_pair.employee_id
                     WHERE training_programs.id = @id", new { id }    
+                );
+                return result;
+            }
+        }
+
+        public IEnumerable<TrainingProgram> GetSingleTrainingProgramTodayOrFuture(int id)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var result = connection.Query<TrainingProgram>(
+                    @"SELECT *, EmployeeName = employee.name 
+                    FROM training_programs
+                    JOIN employee_training_program_pair ON employee_training_program_pair.training_program_id = training_programs.id
+	                    JOIN employee ON employee.id = employee_training_program_pair.employee_id
+                    WHERE training_programs.id = @id AND start_date >= getDate()", new { id }
                 );
                 return result;
             }
