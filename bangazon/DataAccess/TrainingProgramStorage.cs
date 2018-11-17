@@ -63,12 +63,13 @@ namespace bangazon.DataAccess
 
         public bool DeleteTrainingProgram(int id)
         {
-            var currentDateTime = DateTime.Now.ToString("M/d/yyyy");
-
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                var result = connection.Execute(@"DELETE FROM [dbo].training_programs WHERE id = @id", new { id });
+                var result = connection.Execute(@"
+                    DELETE FROM [dbo].training_programs 
+                    WHERE id = @id AND start_date >= getDate()", 
+                    new { id } );
                 return result == 1;
             }
         }
