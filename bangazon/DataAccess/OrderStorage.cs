@@ -60,38 +60,54 @@ namespace bangazon.DataAccess
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                var result3 = connection.Execute(@" INSERT INTO [dbo].[orders]([customer_id], [order_status], [can_complete], [payment_type_id])
-                                                    VALUES(@CustomerId, @OrderStatus, @CanComplete, @PaymentTypeId)", order );
-
+                var result3 = connection.Execute(@" INSERT INTO [dbo].[orders]
+                                                    ([customer_id], 
+                                                    [order_status], 
+                                                    [can_complete], 
+                                                    [payment_type_id])
+                                                    VALUES(@CustomerId, @OrderStatus, @CanComplete, @PaymentTypeId)", order 
+                                                  );
 
                 return result3 == 1;
             }
         }
-        
 
-        // 4) UPDATE PAYMENT TYPE OF AN ORDER
-        //public bool UpdatePaymentTypeId(int customer_id, int payment_type_id)
-        //{
-        //    using (var connection = new SqlConnection(ConnectionString))
-        //    {
-        //        connection.Open();
-        //        var sql = "UPDATE orders SET PaymentTypeId = @payment_type_id WHERE CustomerId = @customer_id";
-        //        var result4 = connection.Execute(sql, new { CustomerId = customer_id, PaymentTypeId = payment_type_id });
-        //        return result4 == 1;
-        //    }
-        //}
 
-        // 5) DELETE AN ORDER
-        //public bool DeleteOrderById(int id)
-        //{
-        //    using (var connection = new SqlConnection(ConnectionString))
-        //    {
-        //        connection.Open();
-        //        string sql = "DELETE FROM orders as o WHERE o.id = @id";
-        //        var result5 = connection.Execute(sql, new { Id = id });
-        //        return result5 > 0;
-        //    }
-        //}
+        // 4) UPDATE AN ORDER
+        public bool UpdateOrderInfo(int id, Order order)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                
+                var result4 = connection.Execute(@"UPDATE [dbo].[orders]
+                                                    SET [customer_id] = @CustomerId, 
+                                                        [order_status] = @OrderStatus, 
+                                                        [can_complete] = @CanComplete, 
+                                                        [payment_type_id] = @PaymentTypeId
+                                                    WHERE id = @id",
+                                                    new
+                                                    {
+                                                        id,
+                                                        customer_id = order.CustomerId,
+                                                        order_status = order.OrderStatus,
+                                                        can_complete = order.CanComplete,
+                                                        payment_type_id = order.PaymentTypeId,
+                                                    });
+                return result4 == 1;
+            }
+        }
+
+         // 5) DELETE AN ORDER
+        public bool DeleteOrderById(int id)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var result5 = connection.Execute(@"DELETE FROM [dbo].[orders] WHERE id = @Id", new { id });
+                return result5 == 1;
+            }
+        }
 
     }
 }
