@@ -10,11 +10,11 @@ namespace bangazon.DataAccess
 {
     public class PaymentStorage
     {
-        private const string ConnectionInfo = "Server = (local); Database=Bangazon; Trusted_Connection=True";
+        private const string ConnectionString = "Server = (local); Database=Bangazon; Trusted_Connection=True";
 
        public IEnumerable<PaymentType>GetAllPaymentTypes()
         {
-            using (var connection = new SqlConnection(ConnectionInfo))
+            using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
                 var result = connection.Query<PaymentType>(@"select * from payment_type");
@@ -27,7 +27,7 @@ namespace bangazon.DataAccess
 
         public IEnumerable<PaymentType> GetPaymentType(int id)
         {
-            using (var connection = new SqlConnection(ConnectionInfo))
+            using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
                 var result = connection.Query<PaymentType>(@"select * 
@@ -37,5 +37,31 @@ namespace bangazon.DataAccess
             }
         }
 
+        public bool AddPayment(PaymentType payment)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+
+                var result = connection.Execute(@"INSERT INTO [dbo].[payment_type]([account_number], [customer_id], [active], [title])
+                                                  VALUES (@account_number, @customer_id, @active, @title)", payment);
+
+                return result == 1;
+            }
+        }
+
+        public bool UpdatePayment(int id, PaymentType payment)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+
+                var result = connection.Execute(@"UPDATE payment_type
+                                                SET account_number = @account_number, active = @active, title = @title
+                                                Where id = @id", payment);
+
+                return result == 1;
+            }
+        }
     }
 }

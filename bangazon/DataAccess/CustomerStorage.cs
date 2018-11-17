@@ -1,5 +1,6 @@
 ﻿using bangazon.Models;
 using Dapper;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -10,7 +11,12 @@ namespace bangazon.DataAccess
 {
   public class CustomerStorage
   {
-    private const string conString = "Server = (local); Database=Bangazon; Trusted_Connection=True";
+    private readonly string conString;
+
+    public CustomerStorage(IConfiguration config)
+    {
+      conString = config.GetSection("ConnectionString").Value;
+    }
 
     public IEnumerable<Customer> GetCustomers()
     {
@@ -60,7 +66,7 @@ namespace bangazon.DataAccess
       {
         connection.Open();
 
-        var result = connection.Query<CustomerandPayment>(@"select first_name, last_name, date_joined, active, c.id as customer_id, account_number, p.id as payment_id
+        var result = connection.Query<CustomerandPayment>(@"select first_name, last_name, date_joined, c.active as active_customer, c.id as customer_id, account_number, p.id as payment_id, p.active as active_payment, title
                                 from customer as c
                                 join payment_type as p
                                 on p.customer_id = c.id
