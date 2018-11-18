@@ -15,15 +15,15 @@ namespace bangazon.Controllers
     public class OrderController : ControllerBase
     {
         private readonly OrderStorage _orders;
-        
+
 
         public OrderController(IConfiguration config)
         {
             _orders = new OrderStorage(config);
-            
+
         }
 
-        //#1 INCLUDING QUERY OPTIONS FOR CAN_COMPLETE
+        //#1 & #6 INCLUDING QUERY OPTIONS FOR CAN_COMPLETE
         [HttpGet("orders")]
         public IActionResult GetOrders(bool? completed)
         {
@@ -55,7 +55,6 @@ namespace bangazon.Controllers
         public IActionResult PostOrder(Order order)
         {
             return Ok(_orders.PostOrder(order));
-
         }
 
         // #4
@@ -63,17 +62,26 @@ namespace bangazon.Controllers
         public IActionResult UpdateOrder(int id, Order order)
         {
             return Ok(_orders.UpdateOrderInfo(id, order));
-
         }
 
         // #5
         [HttpDelete("{id}")]
         public IActionResult DeleteOrder(int id)
         {
-
             return Ok(_orders.DeleteOrderById(id));
         }
 
-        
+        // #7
+        [HttpGet("ordersByQuery")]
+        public IActionResult GetOrdersByQuery(string include)
+        {
+            if (include == "customers")
+            {
+                return Ok(_orders.GetOrdersAndCustomers());
+            }
+            throw new ArgumentException("something went wrong!");
+        }
+
+
     }
 }

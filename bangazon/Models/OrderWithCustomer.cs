@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace bangazon.Models
 {
-    public class OrderAndCustomer
+    public class OrderWithCustomer
     {
         public string FirstName;
         public string LastName;
@@ -15,6 +15,5 @@ namespace bangazon.Models
         public bool OrderStatus { get; set; }
         public bool CanComplete { get; set; }
         public int PaymentTypeId { get; set; }
-        public int Id;
     }
 }

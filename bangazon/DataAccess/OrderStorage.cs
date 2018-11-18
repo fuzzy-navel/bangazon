@@ -127,7 +127,7 @@ namespace bangazon.DataAccess
             }
         }
 
-        //ENDPOINT TO RETRIEVE ORDERS USING THE '?can_complete=true' QUERY STRING PARAMETER
+        // 6.1) ENDPOINT TO RETRIEVE ORDERS USING THE '?can_complete=true' QUERY STRING PARAMETER
         public List<Order> QueryCompletedOrders()
         {
             using (var connection = new SqlConnection(ConnectionString))
@@ -141,6 +141,28 @@ namespace bangazon.DataAccess
                                                         Id = id
                                                       FROM orders
                                                       WHERE can_complete = 1");
+
+                return result.ToList();
+            }
+        }
+
+        // 7) ENDPOINT TO RETRIEVE CUSTOMER INFO ALONG WITH ORDER INFO USING ?_include=customer
+        public List<OrderWithCustomer> GetOrdersAndCustomers()
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                var result = connection.Query<OrderWithCustomer>(@"SELECT
+                                                                    FirstName = c.first_name,
+                                                                    LastName = c.last_name,
+                                                                    DateJoined = c.date_joined,
+                                                                    Active = c.active,   
+                                                                    CustomerId = o.customer_id,
+                                                                    OrderStatus = o.order_status,
+                                                                    CanComplete = o.can_complete,
+                                                                    PaymentTypeId = o.payment_type_id
+                                                                  FROM orders as o
+                                                                  JOIN customer as c ON c.id = o.customer_id
+                                                                ");
 
                 return result.ToList();
             }
