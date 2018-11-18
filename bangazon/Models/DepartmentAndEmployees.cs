@@ -9,7 +9,7 @@ namespace bangazon.Models
     {
         public string Name;
         public int Budget;
-        public int SupervisorId;
+        public int? SupervisorId;
         public int Id;
         public List<Employee> Employees;
     }
