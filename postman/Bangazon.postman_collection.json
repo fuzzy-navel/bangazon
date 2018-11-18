@@ -492,6 +492,37 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "GetOrdersByCompletionStatus",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://localhost:44398/api/order/orders?completed=false",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44398",
+					"path": [
+						"api",
+						"order",
+						"orders"
+					],
+					"query": [
+						{
+							"key": "completed",
+							"value": "false"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
