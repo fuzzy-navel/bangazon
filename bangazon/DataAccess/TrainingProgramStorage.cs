@@ -88,6 +88,17 @@ namespace bangazon.DataAccess
                         @"INSERT into [dbo].[training_programs]([start_date], [end_date], [max_attendees])
                         VALUES (@start_date, @end_date, @max_attendees)", trainingProgram
                 );
+                var tpId = connection.Query<TrainingProgram>(@"
+                    SELECT id
+                    FROM training_programs
+                    WHERE training_programs.start_date == trainingProgam.start_date
+                ", new {trainingProgram});
+                // need to get the training_programs id, from `result`
+                var result2 = connection.Execute(
+                    @"INSERT into [dbo].[employee_training_program_pair]([training_program_id], [employee_id])
+                    VALUES (@id, @employeeid)
+                    WHERE id == tpId", trainingProgram
+                );
                 return result == 1;
             }
         }
