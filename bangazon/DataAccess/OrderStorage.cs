@@ -122,7 +122,7 @@ namespace bangazon.DataAccess
                                                         PaymentTypeId = payment_type_id, 
                                                         Id = id 
                                                       FROM orders
-                                                      WHERE can_complete = 0");
+                                                      WHERE order_status = 0");
                 return result.ToList();
             }
         }
@@ -140,7 +140,7 @@ namespace bangazon.DataAccess
                                                         PaymentTypeId = payment_type_id,
                                                         Id = id
                                                       FROM orders
-                                                      WHERE can_complete = 1");
+                                                      WHERE order_status = 1");
 
                 return result.ToList();
             }
@@ -159,13 +159,16 @@ namespace bangazon.DataAccess
                                                                     CustomerId = o.customer_id,
                                                                     OrderStatus = o.order_status,
                                                                     CanComplete = o.can_complete,
-                                                                    PaymentTypeId = o.payment_type_id
+                                                                    PaymentTypeId = o.payment_type_id,
+                                                                    OrderId = o.id
                                                                   FROM orders as o
                                                                   JOIN customer as c ON c.id = o.customer_id
                                                                 ");
 
                 return result.ToList();
             }
+
         }
+        
     }
 }

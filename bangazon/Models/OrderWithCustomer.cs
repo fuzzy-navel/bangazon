@@ -15,5 +15,6 @@ namespace bangazon.Models
         public bool OrderStatus { get; set; }
         public bool CanComplete { get; set; }
         public int PaymentTypeId { get; set; }
+        public int OrderId;
     }
 }

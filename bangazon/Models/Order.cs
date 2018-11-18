@@ -12,6 +12,5 @@ namespace bangazon.Models
         public bool CanComplete { get; set; }
         public int PaymentTypeId { get; set; }
         public int Id;
-
     }
 }
