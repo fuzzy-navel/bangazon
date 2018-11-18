@@ -23,7 +23,7 @@ namespace bangazon.Controllers
             
         }
 
-        //#1
+        //#1 INCLUDING QUERY OPTIONS FOR CAN_COMPLETE
         [HttpGet("orders")]
         public IActionResult GetOrders(bool? completed)
         {
