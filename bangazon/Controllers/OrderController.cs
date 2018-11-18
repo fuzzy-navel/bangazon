@@ -74,11 +74,6 @@ namespace bangazon.Controllers
             return Ok(_orders.DeleteOrderById(id));
         }
 
-        // #6
-        [HttpGet("incompleteOrders")]
-        public IActionResult GetIncompleteOrders()
-        {
-            return Ok(_orders.QueryIncompleteOrders());
-        }
+        
     }
 }
