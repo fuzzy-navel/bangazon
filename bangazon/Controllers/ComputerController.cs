@@ -31,10 +31,17 @@ namespace bangazon.Controllers
             return Ok(_storage.GetComputerById(id));
         }
 
+
         [HttpPost]
         public IActionResult AddComputer(Computer computer)
         {
             return Ok(_storage.AddComputer(computer));
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            return Ok(_storage.DeleteComputer(id));
         }
 
     }
