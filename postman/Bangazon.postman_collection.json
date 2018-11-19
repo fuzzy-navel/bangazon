@@ -494,7 +494,7 @@
 			"response": []
 		},
 		{
-			"name": "GetOrdersByCompletionStatus",
+			"name": "GetOrdersByStatus",
 			"request": {
 				"method": "GET",
 				"header": [],
