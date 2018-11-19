@@ -183,73 +183,90 @@ namespace bangazon.DataAccess
             }
         }
 
+        public IEnumerable<DepartmentAndEmployees> GetDepartmentByIdWithEmployees(int id)
+        {
+            using (var db = new SqlConnection(ConnectionInfo))
+            {
+                db.Open();
+
+                var result = db.Query<DepartmentAndEmployees>(@"SELECT * FROM [dbo].department WHERE id = @Id", new { id });
+                foreach (var department in result)
+                {
+                    var employeeResult = db.Query<Employee>(@"SELECT * FROM [dbo].employee WHERE department_id = @Id", new { id });
+                    department.Employees = employeeResult.ToList();
+                }
+
+                return result;
+            }
+        }
+
 //        public DepartmentAndEmployees GetDepartmentByIdWithEmployees(int id)
 //        {
 //            var departmentAndEmployees = new DepartmentAndEmployees();
 //            departmentAndEmployees.Employees = new List<Employee>();
 
-//            using (var db = new SqlConnection(ConnectionInfo))
-//            {
-//                db.Open();
+        //            using (var db = new SqlConnection(ConnectionInfo))
+        //            {
+        //                db.Open();
 
-//                var command = db.CreateCommand();
-//                command.CommandText = @"SELECT *
-//                                        FROM [dbo].department
-//                                        WHERE id = @Id";
+        //                var command = db.CreateCommand();
+        //                command.CommandText = @"SELECT *
+        //                                        FROM [dbo].department
+        //                                        WHERE id = @Id";
 
-//                command.Parameters.AddWithValue("@Id", id);
+        //                command.Parameters.AddWithValue("@Id", id);
 
-//                var reader = command.ExecuteReader();
+        //                var reader = command.ExecuteReader();
 
-//                int supervisorId;
+        //                int supervisorId;
 
-//                while (reader.Read())
-//                {
-//                    if (DBNull.Value.Equals(reader["supervisor_id"]))
-//                    {
-//                        supervisorId = 0;
-//                    }
-//                    else
-//                    {
-//                        supervisorId = (int)reader["supervisor_id"];
-//                    }
+        //                while (reader.Read())
+        //                {
+        //                    if (DBNull.Value.Equals(reader["supervisor_id"]))
+        //                    {
+        //                        supervisorId = 0;
+        //                    }
+        //                    else
+        //                    {
+        //                        supervisorId = (int)reader["supervisor_id"];
+        //                    }
 
-//                    departmentAndEmployees.Name = reader["name"].ToString();
-//                    departmentAndEmployees.Budget = (int)reader["expense_budget"];
-//                    departmentAndEmployees.SupervisorId = supervisorId;
-//                    departmentAndEmployees.Id = (int)reader["id"];
-//                }
-//            }
-//            using (var database = new SqlConnection(ConnectionInfo))
-//            {
-//                database.Open();
+        //                    departmentAndEmployees.Name = reader["name"].ToString();
+        //                    departmentAndEmployees.Budget = (int)reader["expense_budget"];
+        //                    departmentAndEmployees.SupervisorId = supervisorId;
+        //                    departmentAndEmployees.Id = (int)reader["id"];
+        //                }
+        //            }
+        //            using (var database = new SqlConnection(ConnectionInfo))
+        //            {
+        //                database.Open();
 
-//                var command = database.CreateCommand();
-//                command.CommandText = @"SELECT *
-//                                        FROM [dbo].employee
-//                                        WHERE department_id = @Id";
+        //                var command = database.CreateCommand();
+        //                command.CommandText = @"SELECT *
+        //                                        FROM [dbo].employee
+        //                                        WHERE department_id = @Id";
 
-//                command.Parameters.AddWithValue("@Id", id);
+        //                command.Parameters.AddWithValue("@Id", id);
 
-//                var reader = command.ExecuteReader();
+        //                var reader = command.ExecuteReader();
 
-//                while (reader.Read())
-//                {
+        //                while (reader.Read())
+        //                {
 
-//                    var employee = new Employee()
-//                    {
-//                        employee_name = reader["name"].ToString(),
-//                        is_supervisor = (bool)reader["is_supervisor"],
-//                        department_name = "WIP",
-//                        department_id = (int)reader["department_id"],
-//                        employee_id = (int)reader["id"]
-//                    };
+        //                    var employee = new Employee()
+        //                    {
+        //                        employee_name = reader["name"].ToString(),
+        //                        is_supervisor = (bool)reader["is_supervisor"],
+        //                        department_name = "WIP",
+        //                        department_id = (int)reader["department_id"],
+        //                        employee_id = (int)reader["id"]
+        //                    };
 
-//                    departmentAndEmployees.Employees.Add(employee);
-//                }
-//            }
-//            return departmentAndEmployees;
-//        }
+        //                    departmentAndEmployees.Employees.Add(employee);
+        //                }
+        //            }
+        //            return departmentAndEmployees;
+        //        }
 
         public bool AddADepartment(Department department)
         {
