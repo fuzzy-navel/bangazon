@@ -117,5 +117,17 @@ namespace bangazon.DataAccess
                 return result == 1;
             }
         }
+
+        public bool DeleteDepartment(int id)
+        {
+            using (var db = new SqlConnection(ConnectionInfo))
+            {
+                db.Open();
+
+                var result = db.Execute(@"DELETE FROM [dbo].department WHERE id = @Id", new { id });
+
+                return result == 1;
+            }
+        }
     }
 }

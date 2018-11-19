@@ -92,6 +92,24 @@ namespace bangazon.DataAccess
       }
     }
 
+    public IEnumerable<Customer> GetInactiveCustomers()
+    {
+      using (var connection = new SqlConnection(conString))
+      {
+        connection.Open();
+
+        var result = connection.Query<Customer>(@"select first_name, last_name, date_joined, active, customer.id as id 
+                                from customer
+                                left join orders
+                                on orders.customer_id = customer.id
+                                where 
+	                                orders.customer_id is null
+	                                and customer.id is not null");
+
+        return result;
+      }
+    }
+
     public bool AddCustomer(Customer customer)
     {
       using (var connection = new SqlConnection(conString))
