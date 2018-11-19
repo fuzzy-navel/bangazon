@@ -34,5 +34,16 @@ namespace bangazon.Controllers
                 return result;
             }
         }
+
+        public bool DeleteComputer(int id)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var result5 = connection.Execute(@"DELETE from [dbo]. computer Where id = @id", new { id });
+
+                return result5 == 1;
+            }
+        }
     }
 }
