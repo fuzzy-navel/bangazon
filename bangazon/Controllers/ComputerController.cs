@@ -31,13 +31,13 @@ namespace bangazon.Controllers
             return Ok(_storage.GetComputerById(id));
         }
 
-<<<<<<< HEAD
+
         [HttpPut("{id}")]
         public IActionResult Update(int id, Computer computer)
         {
             return Ok(_storage.UpdateComputer(id, computer));
         }
-=======
+
 
         [HttpPost]
         public IActionResult AddComputer(Computer computer)
@@ -51,6 +51,5 @@ namespace bangazon.Controllers
             return Ok(_storage.DeleteComputer(id));
         }
 
->>>>>>> master
     }
 }
