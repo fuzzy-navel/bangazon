@@ -13,229 +13,81 @@ namespace bangazon.DataAccess
     {
         private const string ConnectionInfo = "Server = (local); Database=Bangazon; Trusted_Connection=True";
 
-        public List<Department> GetAllDepartments()
+        public IEnumerable<Department> GetAllDepartments()
         {
             using (var db = new SqlConnection(ConnectionInfo))
             {
                 db.Open();
 
-                List<Department> AllDepartments = new List<Department>();
+                var result = db.Query<Department>(@"SELECT * FROM [dbo].department");
 
-                var command = db.CreateCommand();
-                command.CommandText = @"SELECT *
-                                        FROM [dbo].department";
-
-                var reader = command.ExecuteReader();
-
-                int supervisorId;
-                while (reader.Read())
-                {
-                    if(DBNull.Value.Equals(reader["supervisor_id"]))
-                    {
-                        supervisorId = 0;
-                    } else
-                    {
-                        supervisorId = (int)reader["supervisor_id"];
-                    }
-                    var currentDepartment = new Department()
-                    {
-                        Name = reader["name"].ToString(),
-                        Budget = (int)reader["expense_budget"],
-                        SupervisorId = supervisorId,
-                        Id = (int)reader["id"]
-                    };
-
-                    AllDepartments.Add(currentDepartment);
-                }
-
-                return AllDepartments;
+                return result;
             }
         }
 
         public List<DepartmentAndEmployees> GetDepartmentsWithEmployees()
         {
-            List<DepartmentAndEmployees> departmentsAndEmployees = new List<DepartmentAndEmployees>();
             List<Employee> employees = new List<Employee>();
 
             using (var db = new SqlConnection(ConnectionInfo))
             {
                 db.Open();
 
-                var command = db.CreateCommand();
-                command.CommandText = @"SELECT *
-                                        FROM [dbo].department";
-                var reader = command.ExecuteReader();
+                var result = db.Query<DepartmentAndEmployees>(@"SELECT * FROM [dbo].department");
 
-                int supervisorId;
+                List<DepartmentAndEmployees> departmentsAndEmployees = result.ToList();
 
-                while (reader.Read())
+                var employeeResult = db.Query<Employee>(@"SELECT name AS employee_name, id AS employee_id, is_supervisor, department_id FROM [dbo].employee");
+
+                employees = employeeResult.ToList();
+
+                foreach (DepartmentAndEmployees department in departmentsAndEmployees)
                 {
-                    if (DBNull.Value.Equals(reader["supervisor_id"]))
+                    department.Employees = new List<Employee>();
+
+                    foreach (Employee employee in employees)
                     {
-                        supervisorId = 0;
-                    }
-                    else
-                    {
-                        supervisorId = (int)reader["supervisor_id"];
-                    }
-                    var dAndE = new DepartmentAndEmployees()
-                    {
-                        Name = reader["name"].ToString(),
-                        Budget = (int)reader["expense_budget"],
-                        SupervisorId = supervisorId,
-                        Id = (int)reader["id"]
-                    };
-
-                    departmentsAndEmployees.Add(dAndE);
-                }
-            }
-
-            using (var database = new SqlConnection(ConnectionInfo))
-                {
-                    database.Open();
-
-                var command = database.CreateCommand();
-                    command.CommandText = @"SELECT *
-                                            FROM [dbo].employee";
-
-                var reader = command.ExecuteReader();
-
-                    while (reader.Read())
-                    {
-
-                        var employee = new Employee()
+                        if (employee.department_id == department.id)
                         {
-                            employee_name = reader["name"].ToString(),
-                            is_supervisor = (bool)reader["is_supervisor"],
-                            department_name = "WIP",
-                            department_id = (int)reader["department_id"],
-                            employee_id = (int)reader["id"]
-                        };
-
-                        employees.Add(employee);
+                            employee.department_name = department.name;
+                            department.Employees.Add(employee);
+                        }
                     }
                 }
 
-            foreach(DepartmentAndEmployees department in departmentsAndEmployees)
-            {
-                department.Employees = new List<Employee>();
-
-                foreach (Employee employee in employees)
-                {
-                    if(employee.department_id == department.Id)
-                    {
-                        department.Employees.Add(employee);
-                    }
-                }
+                return departmentsAndEmployees;
             }
-
-            return departmentsAndEmployees;
         }
 
-        public Department GetDepartmentById(int id)
+        public IEnumerable<Department> GetDepartmentById(int id)
         {
             using (var db = new SqlConnection(ConnectionInfo))
             {
                 db.Open();
 
-                var command = db.CreateCommand();
-                command.CommandText = @"SELECT *
+                var result = db.Query<Department>(@"SELECT *
                                         FROM [dbo].department
-                                        WHERE id = @Id";
+                                        WHERE id = @Id", new { id });
 
-                command.Parameters.AddWithValue("@Id", id);
-
-                var reader = command.ExecuteReader();
-
-                int supervisorId;
-                var result = new Department();
-
-                while (reader.Read())
-                {
-                    if (DBNull.Value.Equals(reader["supervisor_id"]))
-                    {
-                        supervisorId = 0;
-                    }
-                    else
-                    {
-                        supervisorId = (int)reader["supervisor_id"];
-                    }
-
-                    result.Name = reader["name"].ToString();
-                    result.Budget = (int)reader["expense_budget"];
-                    result.SupervisorId = supervisorId;
-                    result.Id = (int)reader["id"];
-                }
                 return result;
             }
         }
 
-        public DepartmentAndEmployees GetDepartmentByIdWithEmployees(int id)
+        public IEnumerable<DepartmentAndEmployees> GetDepartmentByIdWithEmployees(int id)
         {
-            var departmentAndEmployees = new DepartmentAndEmployees();
-            departmentAndEmployees.Employees = new List<Employee>();
-
             using (var db = new SqlConnection(ConnectionInfo))
             {
                 db.Open();
 
-                var command = db.CreateCommand();
-                command.CommandText = @"SELECT *
-                                        FROM [dbo].department
-                                        WHERE id = @Id";
-
-                command.Parameters.AddWithValue("@Id", id);
-
-                var reader = command.ExecuteReader();
-
-                int supervisorId;
-
-                while (reader.Read())
+                var result = db.Query<DepartmentAndEmployees>(@"SELECT * FROM [dbo].department WHERE id = @Id", new { id });
+                foreach (var department in result)
                 {
-                    if (DBNull.Value.Equals(reader["supervisor_id"]))
-                    {
-                        supervisorId = 0;
-                    }
-                    else
-                    {
-                        supervisorId = (int)reader["supervisor_id"];
-                    }
-
-                    departmentAndEmployees.Name = reader["name"].ToString();
-                    departmentAndEmployees.Budget = (int)reader["expense_budget"];
-                    departmentAndEmployees.SupervisorId = supervisorId;
-                    departmentAndEmployees.Id = (int)reader["id"];
+                    var employeeResult = db.Query<Employee>(@"SELECT * FROM [dbo].employee WHERE department_id = @Id", new { id });
+                    department.Employees = employeeResult.ToList();
                 }
+
+                return result;
             }
-            using (var database = new SqlConnection(ConnectionInfo))
-            {
-                database.Open();
-
-                var command = database.CreateCommand();
-                command.CommandText = @"SELECT *
-                                        FROM [dbo].employee
-                                        WHERE department_id = @Id";
-
-                command.Parameters.AddWithValue("@Id", id);
-
-                var reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-
-                    var employee = new Employee()
-                    {
-                        employee_name = reader["name"].ToString(),
-                        is_supervisor = (bool)reader["is_supervisor"],
-                        department_name = "WIP",
-                        department_id = (int)reader["department_id"],
-                        employee_id = (int)reader["id"]
-                    };
-
-                    departmentAndEmployees.Employees.Add(employee);
-                }
-            }
-            return departmentAndEmployees;
         }
 
         public bool AddADepartment(Department department)
@@ -245,10 +97,10 @@ namespace bangazon.DataAccess
                 db.Open();
 
                 var result = db.Execute(@"INSERT INTO [dbo].department (name, expense_budget, supervisor_id)
-                                        VALUES(@Name, @Expense_Budget, @Supervisor_Id)", new { Name = department.Name, Expense_Budget = department.Budget, Supervisor_Id = department.SupervisorId });
+                                        VALUES(@Name, @Expense_Budget, @Supervisor_Id)", new { Name = department.name, Expense_Budget = department.expense_budget, Supervisor_Id = department.supervisor_id });
 
                 return result == 1;
-                
+
             }
         }
 
@@ -260,7 +112,19 @@ namespace bangazon.DataAccess
 
                 var result = db.Execute(@"UPDATE [dbo].department
                                           SET [name] = @Name, [expense_budget] = @Expense_Budget, [supervisor_id] = @Supervisor_Id
-                                          WHERE id = @Id", new { Name = department.Name, Expense_Budget = department.Budget, Supervisor_Id = department.SupervisorId, Id = id });
+                                          WHERE id = @Id", new { Name = department.name, Expense_Budget = department.expense_budget, Supervisor_Id = department.supervisor_id, Id = id });
+
+                return result == 1;
+            }
+        }
+
+        public bool DeleteDepartment(int id)
+        {
+            using (var db = new SqlConnection(ConnectionInfo))
+            {
+                db.Open();
+
+                var result = db.Execute(@"DELETE FROM [dbo].department WHERE id = @Id", new { id });
 
                 return result == 1;
             }

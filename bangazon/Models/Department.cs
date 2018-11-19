@@ -7,9 +7,9 @@ namespace bangazon.Models
 {
     public class Department
     {
-        public string Name;
-        public int Budget;
-        public int SupervisorId;
-        public int Id;
+        public string name;
+        public int expense_budget;
+        public int? supervisor_id;
+        public int id;
     }
 }

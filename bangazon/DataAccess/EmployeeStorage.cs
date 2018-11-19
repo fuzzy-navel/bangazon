@@ -22,7 +22,6 @@ namespace bangazon.DataAccess
     {
       using (var db = new SqlConnection(conString))
       {
-
         var result = db.Query<Employee>(@"select e.name as employee_name, e.id as employee_id , is_supervisor, d.name as department_name 
 
                             from employee as e
