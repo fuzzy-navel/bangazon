@@ -23,10 +23,11 @@ namespace bangazon.Controllers
         [HttpGet]
         public IActionResult GetAllDepartments([FromQuery] string includes)
         {
-            if(includes == "employees")
+            if (includes == "employees")
             {
                 return Ok(_storage.GetDepartmentsWithEmployees());
-            } else
+            }
+            else
             {
                 return Ok(_storage.GetAllDepartments());
             }
@@ -36,7 +37,7 @@ namespace bangazon.Controllers
         [HttpGet("{id}")]
         public IActionResult GetDepartmentById(int id, [FromQuery] string includes)
         {
-            if(includes == "employees")
+            if (includes == "employees")
             {
                 return Ok(_storage.GetDepartmentByIdWithEmployees(id));
             }
@@ -56,6 +57,12 @@ namespace bangazon.Controllers
         public IActionResult UpdateDepartment(int id, Department department)
         {
             return Ok(_storage.UpdateADepartment(id, department));
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteADepartment(int id)
+        {
+            return Ok(_storage.DeleteDepartment(id));
         }
     }
 }
