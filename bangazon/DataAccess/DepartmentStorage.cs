@@ -59,86 +59,6 @@ namespace bangazon.DataAccess
             }
         }
 
-        //        public List<DepartmentAndEmployees> GetDepartmentsWithEmployees()
-        //        {
-        //            List<DepartmentAndEmployees> departmentsAndEmployees = new List<DepartmentAndEmployees>();
-        //            List<Employee> employees = new List<Employee>();
-
-        //            using (var db = new SqlConnection(ConnectionInfo))
-        //            {
-        //                db.Open();
-
-        //                var command = db.CreateCommand();
-        //                command.CommandText = @"SELECT *
-        //                                        FROM [dbo].department";
-        //                var reader = command.ExecuteReader();
-
-        //                int supervisorId;
-
-        //                while (reader.Read())
-        //                {
-        //                    if (DBNull.Value.Equals(reader["supervisor_id"]))
-        //                    {
-        //                        supervisorId = 0;
-        //                    }
-        //                    else
-        //                    {
-        //                        supervisorId = (int)reader["supervisor_id"];
-        //                    }
-        //                    var dAndE = new DepartmentAndEmployees()
-        //                    {
-        //                        Name = reader["name"].ToString(),
-        //                        Budget = (int)reader["expense_budget"],
-        //                        SupervisorId = supervisorId,
-        //                        Id = (int)reader["id"]
-        //                    };
-
-        //                    departmentsAndEmployees.Add(dAndE);
-        //                }
-        //            }
-
-        //            using (var database = new SqlConnection(ConnectionInfo))
-        //                {
-        //                    database.Open();
-
-        //                var command = database.CreateCommand();
-        //                    command.CommandText = @"SELECT *
-        //                                            FROM [dbo].employee";
-
-        //                var reader = command.ExecuteReader();
-
-        //                    while (reader.Read())
-        //                    {
-
-        //                        var employee = new Employee()
-        //                        {
-        //                            employee_name = reader["name"].ToString(),
-        //                            is_supervisor = (bool)reader["is_supervisor"],
-        //                            department_name = "WIP",
-        //                            department_id = (int)reader["department_id"],
-        //                            employee_id = (int)reader["id"]
-        //                        };
-
-        //                        employees.Add(employee);
-        //                    }
-        //                }
-
-        //            foreach(DepartmentAndEmployees department in departmentsAndEmployees)
-        //            {
-        //                department.Employees = new List<Employee>();
-
-        //                foreach (Employee employee in employees)
-        //                {
-        //                    if(employee.department_id == department.Id)
-        //                    {
-        //                        department.Employees.Add(employee);
-        //                    }
-        //                }
-        //            }
-
-        //            return departmentsAndEmployees;
-        //        }
-
         public IEnumerable<Department> GetDepartmentById(int id)
         {
             using (var db = new SqlConnection(ConnectionInfo))
@@ -150,36 +70,6 @@ namespace bangazon.DataAccess
                                         WHERE id = @Id", new { id });
 
                 return result;
-
-                //var command = db.CreateCommand();
-                //command.CommandText = @"SELECT *
-                //                        FROM [dbo].department
-                //                        WHERE id = @Id";
-
-                //command.Parameters.AddWithValue("@Id", id);
-
-                //var reader = command.ExecuteReader();
-
-                //int supervisorId;
-                //var result = new Department();
-
-                //while (reader.Read())
-                //{
-                //    if (DBNull.Value.Equals(reader["supervisor_id"]))
-                //    {
-                //        supervisorId = 0;
-                //    }
-                //    else
-                //    {
-                //        supervisorId = (int)reader["supervisor_id"];
-                //    }
-
-                //    result.Name = reader["name"].ToString();
-                //    result.ExpenseBudget = (int)reader["expense_budget"];
-                //    result.SupervisorId = supervisorId;
-                //    result.Id = (int)reader["id"];
-                //}
-                //return result;
             }
         }
 
@@ -199,74 +89,6 @@ namespace bangazon.DataAccess
                 return result;
             }
         }
-
-//        public DepartmentAndEmployees GetDepartmentByIdWithEmployees(int id)
-//        {
-//            var departmentAndEmployees = new DepartmentAndEmployees();
-//            departmentAndEmployees.Employees = new List<Employee>();
-
-        //            using (var db = new SqlConnection(ConnectionInfo))
-        //            {
-        //                db.Open();
-
-        //                var command = db.CreateCommand();
-        //                command.CommandText = @"SELECT *
-        //                                        FROM [dbo].department
-        //                                        WHERE id = @Id";
-
-        //                command.Parameters.AddWithValue("@Id", id);
-
-        //                var reader = command.ExecuteReader();
-
-        //                int supervisorId;
-
-        //                while (reader.Read())
-        //                {
-        //                    if (DBNull.Value.Equals(reader["supervisor_id"]))
-        //                    {
-        //                        supervisorId = 0;
-        //                    }
-        //                    else
-        //                    {
-        //                        supervisorId = (int)reader["supervisor_id"];
-        //                    }
-
-        //                    departmentAndEmployees.Name = reader["name"].ToString();
-        //                    departmentAndEmployees.Budget = (int)reader["expense_budget"];
-        //                    departmentAndEmployees.SupervisorId = supervisorId;
-        //                    departmentAndEmployees.Id = (int)reader["id"];
-        //                }
-        //            }
-        //            using (var database = new SqlConnection(ConnectionInfo))
-        //            {
-        //                database.Open();
-
-        //                var command = database.CreateCommand();
-        //                command.CommandText = @"SELECT *
-        //                                        FROM [dbo].employee
-        //                                        WHERE department_id = @Id";
-
-        //                command.Parameters.AddWithValue("@Id", id);
-
-        //                var reader = command.ExecuteReader();
-
-        //                while (reader.Read())
-        //                {
-
-        //                    var employee = new Employee()
-        //                    {
-        //                        employee_name = reader["name"].ToString(),
-        //                        is_supervisor = (bool)reader["is_supervisor"],
-        //                        department_name = "WIP",
-        //                        department_id = (int)reader["department_id"],
-        //                        employee_id = (int)reader["id"]
-        //                    };
-
-        //                    departmentAndEmployees.Employees.Add(employee);
-        //                }
-        //            }
-        //            return departmentAndEmployees;
-        //        }
 
         public bool AddADepartment(Department department)
         {
