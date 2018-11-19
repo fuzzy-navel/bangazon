@@ -5,12 +5,16 @@ using System.Threading.Tasks;
 
 namespace bangazon.Models
 {
-    public class Order
+    public class OrderWithCustomer
     {
+        public string FirstName;
+        public string LastName;
+        public DateTime DateJoined;
+        public bool Active;
         public int CustomerId { get; set; }
         public bool OrderStatus { get; set; }
         public bool CanComplete { get; set; }
         public int PaymentTypeId { get; set; }
-        public int Id;
+        public int OrderId;
     }
 }

@@ -323,57 +323,6 @@
 			"response": []
 		},
 		{
-			"name": "https://localhost:44398/api/order/orders",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "https://localhost:44398/api/order/orders",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "44398",
-					"path": [
-						"api",
-						"order",
-						"orders"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "https://localhost:44398/api/order/orderById/1",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "https://localhost:44398/api/order/orderById/1",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "44398",
-					"path": [
-						"api",
-						"order",
-						"orderById",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "DeleteOrder",
 			"request": {
 				"method": "DELETE",
@@ -418,32 +367,6 @@
 						"api",
 						"order",
 						"orders"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GetOrderById",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "https://localhost:44398/api/order/orderById/1",
-					"protocol": "https",
-					"host": [
-						"localhost"
-					],
-					"port": "44398",
-					"path": [
-						"api",
-						"order",
-						"orderById",
-						"1"
 					]
 				}
 			},
@@ -508,6 +431,94 @@
 						"api",
 						"order",
 						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetOrderAndCustomerDetail",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://localhost:44398/api/order/ordersWithCustomer?include=customer",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44398",
+					"path": [
+						"api",
+						"order",
+						"ordersWithCustomer"
+					],
+					"query": [
+						{
+							"key": "include",
+							"value": "customer"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetOrderById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://localhost:44398/api/order/orderById/5",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44398",
+					"path": [
+						"api",
+						"order",
+						"orderById",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetOrdersByStatus",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://localhost:44398/api/order/orders?completed=false",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44398",
+					"path": [
+						"api",
+						"order",
+						"orders"
+					],
+					"query": [
+						{
+							"key": "completed",
+							"value": "false"
+						}
 					]
 				}
 			},

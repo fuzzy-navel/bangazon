@@ -19,20 +19,20 @@ namespace bangazon.DataAccess
         {
             ConnectionString = config.GetSection("ConnectionString").Value;
         }
-        // 1) GET ALL ORDERS
+        // 1) GET ALL ORDERS 
         public List<Order> GetOrders()
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                var result1 = connection.Query<Order>(@"SELECT 
+                var result = connection.Query<Order>(@"SELECT 
                                                         CustomerId = customer_id, 
                                                         OrderStatus = order_status, 
                                                         CanComplete = can_complete,
                                                         PaymentTypeId = payment_type_id, 
                                                         Id = id 
                                                       FROM orders");
-                return result1.ToList();
+                return result.ToList();
             }
         }
         // 2) GET SINGLE ORDER BY ID
@@ -41,7 +41,7 @@ namespace bangazon.DataAccess
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                var result2 = connection.Query<Order>(@"SELECT 
+                var result = connection.Query<Order>(@"SELECT 
                                                         CustomerId = customer_id, 
                                                         OrderStatus = order_status, 
                                                         CanComplete = can_complete,
@@ -51,7 +51,7 @@ namespace bangazon.DataAccess
                                                       WHERE o.id = @id",
                                                       new { id = id}
                                                       );
-                return result2.ToList();
+                return result.ToList();
             }
         }
         // 3) INSERT A NEW ORDER
@@ -60,7 +60,7 @@ namespace bangazon.DataAccess
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                var result3 = connection.Execute(@" INSERT INTO [dbo].[orders]
+                var result = connection.Execute(@" INSERT INTO [dbo].[orders]
                                                     ([customer_id], 
                                                     [order_status], 
                                                     [can_complete], 
@@ -68,7 +68,7 @@ namespace bangazon.DataAccess
                                                     VALUES(@CustomerId, @OrderStatus, @CanComplete, @PaymentTypeId)", order 
                                                   );
 
-                return result3 == 1;
+                return result == 1;
             }
         }
 
@@ -80,7 +80,7 @@ namespace bangazon.DataAccess
             {
                 connection.Open();
 
-                var result4 = connection.Execute(@"UPDATE [dbo].[orders]
+                var result = connection.Execute(@"UPDATE [dbo].[orders]
                                                     SET [customer_id] = @CustomerId, 
                                                         [order_status] = @OrderStatus, 
                                                         [can_complete] = @CanComplete, 
@@ -94,7 +94,7 @@ namespace bangazon.DataAccess
                                                         order.CanComplete,
                                                         order.PaymentTypeId,
                                                     });
-                return result4 == 1;
+                return result == 1;
             }
         }
 
@@ -104,28 +104,71 @@ namespace bangazon.DataAccess
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                var result5 = connection.Execute(@"DELETE FROM [dbo].[orders] WHERE id = @Id", new { id });
-                return result5 == 1;
+                var result = connection.Execute(@"DELETE FROM [dbo].[orders] WHERE id = @Id", new { id });
+                return result == 1;
             }
         }
 
-        // 6) ENDPOINT TO RETRIEVE ORDERS USING THE '?can_complete=false' 
-        //AND 'can_complete=true' QUERY STRING PARAMETERS 
-        //public List<Order> QueryOrders(string input)
-        //{
-        //    using (var connection = new SqlConnection(ConnectionString))
-        //    {
-        //        connection.Open();
-        //        var result1 = connection.Query<Order>(@"SELECT 
-        //                                                CustomerId = customer_id, 
-        //                                                OrderStatus = order_status, 
-        //                                                CanComplete = can_complete,
-        //                                                PaymentTypeId = payment_type_id, 
-        //                                                Id = id 
-        //                                              FROM orders
-        //                                              WHERE can_complete = @input");
-        //        return result1.ToList();
-        //    }
-        //}
+        // 6) ENDPOINT TO RETRIEVE ORDERS USING THE '?can_complete=false' QUERY STRING PARAMETER
+        public List<Order> QueryIncompleteOrders()
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var result = connection.Query<Order>(@"SELECT 
+                                                        CustomerId = customer_id, 
+                                                        OrderStatus = order_status, 
+                                                        CanComplete = can_complete,
+                                                        PaymentTypeId = payment_type_id, 
+                                                        Id = id 
+                                                      FROM orders
+                                                      WHERE order_status = 0");
+                return result.ToList();
+            }
+        }
+
+        // 6.1) ENDPOINT TO RETRIEVE ORDERS USING THE '?can_complete=true' QUERY STRING PARAMETER
+        public List<Order> QueryCompletedOrders()
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var result = connection.Query<Order>(@"SELECT
+                                                        CustomerId = customer_id,
+                                                        OrderStatus = order_status,
+                                                        CanComplete = can_complete,
+                                                        PaymentTypeId = payment_type_id,
+                                                        Id = id
+                                                      FROM orders
+                                                      WHERE order_status = 1");
+
+                return result.ToList();
+            }
+        }
+
+        // 7) ENDPOINT TO RETRIEVE CUSTOMER INFO ALONG WITH ORDER INFO USING ?_include=customer
+        public List<OrderWithCustomer> GetOrdersAndCustomers()
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                var result = connection.Query<OrderWithCustomer>(@"SELECT
+                                                                    FirstName = c.first_name,
+                                                                    LastName = c.last_name,
+                                                                    DateJoined = c.date_joined,
+                                                                    Active = c.active,   
+                                                                    CustomerId = o.customer_id,
+                                                                    OrderStatus = o.order_status,
+                                                                    CanComplete = o.can_complete,
+                                                                    PaymentTypeId = o.payment_type_id,
+                                                                    OrderId = o.id
+                                                                  FROM orders as o
+                                                                  JOIN customer as c ON c.id = o.customer_id
+                                                                ");
+
+                return result.ToList();
+            }
+
+        }
+        
     }
 }

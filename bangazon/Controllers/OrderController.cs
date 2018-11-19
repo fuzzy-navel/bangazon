@@ -15,23 +15,32 @@ namespace bangazon.Controllers
     public class OrderController : ControllerBase
     {
         private readonly OrderStorage _orders;
-        private readonly OrderStorage _insertOrder;
-        private readonly OrderStorage _updateOrder;
-        private readonly OrderStorage _deleteOrder;
+
 
         public OrderController(IConfiguration config)
         {
             _orders = new OrderStorage(config);
-            _insertOrder = new OrderStorage(config);
-            _updateOrder = new OrderStorage(config);
-            _deleteOrder = new OrderStorage(config);
+
         }
 
-        //#1
+        //#1 & #6 INCLUDING QUERY OPTIONS FOR CAN_COMPLETE
         [HttpGet("orders")]
-        public IActionResult GetOrders()
+        public IActionResult GetOrders(bool? completed)
         {
-            return Ok(_orders.GetOrders());
+            if (completed == true)
+            {
+                return Ok(_orders.QueryCompletedOrders());
+            }
+            else if (completed == false)
+            {
+                return Ok(_orders.QueryIncompleteOrders());
+            }
+            else if (completed == null)
+            {
+                return Ok(_orders.GetOrders());
+            }
+            throw new ArgumentException("something went wrong!");
+
         }
 
         //#2
@@ -40,29 +49,39 @@ namespace bangazon.Controllers
         {
             return Ok(_orders.GetOrderById(id));
         }
-
+     
         // #3
         [HttpPost("addOrder")]
         public IActionResult PostOrder(Order order)
         {
-            return Ok(_insertOrder.PostOrder(order));
-
+            return Ok(_orders.PostOrder(order));
         }
 
         // #4
         [HttpPut("{id}")]
         public IActionResult UpdateOrder(int id, Order order)
         {
-            return Ok(_updateOrder.UpdateOrderInfo(id, order));
-
+            return Ok(_orders.UpdateOrderInfo(id, order));
         }
 
         // #5
         [HttpDelete("{id}")]
         public IActionResult DeleteOrder(int id)
         {
-
-            return Ok(_deleteOrder.DeleteOrderById(id));
+            return Ok(_orders.DeleteOrderById(id));
         }
+
+        // #7
+        [HttpGet("ordersByQuery")]
+        public IActionResult GetOrdersByQuery(string include)
+        {
+            if (include == "customers")
+            {
+                return Ok(_orders.GetOrdersAndCustomers());
+            }
+            throw new ArgumentException("something went wrong!");
+        }
+
+
     }
 }
