@@ -55,40 +55,77 @@ namespace bangazon.DataAccess
             }
         }
         // 3) INSERT A NEW ORDER
-        //public bool PostOrder(int customer_id, bool order_status, bool can_complete, int payment_type)
-        //{
-        //    using (var connection = new SqlConnection(ConnectionString))
-        //    {
-        //        connection.Open();
-        //        string sql = "INSERT INTO orders(CustomerId, OrderStatus, CanComplete, PaymentTypeId) VALUES(@CustomerId, @OrderStatus, @CanComplete, @PaymentTypeId)";
-        //        var result3 = connection.Execute(sql, new { CustomerId = customer_id, OrderStatus = order_status, CanComplete = can_complete, PaymentTypeId = payment_type });
-        //        return result3 == 1;
-        //    }
-        //}
+        public bool PostOrder(Order order)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var result3 = connection.Execute(@" INSERT INTO [dbo].[orders]
+                                                    ([customer_id], 
+                                                    [order_status], 
+                                                    [can_complete], 
+                                                    [payment_type_id])
+                                                    VALUES(@CustomerId, @OrderStatus, @CanComplete, @PaymentTypeId)", order 
+                                                  );
 
-        // 4) UPDATE PAYMENT TYPE OF AN ORDER
-        //public bool UpdatePaymentTypeId(int customer_id, int payment_type_id)
-        //{
-        //    using (var connection = new SqlConnection(ConnectionString))
-        //    {
-        //        connection.Open();
-        //        var sql = "UPDATE orders SET PaymentTypeId = @payment_type_id WHERE CustomerId = @customer_id";
-        //        var result4 = connection.Execute(sql, new { CustomerId = customer_id, PaymentTypeId = payment_type_id });
-        //        return result4 == 1;
-        //    }
-        //}
+                return result3 == 1;
+            }
+        }
+
+
+        // 4) UPDATE AN ORDER
+        public bool UpdateOrderInfo(int id, Order order)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+
+                var result4 = connection.Execute(@"UPDATE [dbo].[orders]
+                                                    SET [customer_id] = @CustomerId, 
+                                                        [order_status] = @OrderStatus, 
+                                                        [can_complete] = @CanComplete, 
+                                                        [payment_type_id] = @PaymentTypeId
+                                                    WHERE id = @Id",
+                                                    new
+                                                    {
+                                                        id,
+                                                        order.CustomerId,
+                                                        order.OrderStatus,
+                                                        order.CanComplete,
+                                                        order.PaymentTypeId,
+                                                    });
+                return result4 == 1;
+            }
+        }
 
         // 5) DELETE AN ORDER
-        //public bool DeleteOrderById(int id)
+        public bool DeleteOrderById(int id)
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                connection.Open();
+                var result5 = connection.Execute(@"DELETE FROM [dbo].[orders] WHERE id = @Id", new { id });
+                return result5 == 1;
+            }
+        }
+
+        // 6) ENDPOINT TO RETRIEVE ORDERS USING THE '?can_complete=false' 
+        //AND 'can_complete=true' QUERY STRING PARAMETERS 
+        //public List<Order> QueryOrders(string input)
         //{
         //    using (var connection = new SqlConnection(ConnectionString))
         //    {
         //        connection.Open();
-        //        string sql = "DELETE FROM orders as o WHERE o.id = @id";
-        //        var result5 = connection.Execute(sql, new { Id = id });
-        //        return result5 > 0;
+        //        var result1 = connection.Query<Order>(@"SELECT 
+        //                                                CustomerId = customer_id, 
+        //                                                OrderStatus = order_status, 
+        //                                                CanComplete = can_complete,
+        //                                                PaymentTypeId = payment_type_id, 
+        //                                                Id = id 
+        //                                              FROM orders
+        //                                              WHERE can_complete = @input");
+        //        return result1.ToList();
         //    }
         //}
-
     }
 }
