@@ -45,6 +45,5 @@ namespace bangazon.Controllers
         {
             return Ok(_storage.UpdatePayment(id, payment));
         }
-
     }
 }
