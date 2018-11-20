@@ -12,6 +12,5 @@ namespace bangazon.Models
         public int Max_Attendees { get; set; }
         public int Id { get; set; }
         public string EmployeeName { get; set; }
-        public int EmployeeId { get; set; }
     }
 }

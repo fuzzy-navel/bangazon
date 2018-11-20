@@ -26,8 +26,8 @@ namespace bangazon.DataAccess
                 var result = connection.Query<TrainingProgram>(
                     @"SELECT *, EmployeeName = employee.name
                     FROM training_programs 
-                    JOIN employee_training_program_pair ON employee_training_program_pair.training_program_id = training_programs.id
-	                    JOIN employee ON employee.id = employee_training_program_pair.employee_id");
+                    LEFT JOIN employee_training_program_pair ON employee_training_program_pair.training_program_id = training_programs.id
+	                    LEFT JOIN employee ON employee.id = employee_training_program_pair.employee_id");
                 return result;
             }
         }
@@ -40,8 +40,8 @@ namespace bangazon.DataAccess
                 var result = connection.Query<TrainingProgram>(
                     @"SELECT *, EmployeeName = employee.name 
                     FROM training_programs 
-                    JOIN employee_training_program_pair ON employee_training_program_pair.training_program_id = training_programs.id
-	                    JOIN employee ON employee.id = employee_training_program_pair.employee_id
+                    LEFT JOIN employee_training_program_pair ON employee_training_program_pair.training_program_id = training_programs.id
+	                    LEFT JOIN employee ON employee.id = employee_training_program_pair.employee_id
                     WHERE start_date >= getDate()");
                 return result;
             }
@@ -55,8 +55,8 @@ namespace bangazon.DataAccess
                 var result = connection.Query<TrainingProgram>(
                     @"SELECT *, EmployeeName = employee.name 
                     FROM training_programs
-                    JOIN employee_training_program_pair ON employee_training_program_pair.training_program_id = training_programs.id
-	                    JOIN employee ON employee.id = employee_training_program_pair.employee_id
+                    LEFT JOIN employee_training_program_pair ON employee_training_program_pair.training_program_id = training_programs.id
+	                    LEFT JOIN employee ON employee.id = employee_training_program_pair.employee_id
                     WHERE training_programs.id = @id", new { id }    
                 );
                 return result;
@@ -71,8 +71,8 @@ namespace bangazon.DataAccess
                 var result = connection.Query<TrainingProgram>(
                     @"SELECT *, EmployeeName = employee.name 
                     FROM training_programs
-                    JOIN employee_training_program_pair ON employee_training_program_pair.training_program_id = training_programs.id
-	                    JOIN employee ON employee.id = employee_training_program_pair.employee_id
+                    LEFT JOIN employee_training_program_pair ON employee_training_program_pair.training_program_id = training_programs.id
+	                    LEFT JOIN employee ON employee.id = employee_training_program_pair.employee_id
                     WHERE training_programs.id = @id AND start_date >= getDate()", new { id }
                 );
                 return result;
@@ -87,17 +87,6 @@ namespace bangazon.DataAccess
                 var result = connection.Execute(
                         @"INSERT into [dbo].[training_programs]([start_date], [end_date], [max_attendees])
                         VALUES (@start_date, @end_date, @max_attendees)", trainingProgram
-                );
-                var tpId = connection.Query<TrainingProgram>(@"
-                    SELECT id
-                    FROM training_programs
-                    WHERE training_programs.start_date == trainingProgam.start_date
-                ", new {trainingProgram});
-                // need to get the training_programs id, from `result`
-                var result2 = connection.Execute(
-                    @"INSERT into [dbo].[employee_training_program_pair]([training_program_id], [employee_id])
-                    VALUES (@id, @employeeid)
-                    WHERE id == tpId", trainingProgram
                 );
                 return result == 1;
             }
