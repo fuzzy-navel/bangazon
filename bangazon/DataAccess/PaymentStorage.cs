@@ -50,6 +50,7 @@ namespace bangazon.DataAccess
             }
         }
 
+
         public bool UpdatePayment(int id, PaymentType payment)
         {
             using (var connection = new SqlConnection(ConnectionString))
@@ -63,5 +64,6 @@ namespace bangazon.DataAccess
                 return result == 1;
             }
         }
+
     }
 }
