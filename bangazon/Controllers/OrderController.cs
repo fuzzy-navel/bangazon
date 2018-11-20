@@ -71,7 +71,7 @@ namespace bangazon.Controllers
             return Ok(_orders.DeleteOrderById(id));
         }
 
-        // #7
+        // #7 && #8
         [HttpGet("ordersByQuery")]
         public IActionResult GetOrdersByQuery(string include)
         {
@@ -79,9 +79,11 @@ namespace bangazon.Controllers
             {
                 return Ok(_orders.GetOrdersAndCustomers());
             }
+            if (include == "products")
+            {
+                return Ok(_orders.GetOrderWithProducts());
+            }
             throw new ArgumentException("something went wrong!");
         }
-
-
     }
 }

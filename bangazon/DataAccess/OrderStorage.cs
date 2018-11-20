@@ -30,7 +30,7 @@ namespace bangazon.DataAccess
                                                         OrderStatus = order_status, 
                                                         CanComplete = can_complete,
                                                         PaymentTypeId = payment_type_id, 
-                                                        Id = id 
+                                                        OrderId = id 
                                                       FROM orders");
                 return result.ToList();
             }
@@ -46,7 +46,7 @@ namespace bangazon.DataAccess
                                                         OrderStatus = order_status, 
                                                         CanComplete = can_complete,
                                                         PaymentTypeId = payment_type_id, 
-                                                        Id = id 
+                                                        OrderId = id 
                                                       FROM orders as o               
                                                       WHERE o.id = @id",
                                                       new { id = id}
@@ -85,7 +85,7 @@ namespace bangazon.DataAccess
                                                         [order_status] = @OrderStatus, 
                                                         [can_complete] = @CanComplete, 
                                                         [payment_type_id] = @PaymentTypeId
-                                                    WHERE id = @Id",
+                                                    WHERE id = @OrderId",
                                                     new
                                                     {
                                                         id,
@@ -93,6 +93,7 @@ namespace bangazon.DataAccess
                                                         order.OrderStatus,
                                                         order.CanComplete,
                                                         order.PaymentTypeId,
+                                                        order.OrderId,
                                                     });
                 return result == 1;
             }
@@ -104,7 +105,7 @@ namespace bangazon.DataAccess
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                var result = connection.Execute(@"DELETE FROM [dbo].[orders] WHERE id = @Id", new { id });
+                var result = connection.Execute(@"DELETE FROM [dbo].[orders] WHERE id = @OrderId", new { id });
                 return result == 1;
             }
         }
@@ -120,7 +121,7 @@ namespace bangazon.DataAccess
                                                         OrderStatus = order_status, 
                                                         CanComplete = can_complete,
                                                         PaymentTypeId = payment_type_id, 
-                                                        Id = id 
+                                                        OrderId = id 
                                                       FROM orders
                                                       WHERE order_status = 0");
                 return result.ToList();
@@ -138,7 +139,7 @@ namespace bangazon.DataAccess
                                                         OrderStatus = order_status,
                                                         CanComplete = can_complete,
                                                         PaymentTypeId = payment_type_id,
-                                                        Id = id
+                                                        OrderId = id
                                                       FROM orders
                                                       WHERE order_status = 1");
 
@@ -169,6 +170,44 @@ namespace bangazon.DataAccess
             }
 
         }
-        
+
+        // 7) ENDPOINT TO RETRIEVE PRODUCT INFO ALONG WITH ORDER INFO USING ?_include=products
+
+        public List<OrderWithProduct> GetOrderWithProducts()
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                var orderDetails = connection.Query<Order>(@"SELECT * FROM orders ");
+                List<OrderWithProduct> orders = new List<OrderWithProduct>();
+                foreach (var order in orderDetails)
+                {
+                    var orderWithProduct = new OrderWithProduct
+                    {
+                        CustomerId = order.CustomerId,
+                        OrderStatus = order.OrderStatus,
+                        CanComplete = order.CanComplete,
+                        PaymentTypeId = order.PaymentTypeId,
+                        OrderId = order.OrderId
+                    };
+
+                    var productDetails = connection.Query<Product>(@"SELECT p.* 
+                                                                from product as p
+                                                                join order_product_pair as opp on p.id = opp.product_id
+                                                                WHERE opp.order_id = @OrderId", new { order.OrderId});
+                    foreach (var product in productDetails)
+                    {
+                        orderWithProduct.ProductTitle.Add(product.Title);
+                    }
+                    //orderWithProduct.ToString
+                    //orderDetails.
+                    //orders.Add(orderWithProduct);
+                    
+                }
+                    return orders.ToList();
+                                                      
+            }
+        }
+
+
     }
 }
