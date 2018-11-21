@@ -77,11 +77,13 @@ namespace bangazon.Controllers
         {
             if (include == "customers")
             {
-                return Ok(_orders.GetOrdersAndCustomers());
+                var getStuff = _orders.GetOrdersAndCustomers();
+                return Ok(getStuff);
             }
             if (include == "products")
             {
-                return Ok(_orders.GetOrderWithProducts());
+                var temp = _orders.GetOrderWithProducts();
+                return Ok(temp);
             }
             throw new ArgumentException("something went wrong!");
         }

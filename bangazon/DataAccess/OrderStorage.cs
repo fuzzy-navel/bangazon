@@ -49,7 +49,7 @@ namespace bangazon.DataAccess
                                                         OrderId = id 
                                                       FROM orders as o               
                                                       WHERE o.id = @id",
-                                                      new { id = id}
+                                                      new { id = id }
                                                       );
                 return result.ToList();
             }
@@ -65,7 +65,7 @@ namespace bangazon.DataAccess
                                                     [order_status], 
                                                     [can_complete], 
                                                     [payment_type_id])
-                                                    VALUES(@CustomerId, @OrderStatus, @CanComplete, @PaymentTypeId)", order 
+                                                    VALUES(@CustomerId, @OrderStatus, @CanComplete, @PaymentTypeId)", order
                                                   );
 
                 return result == 1;
@@ -177,7 +177,14 @@ namespace bangazon.DataAccess
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
-                var orderDetails = connection.Query<Order>(@"SELECT * FROM orders ");
+                var orderDetails = connection.Query<Order>(@"SELECT 
+                                                            CustomerId = o.customer_id,
+                                                            OrderStatus = o.order_status,
+                                                            CanComplete = o.can_complete,
+                                                            PaymentTypeId = o.payment_type_id,
+                                                            OrderId = o.id
+                                                            FROM orders AS o 
+                                                            ");
                 List<OrderWithProduct> orders = new List<OrderWithProduct>();
                 foreach (var order in orderDetails)
                 {
@@ -190,21 +197,24 @@ namespace bangazon.DataAccess
                         OrderId = order.OrderId
                     };
 
-                    var productDetails = connection.Query<Product>(@"SELECT p.* 
-                                                                from product as p
+                    var productDetails = connection.Query<Product>(@"SELECT 
+                                                                Title = p.title
+                                                                FROM product AS p
                                                                 join order_product_pair as opp on p.id = opp.product_id
-                                                                WHERE opp.order_id = @OrderId", new { order.OrderId});
-                    foreach (var product in productDetails)
+                                                                WHERE opp.order_id = @OrderId", new { order.OrderId });
+                    if (productDetails.Any())
                     {
-                        orderWithProduct.ProductTitle.Add(product.Title);
+                        foreach (var product in productDetails)
+                        {
+                            orderWithProduct.ProductTitle.Add(product.Title);
+                        }
+                        orders.Add(orderWithProduct);
+
                     }
-                    //orderWithProduct.ToString
-                    //orderDetails.
-                    //orders.Add(orderWithProduct);
                     
                 }
-                    return orders.ToList();
-                                                      
+                return orders.ToList();
+
             }
         }
 
