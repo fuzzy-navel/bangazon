@@ -85,7 +85,7 @@ namespace bangazon.DataAccess
                                                         [order_status] = @OrderStatus, 
                                                         [can_complete] = @CanComplete, 
                                                         [payment_type_id] = @PaymentTypeId
-                                                    WHERE id = @OrderId",
+                                                    WHERE id = @Id",
                                                     new
                                                     {
                                                         id,
@@ -93,7 +93,6 @@ namespace bangazon.DataAccess
                                                         order.OrderStatus,
                                                         order.CanComplete,
                                                         order.PaymentTypeId,
-                                                        order.OrderId,
                                                     });
                 return result == 1;
             }
@@ -171,7 +170,7 @@ namespace bangazon.DataAccess
 
         }
 
-        // 7) ENDPOINT TO RETRIEVE PRODUCT INFO ALONG WITH ORDER INFO USING ?_include=products
+        // 8) ENDPOINT TO RETRIEVE PRODUCT INFO ALONG WITH ORDER INFO USING ?_include=products
 
         public List<OrderWithProduct> GetOrderWithProducts()
         {
