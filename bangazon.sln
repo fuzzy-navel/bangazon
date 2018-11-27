@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2003
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bangazon", "bangazon\bangazon.csproj", "{E1D587A3-5ED7-4074-AAAB-2743FF6D4E67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bangazon", "bangazon\bangazon.csproj", "{E1D587A3-5ED7-4074-AAAB-2743FF6D4E67}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bangazonFront", "WebApplication1\bangazonFront.csproj", "{36834A16-92F2-4B35-B630-031FCA4A8789}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{E1D587A3-5ED7-4074-AAAB-2743FF6D4E67}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1D587A3-5ED7-4074-AAAB-2743FF6D4E67}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E1D587A3-5ED7-4074-AAAB-2743FF6D4E67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36834A16-92F2-4B35-B630-031FCA4A8789}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36834A16-92F2-4B35-B630-031FCA4A8789}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36834A16-92F2-4B35-B630-031FCA4A8789}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36834A16-92F2-4B35-B630-031FCA4A8789}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
