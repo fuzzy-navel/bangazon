@@ -6,33 +6,6 @@
 	},
 	"item": [
 		{
-<<<<<<< HEAD
-			"name": "Product",
-			"item": [
-				{
-					"name": "GetAllProducts()",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://localhost:44398/api/product",
-							"protocol": "https",
-							"host": [
-								"localhost"
-							],
-							"port": "44398",
-							"path": [
-								"api",
-								"product"
-							]
-						}
-					},
-					"response": []
-=======
 			"name": "GetAllProducts()",
 			"request": {
 				"method": "GET",
@@ -64,7 +37,6 @@
 				"body": {
 					"mode": "raw",
 					"raw": ""
->>>>>>> master
 				},
 				"url": {
 					"raw": "https://localhost:44398/api/product/5",
@@ -181,261 +153,10 @@
 						}
 					]
 				}
-<<<<<<< HEAD
-			]
-		},
-		{
-			"name": "TrainingProgram",
-			"item": [
-				{
-					"name": "SingleTrainingProgramNotCompletedYet()",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://localhost:44398/api/trainingprogram/4?completed=false",
-							"protocol": "https",
-							"host": [
-								"localhost"
-							],
-							"port": "44398",
-							"path": [
-								"api",
-								"trainingprogram",
-								"4"
-							],
-							"query": [
-								{
-									"key": "completed",
-									"value": "false"
-								}
-							]
-						},
-						"description": "https://localhost:44398/api/trainingprogram/4?completed=false"
-					},
-					"response": []
-				},
-				{
-					"name": "GetAllTrainingProgramsNotCompletedYet()",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://localhost:44398/api/trainingprogram?completed=false",
-							"protocol": "https",
-							"host": [
-								"localhost"
-							],
-							"port": "44398",
-							"path": [
-								"api",
-								"trainingprogram"
-							],
-							"query": [
-								{
-									"key": "completed",
-									"value": "false"
-								}
-							]
-						},
-						"description": "https://localhost:44398/api/trainingprogram?completed=false"
-					},
-					"response": []
-				},
-				{
-					"name": "GetAllTrainingPrograms",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://localhost:44398/api/trainingprogram",
-							"protocol": "https",
-							"host": [
-								"localhost"
-							],
-							"port": "44398",
-							"path": [
-								"api",
-								"trainingprogram"
-							]
-						},
-						"description": "https://localhost:44398/api/trainingprogram"
-					},
-					"response": []
-				},
-				{
-					"name": "GetSingleTrainingProgram",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://localhost:44398/api/trainingprogram/3",
-							"protocol": "https",
-							"host": [
-								"localhost"
-							],
-							"port": "44398",
-							"path": [
-								"api",
-								"trainingprogram",
-								"3"
-							]
-						},
-						"description": "https://localhost:44398/api/trainingprogram/3"
-					},
-					"response": []
-				},
-				{
-					"name": "AddNewTrainingProgram",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"start_date\": \"2019-06-02 00:00:00.000\",\n\t\"end_date\": \"2019-06-04 00:00:00.000\",\n\t\"max_attendees\": 33\n}"
-						},
-						"url": {
-							"raw": "https://localhost:44398/api/trainingprogram",
-							"protocol": "https",
-							"host": [
-								"localhost"
-							],
-							"port": "44398",
-							"path": [
-								"api",
-								"trainingprogram"
-							]
-						},
-						"description": "https://localhost:44398/api/trainingprogram/3"
-					},
-					"response": []
-				},
-				{
-					"name": "UpdateTrainingProgram",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\t\"start_date\": \"2019-08-02 00:00:00.000\",\n\t\"end_date\": \"2019-08-04 00:00:00.000\",\n\t\"max_attendees\": 3333\n}"
-						},
-						"url": {
-							"raw": "https://localhost:44398/api/trainingprogram/4",
-							"protocol": "https",
-							"host": [
-								"localhost"
-							],
-							"port": "44398",
-							"path": [
-								"api",
-								"trainingprogram",
-								"4"
-							]
-						},
-						"description": "https://localhost:44398/api/trainingprogram/3"
-					},
-					"response": []
-				},
-				{
-					"name": "DeleteTrainingProgram",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "https://localhost:44398/api/trainingprogram/4",
-							"protocol": "https",
-							"host": [
-								"localhost"
-							],
-							"port": "44398",
-							"path": [
-								"api",
-								"trainingprogram",
-								"4"
-							]
-						},
-						"description": "https://localhost:44398/api/trainingprogram/4"
-					},
-					"response": []
-				}
-			]
-		},
-		{
-=======
 			},
 			"response": []
 		},
 		{
->>>>>>> master
 			"name": "GetCustomers()",
 			"request": {
 				"method": "GET",
@@ -602,9 +323,6 @@
 			"response": []
 		},
 		{
-<<<<<<< HEAD
-			"name": "AddPaymentType()",
-=======
 			"name": "DeleteOrder",
 			"request": {
 				"method": "DELETE",
@@ -656,7 +374,6 @@
 		},
 		{
 			"name": "AddOrder",
->>>>>>> master
 			"request": {
 				"method": "POST",
 				"header": [
@@ -669,12 +386,6 @@
 				],
 				"body": {
 					"mode": "raw",
-<<<<<<< HEAD
-					"raw": "{\n\t\"account_number\": 323232,\n\t\"customer_id\": 5,\n\t\"active\": 1,\n\t\"title\": \"testttt\"\n}"
-				},
-				"url": {
-					"raw": "https://localhost:44398/api/paymenttype",
-=======
 					"raw": "{\n\t\"CustomerId\": \"1\",\n\t\"OrderStatus\": 1,\n\t\"CanComplete\": 0,\n\t\"PaymentTypeId\": \"2\"\n}"
 				},
 				"url": {
@@ -793,7 +504,6 @@
 				},
 				"url": {
 					"raw": "https://localhost:44398/api/order/orders?completed=false",
->>>>>>> master
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -801,9 +511,6 @@
 					"port": "44398",
 					"path": [
 						"api",
-<<<<<<< HEAD
-						"paymenttype"
-=======
 						"order",
 						"orders"
 					],
@@ -812,7 +519,6 @@
 							"key": "completed",
 							"value": "false"
 						}
->>>>>>> master
 					]
 				}
 			},
