@@ -9,7 +9,7 @@ import Employees from '../Employees/Employees';
 import Orders from '../Orders/Orders';
 import PaymentTypes from '../PaymentTypes/PaymentTypes';
 import Products from '../Products/Products';
-import ProductId from '../ProductId/ProductId';
+import ProductId from '../Products/Product/Product';
 import ProductTypes from '../ProductTypes/ProductTypes';
 import TrainingPrograms from '../TrainingPrograms/TrainingPrograms';
 
