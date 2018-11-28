@@ -1,13 +1,20 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
-import constants from '../../constants';
 import './Products.css';
 
 // http://localhost:58050/
 class Products extends Component {
+  constructor(props) {
+    super(props);
+
+    console.log(props);
+   }
+
   state = {
     products: [],
+    productId: 0,
+
   }
 
   componentDidMount() {
@@ -25,42 +32,46 @@ class Products extends Component {
     });
   };
 
+  clickProduct = e => {
+    const id = e.target.name;
+    this.setState({
+      productId: id,
+    });
+    const apiPath = `api/product/${id}`;
+    return new Promise((resolve, reject) => {
+      axios.get(apiPath)
+      .then(product => {
+        // sets state with all products
+        this.setState({
+          product: product.data
+        })
+      })
+      .then(product => {
+        this.props.history.push(`/products/${this.state.productId}`);
+        resolve (product);
+      })
+      .catch(error => reject(error));
+    });
+
+  }
+
   render () {
     const {
       products,
-      singleProduct
+      productId,
     } = this.state;
-
-    const clickProduct = () => {
-      const {value} = this.props;
-      console.log({value});
-      const apiPath = `api/product/${value.id}`;
-      return new Promise((resolve, reject) => {
-        axios.get(apiPath)
-        .then(product => {
-          // sets state with all products
-          this.setState({
-            product: product.data
-          })
-        })
-        .then(product => {
-          this.props.history.push(`/products/${singleProduct.id}`);
-          resolve (product);
-        })
-        .catch(error => reject(error));
-      });
-
-    }
 
     const output = products.map(product => {
       // Prints all product titles to DOM
       return (
-        <h4
+        <input
+          type="button"
+          name={product.id}
           key={product.id}
-          value={product}
-          onClick={clickProduct} >
-          {product.title}
-        </h4>
+          value={product.title}
+          product={product}
+          onClick={this.clickProduct}
+        ></input>
       );
     });
 
