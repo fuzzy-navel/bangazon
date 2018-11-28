@@ -11,8 +11,8 @@ class Departments extends Component {
 
   componentDidMount() {
       DepartmentRequests.getAllDepartments()
-          .then((departments) => {
-              this.setState(departments);
+          .then((data) => {
+              this.setState({ departments: data });
           })
           .catch((err) => {
               console.error(err, "There was a problem");
@@ -33,7 +33,9 @@ class Departments extends Component {
         return (
             <div>
                 <h1>Hey There I am the departments page</h1>
-                {alldepartments}
+                <div>
+                    {allDepartments}
+                </div>
             </div>
         );
   }

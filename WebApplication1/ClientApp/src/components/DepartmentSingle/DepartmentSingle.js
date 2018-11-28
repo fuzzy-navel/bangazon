@@ -4,9 +4,14 @@ import './DepartmentSingle.css';
 
 class DepartmentSingle extends Component {
     render() {
+        const details = this.props.details;
         return (
-            <h3></h3>
-        )
+            <div>
+                <h3>{details.name}</h3>
+                <p>{details.expense_budget}</p>
+                <p>{details.supervisor_id}</p>
+            </div>
+        );
     }
 }
 
