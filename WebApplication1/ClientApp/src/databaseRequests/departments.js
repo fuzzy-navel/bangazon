@@ -1,9 +1,9 @@
 ﻿import axios from 'axios';
-import constants from '../constants';
+//import constants from '../constants';
 
 const getAllDepartments = () => {
     return new Promise((resolve, reject) => {
-        axios.get(`${constants.dataBaseConfig.dataBaseURL}/api/department`)
+        axios.get(`/api/department`)
             .then((res) => {
                 resolve(res.data);
             })
@@ -13,4 +13,4 @@ const getAllDepartments = () => {
     });
 };
 
-export default getAllDepartments;
+export default { getAllDepartments };

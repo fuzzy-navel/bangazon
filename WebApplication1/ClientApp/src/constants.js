@@ -1,6 +1,6 @@
 ﻿const constants = {
     bangazonConfig: {
-        dataBaseURL: 'https://localhost:44398/'
+        dataBaseURL: 'https://localhost:50002'
     }
 };
 
