@@ -32,16 +32,33 @@ class Products extends Component {
     } = this.state;
 
     const clickProduct = () => {
+      const {value} = this.props;
+      console.log({value});
+      const apiPath = `api/product/${value.id}`;
+      return new Promise((resolve, reject) => {
+        axios.get(apiPath)
+        .then(product => {
+          // sets state with all products
+          this.setState({
+            product: product.data
+          })
+        })
+        .then(product => {
+          this.props.history.push(`/products/${singleProduct.id}`);
+          resolve (product);
+        })
+        .catch(error => reject(error));
+      });
 
-
-      this.props.history.push(`/products/${singleProduct.id}`);
     }
 
     const output = products.map(product => {
       // Prints all product titles to DOM
       return (
-        <h4 key={product.id}
-            onClick={clickProduct} >
+        <h4
+          key={product.id}
+          value={product}
+          onClick={clickProduct} >
           {product.title}
         </h4>
       );
