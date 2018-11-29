@@ -1,10 +1,26 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 
 import './Orders.css';
 
 class Orders extends Component {
     state = {
         orders: []
+    };
+
+    componentDidMount() {
+        const apiPath = `api/order/orders/`;
+        return new Promise((resolve, reject) => {
+            axios
+                .get(apiPath)
+                .then(orders => {
+                    this.setState({
+                        orders: orders.data
+                    })
+                    resolve(orders);
+                })
+                .catch(error => reject(error));
+        });
     };
 
     render() {
