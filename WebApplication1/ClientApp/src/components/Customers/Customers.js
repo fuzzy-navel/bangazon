@@ -24,6 +24,11 @@ class Customers extends Component {
 
     const customerList = this.state.customers.map((customer) =>
     {
+      const singleCustomer = () =>   //Button routes to single customer page
+      {
+        this.props.history.push(`/customers/${customer.id}`);
+      };
+
       return (
         <div key={customer.id}>
           <div className="panel panel-primary">
