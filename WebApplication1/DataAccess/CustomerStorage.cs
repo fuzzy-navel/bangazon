@@ -50,11 +50,16 @@ namespace bangazon.DataAccess
       {
         connection.Open();
 
-        var result = connection.Query<CustomerandProduct>(@"select first_name, last_name, date_joined, active, c.id as customer_id, category, price, title, description, quantity, owner_id, p.id as product_id 
-                                from customer as c
-                                join product as p
-                                on p.owner_id = c.id
-                                where c.id = @id", new {id = id});
+        var customer = connection.Query<CustomerandProduct>(@"select * from customer as c where c.id = @id", new {id = id});
+
+        var products = connection.Query<Product>(@"select * from product as p where p.owner_id = @id", new {id = id}).ToList();
+
+        foreach (var cust in customer)
+        {
+          cust.products = products;
+        }
+
+        var result = customer;
 
         return result;
       }
@@ -66,11 +71,18 @@ namespace bangazon.DataAccess
       {
         connection.Open();
 
-        var result = connection.Query<CustomerandPayment>(@"select first_name, last_name, date_joined, c.active as active_customer, c.id as customer_id, account_number, p.id as payment_id, p.active as active_payment, title
-                                from customer as c
-                                join payment_type as p
-                                on p.customer_id = c.id
-                                where c.id = @id", new {id = id});
+        var customer = connection.Query<CustomerandPayment>(@"select * from customer as c where c.id = @id", new { id = id });
+
+        var paymentTypes = connection.Query<PaymentType>(@"select * 
+                                    from payment_type as p
+                                    where p.customer_id = @id", new { id = id }).ToList();
+
+        foreach (var cust in customer)
+        {
+          cust.paymentTypes = paymentTypes;
+        }
+
+        var result = customer;
 
         return result;
       }
