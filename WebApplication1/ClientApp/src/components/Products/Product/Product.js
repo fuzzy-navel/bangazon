@@ -10,8 +10,8 @@ class Product extends Component {
   }
 
   componentDidMount() {
-    const id = this.props.match.params;
-    const apiPath = `api/product/${id.id}`;
+    const id = this.props.match.params.id;
+    const apiPath = `api/product/${id}`;
     return new Promise((resolve, reject) => {
       axios
       .get(apiPath)
@@ -50,6 +50,11 @@ class Product extends Component {
             type="button"
             value="Edit This Record"
             onClick={this.clickEditProductNow}
+          />
+          <input
+            type="button"
+            value="Delete Record"
+            onClick={this.clickDeleteProduct}
           />
         </div>
       );

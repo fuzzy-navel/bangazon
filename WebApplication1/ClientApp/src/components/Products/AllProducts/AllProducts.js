@@ -1,28 +1,23 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
+import Requests from '../Requests/Requests';
+
 import './AllProducts.css';
 
 class AllProducts extends Component {
-  // constructor(props) {
-  //   super(props);
-
-  //   console.log(props);
-  //  }
-
   state = {
     products: [],
     productId: 0,
   }
 
   componentDidMount() {
-    const apiPath = `api/product`;
     return new Promise((resolve, reject) => {
-      axios.get(apiPath)
+      Requests.GetAll()
       .then(products => {
         // sets state with all products
         this.setState({
-          products: products.data
+          products: products
         })
         resolve (products);
       })
