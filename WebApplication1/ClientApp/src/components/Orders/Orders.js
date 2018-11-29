@@ -30,10 +30,10 @@ class Orders extends Component {
                 <table className="table table-bordered table-striped">
                     <tbody>
                         <tr>
-                            <td>{order.customerId}</td>
-                            <td>{order.orderStatus}</td>
-                            <td>{order.canComplete}</td>
-                            <td>{order.paymentTypeId}</td>
+                            <td>Customer Id: {order.customerId}</td>
+                            <td>Order Status: {order.orderStatus.toString()}</td>
+                            <td>Order Complete: {order.canComplete.toString()}</td>
+                            <td>Payment Type Id: {order.paymentTypeId}</td>
                             <td>
                                 <button className="btn btn-primary"> Placeholder </button>  
                             </td>
