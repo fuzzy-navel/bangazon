@@ -32,19 +32,18 @@ class AllProducts extends Component {
 
   clickProduct = e => {
     const id = e.target.name;
-    console.log(id);
     this.setState({
       productId: id,
     });
     const apiPath = `api/product/${id}`;
     return new Promise((resolve, reject) => {
       axios.get(apiPath)
-      .then(product => {
-        // sets state with all products
-        this.setState({
-          product: product.data
-        })
-      })
+      // .then(product => {
+      //   // sets state with all products
+      //   this.setState({
+      //     product: product.data
+      //   })
+      // })
       .then(product => {
         this.props.history.push(`/products/${this.state.productId}`);
         resolve (product);
@@ -68,7 +67,6 @@ class AllProducts extends Component {
           name={product.id}
           key={product.id}
           value={product.title}
-          product={product}
           onClick={this.clickProduct}
         ></input>
       );
