@@ -70,7 +70,7 @@ const getCustomerWithProducts = (id) =>
         const resHoldr = [];
         if (result !== null)
         {
-          Object.keys(result.data).forEach(customer => 
+          Object.keys(result.data).forEach(customer =>
           {
             result.data[customer].id = customer;
             resHoldr.push(result.data[customer]);
@@ -82,4 +82,22 @@ const getCustomerWithProducts = (id) =>
   });
 }
 
-export default {getCustomers, getCustomer, getCustomerWithProducts}
+const getCustomerWithPaymentTypes = (id) =>
+{
+  return new Promise((resolve, reject) =>
+  {
+    axios
+      .get(`api/customer/${id}?include=payments`)
+      .then((res) =>
+      {
+        const customerHoldr = [];
+        if (res !== null)
+        {
+          resolve(res);
+        }
+      })
+      .catch((err) => reject(err));
+  });
+};
+
+export default {getCustomers, getCustomer, getCustomerWithPaymentTypes, getCustomerWithProducts, getInactiveCustomers}
