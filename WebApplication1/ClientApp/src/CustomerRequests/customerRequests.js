@@ -31,11 +31,6 @@ const getCustomer = (id) =>
         const resHoldr = [];
         if (result !== null)
         {
-          Object.keys(result.data).forEach(customer =>
-          {
-            result.data[customer].id = customer;
-            resHoldr.push(result.data[customer]);
-          })
           resolve(result);
         }
       }).catch((err) => reject(err));
@@ -67,14 +62,8 @@ const getCustomerWithProducts = (id) =>
       .get(`api/customer/${id}?include=products`)
       .then((result) =>
       {
-        const resHoldr = [];
         if (result !== null)
         {
-          Object.keys(result.data).forEach(customer =>
-          {
-            result.data[customer].id = customer;
-            resHoldr.push(result.data[customer]);
-          })
           resolve(result)
         }
       })

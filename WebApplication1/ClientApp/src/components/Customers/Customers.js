@@ -10,7 +10,7 @@ class Customers extends Component {
     }
 
   componentDidMount() {
-    customerRequests.getCustomerWithPaymentTypes(3)
+    customerRequests.getCustomers()
       .then((res) => {
         this.setState({ customers: res.data });
       })
