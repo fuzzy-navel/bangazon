@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Panel} from 'react-bootstrap';
+import { Panel} from 'react-bootstrap'
 import customerRequests from '../../CustomerRequests/customerRequests';
 
 import './Customers.css'
@@ -28,11 +28,11 @@ class Customers extends Component {
     {
       return (
         <div key={customer.id}>
-          <Panel>
-            <Panel.Heading>
-              <Panel.Title componentClass="h3">{customer.first_name}</Panel.Title>
-            </Panel.Heading>
-          </Panel>
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              {customer.first_name}
+            </div>
+          </div>
         </div>
       );
     });
