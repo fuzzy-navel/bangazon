@@ -28,7 +28,6 @@ const getCustomer = (id) =>
       .get(`api/customer/${id}`)
       .then((result) =>
       {
-        const resHoldr = [];
         if (result !== null)
         {
           resolve(result);
@@ -79,7 +78,6 @@ const getCustomerWithPaymentTypes = (id) =>
       .get(`api/customer/${id}?include=payments`)
       .then((res) =>
       {
-        const customerHoldr = [];
         if (res !== null)
         {
           resolve(res);

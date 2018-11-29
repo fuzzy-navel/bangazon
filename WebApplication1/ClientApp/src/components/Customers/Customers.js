@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Panel} from 'react-bootstrap'
 import customerRequests from '../../CustomerRequests/customerRequests';
-
 import './Customers.css'
 
 class Customers extends Component {
@@ -27,10 +25,11 @@ class Customers extends Component {
     const customerList = this.state.customers.map((customer) =>
     {
       return (
-        <div key={customer.id}>
+        <div className="col-md-3 col-md-offset-3"key={customer.id}>
           <div class="panel panel-primary">
             <div class="panel-heading">
-              {customer.first_name}
+              <a className="customerName">{customer.first_name} +" "+ {customer.last_name}</a>
+              <p>{customer.date_joined}</p>
             </div>
           </div>
         </div>
