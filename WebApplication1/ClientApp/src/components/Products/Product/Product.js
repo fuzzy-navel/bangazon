@@ -32,6 +32,16 @@ class Product extends Component {
     })
   }
 
+  clickDeleteProduct = () => {
+    const productId = this.state.product.id;
+    return new Promise((resolve, reject) => {
+      Requests.Delete(productId)
+        .then(response => resolve(response))
+        .catch(error => reject(error));
+    });
+    // redirect to product page
+  };
+
   render () {
     const {product} = this.state;
     if (!this.state.isEditing) {

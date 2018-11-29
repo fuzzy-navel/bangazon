@@ -45,8 +45,11 @@ class AllProducts extends Component {
       })
       .catch(error => reject(error));
     });
-
   }
+
+  clickAddProduct = () => {
+
+  };
 
   render () {
     const {
@@ -72,6 +75,11 @@ class AllProducts extends Component {
         <h1>Products</h1>
         <div>
           <h2>All Products:</h2>
+          <input
+            type="button"
+            value="Add Product"
+            onClick={this.clickaddProduct}
+          />
           <div>
             {output}
           </div>

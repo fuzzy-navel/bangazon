@@ -30,4 +30,14 @@ const Add = input => {
   });
 }
 
-export default {GetAll, GetSingle, Add};
+const Delete = input => {
+  const apiPath = `api/product/${input}`;
+  return new Promise((resolve, reject) => {
+    axios
+      .delete(apiPath)
+      .then(response => resolve (response))
+      .catch(error => reject(error));
+  });
+}
+
+export default {GetAll, GetSingle, Add, Delete};
