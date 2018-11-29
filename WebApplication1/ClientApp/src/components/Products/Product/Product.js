@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import axios from 'axios';
+
+import Requests from '../Requests/Requests';
 
 import './Product.css';
 
@@ -10,16 +11,14 @@ class Product extends Component {
   }
 
   componentDidMount() {
-    const id = this.props.match.params.id;
-    const apiPath = `api/product/${id}`;
+    const productId = this.props.match.params.id;
     return new Promise((resolve, reject) => {
-      axios
-      .get(apiPath)
+      Requests.GetSingle(productId)
       .then(product => {
-        // sets state with single product
+        // sets state with all products
         this.setState({
-          product: product.data[0],
-          isEditing: 0
+          product: product,
+          isEditing: 0,
         })
         resolve (product);
       })
@@ -106,6 +105,16 @@ class Product extends Component {
               value={product.id}
             /><br/>
           </form>
+          <input
+            type="button"
+            value="Save Changes"
+            onClick={this.clickUpdateProduct}
+          />
+          <input
+            type="button"
+            value="Cancel"
+            onClick={this.clickCancelUpdate}
+          />
         </div>
       );
     }
