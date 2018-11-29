@@ -33,7 +33,7 @@ class Customers extends Component {
         <div key={customer.id}>
           <div className="panel panel-primary">
             <div className="panel-heading">
-              <a className="customerName">{customer.first_name} {customer.last_name}</a>
+              <a className="customerName" onClick={singleCustomer}>{customer.first_name} {customer.last_name}</a>
               <p>Customer since: {customer.date_joined}</p>
             </div>
           </div>
