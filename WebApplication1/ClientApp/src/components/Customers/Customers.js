@@ -25,11 +25,11 @@ class Customers extends Component {
     const customerList = this.state.customers.map((customer) =>
     {
       return (
-        <div className="col-md-3 col-md-offset-3"key={customer.id}>
-          <div class="panel panel-primary">
-            <div class="panel-heading">
-              <a className="customerName">{customer.first_name} +" "+ {customer.last_name}</a>
-              <p>{customer.date_joined}</p>
+        <div key={customer.id}>
+          <div className="panel panel-primary">
+            <div className="panel-heading">
+              <a className="customerName">{customer.first_name} {customer.last_name}</a>
+              <p>Customer since: {customer.date_joined}</p>
             </div>
           </div>
         </div>
@@ -39,7 +39,9 @@ class Customers extends Component {
     return (
       <div>
         <h3>Customers</h3>
-        {customerList}
+          <div className="col-md-3 col-md-offset-3">
+            {customerList}
+          </div>
       </div>
     );
   }
