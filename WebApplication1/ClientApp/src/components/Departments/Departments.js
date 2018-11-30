@@ -32,7 +32,6 @@ class Departments extends Component {
 
         return (
             <div>
-                <h1>Hey There I am the departments page</h1>
                 <div>
                     {allDepartments}
                 </div>
