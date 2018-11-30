@@ -80,7 +80,7 @@ const getCustomerWithPaymentTypes = (id) =>
       {
         if (res !== null)
         {
-          resolve(res);
+          resolve(res.data[0].paymentTypes);
         }
       })
       .catch((err) => reject(err));

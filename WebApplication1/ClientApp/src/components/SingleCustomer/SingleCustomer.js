@@ -7,6 +7,7 @@ class SingleCustomer extends Component
   state =
   {
       customer: [],
+      payments: [],
       class: 'hidden',
   }
 
@@ -18,6 +19,11 @@ class SingleCustomer extends Component
       {
         this.setState({ customer: res });
         this.setState({ updatedCustomer: res });
+        customerRequests.getCustomerWithPaymentTypes(usrID)
+          .then((res) =>
+          {
+            this.setState({ payments: res });
+          });
       })
       .catch((err) =>
       {
@@ -87,9 +93,26 @@ class SingleCustomer extends Component
       );
     });
 
+    const paymentsComponent = this.state.payments.map((payment) =>
+    {
+      return (
+        <div key={payment.id}>
+          <div className="panel panel-primary">
+            <div className="panel-heading">
+              <p>{payment.title}</p>
+              <p>{payment.account_number}</p>
+            </div>
+          </div>
+        </div>
+      )
+    })
+
     return (
       <div className="singleCustomer">
         {customerComponent}
+        <div className="row">
+          {paymentsComponent}
+        </div>
       </div>
     )
   }
