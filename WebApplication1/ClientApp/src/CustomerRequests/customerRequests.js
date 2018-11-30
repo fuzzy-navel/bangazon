@@ -63,7 +63,7 @@ const getCustomerWithProducts = (id) =>
       {
         if (result !== null)
         {
-          resolve(result)
+          resolve(result.data[0].products)
         }
       })
       .catch((err) => reject(err))

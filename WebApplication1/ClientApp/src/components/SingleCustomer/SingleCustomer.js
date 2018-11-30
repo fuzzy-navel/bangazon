@@ -8,6 +8,7 @@ class SingleCustomer extends Component
   {
       customer: [],
       payments: [],
+      products: [],
       class: 'hidden',
   }
 
@@ -23,6 +24,11 @@ class SingleCustomer extends Component
           .then((res) =>
           {
             this.setState({ payments: res });
+            customerRequests.getCustomerWithProducts(usrID)
+              .then((res) =>
+              {
+                this.setState({ products: res });
+              })
           });
       })
       .catch((err) =>
@@ -99,8 +105,28 @@ class SingleCustomer extends Component
         <div key={payment.id}>
           <div className="panel panel-primary">
             <div className="panel-heading">
-              <p>{payment.title}</p>
+              <p>{payment.title}</p>               
+            </div>
+            <div className="panel-body">
               <p>{payment.account_number}</p>
+            </div>
+          </div>
+        </div>
+      )
+    })
+
+    const productsComponent = this.state.products.map((product) =>
+    {
+      return (
+        <div key={product.id}>
+          <div className="panel panel-warning">
+            <div className="panel-heading">
+              {product.title}
+            </div>
+            <div className="panel-body">
+              <p>Description: {product.description}</p>
+              <p>Price: ${product.price}</p>
+              <p>Quantity Available: {product.quantity}</p>
             </div>
           </div>
         </div>
@@ -111,7 +137,14 @@ class SingleCustomer extends Component
       <div className="singleCustomer">
         {customerComponent}
         <div className="row">
-          {paymentsComponent}
+          <div className="col-md-3">
+            <h3>Payment Types</h3>
+            {paymentsComponent}
+          </div>
+          <div className="col-md-3">
+            <h3>Products</h3>
+            {productsComponent}
+          </div>
         </div>
       </div>
     )
