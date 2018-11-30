@@ -42,7 +42,7 @@ class Product extends Component {
     this.setState({
       isEditing: 1
     })
-  }
+  };
 
   clickDeleteProduct = () => {
     const productId = this.state.product.id;
@@ -61,6 +61,9 @@ class Product extends Component {
     return new Promise((resolve, reject) => {
       Requests.Update(this.state, this.state.id)
       .then(response => {
+        this.setState({
+          isEditing: 0,
+        })
         alert('Updated Product Successfully')
         resolve(response);
       })
