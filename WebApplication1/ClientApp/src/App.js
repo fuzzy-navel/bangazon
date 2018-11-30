@@ -1,6 +1,5 @@
 import React, { Component} from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Main from './components/Main/Main';
 import Header from './components/Header/Header';
 import SingleCustomer from './components/SingleCustomer/SingleCustomer'
 import Home from './components/Home/Home';
