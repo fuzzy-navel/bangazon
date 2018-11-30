@@ -30,7 +30,7 @@ const getCustomer = (id) =>
       {
         if (result !== null)
         {
-          resolve(result);
+          resolve(result.data);
         }
       }).catch((err) => reject(err));
   });
@@ -104,4 +104,21 @@ const addCustomer = (customer) =>
   });
 };
 
-export default {addCustomer, getCustomers, getCustomer, getCustomerWithPaymentTypes, getCustomerWithProducts, getInactiveCustomers}
+const updateCustomer = (id, customer) =>
+{
+  return new Promise((resolve, reject) =>
+  {
+    axios
+      .put(`api/customer/${id}`, customer)
+      .then((res) =>
+      {
+        resolve(res);
+      })
+      .catch((err) =>
+      {
+        reject(err);
+      });
+  });
+}; 
+
+export default {addCustomer, getCustomers, getCustomer, getCustomerWithPaymentTypes, getCustomerWithProducts, getInactiveCustomers, updateCustomer}
