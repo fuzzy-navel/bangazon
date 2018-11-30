@@ -1,32 +1,25 @@
 import React from 'react'
-import { Navbar, Nav, NavItem} from 'react-bootstrap';
+import { Link } from 'react-router-dom'
 
 import './Header.css';
 
 const Header = () => (
   <header>
-    <Navbar inverse collapseOnSelect>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <a className="navbar-brand" href="/">Bangazon</a>
-          </Navbar.Brand>
-          <Navbar.Toggle/>
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav>
-            <NavItem href="/">Home</NavItem>
-            <NavItem href="/computers">Computers</NavItem>
-            <NavItem href="/customers">Customers</NavItem>
-            <NavItem href="/departments">Departments</NavItem>
-            <NavItem href="/employees">Employees</NavItem>
-            <NavItem href="/orders">Orders</NavItem>
-            <NavItem href="/paymenttypes">Payment Types</NavItem>
-            <NavItem href="/products">Products</NavItem>
-            <NavItem href="/producttypes">Product Types</NavItem>
-            <NavItem href="/trainingprograms">Training Programs</NavItem>
-          </Nav>
-        </Navbar.Collapse>
-    </Navbar>
+    <nav>
+      <ul>
+        <li><Link to='/'>Home</Link></li>
+        <li><Link to='/computers'>Computers</Link></li>
+        <li><Link to='/customers'>Customers</Link></li>
+        <li><Link to='/departments'>Departments</Link></li>
+        <li><Link to='/employees'>Employees</Link></li>
+        <li><Link to='/orders'>Orders</Link></li>
+        <li><Link to='/paymenttypes'>Payment Types</Link></li>
+        <li><Link to='/products'>Products</Link></li>
+        <li><Link to='/producttypes'>Product Types</Link></li>
+        <li><Link to='/trainingprograms'>Training Programs</Link></li>
+
+      </ul>
+    </nav>
   </header>
 )
 

@@ -41,9 +41,15 @@ class Customers extends Component {
       );
     });
 
+    const addCustomerBtn = () =>
+    {
+      this.props.history.push(`/addCustomer/`);
+    }
+
     return (
       <div>
         <h3>Customers</h3>
+        <button className="btn btn-primary" onClick={addCustomerBtn}>Add Customer</button>
           <div className="col-md-3 col-md-offset-3">
             {customerList}
           </div>

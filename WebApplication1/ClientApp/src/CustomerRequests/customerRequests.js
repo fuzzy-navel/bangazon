@@ -87,4 +87,21 @@ const getCustomerWithPaymentTypes = (id) =>
   });
 };
 
-export default {getCustomers, getCustomer, getCustomerWithPaymentTypes, getCustomerWithProducts, getInactiveCustomers}
+const addCustomer = (customer) =>
+{
+  return new Promise((resolve, reject) =>
+  {
+    axios
+      .post(`api/customer`, customer)
+      .then((res) =>
+      {
+        resolve(res);
+      })
+      .catch((err) =>
+      {
+        reject(err);
+      });
+  });
+};
+
+export default {addCustomer, getCustomers, getCustomer, getCustomerWithPaymentTypes, getCustomerWithProducts, getInactiveCustomers}
