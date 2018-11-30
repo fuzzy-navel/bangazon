@@ -24,7 +24,14 @@ const Add = input => {
   const apiPath = `api/product`;
   return new Promise((resolve, reject) => {
     axios
-      .post(apiPath,input)
+      .post(apiPath, {
+        category: input.category,
+        price: input.price,
+        title: input.title,
+        description: input.description,
+        quantity: input.quantity,
+        owner_id: input.owner_id,
+      })
       .then(response => resolve (response))
       .catch(error => reject(error));
   });

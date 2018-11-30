@@ -36,10 +36,13 @@ class Product extends Component {
     const productId = this.state.product.id;
     return new Promise((resolve, reject) => {
       Requests.Delete(productId)
-        .then(response => resolve(response))
+        .then(response => {
+          // redirect to product page
+          this.props.history.push(`/products/`)
+          resolve(response);
+        })
         .catch(error => reject(error));
     });
-    // redirect to product page
   };
 
   render () {
