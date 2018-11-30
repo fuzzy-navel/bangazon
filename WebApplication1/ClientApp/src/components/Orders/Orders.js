@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import orderRequests from '../../OrderRequests/OrderRequests';
+
 import './Orders.css';
 
 class Orders extends Component {
@@ -9,10 +11,8 @@ class Orders extends Component {
     };
 
     componentDidMount() {
-        const apiPath = `api/order/orders/`;
         return new Promise((resolve, reject) => {
-            axios
-                .get(apiPath)
+            orderRequests.getOrders()
                 .then(orders => {
                     this.setState({
                         orders: orders.data
@@ -21,7 +21,24 @@ class Orders extends Component {
                 })
                 .catch(error => reject(error));
         });
-    };
+
+        //const apiPath = `api/order/orders/`;
+        //return new Promise((resolve, reject) => {
+        //    axios
+        //        .get(apiPath)
+        //        .then(orders => {
+        //            this.setState({
+        //                orders: orders.data
+        //            })
+        //            resolve(orders);
+        //        })
+        //        .catch(error => reject(error));
+        //}); 
+    }
+
+    deleteClickEvent = () => {
+        this.props.handleDeleteEvent(this.props.event.id);
+    }
 
     render() {
         const { orders } = this.state;
@@ -35,7 +52,10 @@ class Orders extends Component {
                             <td>Order Complete: {order.canComplete.toString()}</td>
                             <td>Payment Type Id: {order.paymentTypeId}</td>
                             <td>
-                                <button className="btn btn-primary"> Placeholder </button>  
+                                <button className="btn btn-primary"> Edit Order </button> 
+                            </td>
+                            <td>
+                                <button className="btn btn-danger" onClick={this.deleteClickEvent}> Delete Order </button>
                             </td>
                         </tr>
                     </tbody>
