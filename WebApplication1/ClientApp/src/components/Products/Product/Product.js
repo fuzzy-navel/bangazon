@@ -45,7 +45,7 @@ class Product extends Component {
   };
 
   clickDeleteProduct = () => {
-    const productId = this.state.product.id;
+    const productId = this.state.id;
     return new Promise((resolve, reject) => {
       Requests.Delete(productId)
         .then(response => {
