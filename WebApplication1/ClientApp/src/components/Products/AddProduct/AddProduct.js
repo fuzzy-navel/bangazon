@@ -30,7 +30,6 @@ class AddProduct extends Component {
     this.setState({
       [name]: value
     });
-    console.log('this.state: ', this.state);
   };
 
   render () {

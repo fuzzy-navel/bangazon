@@ -47,4 +47,21 @@ const Delete = input => {
   });
 }
 
-export default {GetAll, GetSingle, Add, Delete};
+const Update = (input, id) => {
+  const apiPath = `api/product/${id}`;
+  return new Promise((resolve, reject) => {
+    axios
+      .put(apiPath, {
+        category: input.category,
+        price: input.price,
+        title: input.title,
+        description: input.description,
+        quantity: input.quantity,
+        owner_id: input.owner_id,
+      })
+      .then(response => resolve (response))
+      .catch(error => reject(error));
+  });
+}
+
+export default {GetAll, GetSingle, Add, Delete, Update};

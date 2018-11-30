@@ -6,7 +6,13 @@ import './Product.css';
 
 class Product extends Component {
   state = {
-    product: [],
+    category: 0,
+    price: 0,
+    title: "",
+    description: "",
+    quantity: 0,
+    owner_id: 0,
+    id: 0,
     isEditing: 0,
   }
 
@@ -15,9 +21,15 @@ class Product extends Component {
     return new Promise((resolve, reject) => {
       Requests.GetSingle(productId)
       .then(product => {
-        // sets state with all products
+        // sets state with product
         this.setState({
-          product: product,
+          category: product.category,
+          price: product.price,
+          title: product.title,
+          description: product.description,
+          quantity: product.quantity,
+          owner_id: product.owner_Id,
+          id: product.id,
           isEditing: 0,
         })
         resolve (product);
@@ -26,7 +38,7 @@ class Product extends Component {
     });
   };
 
-  clickEditProductNow = e => {
+  clickEditProductNow = () => {
     this.setState({
       isEditing: 1
     })
@@ -45,19 +57,41 @@ class Product extends Component {
     });
   };
 
+  clickUpdateProduct = () => {
+    return new Promise((resolve, reject) => {
+      Requests.Update(this.state, this.state.id)
+      .then(response => {
+        alert('Updated Product Successfully')
+        resolve(response);
+      })
+      .catch(error => reject(error));
+    });
+  };
+
+  clickCancelUpdate = () => {
+    this.props.history.push(`/products/`);
+  };
+
+  handleChange = e => {
+    const {name, value} = e.target;
+    this.setState({
+      [name]: value
+    });
+    console.log(this.state);
+  };
+
   render () {
-    const {product} = this.state;
     if (!this.state.isEditing) {
       return (
         <div>
           <h2>PRODUCT</h2>
-          <p>Title: {product.title}</p>
-          <p>Category: {product.category}</p>
-          <p>Description: {product.description}</p>
-          <p>Price: {product.price}</p>
-          <p>Quantity: {product.quantity}</p>
-          <p>Owner Id: {product.owner_id}</p>
-          <p>Id: {product.id}</p>
+          <p>Title: {this.state.title}</p>
+          <p>Category: {this.state.category}</p>
+          <p>Description: {this.state.description}</p>
+          <p>Price: {this.state.price}</p>
+          <p>Quantity: {this.state.quantity}</p>
+          <p>Owner Id: {this.state.owner_id}</p>
+          <p>Id: {this.state.id}</p>
           <input
             type="button"
             value="Edit This Record"
@@ -78,44 +112,51 @@ class Product extends Component {
             <label>Title: </label>
             <input
               type="text"
-              name="product-name"
-              value={product.title}
+              name="title"
+              value={this.state.title}
+              onChange={this.handleChange}
             /><br/>
             <label>Category: </label>
             <input
               type="number"
-              name="product-category"
-              value={product.category}
+              name="category"
+              value={this.state.category}
+              onChange={this.handleChange}
             /><br/>
             <label>Description: </label>
             <input
               type="text"
-              name="product-description"
-              value={product.description}
+              name="description"
+              value={this.state.description}
+              onChange={this.handleChange}
             /><br/>
             <label>Price: </label>
             <input
               type="number"
-              name="product-price"
-              value={product.price}
+              name="price"
+              value={this.state.price}
+              onChange={this.handleChange}
             /><br/>
           <label>Quantity: </label>
             <input
               type="number"
-              name="product-quantity"
-              value={product.quantity}
+              name="quantity"
+              value={this.state.quantity}
+              onChange={this.handleChange}
               /><br/>
           <label>Owner Id: </label>
             <input
               type="number"
-              name="product-owner-id"
-              value={product.owner_id}
+              name="owner_id"
+              value={this.state.owner_id}
+              onChange={this.handleChange}
             /><br/>
           <label>Id: </label>
             <input
+              readOnly
               type="number"
-              name="product-id"
-              value={product.id}
+              name="id"
+              value={this.state.id}
             /><br/>
           </form>
           <input
