@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import paymentRequest from '../../paymentRequest/Payment';
+
 import './PaymentTypes.css'
 
 class PaymentTypes extends Component {
@@ -7,7 +8,6 @@ class PaymentTypes extends Component {
     state = {
         payments: [],
     }
-
 
     componentDidMount() {
         paymentRequest.getPayments()
@@ -20,34 +20,41 @@ class PaymentTypes extends Component {
     }
         render() {
             const paymentComponents = this.state.payments.map((payment) => {
+
+                const onePayment = () =>   //Button routes to single customer page
+                {
+                    this.props.history.push(`/paymenttypes/${payment.id}`);
+                };
                 return (
 
-                    <div class="container">
-                        <div class="row">
-                            <div class="col">Account Number</div>
-                            <div class="col">{payment.account_number}</div>
-                            <div class="w-100"></div>
-                            <div class="col">Customer Id</div>
-                            <div class="col">{payment.customer_id}</div>
-                            <div class="w-100"></div>
-                            <div class="col">Status</div>
-                            <div class="col">{payment.active}</div>
-                            <div class="w-100"></div>
-                            <div class="col">Title</div>
-                            <div class="col">{payment.title}</div>
-                            <div class="w-100"></div>
-                            <div class="col">Payment Id</div>
-                            <div class="col">{payment.id}</div>
+                    <div className="container" key={payment.id}>
+                        <div className="row">
+                            <div className="col">Account Number</div>
+                            <div className="col">
+                            <a className="paymentAccount" onClick={onePayment}>{payment.account_number}</a></div>
+                            <div className="w-100"></div>
+                            <div className="col">Customer Id</div>
+                            <div className="col">{payment.customer_id}</div>
+                            <div className="w-100"></div>
+                            <div className="col">Status</div>
+                            <div className="col">{payment.active}</div>
+                            <div className="w-100"></div>
+                            <div className="col">Title</div>
+                            <div className="col">{payment.title}</div>
+                            <div className="w-100"></div>
+                            <div className="col">Payment Id</div>
+                            <div className="col">{payment.id}</div>
                         </div>
                     </div>
                 );
             });
 
     return (
-        <div className ="AllPaymentTypes">
+        <div className="AllPaymentTypes">
             <h1>Payment Types</h1>
             <ul className= "Types">
-            {paymentComponents}
+                {paymentComponents}
+
             </ul>
         </div>
     );
