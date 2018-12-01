@@ -30,15 +30,15 @@ const newOrder = () => {
     });
 };
 
-const updateOrder = (orderId, input) => {
-    const apiPath = `api/order/${orderId}`;
-    return new Promise((resolve, reject) => {
-        axios
-            .put(apiPath)
+//const updateOrder = (orderId, input) => {
+//    const apiPath = `api/order/${orderId}`;
+//    return new Promise((resolve, reject) => {
+//        axios
+//            .put(apiPath)
 
-    });
+//    });
 
-};
+//};
 
 const deleteOrder = (id) => {
     const apiPath = `api/order/${id}`;

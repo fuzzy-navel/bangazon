@@ -29,12 +29,19 @@ class Orders extends Component {
             console.error('error retrieving orders', error);
         });
 
-    deleteClickEvent = (id) => orderRequests
-        .deleteOrder(id)
-        .then(this.refreshOrders)
+    deleteClickEvent = (id) =>  {
+            const target = id.target.id;
+
+        orderRequests.deleteOrder(target)
+    
+        .then(() => {
+            this.refreshOrders();
+        })
         .catch((error) => {
             console.error('error with deleting order', error);
         });
+}
+   
 
 
     render() {
@@ -52,7 +59,7 @@ class Orders extends Component {
                                 <button className="btn btn-primary"> Edit Order </button>
                             </td>
                             <td>
-                                <button className="btn btn-danger" onClick={this.deleteClickEvent}> Delete Order </button>
+                                <button className="btn btn-danger" id={order.id} onClick={this.deleteClickEvent}> Delete Order </button>
                             </td>
                         </tr>
                     </tbody>
