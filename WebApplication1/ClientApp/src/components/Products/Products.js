@@ -1,13 +1,18 @@
-import React, {Component} from 'react';
+import React from 'react';
+import {Switch, Route} from 'react-router-dom';
 
-import './Products.css'
+import AddProduct from './AddProduct/AddProduct';
+import AllProducts from './AllProducts/AllProducts';
+import Product from './Product/Product';
 
-class Products extends Component {
-  render () {
-    return (
-      <div></div>
-    );
-  }
-};
+import './Products.css';
+
+const Products = () => (
+  <Switch>
+    <Route exact path='/products' component={AllProducts} />
+    <Route path='/products/addproduct' component={AddProduct} />
+    <Route path='/products/:id' component={Product} />
+  </Switch>
+)
 
 export default Products;
