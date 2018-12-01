@@ -13,6 +13,7 @@ import ProductTypes from './components/ProductTypes/ProductTypes';
 import TrainingPrograms from './components/TrainingPrograms/TrainingPrograms';
 import Navibar from './components/Navibar/Navibar';
 import AddCustomer from './components/Customers/AddCustomer';
+import AddEmployee from './components/Employees/AddEmployee';
 
 class App extends Component
 {
@@ -25,16 +26,14 @@ class App extends Component
           <div className="container">
              <div className="row">
               <Switch>
-                <Route
-                  component={SingleCustomer}
-                  path='/customers/:id'
-                />
+                <Route component={SingleCustomer} path='/customers/:id'/>
                 <Route exact path='/' component={Home} />
                 <Route path='/computers' component={Computers} />
                 <Route path='/customers' component={Customers} />
                 <Route path='/addCustomer' component={AddCustomer} />
                 <Route path='/departments' component={Departments} />
                 <Route path='/employees' component={Employees} />
+                <Route path='/addEmployee' component={AddEmployee}/>
                 <Route path='/orders' component={Orders} />
                 <Route path='/paymenttypes' component={PaymentTypes} />
                 <Route path='/products' component={Products} />
