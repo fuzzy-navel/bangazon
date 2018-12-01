@@ -24,11 +24,16 @@ class Customers extends Component {
 
     const customerList = this.state.customers.map((customer) =>
     {
+      const singleCustomer = () =>   //Button routes to single customer page
+      {
+        this.props.history.push(`/customers/${customer.id}`);
+      };
+
       return (
         <div key={customer.id}>
           <div className="panel panel-primary">
             <div className="panel-heading">
-              <a className="customerName">{customer.first_name} {customer.last_name}</a>
+              <a className="customerName" onClick={singleCustomer}>{customer.first_name} {customer.last_name}</a>
               <p>Customer since: {customer.date_joined}</p>
             </div>
           </div>
@@ -36,9 +41,15 @@ class Customers extends Component {
       );
     });
 
+    const addCustomerBtn = () =>
+    {
+      this.props.history.push(`/addCustomer/`);
+    }
+
     return (
       <div>
         <h3>Customers</h3>
+        <button className="btn btn-primary" onClick={addCustomerBtn}>Add Customer</button>
           <div className="col-md-3 col-md-offset-3">
             {customerList}
           </div>

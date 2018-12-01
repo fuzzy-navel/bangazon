@@ -7,6 +7,6 @@ namespace bangazon.Models
 {
   public class CustomerandProduct : Customer
   {
-    public List<Product> products { get; set; } new List<Product>();
+    public List<Product> products { get; set; } = new List<Product>();
   }
 }

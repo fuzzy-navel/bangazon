@@ -9,6 +9,7 @@ import Employees from '../Employees/Employees';
 import Orders from '../Orders/Orders';
 import PaymentTypes from '../PaymentTypes/PaymentTypes';
 import Products from '../Products/Products';
+import ProductId from '../Products/Product/Product';
 import ProductTypes from '../ProductTypes/ProductTypes';
 import TrainingPrograms from '../TrainingPrograms/TrainingPrograms';
 
@@ -23,6 +24,7 @@ const Main = () => (
       <Route path='/orders' component={Orders}/>
       <Route path='/paymenttypes' component={PaymentTypes}/>
       <Route path='/products' component={Products}/>
+      <Route path='/products/:id' component={ProductId}/>
       <Route path='/producttypes' component={ProductTypes}/>
       <Route path='/trainingprograms' component={TrainingPrograms}/>
     </Switch>
