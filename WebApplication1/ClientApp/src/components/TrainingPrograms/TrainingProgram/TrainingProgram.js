@@ -37,6 +37,7 @@ class TrainingProgram extends Component {
     return new Promise((resolve, reject) => {
       Requests.Delete(tpId)
         .then(response => {
+          alert('Record deleted successfully');
           this.props.history.push(`/trainingprograms/`);
           resolve(response);
         })
