@@ -27,13 +27,14 @@ class DepartmentSingle extends Component {
     render() {
         const details = this.props.details;
         return (
-            <div>
-                <h3>{details.name}</h3>
-                <a onClick={this.handleShow} >More Details</a>
+            <div className="panel panel-primary">
+                <div className="panel-heading text-center" onClick={this.handleShow}>
+                    <h3>{details.name}</h3>
+                </div>
                 <div>
                     <Modal show={this.state.show} onHide={this.handleClose}>
                         <Modal.Header closeButton>
-                            <Modal.Title>{details.name}</Modal.Title>
+                            <Modal.Title className="text-center">{details.name}</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <h5>Supervisor:</h5>
