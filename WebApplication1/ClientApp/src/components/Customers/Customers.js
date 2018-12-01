@@ -75,13 +75,30 @@ class Customers extends Component {
       customerFieldStringState('query', e);
     } 
 
+    const handleKeys = (e) =>
+    {
+      if (e.key === 'Enter')
+      {
+        var query = this.state.query.query;
+        console.log(query)
+        customerRequests.queryCustomer(query)
+          .then((res) => {
+            console.log(res)
+            this.setState({ customers: res })
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    }
+
     return (
       <div>
         <h3>Customers</h3>
         <div className="row">
           <div className="col-md-3 col-md-offset-3">
             <div className="input-group">
-              <input type="text" className="form-control" id="customerSearchBar" onChange={queryChange} placeholder="Search customers..." />
+              <input type="text" className="form-control" id="customerSearchBar" onChange={queryChange} onKeyPress={handleKeys} placeholder="Search customers..." />
               <span className="input-group-btn">
                 <button className="btn btn-default" onClick={searchCustomers}>Go!</button>
               </span>
