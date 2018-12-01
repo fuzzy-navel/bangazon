@@ -38,22 +38,16 @@ class Product extends Component {
     });
   };
 
-  clickEditProductNow = () => {
-    this.setState({
-      isEditing: 1
-    })
-  };
-
   clickDeleteProduct = () => {
     const productId = this.state.id;
     return new Promise((resolve, reject) => {
       Requests.Delete(productId)
-        .then(response => {
-          // redirect to product page
-          this.props.history.push(`/products/`)
-          resolve(response);
-        })
-        .catch(error => reject(error));
+      .then(response => {
+        // redirect to product page
+        this.props.history.push(`/products/`)
+        resolve(response);
+      })
+      .catch(error => reject(error));
     });
   };
 
@@ -69,10 +63,6 @@ class Product extends Component {
       })
       .catch(error => reject(error));
     });
-  };
-
-  clickCancelUpdate = () => {
-    this.props.history.push(`/products/`);
   };
 
   handleChange = e => {
@@ -98,7 +88,7 @@ class Product extends Component {
           <input
             type="button"
             value="Edit This Record"
-            onClick={this.clickEditProductNow}
+            onClick={() => this.setState({isEditing: 1})}
           />
           <input
             type="button"
@@ -170,7 +160,7 @@ class Product extends Component {
           <input
             type="button"
             value="Cancel"
-            onClick={this.clickCancelUpdate}
+            onClick={() => this.props.history.push(`/products/`)}
           />
         </div>
       );
