@@ -80,10 +80,8 @@ class Customers extends Component {
       if (e.key === 'Enter')
       {
         var query = this.state.query.query;
-        console.log(query)
         customerRequests.queryCustomer(query)
           .then((res) => {
-            console.log(res)
             this.setState({ customers: res })
           })
           .catch((err) => {
