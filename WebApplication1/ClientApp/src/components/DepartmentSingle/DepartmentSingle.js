@@ -12,7 +12,12 @@ class DepartmentSingle extends Component {
         this.handleClose = this.handleClose.bind(this);
 
         this.state = {
-            show: false
+            show: false,
+            isEditing: 0,
+            name: this.props.details.name,
+            supervisor: this.props.details.supervisor_id,
+            expense: this.props.details.expense_budget,
+            employees: this.props.details.employees,
         };
     }
 
@@ -24,35 +29,74 @@ class DepartmentSingle extends Component {
         this.setState({ show: false });
     }
 
-    render() {
-        const details = this.props.details;
-        return (
-            <div className="panel panel-primary">
-                <div className="panel-heading text-center" onClick={this.handleShow}>
-                    <h3>{details.name}</h3>
-                </div>
-                <div>
-                    <Modal show={this.state.show} onHide={this.handleClose}>
-                        <Modal.Header closeButton>
-                            <Modal.Title className="text-center">{details.name}</Modal.Title>
-                        </Modal.Header>
-                        <Modal.Body>
-                            <h5>Supervisor:</h5>
-                            <p>{details.supervisor_id}</p>
+    handleUpdate() {
+        if (this.state.isEditing === 0) {
+            this.setState({ isEditing: 1 });
+        } else {
+            this.setState({ isEditing: 0 });
+        }
+    }
 
-                            <h5>Expense:</h5>
-                            <p>{details.expense_budget}</p>
-                            <EmployeeList
-                                employees={details.employees.map(employee => { return employee.employee_name; })}
-                            />
-                        </Modal.Body>
-                        <Modal.Footer>
-                            <Button onClick={this.handleClose}>Close</Button>
-                        </Modal.Footer>
-                    </Modal>
+    render() {
+        if (!this.state.isEditing) {
+            return (
+                <div className="panel panel-primary">
+                    <div className="panel-heading text-center" onClick={this.handleShow}>
+                        <h3>{this.state.name}</h3>
+                    </div>
+                    <div>
+                        <Modal show={this.state.show} onHide={this.handleClose}>
+                            <Modal.Header closeButton>
+                                <Modal.Title className="text-center">{this.state.name}</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <h5>Supervisor:</h5>
+                                <p>{this.state.supervisor}</p>
+
+                                <h5>Expense:</h5>
+                                <p>{this.state.expense}</p>
+                                <EmployeeList
+                                    employees={this.state.employees.map(employee => { return employee.employee_name; })}
+                                />
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button onClick={this.handleUpdate}>Update</Button>
+                                <Button onClick={this.handleClose}>Delete</Button>
+                            </Modal.Footer>
+                        </Modal>
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        } else {
+            return (
+                <div className="panel panel-primary">
+                    <div className="panel-heading text-center" onClick={this.handleShow}>
+                        <h3>{this.state.name}</h3>
+                    </div>
+                    <div>
+                        <Modal show={this.state.show} onHide={this.handleClose}>
+                            <Modal.Header closeButton>
+                                <Modal.Title className="text-center">{this.state.name}</Modal.Title>
+                            </Modal.Header>
+                            <Modal.Body>
+                                <h5>Supervisor:</h5>
+                                <p>{this.state.supervisor}</p>
+
+                                <h5>Expense:</h5>
+                                <p>{this.state.expense}</p>
+                                <EmployeeList
+                                    employees={this.state.employees.map(employee => { return employee.employee_name; })}
+                                />
+                            </Modal.Body>
+                            <Modal.Footer>
+                                <Button onClick={this.handleUpdate}>Cancel</Button>
+                                <Button onClick={this.handleClose}>Save</Button>
+                            </Modal.Footer>
+                        </Modal>
+                    </div>
+                </div>
+            );
+        }
     }
 }
 
