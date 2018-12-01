@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
 import { Modal, Button } from 'react-bootstrap';
-import { Customers } from '../Customers/Customers';
+import EmployeeList from '../EmployeeList/EmployeeList';
 
 import './DepartmentSingle.css';
 
@@ -24,17 +24,6 @@ class DepartmentSingle extends Component {
         this.setState({ show: false });
     }
 
-    employeesInDepartment() {
-        const employees = this.props.employees;
-        return (
-            <ul>
-                {employees.forEach(employee => {
-                    <li>{employee.employee_name}</li>
-                })}
-            </ul>
-        );
-    }
-
     render() {
         const details = this.props.details;
         return (
@@ -52,7 +41,9 @@ class DepartmentSingle extends Component {
 
                             <h5>Expense:</h5>
                             <p>{details.expense_budget}</p>
-                            {this.employeesInDepartment}
+                            <EmployeeList
+                                employees={details.employees.map(employee => { return employee.employee_name; })}
+                            />
                         </Modal.Body>
                         <Modal.Footer>
                             <Button onClick={this.handleClose}>Close</Button>
