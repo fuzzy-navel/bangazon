@@ -40,18 +40,5 @@ const newOrder = () => {
 
 //};
 
-const deleteOrder = (id) => {
-    const apiPath = `api/order/${id}`;
-    return new Promise((resolve, reject) => {
-        axios
-            .delete(apiPath)
-            .then((res) => {
-                resolve(res);
-            })
-            .catch((error) => {
-                reject(error);
-            });
-    });
-};
 
-export default {getOrders, deleteOrder, getOrderById, newOrder};
+export default {getOrders, getOrderById, newOrder};
