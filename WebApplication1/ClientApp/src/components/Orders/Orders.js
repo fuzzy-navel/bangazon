@@ -29,6 +29,14 @@ class Orders extends Component {
             console.error('error retrieving orders', error);
         });
 
+    viewOrderEvent = (id) => {
+        const target = id.target.id;
+        orderRequests.getOrderById(target)
+            .then(() => { })
+            .catch((error) => {
+                console.error('error with retrieving single order', error);
+            });
+    }
 
     render() {
         const { orders } = this.state;
@@ -42,7 +50,7 @@ class Orders extends Component {
                             <td>Order Complete: {order.canComplete.toString()}</td>
                             <td>Payment Type Id: {order.paymentTypeId}</td>
                             <td>
-                                <button className="btn btn-primary"> Edit Order </button>
+                                <button className="btn btn-primary" id={order.id} onClick={this.viewOrderEvent}> View Order </button>
                             </td>
                             
                         </tr>
