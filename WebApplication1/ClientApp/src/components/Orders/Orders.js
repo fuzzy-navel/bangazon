@@ -8,37 +8,35 @@ import './Orders.css';
 class Orders extends Component {
     state = {
         orders: []
-    };
+    }
 
     componentDidMount() {
-        return new Promise((resolve, reject) => {
-            orderRequests.getOrders()
-                .then(orders => {
-                    this.setState({
-                        orders: orders.data
-                    })
-                    resolve(orders);
-                })
-                .catch(error => reject(error));
+        orderRequests.getOrders()
+            .then((orderResults) => {
+                this.setState({ orders: orderResults.data });
+            })
+            .catch((error) => {
+                console.error('error retrieving orders', error);
+            });
+    }
+
+    refreshOrders = () => orderRequests
+        .getOrders()
+        .then((orders) => {
+            this.setState({ orders });
+        })
+
+        .catch((error) => {
+            console.error('error retrieving orders', error);
         });
 
-        //const apiPath = `api/order/orders/`;
-        //return new Promise((resolve, reject) => {
-        //    axios
-        //        .get(apiPath)
-        //        .then(orders => {
-        //            this.setState({
-        //                orders: orders.data
-        //            })
-        //            resolve(orders);
-        //        })
-        //        .catch(error => reject(error));
-        //}); 
-    }
+    deleteClickEvent = (id) => orderRequests
+        .deleteOrder(id)
+        .then(this.refreshOrders)
+        .catch((error) => {
+            console.error('error with deleting order', error);
+        });
 
-    deleteClickEvent = () => {
-        this.props.handleDeleteEvent(this.props.event.id);
-    }
 
     render() {
         const { orders } = this.state;
@@ -52,7 +50,7 @@ class Orders extends Component {
                             <td>Order Complete: {order.canComplete.toString()}</td>
                             <td>Payment Type Id: {order.paymentTypeId}</td>
                             <td>
-                                <button className="btn btn-primary"> Edit Order </button> 
+                                <button className="btn btn-primary"> Edit Order </button>
                             </td>
                             <td>
                                 <button className="btn btn-danger" onClick={this.deleteClickEvent}> Delete Order </button>
@@ -61,8 +59,8 @@ class Orders extends Component {
                     </tbody>
                 </table>
             </div>
-            
-            ));
+
+        ));
 
         return (
             <div className="orders">
