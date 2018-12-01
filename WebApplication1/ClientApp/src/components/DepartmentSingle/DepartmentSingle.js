@@ -1,6 +1,7 @@
 ﻿import React, { Component } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import EmployeeList from '../EmployeeList/EmployeeList';
+import DatabaseRequests from '../../databaseRequests/departments';
 
 import './DepartmentSingle.css';
 
@@ -18,6 +19,7 @@ class DepartmentSingle extends Component {
             supervisor: this.props.details.supervisor_id,
             expense: this.props.details.expense_budget,
             employees: this.props.details.employees,
+            id: this.props.details.id,
         };
     }
 
@@ -35,6 +37,26 @@ class DepartmentSingle extends Component {
         } else {
             this.setState({ isEditing: 0 });
         }
+    }
+
+    handleDelete() {
+        DatabaseRequests.deleteDepartment(this.state.id)
+            .then(() => {
+                alert("Deleted Department Successfully");
+            })
+            .catch ((err) => {
+                console.error(err, "Error Deleting Department");
+            });
+    }
+
+    handleAdd(deptObj) {
+        DatabaseRequests.addDepartment(deptObj)
+            .then(() => {
+                alert("Added Department Successfully");
+            })
+            .catch((err) => {
+                console.error(err, "Error Adding Department");
+            });
     }
 
     render() {
@@ -61,7 +83,7 @@ class DepartmentSingle extends Component {
                             </Modal.Body>
                             <Modal.Footer>
                                 <Button onClick={this.handleUpdate}>Update</Button>
-                                <Button onClick={this.handleClose}>Delete</Button>
+                                <Button onClick={this.handleDelete}>Delete</Button>
                             </Modal.Footer>
                         </Modal>
                     </div>
