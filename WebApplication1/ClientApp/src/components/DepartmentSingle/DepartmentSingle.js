@@ -11,6 +11,7 @@ class DepartmentSingle extends Component {
 
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
 
         this.state = {
             show: false,
@@ -43,6 +44,7 @@ class DepartmentSingle extends Component {
         DatabaseRequests.deleteDepartment(this.state.id)
             .then(() => {
                 alert("Deleted Department Successfully");
+                this.handleClose();
             })
             .catch ((err) => {
                 console.error(err, "Error Deleting Department");

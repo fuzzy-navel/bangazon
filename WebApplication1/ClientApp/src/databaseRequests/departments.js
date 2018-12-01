@@ -27,7 +27,7 @@ const addDepartment = (deptObj) => {
 
 const deleteDepartment = (id) => {
     return new Promise((resolve, reject) => {
-        axios.delete(`/api/delete/${id}`)
+        axios.delete(`/api/department/${id}`)
             .then((res) => {
                 resolve(res);
             })
