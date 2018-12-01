@@ -15,7 +15,7 @@ const getAllDepartments = () => {
 
 const addDepartment = (deptObj) => {
     return new Promise((resolve, reject) => {
-        axios.post(`/api/department`, { deptObj })
+        axios.post(`/api/department`, deptObj)
             .then((res) => {
                 resolve(res);
             })

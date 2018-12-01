@@ -19,7 +19,7 @@ class DepartmentSingle extends Component {
             supervisor: this.props.details.supervisor_id,
             expense: this.props.details.expense_budget,
             employees: this.props.details.employees,
-            id: this.props.details.id,
+            id: this.props.details.id
         };
     }
 
@@ -46,16 +46,6 @@ class DepartmentSingle extends Component {
             })
             .catch ((err) => {
                 console.error(err, "Error Deleting Department");
-            });
-    }
-
-    handleAdd(deptObj) {
-        DatabaseRequests.addDepartment(deptObj)
-            .then(() => {
-                alert("Added Department Successfully");
-            })
-            .catch((err) => {
-                console.error(err, "Error Adding Department");
             });
     }
 
