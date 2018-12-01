@@ -16,5 +16,7 @@ namespace bangazon.Models
     public int account_number { get; set;}
     public int customer_id { get; set;}
     public int payment_id {get; set;}
+    public List<PaymentType> paymentTypes { get; set; } = new List<PaymentType>();
+
   }
 }

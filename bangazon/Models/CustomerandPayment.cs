@@ -7,6 +7,7 @@ namespace bangazon.Models
 {
   public class CustomerandPayment
   {
+
     public string first_name { get; set; }
     public string last_name { get; set; }
     public DateTime date_joined { get; set; }
@@ -16,5 +17,6 @@ namespace bangazon.Models
     public int account_number { get; set;}
     public int customer_id { get; set;}
     public int payment_id {get; set;}
+    public List<PaymentType> paymentTypes { get; set; } = new List<PaymentType>();
   }
 }
