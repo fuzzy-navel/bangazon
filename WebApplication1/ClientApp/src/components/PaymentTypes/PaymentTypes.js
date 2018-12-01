@@ -40,14 +40,6 @@ class PaymentTypes extends Component {
                             <div class="col">{payment.id}</div>
                         </div>
                     </div>
-                   
-                    //<li>
-                    //    <h5>Account Number</h5> : {payment.account_number}
-                    //    {payment.customer_id}
-                       
-                    //    {payment.title}
-                    //    {payment.id}
-                    //</li>
                 );
             });
 
