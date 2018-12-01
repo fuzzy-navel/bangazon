@@ -24,6 +24,22 @@ class Employees extends Component
 
   render()
   {
+    const employeeList = this.state.employees.map((employee) =>
+    {
+      const singleEmployee = () =>
+      {
+        this.props.history.push(`/employees/${employee.id}`)
+      };
+      return (
+        <div key={employee.id}>
+          <div className="panel panel-primary">
+
+          </div>
+        </div>
+      )
+
+    });
+
     return (
       <div></div>
     );
