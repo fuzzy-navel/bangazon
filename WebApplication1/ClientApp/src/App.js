@@ -14,6 +14,7 @@ import TrainingPrograms from './components/TrainingPrograms/TrainingPrograms';
 import Navibar from './components/Navibar/Navibar';
 import AddCustomer from './components/Customers/AddCustomer';
 import AddEmployee from './components/Employees/AddEmployee';
+import SingleEmployee from './components/Employees/SingleEmployee';
 
 class App extends Component
 {
@@ -33,7 +34,8 @@ class App extends Component
                 <Route path='/addCustomer' component={AddCustomer} />
                 <Route path='/departments' component={Departments} />
                 <Route path='/employees' component={Employees} />
-                <Route path='/addEmployee' component={AddEmployee}/>
+                <Route path='/addEmployee' component={AddEmployee} />
+                <Route component={SingleEmployee} path='/employees/:id'/>
                 <Route path='/orders' component={Orders} />
                 <Route path='/paymenttypes' component={PaymentTypes} />
                 <Route path='/products' component={Products} />

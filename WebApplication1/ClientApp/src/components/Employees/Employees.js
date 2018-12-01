@@ -28,7 +28,7 @@ class Employees extends Component
     {
       const singleEmployee = () =>
       {
-        this.props.history.push(`/employees/${employee.id}`)
+        this.props.history.push(`/employees/${employee.employee_id}`)
       };
       return (
         <div key={employee.id}>
