@@ -20,14 +20,14 @@ class Orders extends Component {
             });
     }
 
-    refreshOrders = () => orderRequests
-        .getOrders()
-        .then((orders) => {
-            this.setState({ orders });
-        })
-        .catch((error) => {
-            console.error('error retrieving orders', error);
-        });
+    //refreshOrders = () => orderRequests
+    //    .getOrders()
+    //    .then((orders) => {
+    //        this.setState({ orders });
+    //    })
+    //    .catch((error) => {
+    //        console.error('error retrieving orders', error);
+    //    });
 
     viewOrderEvent = (id) => {
         const target = id.target.id;
