@@ -119,6 +119,23 @@ const updateCustomer = (id, customer) =>
         reject(err);
       });
   });
-}; 
+};
 
-export default {addCustomer, getCustomers, getCustomer, getCustomerWithPaymentTypes, getCustomerWithProducts, getInactiveCustomers, updateCustomer}
+const queryCustomer = (query) =>
+{
+  return new Promise((resolve, reject) =>
+  {
+    axios
+      .get(`api/customer?q=${query}`)
+      .then((res) =>
+      {
+        resolve(res.data);
+      })
+      .catch((err) =>
+      {
+        reject(err);
+      });
+  });
+};
+
+export default {addCustomer, getCustomers, getCustomer, getCustomerWithPaymentTypes, getCustomerWithProducts, getInactiveCustomers, queryCustomer,updateCustomer}
