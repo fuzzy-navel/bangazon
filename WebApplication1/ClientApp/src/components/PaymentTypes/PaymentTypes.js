@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import paymentRequest from '../../paymentRequest/Payment.js';
+import paymentRequest from '../../paymentRequest/Payment';
 import './PaymentTypes.css'
 
 class PaymentTypes extends Component {
@@ -21,14 +21,33 @@ class PaymentTypes extends Component {
         render() {
             const paymentComponents = this.state.payments.map((payment) => {
                 return (
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">Account Number</div>
+                            <div class="col">{payment.account_number}</div>
+                            <div class="w-100"></div>
+                            <div class="col">Customer Id</div>
+                            <div class="col">{payment.customer_id}</div>
+                            <div class="w-100"></div>
+                            <div class="col">Status</div>
+                            <div class="col">{payment.active}</div>
+                            <div class="w-100"></div>
+                            <div class="col">Title</div>
+                            <div class="col">{payment.title}</div>
+                            <div class="w-100"></div>
+                            <div class="col">Payment Id</div>
+                            <div class="col">{payment.id}</div>
+                        </div>
+                    </div>
                    
-                    <li>
-                        {payment.account_number}
-                        {payment.customer_id}
+                    //<li>
+                    //    <h5>Account Number</h5> : {payment.account_number}
+                    //    {payment.customer_id}
                        
-                        {payment.title}
-                        {payment.id}
-                    </li>
+                    //    {payment.title}
+                    //    {payment.id}
+                    //</li>
                 );
             });
 
