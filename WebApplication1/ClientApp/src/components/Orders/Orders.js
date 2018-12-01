@@ -25,7 +25,6 @@ class Orders extends Component {
         .then((orders) => {
             this.setState({ orders });
         })
-
         .catch((error) => {
             console.error('error retrieving orders', error);
         });
