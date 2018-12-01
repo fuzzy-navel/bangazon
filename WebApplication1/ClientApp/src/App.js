@@ -14,7 +14,7 @@ import TrainingPrograms from './components/TrainingPrograms/TrainingPrograms';
 import Navibar from './components/Navibar/Navibar';
 import AddCustomer from './components/Customers/AddCustomer';
 import AddEmployee from './components/Employees/AddEmployee';
-import SingleEmployee from './components/Employees/SingleEmployee';
+import SingleEmployee from './components/SingleEmployee/SingleEmployee';
 
 class App extends Component
 {
@@ -27,7 +27,8 @@ class App extends Component
           <div className="container">
              <div className="row">
               <Switch>
-                <Route component={SingleCustomer} path='/customers/:id'/>
+                <Route component={SingleCustomer} path='/customers/:id' />
+                <Route component={SingleEmployee} path='/employees/:id' />
                 <Route exact path='/' component={Home} />
                 <Route path='/computers' component={Computers} />
                 <Route path='/customers' component={Customers} />
@@ -35,7 +36,6 @@ class App extends Component
                 <Route path='/departments' component={Departments} />
                 <Route path='/employees' component={Employees} />
                 <Route path='/addEmployee' component={AddEmployee} />
-                <Route component={SingleEmployee} path='/employees/:id'/>
                 <Route path='/orders' component={Orders} />
                 <Route path='/paymenttypes' component={PaymentTypes} />
                 <Route path='/products' component={Products} />
