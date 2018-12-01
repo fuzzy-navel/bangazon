@@ -10,7 +10,6 @@ class AddTrainingProgram extends Component {
     enddate: '',
     maxattendees: 0,
     id: 0,
-    employeename: '',
   }
 
   clickAddNewTrainingProgram = () => {
@@ -35,13 +34,6 @@ class AddTrainingProgram extends Component {
         <h2>TRAINING PROGRAM</h2>
         <h3>Add New Training Program</h3>
         <form>
-          <label>Employee Name: </label>
-          <input
-            type="text"
-            name="employeename"
-            value={this.state.employeename}
-            onChange={this.handleChange}
-          /><br/>
           <label>Start Date: </label>
           <input
             type="text"

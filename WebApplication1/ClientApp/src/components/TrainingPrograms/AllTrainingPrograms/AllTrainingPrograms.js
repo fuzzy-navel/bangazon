@@ -12,13 +12,13 @@ class AllTrainingPrograms extends Component {
   componentDidMount() {
     return new Promise((resolve, reject) => {
       Requests.GetAll()
-      .then(trainingPrograms => {
+      .then(tp => {
         this.setState({
-          trainingPrograms: trainingPrograms
+          trainingPrograms: tp,
         });
-        resolve(trainingPrograms)
-      .catch(error => reject(error));
+        resolve(tp)
       })
+      .catch(error => reject(error));
     });
   };
 
@@ -36,7 +36,7 @@ class AllTrainingPrograms extends Component {
           type="button"
           name={tp.id}
           key={tp.id}
-          value={tp.employe_ename}
+          value={tp.id}
           onClick={this.clickTrainingProgram}
         ></input>
       );

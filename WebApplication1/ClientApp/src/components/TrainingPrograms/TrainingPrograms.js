@@ -13,6 +13,6 @@ const TrainingPrograms = () => (
     <Route path='/trainingprograms/addtrainingprogram' component={AddTrainingProgram} />
     <Route path='/trainingprograms/:id' component={TrainingProgram} />
   </Switch>
-);
+)
 
 export default TrainingPrograms;

@@ -10,7 +10,6 @@ class TrainingProgram extends Component {
     enddate: '',
     maxattendees: 0,
     id: 0,
-    employeename: '',
     isEditing: 0,
   }
 
@@ -19,12 +18,12 @@ class TrainingProgram extends Component {
     return new Promise((resolve, reject) => {
       Requests.GetSingle(tpId)
       .then(tp => {
+        console.log(tp);
         this.setState({
-          startdate: tp.start_date,
-          enddate: tp.end_date,
-          maxattendees: tp.max_attendees,
+          startdate: tp.start_Date,
+          enddate: tp.end_Date,
+          maxattendees: tp.max_Attendees,
           id: tp.id,
-          employeename: tp.employee_name,
           isEditing: 0,
         });
         resolve(tp);
@@ -70,7 +69,6 @@ class TrainingProgram extends Component {
           <p>Start Date: {this.state.startdate}</p>
           <p>End Date: {this.state.enddate}</p>
           <p>Max Attendees: {this.state.maxattendees}</p>
-          <p>Employee Name: {this.state.employeename}</p>
           <p>Id: {this.state.id}</p>
           <input
             type="button"
@@ -109,13 +107,6 @@ class TrainingProgram extends Component {
               type="number"
               name="maxattendees"
               value={this.state.maxattendees}
-              onChange={this.handleChange}
-            /><br />
-            <label>Employee Name: </label>
-            <input
-              type="text"
-              name="employeename"
-              value={this.state.employeename}
               onChange={this.handleChange}
             /><br />
             <label>Id: </label>
