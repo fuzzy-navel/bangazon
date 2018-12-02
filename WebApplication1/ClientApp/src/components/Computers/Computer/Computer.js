@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Label, Input, Button } from 'react-bootstrap';
+import { Form, Label, Button } from 'react-bootstrap';
 
 import Requests from '../Requests/Requests';
 
@@ -22,10 +22,10 @@ class Computer extends Component {
       Requests.GetSingle(compId)
       .then(c => {
         this.setState({
-          id = c.id,
-          purchaseDate = c.purchase_date,
-          decommissioned = c.decommissioned,
-          employeeId = c.employee_id,
+          id: c.id,
+          purchaseDate: c.purchase_date,
+          decommissioned: c.decommissioned,
+          employeeId: c.employee_id,
           inUse: c.in_use,
           isMalfunctioning: c.is_malfunctioning,
           isEditing: 0,
@@ -74,10 +74,14 @@ class Computer extends Component {
           <h2>COMPUTERS</h2>
           <p>Id: {id}</p>
           <p>Purchase Date: {purchaseDate}</p>
-          <p>Decommissioned? {decommissioned}</p>
+          <p>Decommissioned?
+            {decommissioned ?
+              decommissioned.toString() :
+              " Null" }
+          </p>
           <p>Employee Id: {employeeId}</p>
-          <p>In Use? {inUse}</p>
-          <p>Is Malfunctioning? {isMalfunctioning}</p>
+          <p>In Use? {inUse.toString()}</p>
+          <p>Is Malfunctioning? {isMalfunctioning.toString()}</p>
           <Button
             onClick={() => this.setState({isEditing: 1})}
           >Edit This Record</Button>
@@ -92,41 +96,43 @@ class Computer extends Component {
           <h2>COMPUTERS</h2>
           <Form>
             <Label>Purchase Date: </Label>
-            <Input
+            <input
               name="purchaseDate"
               value={purchaseDate}
               onChange={this.handleChange}
-            ></Input>
+            ></input><br/>
             <Label>Decommissioned? </Label>
-            <Input
+            <input
               name="decommissioned"
-              value={decommissioned}
+              value={decommissioned ?
+                decommissioned.toString() :
+                "Null" }
               onChange={this.handleChange}
-            ></Input>
+            ></input><br/>
             <Label>Employee Id: </Label>
-            <Input
+            <input
               name="employeeId"
               value={employeeId}
               onChange={this.handleChange}
-            ></Input>
+            ></input><br/>
             <Label>In Use? </Label>
-            <Input
+            <input
               name="inUse"
-              value={inUse}
+              value={inUse.toString()}
               onChange={this.handleChange}
-            ></Input>
+            ></input><br/>
             <Label>Malfunctioning? </Label>
-            <Input
+            <input
               name="isMalfunctioning"
-              value={isMalfunctioning}
+              value={isMalfunctioning.toString()}
               onChange={this.handleChange}
-            ></Input><br/>
+            ></input><br/><br/>
             <Label>Id: </Label>
-            <Input
+            <input
               disabled
               readOnly
               value={id}
-            ></Input><br/>
+            ></input><br/>
           </Form>
           <Button
             onClick={this.clickUpdateComputer}

@@ -38,7 +38,7 @@ class AllComputers extends Component {
           key={c.id}
           value={c.id}
           onClick={this.clickAllComputers}
-        ></Button>
+        >{c.id}</Button>
       );
     });
 

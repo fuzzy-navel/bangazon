@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Form, Label, Button } from 'react-bootstrap';
 
 import Requests from '../Requests/Requests';
 
@@ -14,7 +15,14 @@ class AddComputer extends Component {
   };
 
   clickAddNewComputer = () => {
-
+    return new Promise((resolve, reject) => {
+      Requests.Add(this.state)
+      .then(response => {
+        alert('Computer saved');
+        resolve(response);
+      })
+      .catch(error => reject(error));
+    });
   };
 
   handleChange = e => {
@@ -29,44 +37,47 @@ class AddComputer extends Component {
         <h3>Add New Computer</h3>
         <Form>
           <Label>Purchase Date: </Label>
-          <Input
+          <input
             type="text"
             name="purchaseDate"
             onChange={this.handleChange}
             value={this.state.purchaseDate}
-          ></Input><br/>
+          ></input><br/>
           <Label>Decommissioned? </Label>
-          <Input
+          <input
             type="text"
             name="decommissioned"
             onChange={this.handleChange}
             value={this.state.decommissioned}
-          ></Input><br/>
+          ></input><br/>
           <Label>Employee Id</Label>
-          <Input
+          <input
             type="text"
             name="employeeId"
             value={this.state.employeeId}
             onChange={this.handleChange}
-          ></Input><br/>
+          ></input><br/>
           <Label>In Use? </Label>
-          <Input
+          <input
             type="text"
             name="inUse"
             value={this.state.inUse}
             onChange={this.handleChange}
-          ></Input><br/>
+          ></input><br/>
           <Label>Is Malfunctioning? </Label>
-          <Input
+          <input
             type="text"
             name="isMalfunctioning"
             value={this.state.isMalfunctioning}
             onChange={this.handleChange}
-          ></Input><br/>
+          ></input><br/>
         </Form>
         <Button
-          {}
+          onClick={this.clickAddNewComputer}
         >Save Changes</Button>
+        <Button
+          onClick={() => this.props.history.push('/computers/')}
+        >Cancel</Button>
       </div>
     );
   }
