@@ -17,7 +17,7 @@ class Orders extends Component {
         orderRequests
             .getOrders()
             .then((orders) => {
-                this.setState({ originalOrders: orders });
+                this.setState({ originalOrders: orders.data });
                 const copyOfOriginal = [...orders];
                 copyOfOriginal.forEach((order) => {
                     const foundOrder = keepers.find((keepOrder) => {

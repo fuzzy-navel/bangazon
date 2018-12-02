@@ -75,12 +75,12 @@ class TrainingProgram extends Component {
             type="button"
             value="Edit This Record"
             onClick={() => this.setState({isEditing: 1})}
-          ></input>
+          />
           <input
             type="button"
             value="Delete Record"
             onClick={this.clickDeleteTrainingProgram}
-          ></input>
+          />
         </div>
       );
     }

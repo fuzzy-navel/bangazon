@@ -4,12 +4,14 @@ import orderRequests from '../../OrderRequests/OrderRequests';
 
 import Orders from '../Orders/Orders';
 import Search from '../Orders/Search';
+import SingleOrder from '../Orders/SingleOrder';
+import axios from 'axios';
 
 class EditOrder extends React.Component {
     state = {
-        showOrderForm: false,
+        showEditForm: false,
         orderDeets: {},
-        orders: {},
+        orders: [],
         searchInput: 0,
     };
 
@@ -25,7 +27,7 @@ class EditOrder extends React.Component {
             .then(() => {
                 orderRequests.getOrders()
                     .then((orders) => {
-                        this.setState({ orders });
+                        this.setState({ orders: orders.data });
                         //this.props.history('/Orders');
                     });
             })
@@ -42,6 +44,21 @@ class EditOrder extends React.Component {
     //**************GRABS ORDERDEETS FROM ORDER FORM & SETS STATE******************//
     updateOrderDeets = orderDeets => this.setState({ orderDeets })
 
+    componentDidMount() {
+        const apiPath = `api/order/orders`;
+        return new Promise((resolve, reject) => {
+            axios
+                .get(apiPath)
+                .then(orders => {
+                    this.setState({
+                        orders: orders.data
+                    })
+                    resolve(orders);
+                })
+                .catch(error => reject(error));
+        });
+    };
+
     render() {
         return (
             <div className="EditOrder">
@@ -56,13 +73,7 @@ class EditOrder extends React.Component {
                         searchInput={this.state.searchInput}
                     />
                 </div>
-                <div className="col-sm-6">
-                    <OrderForm
-                        showOrderForm={this.state.showOrderForm}
-                        onSubmit={this.formSubmitEvent}
-                        orderDeets={this.state.orderDeets}
-                    />
-                </div>
+                
             </div>
         );
     }
