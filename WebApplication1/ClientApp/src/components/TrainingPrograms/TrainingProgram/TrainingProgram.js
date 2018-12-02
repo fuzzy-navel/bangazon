@@ -18,7 +18,6 @@ class TrainingProgram extends Component {
     return new Promise((resolve, reject) => {
       Requests.GetSingle(tpId)
       .then(tp => {
-        console.log(tp);
         this.setState({
           startdate: tp.start_Date,
           enddate: tp.end_Date,

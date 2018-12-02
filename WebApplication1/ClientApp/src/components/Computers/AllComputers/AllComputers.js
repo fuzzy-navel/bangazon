@@ -49,3 +49,5 @@ class AllComputers extends Component {
     );
   }
 };
+
+export default AllComputers;
