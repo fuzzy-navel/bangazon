@@ -44,7 +44,16 @@ class AllComputers extends Component {
 
     return (
       <div>
-        {output}
+        <h1>COMPUTERS</h1>
+        <div>
+          <h2>All Computers</h2>
+          <Button
+            onClick={() => this.props.history.push('/computers/addcomputer')}
+          >Add Computer</Button>
+        </div>
+        <div>
+          {output}
+        </div>
       </div>
     );
   }
