@@ -142,7 +142,7 @@ class Computer extends Component {
           >Cancel</Button>
         </div>
       );
-    };
+    }
   }
 };
 

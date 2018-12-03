@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button, Form } from 'react-bootstrap';
 
 import Requests from '../Requests/Requests';
 
@@ -29,43 +30,40 @@ class AddTrainingProgram extends Component {
   };
 
   render () {
+    const { startdate, enddate, maxattendees } = this.state;
     return (
       <div>
         <h2>TRAINING PROGRAM</h2>
         <h3>Add New Training Program</h3>
-        <form>
+        <Form>
           <label>Start Date: </label>
           <input
             type="text"
             name="startdate"
-            value={this.state.startdate}
+            value={startdate}
             onChange={this.handleChange}
           /><br/>
           <label>End Date: </label>
           <input
             type="text"
             name="enddate"
-            value={this.state.enddate}
+            value={enddate}
             onChange={this.handleChange}
           /><br/>
           <label>Max Attendees: </label>
           <input
             type="text"
             name="maxattendees"
-            value={this.state.maxattendees}
+            value={maxattendees}
             onChange={this.handleChange}
           /><br/>
-        </form>
-        <input
-          type="button"
-          value="Save Changes"
+        </Form>
+        <Button
           onClick={this.clickAddNewTrainingProgram}
-          />
-        <input
-          type="button"
-          value="Cancel"
+        >Save Changes</Button>
+        <Button
           onClick={this.clickCancelAdd}
-        />
+        >Cancel</Button>
       </div>
     );
   }

@@ -130,7 +130,7 @@ class TrainingProgram extends Component {
           />
         </div>
       );
-    };
+    }
   }
 };
 
