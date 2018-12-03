@@ -1,52 +1,36 @@
 import React, { Component } from 'react';
 
 import orderRequests from '../../OrderRequests/OrderRequests';
+import Search from '../Orders/Search';
 
 import './Orders.css';
 
 class Orders extends Component {
     state = {
         orders: [],
-        view: {},
-        originalOrders: [],
     };
 
-    //*************SEARCHES DATABASE FOR USER INPUT AND COLLECTS MATCHES***//
+    //******************GET & DISPLAY ALL ORDERS**********************//
     componentDidMount() {
-        const keepers = [];
-        orderRequests
-            .getOrders()
-            .then((orders) => {
-                this.setState({ originalOrders: orders.data });
-                const copyOfOriginal = [...orders];
-                copyOfOriginal.forEach((order) => {
-                    const foundOrder = keepers.find((keepOrder) => {
-                        return keepOrder === order;
-                    });
-                    if (foundOrder === undefined) {
-                        keepers.push(order);
-                    }
+        const apiPath = `api/order/orders`;
+        return new Promise((resolve, reject) => {
+            orderRequests
+                .getOrders(apiPath)
+                .then(orders => {
+                    this.setState({
+                        orders: orders.data
+                    })
+                    resolve(orders);
+                })
+                .catch(error => reject(error));
                 });
-                this.setState({ orders: keepers });
-            })
-            .catch((error) => {
-                console.error('error retrieving orders', error);
-            });
-    }
-
-    componentWillReceiveProps() {
-        const searchInput = this.props.searchInput;
-        const orders = [...this.state.originalOrders];
-        const filterOrders = orders.filter(order => order.id.toString().includes(searchInput.toString()));
-        this.setState({ orders: filterOrders });
-    }
-
+        };
+        
     //**************IDENTIFIES WHICH ORDER IS SELECTED************//
-    selectedOrder = (order) => {
-        const { toggleShowOrderForm, updateOrderDeets } = this.props;
-        this.setState({ view: { ...order } });
-        updateOrderDeets(order);
-        toggleShowOrderForm();
+    selectedOrder = (e) => {
+        const id = e.target.name;
+        this.props.history.push(`/orders/${id}`);
+        
     }
 
     render() {
@@ -56,13 +40,13 @@ class Orders extends Component {
                 <table className="table table-bordered table-striped">
                     <tbody>
                         <tr>
-                            <td>Order Id: {order.orderId}</td>
+                            <td>Order Id: {order.id}</td>
                             <td>Customer Id: {order.customerId}</td>
                             <td>Order Status: {order.orderStatus.toString()}</td>
                             <td>Order Complete: {order.canComplete.toString()}</td>
                             <td>Payment Type Id: {order.paymentTypeId}</td>
                             <td>
-                                <button className="btn btn-primary" id={order.id} onClick={this.selectedOrder}> Edit Order </button>
+                                <button className="btn btn-primary" id={order.id} onClick={this.selectedOrder}> View Order </button>
                             </td>
                             
                         </tr>
@@ -74,6 +58,13 @@ class Orders extends Component {
 
         return (
             <div className="orders">
+                <div className="search">
+                    <Search
+                        onSearch={this.updateSearchInput}
+                        searchInput={this.state.searchInput}
+                    />
+                </div>
+
                 <div className="panel panel-primary">
                     <div className="panel-heading">Order Management</div>
                     <div className="panel-body">
