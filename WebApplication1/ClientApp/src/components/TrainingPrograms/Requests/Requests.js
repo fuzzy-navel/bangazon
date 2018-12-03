@@ -22,6 +22,7 @@ const GetSingle = id => {
 
 const Add = input => {
   const apiPath = `api/trainingprogram`;
+  console.log(input);
   return new Promise((resolve, reject) => {
     axios
       .post(apiPath, {

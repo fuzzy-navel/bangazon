@@ -1,5 +1,6 @@
 ﻿import React, { Component} from 'react'
-import { Navbar, Nav, MenuItem } from 'react-bootstrap';
+import {Link} from 'react-router-dom';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
 
 import './Navibar.css';
 
@@ -10,26 +11,46 @@ export class Navibar extends Component
     return (
     <Navbar inverse collapseOnSelect>
       <Navbar.Header>
-        <Navbar.Brand>
-          <a className="navbar-brand" href="/">Bangazon</a>
+        <Navbar.Brand className="navbar-brand">
+          <Link to ="/">Bangazon</Link>
         </Navbar.Brand>
         <Navbar.Toggle />
       </Navbar.Header>
       <Navbar.Collapse>
         <Nav>
-          <MenuItem href="/">Home</MenuItem>
-          <MenuItem href="/computers">Computers</MenuItem>
-          <MenuItem href="/customers">Customers</MenuItem>
-          <MenuItem href="/departments">Departments</MenuItem>
-          <MenuItem href="/employees">Employees</MenuItem>
-          <MenuItem href="/orders">Orders</MenuItem>
-          <MenuItem href="/paymenttypes">Payment Types</MenuItem>
-          <MenuItem href="/products">Products</MenuItem>
-          <MenuItem href="/producttypes">Product Types</MenuItem>
-          <MenuItem href="/trainingprograms">Training Programs</MenuItem>
+          <NavItem componentClass='span'>
+            <Link to ="/">Home</Link>
+          </NavItem>
+          <NavItem componentClass='span'>
+            <Link to="/computers">Computers</Link>
+          </NavItem>
+          <NavItem componentClass='span'>
+            <Link to ="/customers">Cusomters</Link>
+          </NavItem>
+          <NavItem componentClass='span'>
+            <Link to ="/departments">Departments</Link>
+          </NavItem>
+          <NavItem componentClass='span'>
+            <Link to ="/employees">Employees</Link>
+          </NavItem>
+          <NavItem componentClass='span'>
+            <Link to ="/orders">Orders</Link>
+          </NavItem>
+          <NavItem componentClass='span'>
+            <Link to ="/paymenttypes">Payment Types</Link>
+          </NavItem>
+          <NavItem componentClass='span'>
+            <Link to ="/products">Products</Link>
+          </NavItem>
+          <NavItem componentClass='span'>
+            <Link to ="/producttypes">Product Types</Link>
+          </NavItem>
+          <NavItem componentClass='span'>
+            <Link to ="/trainingprograms">Training Programs</Link>
+          </NavItem>
         </Nav>
       </Navbar.Collapse>
-    </Navbar> 
+    </Navbar>
    )
   }
 }

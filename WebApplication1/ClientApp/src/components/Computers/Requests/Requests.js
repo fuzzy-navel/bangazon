@@ -26,10 +26,14 @@ const Add = input => {
     axios
       .post(apiPath, {
         purchase_date: input.purchaseDate,
-        decommissioned: input.isDecommissioned,
+        decommissioned: (
+          input.decommissioned ?
+          input.decommissioned.toString() :
+          null
+        ),
         employee_id: input.employeeId,
-        in_use: input.inUse,
-        is_malfunctioning: input.isMalfunctioning,
+        in_use: JSON.parse(input.inUse),
+        is_malfunctioning: JSON.parse(input.isMalfunctioning),
       })
       .then(response => resolve (response))
       .catch(error => reject(error));
@@ -52,10 +56,14 @@ const Update = (input, id) => {
     axios
       .put(apiPath, {
         purchase_date: input.purchaseDate,
-        decommissioned: input.isDecommissioned,
+        decommissioned: (
+          input.decommissioned ?
+          input.decommissioned.toString() :
+          null
+        ),
         employee_id: input.employeeId,
-        in_use: input.inUse,
-        is_malfunctioning: input.isMalfunctioning,
+        in_use: JSON.parse(input.inUse),
+        is_malfunctioning: JSON.parse(input.isMalfunctioning),
       })
       .then(response => resolve (response))
       .catch(error => reject(error));

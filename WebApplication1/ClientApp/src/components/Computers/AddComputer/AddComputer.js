@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Label, Button } from 'react-bootstrap';
+import { Form, FormControl, Label, Button } from 'react-bootstrap';
 
 import Requests from '../Requests/Requests';
 
@@ -19,6 +19,7 @@ class AddComputer extends Component {
       Requests.Add(this.state)
       .then(response => {
         alert('Computer saved');
+        this.props.history.push('/computers/');
         resolve(response);
       })
       .catch(error => reject(error));
@@ -26,51 +27,52 @@ class AddComputer extends Component {
   };
 
   handleChange = e => {
-    const { name, value } = e.target;
+    const {name, value} = e.target;
     this.setState({ [name]: value });
   };
 
   render() {
+    const {purchaseDate, decommissioned, employeeId, inUse, isMalfunctioning} = this.state;
     return (
       <div>
         <h2>COMPUTER</h2>
         <h3>Add New Computer</h3>
         <Form>
           <Label>Purchase Date: </Label>
-          <input
+          <FormControl
             type="text"
             name="purchaseDate"
+            value={purchaseDate}
             onChange={this.handleChange}
-            value={this.state.purchaseDate}
-          ></input><br/>
+          /><br/>
           <Label>Decommissioned? </Label>
-          <input
+          <FormControl
             type="text"
             name="decommissioned"
+            value={decommissioned}
             onChange={this.handleChange}
-            value={this.state.decommissioned}
-          ></input><br/>
+          /><br/>
           <Label>Employee Id</Label>
-          <input
-            type="text"
+          <FormControl
+            type="number"
             name="employeeId"
-            value={this.state.employeeId}
+            value={employeeId}
             onChange={this.handleChange}
-          ></input><br/>
+          /><br/>
           <Label>In Use? </Label>
-          <input
-            type="text"
+          <FormControl
+            type="number"
             name="inUse"
-            value={this.state.inUse}
+            value={inUse}
             onChange={this.handleChange}
-          ></input><br/>
+          /><br/>
           <Label>Is Malfunctioning? </Label>
-          <input
-            type="text"
+          <FormControl
+            type="number"
             name="isMalfunctioning"
-            value={this.state.isMalfunctioning}
+            value={isMalfunctioning}
             onChange={this.handleChange}
-          ></input><br/>
+          /><br/>
         </Form>
         <Button
           onClick={this.clickAddNewComputer}

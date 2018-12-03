@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Button, Form, FormControl, Label} from 'react-bootstrap';
 
 import Requests from '../Requests/Requests';
 
@@ -74,94 +75,87 @@ class Product extends Component {
   };
 
   render () {
-    if (!this.state.isEditing) {
+    const {isEditing, title, category, description, price, quantity, owner_id, id} = this.state;
+    if (!isEditing) {
       return (
         <div>
           <h2>PRODUCT</h2>
-          <p>Title: {this.state.title}</p>
-          <p>Category: {this.state.category}</p>
-          <p>Description: {this.state.description}</p>
-          <p>Price: {this.state.price}</p>
-          <p>Quantity: {this.state.quantity}</p>
-          <p>Owner Id: {this.state.owner_id}</p>
-          <p>Id: {this.state.id}</p>
-          <input
-            type="button"
-            value="Edit This Record"
+          <p>Title: {title}</p>
+          <p>Category: {category}</p>
+          <p>Description: {description}</p>
+          <p>Price: {price}</p>
+          <p>Quantity: {quantity}</p>
+          <p>Owner Id: {owner_id}</p>
+          <p>Id: {id}</p>
+          <Button
             onClick={() => this.setState({isEditing: 1})}
-          />
-          <input
-            type="button"
-            value="Delete Record"
+          >Edit This Record</Button>
+          <Button
             onClick={this.clickDeleteProduct}
-          />
+          >Delete Record</Button>
         </div>
       );
     } else {
       return (
         <div>
           <h2>PRODUCT</h2>
-          <form>
-            <label>Title: </label>
-            <input
+          <Form>
+            <Label>Title: </Label>
+            <FormControl
               type="text"
               name="title"
-              value={this.state.title}
+              value={title}
               onChange={this.handleChange}
-            /><br/>
-            <label>Category: </label>
-            <input
+            ></FormControl><br/>
+            <Label>Category: </Label>
+            <FormControl
               type="number"
               name="category"
-              value={this.state.category}
+              value={category}
               onChange={this.handleChange}
-            /><br/>
-            <label>Description: </label>
-            <input
+            ></FormControl><br/>
+            <Label>Description: </Label>
+            <FormControl
               type="text"
               name="description"
-              value={this.state.description}
+              value={description}
               onChange={this.handleChange}
-            /><br/>
-            <label>Price: </label>
-            <input
+            ></FormControl><br/>
+            <Label>Price: </Label>
+            <FormControl
               type="number"
               name="price"
-              value={this.state.price}
+              value={price}
               onChange={this.handleChange}
-            /><br/>
-          <label>Quantity: </label>
-            <input
+            ></FormControl><br/>
+          <Label>Quantity: </Label>
+            <FormControl
               type="number"
               name="quantity"
-              value={this.state.quantity}
+              value={quantity}
               onChange={this.handleChange}
-              /><br/>
-          <label>Owner Id: </label>
-            <input
+            ></FormControl><br/>
+          <Label>Owner Id: </Label>
+            <FormControl
               type="number"
               name="owner_id"
-              value={this.state.owner_id}
+              value={owner_id}
               onChange={this.handleChange}
-            /><br/>
-          <label>Id: </label>
-            <input
+            ></FormControl><br/>
+          <Label>Id: </Label>
+            <FormControl
               readOnly
               type="number"
               name="id"
-              value={this.state.id}
-            /><br/>
-          </form>
-          <input
-            type="button"
-            value="Save Changes"
+              value={id}
+            ></FormControl><br/>
+          </Form>
+          <Button
             onClick={this.clickUpdateProduct}
-          />
-          <input
-            type="button"
-            value="Cancel"
+          >Save Changes</Button>
+          <Button
             onClick={() => this.props.history.push(`/products/`)}
-          />
+          >Cancel</Button>
         </div>
       );
     }

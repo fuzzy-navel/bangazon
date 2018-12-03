@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, Label, Button } from 'react-bootstrap';
+import { Form, Label, Button, FormControl } from 'react-bootstrap';
 
 import Requests from '../Requests/Requests';
 
@@ -96,43 +96,43 @@ class Computer extends Component {
           <h2>COMPUTERS</h2>
           <Form>
             <Label>Purchase Date: </Label>
-            <input
+            <FormControl
               name="purchaseDate"
               value={purchaseDate}
               onChange={this.handleChange}
-            ></input><br/>
+            ></FormControl><br/>
             <Label>Decommissioned? </Label>
-            <input
+            <FormControl
               name="decommissioned"
               value={decommissioned ?
                 decommissioned.toString() :
                 "Null" }
               onChange={this.handleChange}
-            ></input><br/>
+            ></FormControl><br/>
             <Label>Employee Id: </Label>
-            <input
+            <FormControl
               name="employeeId"
               value={employeeId}
               onChange={this.handleChange}
-            ></input><br/>
+            ></FormControl><br/>
             <Label>In Use? </Label>
-            <input
+            <FormControl
               name="inUse"
               value={inUse.toString()}
               onChange={this.handleChange}
-            ></input><br/>
+            ></FormControl><br/>
             <Label>Malfunctioning? </Label>
-            <input
+            <FormControl
               name="isMalfunctioning"
               value={isMalfunctioning.toString()}
               onChange={this.handleChange}
-            ></input><br/><br/>
+            ></FormControl><br/><br/>
             <Label>Id: </Label>
-            <input
+            <FormControl
               disabled
               readOnly
               value={id}
-            ></input><br/>
+            ></FormControl><br/>
           </Form>
           <Button
             onClick={this.clickUpdateComputer}
