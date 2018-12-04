@@ -1,13 +1,18 @@
-import React, {Component} from 'react';
+import React from 'react';
+import {Switch, Route} from 'react-router-dom';
 
-import './Computers.css'
+import AddComputer from './AddComputer/AddComputer';
+import AllComputers from './AllComputers/AllComputers';
+import Computer from './Computer/Computer';
 
-class Computers extends Component {
-  render () {
-    return (
-      <div></div>
-    );
-  }
-};
+import './Computers.css';
+
+const Computers = () => (
+  <Switch>
+    <Route exact path='/computers' component={AllComputers} />
+    <Route path='/computers/addcomputer' component={AddComputer} />
+    <Route path='/computers/:id' component={Computer} />
+  </Switch>
+)
 
 export default Computers;
