@@ -37,7 +37,7 @@ class App extends Component
                 <Route path='/departments' component={Departments} />
                 <Route path='/employees' component={Employees} />
                 <Route path='/orders' component={Orders} />
-                <Route path='/paymenttypes' component={PaymentTypes} />
+                <Route exact path='/paymenttypes' component={PaymentTypes} />
                 <Route path='/paymenttypes/:id' component={OnePaymentType}/>
                 <Route path='/products' component={Products} />
                 <Route path='/producttypes' component={ProductTypes} />

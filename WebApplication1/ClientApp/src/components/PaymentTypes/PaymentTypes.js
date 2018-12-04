@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import paymentRequest from '../../paymentRequest/Payment';
-
 import './PaymentTypes.css'
 
 class PaymentTypes extends Component {
@@ -18,6 +17,23 @@ class PaymentTypes extends Component {
                 console.error('No payments returned', err);
             })
     }
+
+    //updatePaymentClick = () => {
+    //    return new Promise((resolve, reject) => {
+            //paymentRequest
+    //            .updateRequest(this.state, this.state.id)
+    //            .then(response => {
+    //                this.setState({
+    //                    isAvailable: 0,
+    //                })
+    //                alert('Sucessfully Updated')
+    //                resolve(response);
+    //            })
+    //            .catch(error => reject(error));
+    //    });
+    //};
+
+
         render() {
             const paymentComponents = this.state.payments.map((payment) => {
 
@@ -44,17 +60,16 @@ class PaymentTypes extends Component {
                             <div className="w-100"></div>
                             <div className="col">Payment Id</div>
                             <div className="col">{payment.id}</div>
+                            <button className="btn btn-success" onClick={this.updatePaymentClick}>Update</button>
                         </div>
                     </div>
                 );
             });
-
     return (
         <div className="AllPaymentTypes">
             <h1>Payment Types</h1>
             <ul className= "Types">
                 {paymentComponents}
-
             </ul>
         </div>
     );
