@@ -1,6 +1,6 @@
 ﻿import React, { Component} from 'react'
-import { Navbar, Nav, MenuItem } from 'react-bootstrap';
-
+import { Navbar, Nav,  NavItem } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap'
 import './Navibar.css';
 
 export class Navibar extends Component
@@ -17,16 +17,36 @@ export class Navibar extends Component
       </Navbar.Header>
       <Navbar.Collapse>
         <Nav>
-          <MenuItem href="/">Home</MenuItem>
-          <MenuItem href="/computers">Computers</MenuItem>
-          <MenuItem href="/customers">Customers</MenuItem>
-          <MenuItem href="/departments">Departments</MenuItem>
-          <MenuItem href="/employees">Employees</MenuItem>
-          <MenuItem href="/orders">Orders</MenuItem>
-          <MenuItem href="/paymenttypes">Payment Types</MenuItem>
-          <MenuItem href="/products">Products</MenuItem>
-          <MenuItem href="/producttypes">Product Types</MenuItem>
-          <MenuItem href="/trainingprograms">Training Programs</MenuItem>
+          <LinkContainer to="/">
+            <NavItem href="/">Home</NavItem>
+          </LinkContainer>
+          <LinkContainer to="/computers">
+            <NavItem href="/computers">Computers</NavItem>
+          </LinkContainer>
+          <LinkContainer to="/customers">
+            <NavItem href="/customers">Customers</NavItem>
+          </LinkContainer>
+          <LinkContainer to="/departments">
+            <NavItem href="/departments">Departments</NavItem>
+          </LinkContainer>
+          <LinkContainer to="/employees">
+            <NavItem href="/employees">Employees</NavItem>
+          </LinkContainer>
+          <LinkContainer to="/orders">
+            <NavItem href="/orders">Orders</NavItem>
+          </LinkContainer>
+          <LinkContainer to="/paymenttypes">
+            <NavItem href="/paymenttypes">Payment Types</NavItem>
+          </LinkContainer>
+          <LinkContainer to="/products">
+            <NavItem href="/products">Products</NavItem>
+          </LinkContainer>
+          <LinkContainer to="/producttypes">
+            <NavItem href="/producttypes">Product Types</NavItem>
+          </LinkContainer>
+          <LinkContainer to="/trainingprograms">
+              <NavItem href="/trainingprograms">Training Programs</NavItem>
+          </LinkContainer>
         </Nav>
       </Navbar.Collapse>
     </Navbar> 
