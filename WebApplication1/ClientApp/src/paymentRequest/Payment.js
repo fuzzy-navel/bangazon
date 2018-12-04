@@ -35,7 +35,6 @@ const getPayments = () => {
 //    });
 //};
 const getPayment = id => {
-    //const apiPath = `api/paymentType/${id}`;
     return new Promise((resolve, reject) => {
         axios
             .get(`api/paymentType/${id}`)
@@ -59,4 +58,4 @@ const getPayment = id => {
 
 
 
-export default { getPayments, getPayment,};
+export default { getPayments, getPayment};
