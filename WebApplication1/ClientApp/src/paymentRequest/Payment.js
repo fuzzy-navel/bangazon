@@ -58,4 +58,4 @@ const getPayment = id => {
 
 
 
-export default { getPayments, getPayment};
+export default { getPayments, getPayment,};
