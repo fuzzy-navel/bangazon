@@ -60,7 +60,6 @@ class PaymentTypes extends Component {
                             <div className="w-100"></div>
                             <div className="col">Payment Id</div>
                             <div className="col">{payment.id}</div>
-                            <button className="btn btn-success" onClick={this.updatePaymentClick}>Update</button>
                         </div>
                     </div>
                 );
