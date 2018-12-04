@@ -1,33 +1,31 @@
 import axios from 'axios';
 
 const GetAll = () => {
-  const apiPath = `api/trainingprogram`;
+  const apiPath = `api/producttype`;
   return new Promise((resolve, reject) => {
     axios
       .get(apiPath)
-      .then(tp => resolve (tp.data))
+      .then(pt => resolve (pt.data))
       .catch(error => reject(error));
     });
 };
 
 const GetSingle = id => {
-  const apiPath = `api/trainingprogram/${id}`;
+  const apiPath = `api/producttype/${id}`;
   return new Promise((resolve, reject) => {
     axios
       .get(apiPath)
-      .then(tp => resolve (tp.data[0]))
+      .then(pt => resolve (pt))
       .catch(error => reject(error));
   });
 }
 
 const Add = input => {
-  const apiPath = `api/trainingprogram`;
+  const apiPath = `api/producttype`;
   return new Promise((resolve, reject) => {
     axios
       .post(apiPath, {
-        start_date: input.startdate,
-        end_date: input.enddate,
-        max_attendees: input.maxattendees,
+        category: input.category,
       })
       .then(response => resolve (response))
       .catch(error => reject(error));
@@ -35,7 +33,7 @@ const Add = input => {
 }
 
 const Delete = input => {
-  const apiPath = `api/trainingprogram/${input}`;
+  const apiPath = `api/producttype/${input}`;
   return new Promise((resolve, reject) => {
     axios
       .delete(apiPath)
@@ -45,13 +43,13 @@ const Delete = input => {
 }
 
 const Update = (input, id) => {
-  const apiPath = `api/trainingprogram/${id}`;
+  const apiPath = `api/producttype/${id}`;
+  console.log('input.category', input.category);
+  console.log('id', id);
   return new Promise((resolve, reject) => {
     axios
       .put(apiPath, {
-        start_date: input.startdate,
-        end_date: input.enddate,
-        max_attendees: input.maxattendees,
+        category: input.category,
       })
       .then(response => resolve (response))
       .catch(error => reject(error));

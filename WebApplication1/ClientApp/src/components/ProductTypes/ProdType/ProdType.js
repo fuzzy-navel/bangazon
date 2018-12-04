@@ -17,13 +17,12 @@ class ProdType extends Component {
     return new Promise((resolve, reject) => {
       Requests.GetSingle(prodTypeId)
       .then(prodType => {
-        // sets state with product
         this.setState({
-          category: prodType.category,
-          id: prodType.id,
+          category: prodType.data,
+          id: prodTypeId,
           isEditing: 0,
         })
-        resolve (product);
+        resolve (prodType);
       })
       .catch(error => reject(error));
     });
@@ -35,6 +34,7 @@ class ProdType extends Component {
       Requests.Delete(prodTypeId)
       .then(response => {
         // redirect to product page
+        alert('Record deleted');
         this.props.history.push(`/producttypes/`)
         resolve(response);
       })
