@@ -61,27 +61,30 @@ namespace bangazon.DataAccess
             }
         }
 
-        public bool AddProductType(string category)
+        public bool AddProductType(ProductType productType)
         {
             using (var db = new SqlConnection(ConnectionInfo))
             {
                 db.Open();
 
-                var result = db.Execute(@"insert into [dbo].product_types([category]) VALUES (@Category)", new { category });
+                var result = db.Execute(
+                    @"insert into [dbo].[product_types]([category])
+                    VALUES (@category)", productType
+                );
 
                 return result == 1;
             }
         }
 
-        public bool UpdateProductType(string category, int id)
+        public bool UpdateProductType(int id, ProductType productType)
         {
             using (var db = new SqlConnection(ConnectionInfo))
             {
                 db.Open();
 
-                var result = db.Execute(@"Update [dbo].product_types
-                                          SET category = @Category
-                                          WHERE id = @Id", new { category, id });
+                var result = db.Execute(@"Update [dbo].[product_types]
+                                          SET category = @category
+                                          WHERE id = @id", new { id, productType.category });
 
                 return result == 1;
             }
