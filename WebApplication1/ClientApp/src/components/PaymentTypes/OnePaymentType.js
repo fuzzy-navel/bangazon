@@ -23,8 +23,7 @@ class OnePaymentType extends Component {
 
 
     render() {
-        const { payment } = this.state;
-        console.error('OneType', this.state);
+        const {payment} = this.state;
         return (
                 <div className="container">
                 <div className="row" key={payment.id}>

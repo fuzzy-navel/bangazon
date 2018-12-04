@@ -22,27 +22,28 @@ const getPayments = () => {
 };
 
 
-//const getPayment = (id) => {
-//    return new Promise((resolve, reject) => {
-//        axios
-//            .get(`/api/PaymentType/${id}`)
-//            .then((res) => {
-//                resolve(res.data);
-//            })
-//            .catch((err) => {
-//                reject(err);
-//            });
-//    });
-//};
-const getPayment = id => {
-    const apiPath = `api/paymentType/${id}`;
+const getPayment = (id) => {
     return new Promise((resolve, reject) => {
         axios
-            .get(apiPath)
-            .then(payment => resolve(payment.data[0]))
-            .catch(error => reject(error));
+            .get(`/api/PaymentType/${id}`)
+            .then((res) => {
+                resolve(res.data);
+            })
+            .catch((err) => {
+                reject(err);
+            });
     });
-}
+};
+
+//const getPayment = id => {
+//    const apiPath = `api/paymentType/${id}`;
+//    return new Promise((resolve, reject) => {
+//        axios
+//            .get(apiPath)
+//            .then(payment => resolve(payment.data[0]))
+//            .catch(error => reject(error));
+//    });
+//}
 
 //const postPayment = (newPayment) => {
 //    return new Promise((resolve, reject) => {
