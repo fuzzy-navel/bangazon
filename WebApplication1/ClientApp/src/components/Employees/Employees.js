@@ -31,7 +31,7 @@ class Employees extends Component
         this.props.history.push(`/employees/${employee.employee_id}`)
       };
       return (
-        <div key={employee.id}>
+        <div key={employee.employee_id}>
           <div className="panel panel-primary">
             <div className="panel-heading">
               <a className="employeeName" onClick={singleEmployee}>{employee.employee_name}</a>

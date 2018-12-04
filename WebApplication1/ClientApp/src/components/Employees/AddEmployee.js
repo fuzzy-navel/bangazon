@@ -32,7 +32,7 @@ class AddEmployee extends Component
   formFieldBoolState = (name, e) =>
   {
     const tempEmployee = { ...this.state.newEmployee };
-    tempEmployee[name] = (e.target.value == 'true');
+    tempEmployee[name] = (e.target.value === 'true');
     this.setState({ newEmployee: tempEmployee });
   };
 

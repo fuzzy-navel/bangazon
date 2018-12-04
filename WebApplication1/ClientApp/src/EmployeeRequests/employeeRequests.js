@@ -30,7 +30,7 @@ const getEmployee = (id) =>
       {
         if (res !== null)
         {
-          resolve(res);
+          resolve(res.data);
         }
       })
       .catch((err) =>
