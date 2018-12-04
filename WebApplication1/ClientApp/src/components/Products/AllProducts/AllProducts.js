@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Button} from 'react-bootstrap';
 
 import Requests from '../Requests/Requests';
 
@@ -36,13 +37,11 @@ class AllProducts extends Component {
     const output = products.map(product => {
       // Prints all product titles to DOM
       return (
-        <input
-          type="button"
+        <Button
           name={product.id}
           key={product.id}
-          value={product.title}
           onClick={this.clickProduct}
-        ></input>
+        >{product.title}</Button>
       );
     });
 
@@ -51,11 +50,9 @@ class AllProducts extends Component {
         <h1>Products</h1>
         <div>
           <h2>All Products:</h2>
-          <input
-            type="button"
-            value="Add Product"
+          <Button
             onClick={() => this.props.history.push('/products/addproduct') }
-          />
+          >Add Product</Button>
           <div>
             {output}
           </div>

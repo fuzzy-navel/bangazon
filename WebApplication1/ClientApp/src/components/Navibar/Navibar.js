@@ -1,6 +1,8 @@
-﻿import React, { Component} from 'react'
+﻿import React, { Component} from 'react';
+import {Link} from 'react-router-dom';
+
 import { Navbar, Nav,  NavItem } from 'react-bootstrap';
-import { LinkContainer } from 'react-router-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap';
 import './Navibar.css';
 
 export class Navibar extends Component
@@ -10,8 +12,8 @@ export class Navibar extends Component
     return (
     <Navbar inverse collapseOnSelect>
       <Navbar.Header>
-        <Navbar.Brand>
-          <a className="navbar-brand" href="/">Bangazon</a>
+        <Navbar.Brand className="navbar-brand">
+          <Link to ="/">Bangazon</Link>
         </Navbar.Brand>
         <Navbar.Toggle />
       </Navbar.Header>
@@ -49,7 +51,7 @@ export class Navibar extends Component
           </LinkContainer>
         </Nav>
       </Navbar.Collapse>
-    </Navbar> 
+    </Navbar>
    )
   }
 }

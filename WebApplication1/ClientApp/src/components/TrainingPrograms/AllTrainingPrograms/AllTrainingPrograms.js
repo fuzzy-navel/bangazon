@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Button} from 'react-bootstrap';
 
 import Requests from '../Requests/Requests';
 
@@ -32,13 +33,11 @@ class AllTrainingPrograms extends Component {
 
     const output = trainingPrograms.map(tp => {
       return (
-        <input
-          type="button"
+        <Button
           name={tp.id}
           key={tp.id}
-          value={tp.id}
           onClick={this.clickTrainingProgram}
-        ></input>
+        >{tp.id}</Button>
       );
     });
 
@@ -48,11 +47,9 @@ class AllTrainingPrograms extends Component {
         <h1>Training Programs</h1>
         <div>
           <h2>All Training Programs:</h2>
-          <input
-            type="button"
-            value="Add Training Program"
+          <Button
             onClick={() => this.props.history.push('/trainingprograms/addtrainingprogram')}
-          ></input>
+          >Add Training Program</Button>
         </div>
         <div>
           {output}
