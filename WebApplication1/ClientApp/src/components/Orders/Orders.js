@@ -27,34 +27,43 @@ class Orders extends Component {
         };
         
     //**************IDENTIFIES WHICH ORDER IS SELECTED************//
-    selectedOrder = (e) => {
-        const id = e.target.name;
-        this.props.history.push(`/orders/${id}`);
+    //selectedOrder = (id) => {
+    //    //console.log(e.target.name);
+    //    //const id = e.target.name;
+    //    this.props.history.push(`/orders/${id}`);
         
-    }
+    
 
     render() {
         const { orders } = this.state;
-        const orderComponents = orders.map((order) => (
-            <div key={order.id}>
-                <table className="table table-bordered table-striped">
-                    <tbody>
-                        <tr>
-                            <td>Order Id: {order.id}</td>
-                            <td>Customer Id: {order.customerId}</td>
-                            <td>Order Status: {order.orderStatus.toString()}</td>
-                            <td>Order Complete: {order.canComplete.toString()}</td>
-                            <td>Payment Type Id: {order.paymentTypeId}</td>
-                            <td>
-                                <button className="btn btn-primary" id={order.id} onClick={this.selectedOrder}> View Order </button>
-                            </td>
-                            
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
 
-        ));
+        const orderComponents = orders.map((order) => {
+            const selectedOrder = () => {
+                this.props.history.push(`/orders/${order.id}`);
+            };
+            return (
+
+                <div key={order.id}>
+                    <table className="table table-bordered table-striped">
+                        <tbody>
+                            <tr>
+                                <td>Order Id: {order.id}</td>
+                                <td>Customer Id: {order.customerId}</td>
+                                <td>Order Status: {order.orderStatus.toString()}</td>
+                                <td>Order Complete: {order.canComplete.toString()}</td>
+                                <td>Payment Type Id: {order.paymentTypeId}</td>
+                                <td>
+                                    <button className="btn btn-primary" id={order.id} onClick={selectedOrder}> View Order </button>
+                                </td>
+
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+
+            );
+        });
 
         return (
             <div className="orders">
@@ -63,7 +72,9 @@ class Orders extends Component {
                         onSearch={this.updateSearchInput}
                         searchInput={this.state.searchInput}
                     />
+
                 </div>
+
 
                 <div className="panel panel-primary">
                     <div className="panel-heading">Order Management</div>

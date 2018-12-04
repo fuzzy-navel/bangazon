@@ -3,7 +3,7 @@ import { Switch, Route } from 'react-router-dom';
 
 import Orders from '../Orders/Orders';
 import EditOrder from '../Orders/EditOrder';
-import SingleOrder from '../Orders/SingleOrder';
+import SingleOrder from '../SingleOrder/SingleOrder';
 
 const OrderRoutes = () => (
     <Switch>

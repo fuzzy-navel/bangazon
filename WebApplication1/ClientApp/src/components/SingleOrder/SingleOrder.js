@@ -15,6 +15,21 @@ class SingleOrder extends Component {
         },
     };
 
+    componentDidMount() {
+        const orderId = this.props.match.params.id;
+            orderRequests
+                .getOrderById(orderId)
+                .then(order => {
+                    this.setState({
+                        order: order.data[0]
+                    })
+             
+        })
+                .catch(error => console.error(error));
+    };
+
+    
+
     //**************CAPTURES NEW USER INPUT WITHIN THE EDIT FORM************//
     handleInputChange = (e) => {
         const orderStatus = e.target.value;
@@ -29,6 +44,8 @@ class SingleOrder extends Component {
             }
         });
     }
+
+
 
     //********************SHOW THE EDIT FORM ON BUTTON CLICK**************//
     toggleShowEditForm = () => {
@@ -52,12 +69,12 @@ class SingleOrder extends Component {
             <div className="col-sm-4 col-med-2">
                 <div className="thumbnail">
                     <div className="caption">
-                        <h3> Order Number: {this.props.order.id}</h3>
-                        <p>Customer Number: {this.order.customerId}</p>
-                        <p>Order Status: {this.order.orderStatus}</p>
-                        <p>Order Complete: {this.order.canComplete}</p>
-                        <p>Payment Type Number: {this.order.paymentTypeId}</p>
-                        <p><button type="button" className="btn btn-primary" id={order.id} onClick={this.toggleShowEditForm}>Edit Details</button></p>
+                        <h3> Order Number: {this.state.order.id}</h3>
+                        <p>Customer Number: {this.state.order.customerId}</p>
+                        <p>Order Status: {this.state.order.orderStatus.toString()}</p>
+                        <p>Order Complete: {this.state.order.canComplete.toString()}</p>
+                        <p>Payment Type Number: {this.state.order.paymentTypeId}</p>
+                        <p><button type="button" className="btn btn-primary" id={this.state.order.id} onClick={this.toggleShowEditForm}>Edit Details</button></p>
                     </div>
                     <div className={this.state.showEditForm ? '' : 'hide'}>
                         <input
@@ -84,6 +101,6 @@ class SingleOrder extends Component {
             </div>
          ); 
     }
-}
+};
 
 export default SingleOrder;
