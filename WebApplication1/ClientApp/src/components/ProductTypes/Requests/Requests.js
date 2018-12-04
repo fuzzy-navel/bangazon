@@ -22,6 +22,7 @@ const GetSingle = id => {
 
 const Add = input => {
   const apiPath = `api/producttype`;
+  console.log(input.category);
   return new Promise((resolve, reject) => {
     axios
       .post(apiPath, {
@@ -49,7 +50,7 @@ const Update = (input, id) => {
   return new Promise((resolve, reject) => {
     axios
       .put(apiPath, {
-        category: input.category,
+        category: input.category
       })
       .then(response => resolve (response))
       .catch(error => reject(error));
