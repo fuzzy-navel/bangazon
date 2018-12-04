@@ -12,10 +12,14 @@ class DepartmentSingle extends Component {
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
+        this.handleUpdate = this.handleUpdate.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.cancelUpdate = this.cancelUpdate.bind(this);
+        this.saveUpdate = this.saveUpdate.bind(this);
 
         this.state = {
             show: false,
-            isEditing: 0,
+            isEditing: false,
             name: this.props.details.name,
             supervisor: this.props.details.supervisor_id,
             expense: this.props.details.expense_budget,
@@ -33,11 +37,48 @@ class DepartmentSingle extends Component {
     }
 
     handleUpdate() {
-        if (this.state.isEditing === 0) {
-            this.setState({ isEditing: 1 });
-        } else {
-            this.setState({ isEditing: 0 });
-        }
+        this.setState({ isEditing: true });
+    }
+
+    handleChange(e) {
+        const { name, value } = e.target;
+        this.setState({
+            [name]: value
+        });
+    }
+
+    cancelUpdate() {
+        DatabaseRequests.getSingleDepartment(this.state.id)
+            .then((res) => {
+                this.setState({
+                    name: res[0].name,
+                    supervisor: res[0].supervisor_id,
+                    expense: res[0].expense_budget,
+                    isEditing: false
+                });
+            })
+            .catch((err) => {
+                console.error(err, "Error retrieving single department data")
+            });
+    }
+
+    saveUpdate() {
+        const deptObj = {
+            name: this.state.name,
+            supervisor_id: this.state.supervisor,
+            expense_budget: this.state.expense,
+            id: this.state.id
+        };
+
+        DatabaseRequests.updateDepartment(this.state.id, deptObj)
+            .then(() => {
+                this.setState({ isEditing: false });
+                this.handleClose();
+                alert("Update Successful");
+            })
+            .catch((err) => {
+                console.erro(err, "Error updating department");
+            });
     }
 
     handleDelete() {
@@ -94,17 +135,27 @@ class DepartmentSingle extends Component {
                             </Modal.Header>
                             <Modal.Body>
                                 <h5>Supervisor:</h5>
-                                <p>{this.state.supervisor}</p>
+                                <input
+                                    type="text"
+                                    name="supervisor"
+                                    value={this.state.supervisor}
+                                    onChange={this.handleChange}
+                                />
 
                                 <h5>Expense:</h5>
-                                <p>{this.state.expense}</p>
+                                <input
+                                    type="text"
+                                    name="expense"
+                                    value={this.state.expense}
+                                    onChange={this.handleChange}
+                                />
                                 <EmployeeList
                                     employees={this.state.employees.map(employee => { return employee.employee_name; })}
                                 />
                             </Modal.Body>
                             <Modal.Footer>
-                                <Button onClick={this.handleUpdate}>Cancel</Button>
-                                <Button onClick={this.handleClose}>Save</Button>
+                                <Button onClick={this.cancelUpdate}>Cancel</Button>
+                                <Button onClick={this.saveUpdate}>Save</Button>
                             </Modal.Footer>
                         </Modal>
                     </div>
