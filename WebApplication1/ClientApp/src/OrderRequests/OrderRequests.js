@@ -24,21 +24,22 @@ const newOrder = () => {
     const apiPath = `api/order/addOrder`;
     return new Promise((resolve, reject) => {
         axios
-            .post(apiPath)
+            .post(apiPath, input)
             .then(order => resolve(order))
             .catch(error => reject(error));
     });
 };
 
-//const updateOrder = (orderId, input) => {
-//    const apiPath = `api/order/${orderId}`;
-//    return new Promise((resolve, reject) => {
-//        axios
-//            .put(apiPath)
+const updateOrder = (orderId, input) => {
+    const apiPath = `api/order/${orderId}`;
+    return new Promise((resolve, reject) => {
+        axios
+            .put(apiPath, input)
+            .then(order => resolve(order))
+            .catch(error => reject(error));
+    });
 
-//    });
-
-//};
+};
 
 
-export default {getOrders, getOrderById, newOrder};
+export default {getOrders, getOrderById, newOrder, updateOrder};

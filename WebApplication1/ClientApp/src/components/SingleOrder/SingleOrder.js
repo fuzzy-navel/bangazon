@@ -105,7 +105,7 @@ class SingleOrder extends Component {
                             value={this.state.paymentTypeId}
                             className="form-control"
                         />
-                        <button className="btn btn-default" type="button" onClick={this.handleSave}>Save</button>
+                        <button className="btn btn-default" type="button" onClick={this.UpdateOrderClick}>Save</button>
                     </div>
                 </div>
             </div>
