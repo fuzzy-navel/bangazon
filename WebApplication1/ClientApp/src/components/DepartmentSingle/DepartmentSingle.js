@@ -1,5 +1,5 @@
 ﻿import React, { Component } from 'react';
-import { Modal, Button } from 'react-bootstrap';
+import { Panel, Button } from 'react-bootstrap';
 import EmployeeList from '../EmployeeList/EmployeeList';
 import DatabaseRequests from '../../databaseRequests/departments';
 
@@ -19,6 +19,7 @@ class DepartmentSingle extends Component {
 
         this.state = {
             show: false,
+            open: false,
             isEditing: false,
             name: this.props.details.name,
             supervisor: this.props.details.supervisor_id,
@@ -95,45 +96,106 @@ class DepartmentSingle extends Component {
     render() {
         if (!this.state.isEditing) {
             return (
-                <div className="panel panel-primary">
-                    <div className="panel-heading text-center" onClick={this.handleShow}>
-                        <h3>{this.state.name}</h3>
-                    </div>
-                    <div>
-                        <Modal show={this.state.show} onHide={this.handleClose}>
-                            <Modal.Header closeButton>
-                                <Modal.Title className="text-center">{this.state.name}</Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>
-                                <h5>Supervisor:</h5>
-                                <p>{this.state.supervisor}</p>
+                //<div className="panel panel-primary">
+                //    <div className="panel-heading text-center" onClick={this.handleShow}>
+                //        <h3>{this.state.name}</h3>
+                //    </div>
+                //    <div>
+                //        <Modal show={this.state.show} onHide={this.handleClose}>
+                //            <Modal.Header closeButton>
+                //                <Modal.Title className="text-center">{this.state.name}</Modal.Title>
+                //            </Modal.Header>
+                //            <Modal.Body>
+                //                <h5>Supervisor:</h5>
+                //                <p>{this.state.supervisor}</p>
 
-                                <h5>Expense:</h5>
-                                <p>{this.state.expense}</p>
+                //                <h5>Expense:</h5>
+                //                <p>{this.state.expense}</p>
+                //                <EmployeeList
+                //                    employees={this.state.employees.map(employee => { return employee.employee_name; })}
+                //                />
+                //            </Modal.Body>
+                //            <Modal.Footer>
+                //                <Button onClick={this.handleUpdate}>Update</Button>
+                //                <Button onClick={this.handleDelete}>Delete</Button>
+                //            </Modal.Footer>
+                //        </Modal>
+                //    </div>
+                //</div>
+                <div>
+                    <Panel id="collapsible-panel-example-2" defaultExpanded={false}>
+                        <Panel.Heading>
+                            <Panel.Title toggle>
+                                {this.state.name}
+                            </Panel.Title>
+                        </Panel.Heading>
+                        <Panel.Collapse>
+                            <Panel.Body>
+                                <h5>Budget: {this.state.expense}</h5>
+                                
+                                <h5>Supervisor: {this.state.supervisor}</h5>
                                 <EmployeeList
                                     employees={this.state.employees.map(employee => { return employee.employee_name; })}
                                 />
-                            </Modal.Body>
-                            <Modal.Footer>
+                            </Panel.Body>
+                            <Panel.Footer>
                                 <Button onClick={this.handleUpdate}>Update</Button>
-                                <Button onClick={this.handleDelete}>Delete</Button>
-                            </Modal.Footer>
-                        </Modal>
-                    </div>
+                                <Button id={this.state.id} onClick={this.props.delete}>Delete</Button>
+                            </Panel.Footer>
+                        </Panel.Collapse>
+                    </Panel>
                 </div>
+                //<div>
+                //    <h1>{this.state.name}</h1>
+                //</div>
             );
         } else {
             return (
-                <div className="panel panel-primary">
-                    <div className="panel-heading text-center" onClick={this.handleShow}>
-                        <h3>{this.state.name}</h3>
-                    </div>
-                    <div>
-                        <Modal show={this.state.show} onHide={this.handleClose}>
-                            <Modal.Header closeButton>
-                                <Modal.Title className="text-center">{this.state.name}</Modal.Title>
-                            </Modal.Header>
-                            <Modal.Body>
+        //        <div className="panel panel-primary">
+        //            <div className="panel-heading text-center" onClick={this.handleShow}>
+        //                <h3>{this.state.name}</h3>
+        //            </div>
+        //            <div>
+        //                <Modal show={this.state.show} onHide={this.handleClose}>
+        //                    <Modal.Header closeButton>
+        //                        <Modal.Title className="text-center">{this.state.name}</Modal.Title>
+        //                    </Modal.Header>
+        //                    <Modal.Body>
+        //                        <h5>Supervisor:</h5>
+        //                        <input
+        //                            type="text"
+        //                            name="supervisor"
+        //                            value={this.state.supervisor}
+        //                            onChange={this.handleChange}
+        //                        />
+
+        //                        <h5>Expense:</h5>
+        //                        <input
+        //                            type="text"
+        //                            name="expense"
+        //                            value={this.state.expense}
+        //                            onChange={this.handleChange}
+        //                        />
+        //                        <EmployeeList
+        //                            employees={this.state.employees.map(employee => { return employee.employee_name; })}
+        //                        />
+        //                    </Modal.Body>
+        //                    <Modal.Footer>
+        //                        <Button onClick={this.cancelUpdate}>Cancel</Button>
+        //                        <Button onClick={this.saveUpdate}>Save</Button>
+        //                    </Modal.Footer>
+        //                </Modal>
+        //            </div>
+        //        </div>
+            <div>
+                <Panel id="collapsible-panel-example-2" defaultExpanded={false}>
+                    <Panel.Heading>
+                        <Panel.Title toggle>
+                            {this.state.name}
+                        </Panel.Title>
+                    </Panel.Heading>
+                    <Panel.Collapse>
+                        <Panel.Body>
                                 <h5>Supervisor:</h5>
                                 <input
                                     type="text"
@@ -149,17 +211,14 @@ class DepartmentSingle extends Component {
                                     value={this.state.expense}
                                     onChange={this.handleChange}
                                 />
-                                <EmployeeList
-                                    employees={this.state.employees.map(employee => { return employee.employee_name; })}
-                                />
-                            </Modal.Body>
-                            <Modal.Footer>
+                        </Panel.Body>
+                        <Panel.Footer>
                                 <Button onClick={this.cancelUpdate}>Cancel</Button>
                                 <Button onClick={this.saveUpdate}>Save</Button>
-                            </Modal.Footer>
-                        </Modal>
-                    </div>
-                </div>
+                        </Panel.Footer>
+                    </Panel.Collapse>
+                </Panel>
+            </div>
             );
         }
     }

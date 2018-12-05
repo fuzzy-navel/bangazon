@@ -12,6 +12,8 @@ class Departments extends Component {
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleAdd = this.handleAdd.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
+        this.getDepartments = this.getDepartments.bind(this);
 
         this.state = {
             departments: [],
@@ -24,13 +26,17 @@ class Departments extends Component {
     }
 
   componentDidMount() {
-      DepartmentRequests.getAllDepartments()
-          .then((data) => {
-              this.setState({ departments: data });
-          })
-          .catch((err) => {
-              console.error(err, "There was a problem");
-          });
+      this.getDepartments();
+    }
+
+    getDepartments() {
+        DepartmentRequests.getAllDepartments()
+            .then((data) => {
+                this.setState({ departments: data });
+            })
+            .catch((err) => {
+                console.error(err, "There was a problem");
+            });
     }
 
     handleShow() {
@@ -62,15 +68,22 @@ class Departments extends Component {
 
                 this.handleClose();
 
-                this.setState({
-                    addDept: {
-                        name: "",
-                        expense_budget: 0
-                    }
-                });
+                this.getDepartments();
             })
             .catch((err) => {
                 console.error(err, "Error Adding Department");
+            });
+    }
+
+    handleDelete(e) {
+        console.log(e);
+        DepartmentRequests.deleteDepartment(e.target.id)
+            .then(() => {
+                alert("Deleted Department Successfully");
+                this.getDepartments();
+            })
+            .catch((err) => {
+                console.error(err, "Error Deleting Department");
             });
     }
 
@@ -83,6 +96,7 @@ class Departments extends Component {
                 <DepartmentSingle
                     key={trip.id}
                     details={trip}
+                    delete={this.handleDelete}
                 />
             );
         });
@@ -124,7 +138,7 @@ class Departments extends Component {
             </div>
         );
   }
-};
+}
 
 export default Departments;
 
