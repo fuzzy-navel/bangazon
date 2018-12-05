@@ -28,10 +28,6 @@ class AllProducts extends Component {
     this.props.history.push(`/products/${id}`);
   }
 
-  clickAddProduct = () => {
-    this.props.history.push(`/products/addproduct`);
-  };
-
   render () {
     const {
       products,
