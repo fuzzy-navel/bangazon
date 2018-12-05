@@ -12,7 +12,6 @@ import ProductTypes from './components/ProductTypes/ProductTypes';
 import TrainingPrograms from './components/TrainingPrograms/TrainingPrograms';
 import Navibar from './components/Navibar/Navibar';
 import AddCustomer from './components/Customers/AddCustomer';
-import SingleOrder from './components/SingleOrder/SingleOrder';
 import OrderRoutes from './components/Orders/OrderRoutes';
 
 class App extends Component

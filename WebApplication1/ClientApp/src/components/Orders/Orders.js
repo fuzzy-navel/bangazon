@@ -7,7 +7,7 @@ import './Orders.css';
 
 class Orders extends Component {
     state = {
-        orders: [],
+        orders: []
     };
 
     //******************GET & DISPLAY ALL ORDERS**********************//
@@ -26,23 +26,13 @@ class Orders extends Component {
                 });
         };
         
-    //**************IDENTIFIES WHICH ORDER IS SELECTED************//
-    //selectedOrder = (id) => {
-    //    //console.log(e.target.name);
-    //    //const id = e.target.name;
-    //    this.props.history.push(`/orders/${id}`);
-        
-    
-
     render() {
         const { orders } = this.state;
-
         const orderComponents = orders.map((order) => {
             const selectedOrder = () => {
                 this.props.history.push(`/orders/${order.id}`);
             };
             return (
-
                 <div key={order.id}>
                     <table className="table table-bordered table-striped">
                         <tbody>
@@ -55,13 +45,10 @@ class Orders extends Component {
                                 <td>
                                     <button className="btn btn-primary" id={order.id} onClick={selectedOrder}> View Order </button>
                                 </td>
-
                             </tr>
                         </tbody>
                     </table>
                 </div>
-
-
             );
         });
 
@@ -74,7 +61,6 @@ class Orders extends Component {
                     />
 
                 </div>
-
 
                 <div className="panel panel-primary">
                     <div className="panel-heading">Order Management</div>

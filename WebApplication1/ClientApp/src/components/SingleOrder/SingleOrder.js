@@ -17,53 +17,54 @@ class SingleOrder extends Component {
 
     componentDidMount() {
         const orderId = this.props.match.params.id;
-            orderRequests
-                .getOrderById(orderId)
-                .then(order => {
-                    this.setState({
-                        order: order.data[0]
-                    })
-             
-        })
-                .catch(error => console.error(error));
+        orderRequests
+            .getOrderById(orderId)
+            .then(order => {
+                this.setState({
+                    order: order.data[0]
+                })
+
+            })
+            .catch(error => console.error(error));
     };
 
-    
 
     //**************CAPTURES NEW USER INPUT WITHIN THE EDIT FORM************//
     handleInputChange = (e) => {
-        const orderStatus = e.target.value;
-        const canComplete = e.target.value;
-        const paymentTypeId = e.target.value;
+        const { name, value } = e.target;
+        const defaultOrderValue = this.state.order;
+        defaultOrderValue[name] = value;
         this.setState({
-            order: {
-                ...this.state.order,
-                orderStatus,
-                canComplete,
-                paymentTypeId
-            }
+            order: { ...defaultOrderValue },
         });
-    }
-
+    };
 
 
     //********************SHOW THE EDIT FORM ON BUTTON CLICK**************//
     toggleShowEditForm = () => {
         this.setState({
             showEditForm: !this.state.showEditForm,
-            order: { ...this.props.order },
+            order: { ...this.state.order },
         });
     }
 
-    handleSave = () => {
-        this.props.handleSaveClickEvent(this.props.order.id, this.state.order)
-            .then(() => {
-                this.toggleShowEditForm();
-            });
+    UpdateOrderClick = () => {
+        return new Promise((resolve, reject) => {
+            orderRequests
+                .updateOrder(this.state.order.id, this.state.order)
+
+                .then((response) => {
+                    this.setState({
+                        showEditForm: 0
+                    })
+                    resolve(response)
+                })
+                .catch(error => reject(error));
+        });
     }
-    
+
     render() {
-        const { order } = this.props;
+        const { order } = this.state;
 
         return (
             <div className="col-sm-4 col-med-2">
@@ -71,35 +72,44 @@ class SingleOrder extends Component {
                     <div className="caption">
                         <h3> Order Number: {this.state.order.id}</h3>
                         <p>Customer Number: {this.state.order.customerId}</p>
-                        <p>Order Status: {this.state.order.orderStatus.toString()}</p>
+                        <p>Order Status: {this.state.order.orderStatus ?
+                             this.state.order.orderStatus.toString() : "Null" }</p>
                         <p>Order Complete: {this.state.order.canComplete.toString()}</p>
                         <p>Payment Type Number: {this.state.order.paymentTypeId}</p>
                         <p><button type="button" className="btn btn-primary" id={this.state.order.id} onClick={this.toggleShowEditForm}>Edit Details</button></p>
                     </div>
                     <div className={this.state.showEditForm ? '' : 'hide'}>
+                        <label> Order Status: </label>
                         <input
                             type="text"
+                            name="orderStatus"
                             onChange={this.handleInputChange}
-                            value={this.state.order.orderStatus}
+                            value={this.state.orderStatus}
                             className="form-control"
                         />
+                        <label> Order Complete: </label>
+
                         <input
                             type="text"
+                            name="canComplete"
                             onChange={this.handleInputChange}
-                            value={this.state.order.canComplete}
+                            value={this.state.canComplete}
                             className="form-control"
                         />
+                        <label> Payment Type Id: </label>
+
                         <input
                             type="text"
+                            name="paymentTypeId"
                             onChange={this.handleInputChange}
-                            value={this.state.order.paymentTypeId}
+                            value={this.state.paymentTypeId}
                             className="form-control"
                         />
                         <button className="btn btn-default" type="button" onClick={this.handleSave}>Save</button>
                     </div>
                 </div>
             </div>
-         ); 
+        );
     }
 };
 
