@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
+import SingleComputer from '../Computer/Computer';
 
 import Requests from '../Requests/Requests';
 
@@ -33,12 +34,16 @@ class AllComputers extends Component {
 
     const output = allComputers.map(c => {
       return (
-        <Button
-          name={c.id}
-          key={c.id}
-          value={c.id}
-          onClick={this.clickAllComputers}
-        >{c.id}</Button>
+        //<Button
+        //  name={c.id}
+        //  key={c.id}
+        //  value={c.id}
+        //  onClick={this.clickAllComputers}
+        //>{c.id}</Button>
+          <SingleComputer
+              key={c.id}
+              details={c}
+          />
       );
     });
 
