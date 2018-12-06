@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import SingleComputer from '../Computer/Computer';
 
 import Requests from '../Requests/Requests';
@@ -8,7 +8,8 @@ import './AllComputers.css';
 
 class AllComputers extends Component {
   state = {
-    allComputers: [],
+      allComputers: [],
+      show: false
   }
 
   componentDidMount() {
@@ -22,7 +23,15 @@ class AllComputers extends Component {
       })
       .catch(error => reject(error));
     });
-  };
+    };
+
+    handleShow = () => {
+        this.setState({ show: true });
+    }
+
+    handleClose = () => {
+        this.setState({ show: false });
+    }
 
   clickAllComputers = e => {
     const id = e.target.name;
@@ -53,9 +62,37 @@ class AllComputers extends Component {
         <div>
           <h2>All Computers</h2>
           <Button
-            onClick={() => this.props.history.push('/computers/addcomputer')}
+              onClick={this.handleShow}
           >Add Computer</Button>
-        </div>
+
+                <div>
+                    <Modal show={this.state.show} onHide={this.handleClose}>
+                        <Modal.Header closeButton>
+                            <Modal.Title className="text-center">Add Department</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <label>Department Name: </label>
+                            <input
+                                type="text"
+                                name="name"
+                                //value={addDept.name}
+                                //onChange={this.handleChangeName}
+                            /><br />
+                            <label>Budget: </label>
+                            <input
+                                type="number"
+                                name="budget"
+                                //value={addDept.expense_budget}
+                                //onChange={this.handleChangeBudget}
+                            /><br />
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button >Save</Button>
+                            <Button >Cancel</Button>
+                        </Modal.Footer>
+                    </Modal>
+                </div>
+            </div>
         <div>
           {output}
         </div>

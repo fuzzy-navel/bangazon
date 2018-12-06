@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 //import { Form, Label, Button, FormControl } from 'react-bootstrap';
-import { Panel, Button } from 'react-bootstrap';
+import { Panel, Button, Form, Label, FormControl } from 'react-bootstrap';
 
 import Requests from '../Requests/Requests';
 
@@ -67,7 +67,26 @@ class Computer extends Component {
       })
       .catch(error => reject(error));
     });
-  };
+    };
+
+    clickCancelUpdate = () => {
+        Requests.GetSingle(this.state.id)
+            .then((res) => {
+                console.log(res);
+                this.setState({
+                    id: res.id,
+                    purchaseDate: res.purchase_date,
+                    decommissioned: res.decommissioned,
+                    employeeId: res.employee_id,
+                    inUse: res.in_use,
+                    isMalfunctioning: res.is_malfunctioning,
+                    isEditing: false
+                });
+            })
+            .catch((err) => {
+                console.error(err, "Error retrieving single department data")
+            });
+    }
 
   handleChange = e => {
     const { name, value } = e.target;
@@ -75,37 +94,104 @@ class Computer extends Component {
     };
 
     render() {
-        const { id, purchaseDate, decommissioned, employeeId, inUse, isMalfunctioning } = this.state;
+        const { id, purchaseDate, decommissioned, employeeId, inUse, isMalfunctioning, isEditing } = this.state;
 
-        return (
-            <div>
-                <Panel id="collapsible-panel-example-2" defaultExpanded={false}>
-                    <Panel.Heading>
-                        <Panel.Title toggle>
-                            {this.state.id}
-                        </Panel.Title>
-                    </Panel.Heading>
-                    <Panel.Collapse>
-                        <Panel.Body>
-                            <p>Id: {id}</p>
-                            <p>Purchase Date: {purchaseDate}</p>
-                            <p>Decommissioned
+        
+        if (!isEditing) {
+            return (
+                <div>
+                    <Panel id="collapsible-panel-example-2" defaultExpanded={false}>
+                        <Panel.Heading>
+                            <Panel.Title toggle>
+                                {this.state.id}
+                            </Panel.Title>
+                        </Panel.Heading>
+                        <Panel.Collapse>
+                            <Panel.Body>
+                                <p>Id: {id}</p>
+                                <p>Purchase Date: {purchaseDate}</p>
+                                <p>Decommissioned
                             {decommissioned ?
-                                decommissioned.toString() :
-                                " Null" }
-                            </p>
-                            <p>Employee Id: {employeeId}</p>
-                            <p>In Use {inUse.toString()}</p>
-                            <p>Is Malfunctioning? {isMalfunctioning.toString()}</p>
-                        </Panel.Body>
-                        <Panel.Footer>
-                            <Button onClick={() => this.setState({ isEditing: true })}>Update</Button>
-                            <Button id={this.state.id} onClick={this.clickDeleteComputer}>Delete</Button>
-                        </Panel.Footer>
-                    </Panel.Collapse>
-                </Panel>
-            </div>
-        );
+                                        decommissioned.toString() :
+                                        " Null"}
+                                </p>
+                                <p>Employee Id: {employeeId}</p>
+                                <p>In Use {inUse.toString()}</p>
+                                <p>Is Malfunctioning? {isMalfunctioning.toString()}</p>
+                            </Panel.Body>
+                            <Panel.Footer>
+                                <Button onClick={() => this.setState({ isEditing: true })}>Update</Button>
+                                <Button id={this.state.id} onClick={this.clickDeleteComputer}>Delete</Button>
+                            </Panel.Footer>
+                        </Panel.Collapse>
+                    </Panel>
+                </div>
+            );
+        } else {
+            return (
+                <div>
+                    <Panel id="collapsible-panel-example-2" defaultExpanded={false}>
+                        <Panel.Heading>
+                            <Panel.Title toggle>
+                                {this.state.id}
+                            </Panel.Title>
+                        </Panel.Heading>
+                        <Panel.Collapse>
+                            <Panel.Body>
+                            <Form>
+                                <Label>Purchase Date: </Label>
+                                <FormControl
+                                  name="purchaseDate"
+                                  value={purchaseDate}
+                                  onChange={this.handleChange}
+                                /><br/>
+                                <Label>Decommissioned? </Label>
+                                <FormControl
+                                    name="decommissioned"
+                                    value={decommissioned ?
+                                    decommissioned.toString() :
+                                    "Null"}
+                                    onChange={this.handleChange}
+                                /><br/>
+                                <Label>Employee Id: </Label>
+                                <FormControl
+                                  name="employeeId"
+                                  value={employeeId}
+                                  onChange={this.handleChange}
+                                /><br/>
+                                <Label>In Use? </Label>
+                                <FormControl
+                                  name="inUse"
+                                  value={inUse.toString()}
+                                  onChange={this.handleChange}
+                                /><br/>
+                                <Label>Malfunctioning? </Label>
+                                <FormControl
+                                  name="isMalfunctioning"
+                                  value={isMalfunctioning.toString()}
+                                  onChange={this.handleChange}
+                                /><br/><br/>
+                                <Label>Id: </Label>
+                                <FormControl
+                                  disabled
+                                  readOnly
+                                  value={id}
+                                /><br/>
+                              </Form>
+                            </Panel.Body>
+                            <Panel.Footer>
+                                <Button
+                                    onClick={this.clickUpdateComputer}
+                                >Save Changes</Button>
+                                <Button
+                                    onClick={this.clickCancelUpdate}
+                                >Cancel</Button>
+                            </Panel.Footer>
+                        </Panel.Collapse>
+                    </Panel>
+                </div>
+            );
+        }
     }
 
   //render () {
