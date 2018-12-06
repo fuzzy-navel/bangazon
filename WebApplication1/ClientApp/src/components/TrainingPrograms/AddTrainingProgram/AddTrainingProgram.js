@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Button, Form, FormControl, Label } from 'react-bootstrap';
 
 import Requests from '../Requests/Requests';
 
@@ -17,6 +18,7 @@ class AddTrainingProgram extends Component {
       Requests.Add(this.state)
         .then(response => {
           alert('Training Program saved.');
+          this.props.history.push('/trainingprograms/');
           resolve(response);
         })
         .catch(error => reject(error));
@@ -29,43 +31,40 @@ class AddTrainingProgram extends Component {
   };
 
   render () {
+    const { startdate, enddate, maxattendees } = this.state;
     return (
       <div>
         <h2>TRAINING PROGRAM</h2>
         <h3>Add New Training Program</h3>
-        <form>
-          <label>Start Date: </label>
-          <input
+        <Form>
+          <Label>Start Date: </Label>
+          <FormControl
             type="text"
             name="startdate"
-            value={this.state.startdate}
+            value={startdate}
             onChange={this.handleChange}
-          /><br/>
-          <label>End Date: </label>
-          <input
+          ></FormControl><br/>
+          <Label>End Date: </Label>
+          <FormControl
             type="text"
             name="enddate"
-            value={this.state.enddate}
+            value={enddate}
             onChange={this.handleChange}
-          /><br/>
-          <label>Max Attendees: </label>
-          <input
+          ></FormControl><br/>
+          <Label>Max Attendees: </Label>
+          <FormControl
             type="text"
             name="maxattendees"
-            value={this.state.maxattendees}
+            value={maxattendees}
             onChange={this.handleChange}
-          /><br/>
-        </form>
-        <input
-          type="button"
-          value="Save Changes"
+          ></FormControl><br/>
+        </Form>
+        <Button
           onClick={this.clickAddNewTrainingProgram}
-          />
-        <input
-          type="button"
-          value="Cancel"
-          onClick={this.clickCancelAdd}
-        />
+        >Save Changes</Button>
+        <Button
+          onClick={() => this.props.history.push('/trainingprograms/')}
+        >Cancel</Button>
       </div>
     );
   }

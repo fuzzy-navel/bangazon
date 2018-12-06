@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {Form, FormControl, Button, Label} from 'react-bootstrap';
 
 import Requests from '../Requests/Requests';
 
@@ -18,7 +19,8 @@ class AddProduct extends Component {
     return new Promise((resolve, reject) => {
       Requests.Add(this.state)
         .then(response => {
-          alert('Product saved.')
+          alert('Product saved.');
+          this.props.history.push('/products/');
           resolve(response);
         })
         .catch(error => reject(error));
@@ -33,64 +35,61 @@ class AddProduct extends Component {
   };
 
   render () {
+    const {title, category, description, price, quantity, owner_id} = this.state;
     return (
       <div>
         <h2>PRODUCT</h2>
         <h3>Add New Product</h3>
-        <form>
-          <label>Title: </label>
-          <input
+        <Form>
+          <Label>Title: </Label>
+          <FormControl
             type="text"
             name="title"
-            value={this.state.title}
+            value={title}
             onChange={this.handleChange}
           /><br/>
-          <label>Category: </label>
-          <input
+          <Label>Category: </Label>
+          <FormControl
             type="number"
             name="category"
-            value={this.state.category}
+            value={category}
             onChange={this.handleChange}
           /><br/>
-          <label>Description: </label>
-          <input
+          <Label>Description: </Label>
+          <FormControl
             type="text"
             name="description"
-            value={this.state.description}
+            value={description}
             onChange={this.handleChange}
           /><br/>
-          <label>Price: </label>
-          <input
+          <Label>Price: </Label>
+          <FormControl
             type="number"
             name="price"
-            value={this.state.price}
+            value={price}
             onChange={this.handleChange}
           /><br/>
-        <label>Quantity: </label>
-          <input
+        <Label>Quantity: </Label>
+          <FormControl
             type="number"
             name="quantity"
-            value={this.state.quantity}
+            value={quantity}
             onChange={this.handleChange}
             /><br/>
-        <label>Owner Id: </label>
-          <input
+        <Label>Owner Id: </Label>
+          <FormControl
             type="number"
             name="owner_id"
-            value={this.state.owner_id}
+            value={owner_id}
             onChange={this.handleChange}
           /><br/>
-        </form>
-        <input
-          type="button"
-          value="Save Changes"
+        </Form>
+        <Button
           onClick={this.clickAddNewProduct}
-        />
-        <input
-          type="button"
-          value="Cancel"
-          onClick={this.clickCancelAdd}
-        />
+        >Save Changes</Button>
+        <Button
+          onClick={() => this.props.history.push('/products/')}
+        >Cancel</Button>
       </div>
     );
   }

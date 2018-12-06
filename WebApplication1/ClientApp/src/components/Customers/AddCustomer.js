@@ -37,7 +37,6 @@ class AddCustomer extends Component
 
   submitNewCustomer = (e) => {
     e.preventDefault();
-    const { newCustomer } = this.state;
     customerRequests.addCustomer(this.state.newCustomer);
     this.props.history.push(`/`);
   };

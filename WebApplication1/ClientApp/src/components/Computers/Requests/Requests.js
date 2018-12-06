@@ -1,34 +1,39 @@
 import axios from 'axios';
 
 const GetAll = () => {
-  const apiPath = `api/trainingprogram`;
+  const apiPath = `api/computer`;
   return new Promise((resolve, reject) => {
     axios
       .get(apiPath)
-      .then(tp => resolve (tp.data))
+      .then(c => resolve (c.data))
       .catch(error => reject(error));
     });
 };
 
 const GetSingle = id => {
-  const apiPath = `api/trainingprogram/${id}`;
+  const apiPath = `api/computer/${id}`;
   return new Promise((resolve, reject) => {
     axios
       .get(apiPath)
-      .then(tp => resolve (tp.data[0]))
+      .then(c => resolve (c.data[0]))
       .catch(error => reject(error));
   });
 }
 
 const Add = input => {
-  const apiPath = `api/trainingprogram`;
-  console.log(input);
+  const apiPath = `api/computer`;
   return new Promise((resolve, reject) => {
     axios
       .post(apiPath, {
-        start_date: input.startdate,
-        end_date: input.enddate,
-        max_attendees: input.maxattendees,
+        purchase_date: input.purchaseDate,
+        decommissioned: (
+          input.decommissioned ?
+          input.decommissioned.toString() :
+          null
+        ),
+        employee_id: input.employeeId,
+        in_use: JSON.parse(input.inUse),
+        is_malfunctioning: JSON.parse(input.isMalfunctioning),
       })
       .then(response => resolve (response))
       .catch(error => reject(error));
@@ -36,7 +41,7 @@ const Add = input => {
 }
 
 const Delete = input => {
-  const apiPath = `api/trainingprogram/${input}`;
+  const apiPath = `api/computer/${input}`;
   return new Promise((resolve, reject) => {
     axios
       .delete(apiPath)
@@ -46,13 +51,19 @@ const Delete = input => {
 }
 
 const Update = (input, id) => {
-  const apiPath = `api/trainingprogram/${id}`;
+  const apiPath = `api/computer/${id}`;
   return new Promise((resolve, reject) => {
     axios
       .put(apiPath, {
-        start_date: input.startdate,
-        end_date: input.enddate,
-        max_attendees: input.maxattendees,
+        purchase_date: input.purchaseDate,
+        decommissioned: (
+          input.decommissioned ?
+          input.decommissioned.toString() :
+          null
+        ),
+        employee_id: input.employeeId,
+        in_use: JSON.parse(input.inUse),
+        is_malfunctioning: JSON.parse(input.isMalfunctioning),
       })
       .then(response => resolve (response))
       .catch(error => reject(error));
