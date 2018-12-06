@@ -24,23 +24,41 @@ class AllProducts extends Component {
     });
   };
 
+//   removePeople(e) {
+//     this.setState({people: this.state.people.filter(function(person) {
+//         return person !== e.target.value
+//     })});
+// }
 
-
-  deleteProductFromState = () => {
-
+  deleteProductFromState = deleted => {
+    this.setState({
+      products: this.state.products.filter(p => {
+        return p !== deleted;
+      })
+    });
   };
 
-  clickDeleteProduct = () => {
-    const productId = this.state.id;
+  clickDeleteProduct = e => {
+    const productId = e.target.id;
     return new Promise((resolve, reject) => {
       Requests.Delete(productId)
       .then(response => {
         // redirect to product page
-        // this.props.history.push(`/products/`);
         alert('Record deleted');
+        this.deleteProductFromState(productId);
         resolve(response);
       })
       .catch(error => reject(error));
+      Requests.GetAll()
+        .then(products => {
+          // sets state with all products
+          this.setState({
+            products: products
+          })
+          console.log('2nd get all',this.state)
+          resolve (products);
+        })
+        .catch(error => reject(error));
     });
   };
 
@@ -92,7 +110,7 @@ class AllProducts extends Component {
               </Panel.Body>
               <Panel.Footer>
                 <Button onClick={this.handleUpdate}>Update</Button>
-                <Button id={id} onClick={this.props.delete}>Delete</Button>
+                <Button id={id} onClick={this.clickDeleteProduct}>Delete</Button>
               </Panel.Footer>
             </Panel.Collapse>
           </Panel>
