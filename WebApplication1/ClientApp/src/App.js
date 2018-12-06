@@ -9,11 +9,13 @@ import Employees from './components/Employees/Employees';
 import Orders from './components/Orders/Orders';
 import PaymentTypes from './components/PaymentTypes/PaymentTypes';
 import OnePaymentType from './components/PaymentTypes/OnePaymentType';
+import AddPayments from './components/PaymentTypes/AddPaymentType';
 import Products from './components/Products/Products';
 import ProductTypes from './components/ProductTypes/ProductTypes';
 import TrainingPrograms from './components/TrainingPrograms/TrainingPrograms';
 import Navibar from './components/Navibar/Navibar';
 import AddCustomer from './components/Customers/AddCustomer';
+
 
 class App extends Component
 {
@@ -38,7 +40,8 @@ class App extends Component
                 <Route path='/employees' component={Employees} />
                 <Route path='/orders' component={Orders} />
                 <Route exact path='/paymenttypes' component={PaymentTypes} />
-                <Route path='/paymenttypes/:id' component={OnePaymentType}/>
+                <Route path='/paymenttypes/:id' component={OnePaymentType} />
+                <Route exact path='/paymenttype/' component={AddPayments}/>
                 <Route path='/products' component={Products} />
                 <Route path='/producttypes' component={ProductTypes} />
                 <Route path='/trainingprograms' component={TrainingPrograms} />

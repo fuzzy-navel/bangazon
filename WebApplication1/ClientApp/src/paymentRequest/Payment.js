@@ -22,18 +22,6 @@ const getPayments = () => {
 };
 
 
-//const getPayment = (id) => {
-//    return new Promise((resolve, reject) => {
-//        axios
-//            .get(`/api/PaymentType/${id}`)
-//            .then((res) => {
-//                resolve(res.data);
-//            })
-//            .catch((err) => {
-//                reject(err);
-//            });
-//    });
-//};
 const getPayment = id => {
     return new Promise((resolve, reject) => {
         axios
@@ -43,19 +31,24 @@ const getPayment = id => {
     });
 }
 
-//const postPayment = (newPayment) => {
-//    return new Promise((resolve, reject) => {
-//        axios
-//            .post(`/api/paymentType`, newPayment)
-//            .then(res => {
-//                resolve(res);
-//            })
-//            .catch(err => {
-//                reject(err);
-//            });
-//    });
-//};
+const postPayment = input => {
+    return new Promise((resolve, reject) => {
+        axios
+            .post(`api/paymentType`, {
+                account_number: input.account_number,
+                customer_id: input.customer_id,
+                active: input.active,
+                title: input.price,
+                id: input.id
+
+            })
+            .then(res => 
+                resolve(res))
+            .catch(err =>
+                reject(err))
+            });
+}
 
 
 
-export default { getPayments, getPayment,};
+export default { getPayments, getPayment, postPayment};

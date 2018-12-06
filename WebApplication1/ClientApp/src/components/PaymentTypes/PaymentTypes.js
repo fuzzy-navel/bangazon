@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import paymentRequest from '../../paymentRequest/Payment';
 import './PaymentTypes.css'
+import { Button } from 'react-bootstrap';
 
 class PaymentTypes extends Component {
 
@@ -37,7 +38,7 @@ class PaymentTypes extends Component {
         render() {
             const paymentComponents = this.state.payments.map((payment) => {
 
-                const onePayment = () =>   //Button routes to single customer page
+                const onePayment = () =>   
                 {
                     this.props.history.push(`/paymenttypes/${payment.id}`);
                 };
@@ -60,7 +61,9 @@ class PaymentTypes extends Component {
                             <div className="w-100"></div>
                             <div className="col">Payment Id</div>
                             <div className="col">{payment.id}</div>
+                            <div className="w-100"></div>
                         </div>
+                        <Button onClick={() => this.props.history.push('/paymenttype')}>Add Payment Type</Button>
                     </div>
                 );
             });
