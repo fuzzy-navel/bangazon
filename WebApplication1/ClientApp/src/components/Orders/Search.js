@@ -6,7 +6,7 @@ class Search extends React.Component {
     }
 
     handleInputChange = () => {
-        this.props.onSearch(
+        this.state.onSearch(
             this.search.value,
         );
     }

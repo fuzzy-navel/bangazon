@@ -20,7 +20,7 @@ const getOrderById = (id) => {
     });
 };
 
-const newOrder = () => {
+const newOrder = (input) => {
     const apiPath = `api/order/addOrder`;
     return new Promise((resolve, reject) => {
         axios

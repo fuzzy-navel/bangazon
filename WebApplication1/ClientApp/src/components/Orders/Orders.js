@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 
 import orderRequests from '../../OrderRequests/OrderRequests';
 import Search from '../Orders/Search';
+import { Button } from 'react-bootstrap';
+
 
 import './Orders.css';
+import AddOrder from './AddOrder';
 
 class Orders extends Component {
     state = {
@@ -52,6 +55,7 @@ class Orders extends Component {
             );
         });
 
+    
         return (
             <div className="orders">
                 <div className="search">
@@ -61,6 +65,7 @@ class Orders extends Component {
                     />
 
                 </div>
+                <Button onClick={() => this.props.history.push('/addOrder')}> Add Order </Button>
 
                 <div className="panel panel-primary">
                     <div className="panel-heading">Order Management</div>
