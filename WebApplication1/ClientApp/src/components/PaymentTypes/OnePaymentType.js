@@ -20,6 +20,21 @@ class OnePaymentType extends Component {
             });
     }
 
+    updatePaymentClick = () => {
+        return new Promise((resolve, reject) => {
+            onePayment
+                .updatePayment(this.state, this.state.id)
+                .then(response => {
+                    this.setState({
+                        payment: response,
+                    })
+                    resolve(response);
+                })
+                .catch(error => reject(error));
+        });
+    };
+
+
 
     render() {
         const { payment } = this.state;
@@ -34,18 +49,18 @@ class OnePaymentType extends Component {
                     <div className="col">{payment.title}</div>
                     <div className="w-100"></div>
                     <div className="col">CustomerId</div>
-                        <div className="col">{payment.customer_id}</div>
-                        <div className="w-100"></div>
-                        <div className="col">Status</div>
-                        <div className="col">{payment.active}</div>
-                        <div className="w-100"></div>
-                        <div className="col">Payment Id</div>
+                    <div className="col">{payment.customer_id}</div>
+                    <div className="w-100"></div>
+                    <div className="col">Status</div>
+                    <div className="col">{payment.active}</div>
+                    <div className="w-100"></div>
+                    <div className="col">Payment Id</div>
                     <div className="col">{payment.id}</div>
                     <button className="btn btn-success" onClick={this.updatePaymentClick}>Update</button>
                     </div>
                 </div>
             );
-    }
+    } 
 }
 
 export default OnePaymentType;

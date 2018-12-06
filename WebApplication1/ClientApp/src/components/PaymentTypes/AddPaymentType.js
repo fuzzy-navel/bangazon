@@ -7,7 +7,7 @@ class AddPaymentType extends Component {
         account_number: 0,
         title: '',
         customer_id: 0,
-        active: '',
+        active: false,
         id: 0,
     }
 
@@ -15,9 +15,8 @@ class AddPaymentType extends Component {
         return new Promise((resolve, reject) => {
             addPayment
                 .postPayment(this.state)
-            console.error('add', this.state)
                 .then(response => {
-                    this.props.hisory.push('/paymenttype/');
+                    this.props.history.push('/paymenttype/');
                     resolve(response);
                 })
                 .catch(err => reject(err));
@@ -65,7 +64,7 @@ class AddPaymentType extends Component {
                     <Label>Status: </Label>
                     <FormControl
                         type="name"
-                        name="status"
+                        name="active"
                         value={active}
                         onChange={this.handleChange}
                     /><br />
@@ -82,7 +81,7 @@ class AddPaymentType extends Component {
                 >Save Changes</Button>
                 <Button
                     onClick={() => this.props.history.push('/paymenttypes/')}
-                >Cancel</Button>
+                >View Updated List</Button>
             </div>
 
         );

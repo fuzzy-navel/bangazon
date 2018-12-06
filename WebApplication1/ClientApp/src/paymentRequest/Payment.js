@@ -39,7 +39,6 @@ const postPayment = input => {
                 customer_id: input.customer_id,
                 active: input.active,
                 title: input.price,
-                id: input.id
 
             })
             .then(res => 
@@ -48,6 +47,7 @@ const postPayment = input => {
                 reject(err))
             });
 }
+
 
 
 
