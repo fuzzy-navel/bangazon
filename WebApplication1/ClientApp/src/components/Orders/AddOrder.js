@@ -2,7 +2,7 @@
 import orderRequests from '../../OrderRequests/OrderRequests';
 
 
-class AddOrder extends Component {
+class AddOrder extends React.Component {
     state = {
         order: {
             customerId: 0,
@@ -51,8 +51,8 @@ class AddOrder extends Component {
 
             </div>
 
-            )
-    }
+        );
+    };
 }
 
 export default AddOrder;

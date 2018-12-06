@@ -1,5 +1,4 @@
 ﻿import React, { Component } from 'react';
-import Orders from '../Orders/Orders';
 import orderRequests from '../../OrderRequests/OrderRequests';
 
 

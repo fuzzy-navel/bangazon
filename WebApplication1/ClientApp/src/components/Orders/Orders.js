@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 
-import orderRequests from '../../OrderRequests/OrderRequests';
 import Search from '../Orders/Search';
 import { Button } from 'react-bootstrap';
 
-
+import orderRequests from '../../OrderRequests/OrderRequests';
 import './Orders.css';
-import AddOrder from './AddOrder';
 
 class Orders extends Component {
     state = {
