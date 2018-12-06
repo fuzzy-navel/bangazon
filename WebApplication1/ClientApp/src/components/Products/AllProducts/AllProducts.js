@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button} from 'react-bootstrap';
+import {Button, Panel} from 'react-bootstrap';
 
 import Requests from '../Requests/Requests';
 
@@ -24,10 +24,47 @@ class AllProducts extends Component {
     });
   };
 
-  clickProduct = e => {
-    const id = e.target.name;
-    this.props.history.push(`/products/${id}`);
-  }
+
+
+  deleteProductFromState = () => {
+
+  };
+
+  clickDeleteProduct = () => {
+    const productId = this.state.id;
+    return new Promise((resolve, reject) => {
+      Requests.Delete(productId)
+      .then(response => {
+        // redirect to product page
+        // this.props.history.push(`/products/`);
+        alert('Record deleted');
+        resolve(response);
+      })
+      .catch(error => reject(error));
+    });
+  };
+
+  // clickUpdateProduct = () => {
+  //   return new Promise((resolve, reject) => {
+  //     Requests.Update(this.state, this.state.id)
+  //     .then(response => {
+  //       this.setState({
+  //         isEditing: 0,
+  //       })
+  //       alert('Updated Product Successfully')
+  //       resolve(response);
+  //     })
+  //     .catch(error => reject(error));
+  //   });
+  // };
+
+  // handleChange = e => {
+  //   const {name, value} = e.target;
+  //   this.setState({
+  //     [name]: value
+  //   });
+  //   console.log(this.state);
+  // };
 
   render () {
     const {
@@ -36,12 +73,30 @@ class AllProducts extends Component {
 
     const output = products.map(product => {
       // Prints all product titles to DOM
+      const {title, description, price, quantity, owner_Id, id } = product;
       return (
-        <Button
-          name={product.id}
-          key={product.id}
-          onClick={this.clickProduct}
-        >{product.title}</Button>
+        <div key={id}>
+          <Panel defaultExpanded={false}>
+            <Panel.Heading>
+              <Panel.Title toggle>
+                  {title}
+              </Panel.Title>
+            </Panel.Heading>
+            <Panel.Collapse>
+              <Panel.Body>
+                <h5>Description: {description}</h5>
+                <h5>Price: {price}</h5>
+                <h5>Quantity: {quantity}</h5>
+                <h5>Owner Id: {owner_Id}</h5>
+                <h5>Product Id: {id}</h5>
+              </Panel.Body>
+              <Panel.Footer>
+                <Button onClick={this.handleUpdate}>Update</Button>
+                <Button id={id} onClick={this.props.delete}>Delete</Button>
+              </Panel.Footer>
+            </Panel.Collapse>
+          </Panel>
+        </div>
       );
     });
 
@@ -51,8 +106,9 @@ class AllProducts extends Component {
         <div>
           <h2>All Products:</h2>
           <Button
-            onClick={() => this.props.history.push('/products/addproduct') }
-          >Add Product</Button>
+            onClick={() => this.props.history.push('/products/addproduct')}
+            bsStyle="primary"
+          >Add New Product</Button>
           <div>
             {output}
           </div>
