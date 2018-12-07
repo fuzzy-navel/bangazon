@@ -5,6 +5,7 @@ import { Button } from 'react-bootstrap';
 
 import orderRequests from '../../OrderRequests/OrderRequests';
 import './Orders.css';
+import AddOrder from './AddOrder';
 
 class Orders extends Component {
     state = {
@@ -62,8 +63,14 @@ class Orders extends Component {
                         searchInput={this.state.searchInput}
                     />
 
+
                 </div>
-                <Button onClick={() => this.props.history.push('/addOrder')}> Add Order </Button>
+
+                <AddOrder
+
+                />
+                    <Button onClick={() => this.props.history.push('orders/addOrder')}> Add Order </Button>
+
 
                 <div className="panel panel-primary">
                     <div className="panel-heading">Order Management</div>

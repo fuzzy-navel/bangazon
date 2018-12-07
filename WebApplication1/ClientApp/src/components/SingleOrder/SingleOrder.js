@@ -10,7 +10,6 @@ class SingleOrder extends Component {
             orderStatus: false,
             canComplete: false,
             paymentTypeId: 0,
-            id: 0
         },
     };
 

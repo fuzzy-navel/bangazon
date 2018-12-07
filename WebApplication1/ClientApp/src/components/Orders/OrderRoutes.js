@@ -9,7 +9,7 @@ const OrderRoutes = () => (
     <Switch>
         <Route exact path='/orders' component={Orders} />
         <Route path='/orders/:id' component={SingleOrder} />
-        <Route path='/orders' component={AddOrder} />
+        <Route path='/orders/addOrder' component={AddOrder} />
     </Switch>
 
 )
