@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, Panel} from 'react-bootstrap';
+import {Button, Form, FormControl, Label, Panel} from 'react-bootstrap';
 
 import Requests from '../Requests/Requests';
 
@@ -8,6 +8,7 @@ import './AllProducts.css';
 class AllProducts extends Component {
   state = {
     products: [],
+    isEditing: 0,
   }
 
   componentDidMount() {
@@ -24,16 +25,10 @@ class AllProducts extends Component {
     });
   };
 
-//   removePeople(e) {
-//     this.setState({people: this.state.people.filter(function(person) {
-//         return person !== e.target.value
-//     })});
-// }
-
   deleteProductFromState = deleted => {
     this.setState({
       products: this.state.products.filter(p => {
-        return p !== deleted;
+        return p.id * 1 !== deleted * 1;
       })
     });
   };
@@ -43,46 +38,35 @@ class AllProducts extends Component {
     return new Promise((resolve, reject) => {
       Requests.Delete(productId)
       .then(response => {
-        // redirect to product page
-        alert('Record deleted');
         this.deleteProductFromState(productId);
+        alert('Record deleted');
         resolve(response);
       })
       .catch(error => reject(error));
-      Requests.GetAll()
-        .then(products => {
-          // sets state with all products
-          this.setState({
-            products: products
-          })
-          console.log('2nd get all',this.state)
-          resolve (products);
-        })
-        .catch(error => reject(error));
     });
   };
 
-  // clickUpdateProduct = () => {
-  //   return new Promise((resolve, reject) => {
-  //     Requests.Update(this.state, this.state.id)
-  //     .then(response => {
-  //       this.setState({
-  //         isEditing: 0,
-  //       })
-  //       alert('Updated Product Successfully')
-  //       resolve(response);
-  //     })
-  //     .catch(error => reject(error));
-  //   });
-  // };
+  clickUpdateProduct = () => {
+    return new Promise((resolve, reject) => {
+      Requests.Update(this.state, this.state.id)
+      .then(response => {
+        this.setState({
+          isEditing: 0,
+        })
+        alert('Updated Product Successfully')
+        resolve(response);
+      })
+      .catch(error => reject(error));
+    });
+  };
 
-  // handleChange = e => {
-  //   const {name, value} = e.target;
-  //   this.setState({
-  //     [name]: value
-  //   });
-  //   console.log(this.state);
-  // };
+  handleChange = e => {
+    const {name, value} = e.target;
+    this.setState({
+      [name]: value
+    });
+    console.log(this.state);
+  };
 
   render () {
     const {
@@ -91,7 +75,7 @@ class AllProducts extends Component {
 
     const output = products.map(product => {
       // Prints all product titles to DOM
-      const {title, description, price, quantity, owner_Id, id } = product;
+      const {title, category, description, price, quantity, owner_id, id} = product;
       return (
         <div key={id}>
           <Panel defaultExpanded={false}>
@@ -101,16 +85,89 @@ class AllProducts extends Component {
               </Panel.Title>
             </Panel.Heading>
             <Panel.Collapse>
-              <Panel.Body>
-                <h5>Description: {description}</h5>
-                <h5>Price: {price}</h5>
-                <h5>Quantity: {quantity}</h5>
-                <h5>Owner Id: {owner_Id}</h5>
-                <h5>Product Id: {id}</h5>
-              </Panel.Body>
+              {!this.state.isEditing ?
+                <Panel.Body>
+                  <h5>Title: {title}</h5>
+                  <h5>Category: {category}</h5>
+                  <h5>Description: {description}</h5>
+                  <h5>Price: {price}</h5>
+                  <h5>Quantity: {quantity}</h5>
+                  <h5>Owner Id: {owner_id}</h5>
+                  <h5>Product Id: {id}</h5>
+                </Panel.Body>
+              :
+                <Panel.Body>
+                  <Form>
+                    <Label>Title: </Label>
+                    <FormControl
+                      type="text"
+                      name="title"
+                      value={title}
+                      onChange={this.handleChange}
+                    ></FormControl><br/>
+                    <Label>Category: </Label>
+                    <FormControl
+                      type="number"
+                      name="category"
+                      value={category}
+                      onChange={this.handleChange}
+                    ></FormControl><br/>
+                    <Label>Description: </Label>
+                    <FormControl
+                      type="text"
+                      name="description"
+                      value={description}
+                      onChange={this.handleChange}
+                    ></FormControl><br/>
+                    <Label>Price: </Label>
+                    <FormControl
+                      type="number"
+                      name="price"
+                      value={price}
+                      onChange={this.handleChange}
+                    ></FormControl><br/>
+                  <Label>Quantity: </Label>
+                    <FormControl
+                      type="number"
+                      name="quantity"
+                      value={quantity}
+                      onChange={this.handleChange}
+                    ></FormControl><br/>
+                  <Label>Owner Id: </Label>
+                    <FormControl
+                      type="number"
+                      name="owner_id"
+                      value={owner_id}
+                      onChange={this.handleChange}
+                    ></FormControl><br/>
+                  <Label>Id: </Label>
+                    <FormControl
+                      disabled
+                      readOnly
+                      type="number"
+                      name="id"
+                      value={id}
+                    ></FormControl><br/>
+                  </Form>
+                </Panel.Body>
+              }
               <Panel.Footer>
-                <Button onClick={this.handleUpdate}>Update</Button>
-                <Button id={id} onClick={this.clickDeleteProduct}>Delete</Button>
+                {!this.state.isEditing ?
+                  <div>
+                    <Button onClick={() => this.setState({isEditing: 1})}
+                    >Update</Button>
+                    <Button id={id} onClick={this.clickDeleteProduct}>Delete</Button>
+                  </div>
+                  :
+                  <div>
+                    <Button
+                      onClick={this.clickUpdateProduct}
+                    >Save Changes</Button>
+                    <Button
+                      onClick={() => this.props.history.push(`/products/`)}
+                    >Cancel</Button>
+                  </div>
+                }
               </Panel.Footer>
             </Panel.Collapse>
           </Panel>
