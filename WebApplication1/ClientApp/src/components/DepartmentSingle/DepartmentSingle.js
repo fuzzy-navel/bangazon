@@ -96,32 +96,6 @@ class DepartmentSingle extends Component {
     render() {
         if (!this.state.isEditing) {
             return (
-                //<div className="panel panel-primary">
-                //    <div className="panel-heading text-center" onClick={this.handleShow}>
-                //        <h3>{this.state.name}</h3>
-                //    </div>
-                //    <div>
-                //        <Modal show={this.state.show} onHide={this.handleClose}>
-                //            <Modal.Header closeButton>
-                //                <Modal.Title className="text-center">{this.state.name}</Modal.Title>
-                //            </Modal.Header>
-                //            <Modal.Body>
-                //                <h5>Supervisor:</h5>
-                //                <p>{this.state.supervisor}</p>
-
-                //                <h5>Expense:</h5>
-                //                <p>{this.state.expense}</p>
-                //                <EmployeeList
-                //                    employees={this.state.employees.map(employee => { return employee.employee_name; })}
-                //                />
-                //            </Modal.Body>
-                //            <Modal.Footer>
-                //                <Button onClick={this.handleUpdate}>Update</Button>
-                //                <Button onClick={this.handleDelete}>Delete</Button>
-                //            </Modal.Footer>
-                //        </Modal>
-                //    </div>
-                //</div>
                 <div>
                     <Panel id="collapsible-panel-example-2" defaultExpanded={false}>
                         <Panel.Heading>
@@ -145,48 +119,9 @@ class DepartmentSingle extends Component {
                         </Panel.Collapse>
                     </Panel>
                 </div>
-                //<div>
-                //    <h1>{this.state.name}</h1>
-                //</div>
             );
         } else {
             return (
-        //        <div className="panel panel-primary">
-        //            <div className="panel-heading text-center" onClick={this.handleShow}>
-        //                <h3>{this.state.name}</h3>
-        //            </div>
-        //            <div>
-        //                <Modal show={this.state.show} onHide={this.handleClose}>
-        //                    <Modal.Header closeButton>
-        //                        <Modal.Title className="text-center">{this.state.name}</Modal.Title>
-        //                    </Modal.Header>
-        //                    <Modal.Body>
-        //                        <h5>Supervisor:</h5>
-        //                        <input
-        //                            type="text"
-        //                            name="supervisor"
-        //                            value={this.state.supervisor}
-        //                            onChange={this.handleChange}
-        //                        />
-
-        //                        <h5>Expense:</h5>
-        //                        <input
-        //                            type="text"
-        //                            name="expense"
-        //                            value={this.state.expense}
-        //                            onChange={this.handleChange}
-        //                        />
-        //                        <EmployeeList
-        //                            employees={this.state.employees.map(employee => { return employee.employee_name; })}
-        //                        />
-        //                    </Modal.Body>
-        //                    <Modal.Footer>
-        //                        <Button onClick={this.cancelUpdate}>Cancel</Button>
-        //                        <Button onClick={this.saveUpdate}>Save</Button>
-        //                    </Modal.Footer>
-        //                </Modal>
-        //            </div>
-        //        </div>
             <div>
                 <Panel id="collapsible-panel-example-2" defaultExpanded={false}>
                     <Panel.Heading>
