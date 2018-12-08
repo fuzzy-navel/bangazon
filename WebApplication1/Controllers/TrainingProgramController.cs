@@ -79,6 +79,7 @@ namespace bangazon.Controllers
         }
 
         //returns a list of attendees
+        // https://localhost:44304/api/trainingprogram/1/attendees
         [HttpGet("{id}/attendees")]
         public IActionResult GetAttendees(int id)
         {
