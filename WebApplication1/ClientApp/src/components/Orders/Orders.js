@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-
+import AddOrder from '../Orders/AddOrder';
 import Search from '../Orders/Search';
 import { Button } from 'react-bootstrap';
-
 import orderRequests from '../../OrderRequests/OrderRequests';
 import './Orders.css';
-import AddOrder from './AddOrder';
 
 class Orders extends Component {
     state = {
@@ -62,13 +60,11 @@ class Orders extends Component {
                         onSearch={this.updateSearchInput}
                         searchInput={this.state.searchInput}
                     />
-
+                    
 
                 </div>
 
-                <AddOrder
-
-                />
+                
                     <Button onClick={() => this.props.history.push('orders/addOrder')}> Add Order </Button>
 
 

@@ -21,7 +21,7 @@ const getOrderById = (id) => {
 };
 
 const newOrder = (input) => {
-    const apiPath = `api/order/addOrder`;
+    const apiPath = `api/orders/addOrder`;
     return new Promise((resolve, reject) => {
         axios
             .post(apiPath, input)
