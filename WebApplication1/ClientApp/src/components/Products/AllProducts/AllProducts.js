@@ -8,6 +8,13 @@ import './AllProducts.css';
 class AllProducts extends Component {
   state = {
     products: [],
+    title: '',
+    category: 0,
+    description: '',
+    price: 0,
+    quantity: 0,
+    owner_id: 0,
+    id: 0,
     isEditing: 0,
   }
 
@@ -44,6 +51,23 @@ class AllProducts extends Component {
       })
       .catch(error => reject(error));
     });
+  };
+
+  clickUpdateButton = e => {
+    const tempProduct = this.state.products.filter(p => {
+      return p.id === e.target.id;
+    });
+    this.setState({
+      isEditing: 1,
+      title: tempProduct.title,
+      category: tempProduct.category,
+      description: tempProduct.description,
+      price: tempProduct.price,
+      quantity: tempProduct.quantity,
+      owner_id: tempProduct.owner_id,
+      id: tempProduct.id,
+    });
+    console.log(this.state);
   };
 
   clickUpdateProduct = () => {
@@ -154,7 +178,9 @@ class AllProducts extends Component {
               <Panel.Footer>
                 {!this.state.isEditing ?
                   <div>
-                    <Button onClick={() => this.setState({isEditing: 1})}
+                    <Button
+                      onClick={this.clickUpdateButton}
+                      id={id}
                     >Update</Button>
                     <Button id={id} onClick={this.clickDeleteProduct}>Delete</Button>
                   </div>
