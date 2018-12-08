@@ -77,5 +77,12 @@ namespace bangazon.Controllers
         {
             return Ok(_storage.UpdateTrainingProgram(id, trainingProgram));
         }
+
+        //returns a list of attendees
+        [HttpGet("{id}/attendees")]
+        public IActionResult GetAttendees(int id)
+        {
+          return Ok(_storage.GetTPEmployees(id));
+        }
     }
 }
