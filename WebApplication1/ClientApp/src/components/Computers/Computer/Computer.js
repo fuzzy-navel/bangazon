@@ -110,14 +110,14 @@ class Computer extends Component {
                             <Panel.Body>
                                 <p>Id: {id}</p>
                                 <p>Purchase Date: {purchaseDate}</p>
-                                <p>Decommissioned
+                                <p>Decommissioned: 
                             {decommissioned ?
                                         decommissioned.toString() :
                                         " Null"}
                                 </p>
                                 <p>Employee Id: {employeeId}</p>
-                                <p>In Use {inUse.toString()}</p>
-                                <p>Is Malfunctioning? {isMalfunctioning.toString()}</p>
+                                <p>In Use: {inUse.toString()}</p>
+                                <p>Is Malfunctioning: {isMalfunctioning.toString()}</p>
                             </Panel.Body>
                             <Panel.Footer>
                                 <Button onClick={() => this.setState({ isEditing: true })}>Update</Button>
@@ -145,7 +145,7 @@ class Computer extends Component {
                                   value={purchaseDate}
                                   onChange={this.handleChange}
                                 /><br/>
-                                <Label>Decommissioned? </Label>
+                                <Label>Decommissioned: </Label>
                                 <FormControl
                                     name="decommissioned"
                                     value={decommissioned ?
@@ -159,18 +159,18 @@ class Computer extends Component {
                                   value={employeeId}
                                   onChange={this.handleChange}
                                 /><br/>
-                                <Label>In Use? </Label>
+                                <Label>In Use: </Label>
                                 <FormControl
                                   name="inUse"
                                   value={inUse.toString()}
                                   onChange={this.handleChange}
                                 /><br/>
-                                <Label>Malfunctioning? </Label>
+                                <Label>Malfunctioning: </Label>
                                 <FormControl
                                   name="isMalfunctioning"
                                   value={isMalfunctioning.toString()}
                                   onChange={this.handleChange}
-                                /><br/><br/>
+                                /><br/>
                                 <Label>Id: </Label>
                                 <FormControl
                                   disabled

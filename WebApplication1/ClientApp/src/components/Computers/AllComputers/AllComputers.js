@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import update from 'react-addons-update';
 import { Button, Modal } from 'react-bootstrap';
 import SingleComputer from '../Computer/Computer';
 
@@ -9,6 +10,13 @@ import './AllComputers.css';
 class AllComputers extends Component {
   state = {
       allComputers: [],
+      addComp: {
+          purchaseDate: "",
+          decommissioned: "",
+          employeeId: 0,
+          inUse: false,
+          isMalfunctioning: false,
+      },
       show: false
   }
 
@@ -36,10 +44,18 @@ class AllComputers extends Component {
   clickAllComputers = e => {
     const id = e.target.name;
     this.props.history.push(`/computers/${id}`);
-  };
+    };
+
+    handleChange = e => {
+        const { name, value } = e.target;
+        this.setState({
+                addComp: update(this.state.addComp, { [name]: { value } })
+        });
+        console.log(this.state);
+    }
 
   render () {
-    const { allComputers } = this.state;
+    const { allComputers, addComp } = this.state;
 
     const output = allComputers.map(c => {
       return (
@@ -71,19 +87,40 @@ class AllComputers extends Component {
                             <Modal.Title className="text-center">Add Department</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
-                            <label>Department Name: </label>
+                            <label>Purchase Date: </label>
                             <input
                                 type="text"
-                                name="name"
-                                //value={addDept.name}
-                                //onChange={this.handleChangeName}
+                                name="purchaseDate"
+                                value={addComp.purchaseDate}
+                                onChange={this.handleChange}
                             /><br />
-                            <label>Budget: </label>
+                            <label>Decomissioned: </label>
                             <input
                                 type="number"
                                 name="budget"
-                                //value={addDept.expense_budget}
-                                //onChange={this.handleChangeBudget}
+                                value={addComp.decomissioned}
+                                onChange={this.handleChange}
+                            /><br />
+                            <label>Employee Id: </label>
+                            <input
+                                type="number"
+                                name="budget"
+                            //value={addComp.employeeId}
+                            //onChange={this.handleChangeBudget}
+                            /><br />
+                            <label>In Use: </label>
+                            <input
+                                type="number"
+                                name="budget"
+                            //value={addComp.inUse}
+                            //onChange={this.handleChangeBudget}
+                            /><br />
+                            <label>Is Malfunctioning: </label>
+                            <input
+                                type="number"
+                                name="budget"
+                            //value={addComp.isMalfunctioning}
+                            //onChange={this.handleChangeBudget}
                             /><br />
                         </Modal.Body>
                         <Modal.Footer>
