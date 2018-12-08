@@ -7,6 +7,7 @@ import Customers from './components/Customers/Customers';
 import Departments from './components/Departments/Departments';
 import Employees from './components/Employees/Employees';
 import PaymentTypes from './components/PaymentTypes/PaymentTypes';
+import OnePaymentType from './components/PaymentTypes/OnePaymentType';
 import Products from './components/Products/Products';
 import ProductTypes from './components/ProductTypes/ProductTypes';
 import TrainingPrograms from './components/TrainingPrograms/TrainingPrograms';
@@ -36,7 +37,8 @@ class App extends Component
                 <Route path='/departments' component={Departments} />
                 <Route path='/employees' component={Employees} />
                 <Route path='/orders' component={OrderRoutes} />
-                <Route path='/paymenttypes' component={PaymentTypes} />
+                <Route exact path='/paymenttypes' component={PaymentTypes} />
+                <Route path='/paymenttypes/:id' component={OnePaymentType}/>
                 <Route path='/products' component={Products} />
                 <Route path='/producttypes' component={ProductTypes} />
                 <Route path='/trainingprograms' component={TrainingPrograms} />
