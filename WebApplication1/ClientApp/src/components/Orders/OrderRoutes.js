@@ -8,8 +8,8 @@ import AddOrder from '../Orders/AddOrder';
 const OrderRoutes = () => (
     <Switch>
         <Route exact path='/orders' component={Orders} />
+        <Route exact path='/orders/addOrder' component={AddOrder} />
         <Route path='/orders/:id' component={SingleOrder} />
-        <Route path='/orders/addOrder' component={AddOrder} />
     </Switch>
 
 )

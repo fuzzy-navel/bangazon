@@ -28,6 +28,10 @@ class Orders extends Component {
         
     render() {
         const { orders } = this.state;
+        const addNewOrder = () => {
+            this.props.history.push('/orders/addOrder');
+        };
+        
         const orderComponents = orders.map((order) => {
             const selectedOrder = () => {
                 this.props.history.push(`/orders/${order.id}`);
@@ -60,12 +64,9 @@ class Orders extends Component {
                         onSearch={this.updateSearchInput}
                         searchInput={this.state.searchInput}
                     />
-                    
 
                 </div>
-
-                
-                    <Button onClick={() => this.props.history.push('orders/addOrder')}> Add Order </Button>
+                <Button onClick={addNewOrder}> Add Order </Button>
 
 
                 <div className="panel panel-primary">
