@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import update from 'react-addons-update';
 import { Button, Modal } from 'react-bootstrap';
 import SingleComputer from '../Computer/Computer';
 
@@ -48,9 +47,12 @@ class AllComputers extends Component {
 
     handleChange = e => {
         const { name, value } = e.target;
-        this.setState({
-                addComp: update(this.state.addComp, { [name]: { value } })
-        });
+        this.setState(prevState => ({
+            addComp: {
+                ...prevState.addComp,
+                [name]: value
+            }
+        }));
         console.log(this.state);
     }
 
