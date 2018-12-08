@@ -19,7 +19,8 @@ class Departments extends Component {
             departments: [],
             addDept: {
                 name: "",
-                expense_budget: 0
+                expense_budget: 0,
+                supervisor_id: 0
             },
             show: false
         };
@@ -59,12 +60,26 @@ class Departments extends Component {
         this.setState({ addDept });
     };
 
+    handleChangeSupervisor = e => {
+        const addDept = { ...this.state.addDept };
+        addDept.supervisor_id = e.target.value * 1;
+        this.setState({ addDept });
+    }
+
     handleAdd() {
         const deptObj = this.state.addDept;
 
         DepartmentRequests.addDepartment(deptObj)
             .then(() => {
                 alert("Added Department Successfully");
+
+                this.setState({
+                    addDept: {
+                        name: "",
+                        expense_budget: 0,
+                        supervisor_id: 0
+                    }
+                });
 
                 this.handleClose();
 
@@ -128,6 +143,13 @@ class Departments extends Component {
                                     value={addDept.expense_budget}
                                     onChange={this.handleChangeBudget}
                                 /><br />
+                                <label>Supervisor Id</label>
+                                <input
+                                    type="number"
+                                    name="supervisor_id"
+                                    value={addDept.supervisor_id}
+                                    onChange={this.handleChangeSupervisor}
+                                />
                         </Modal.Body>
                         <Modal.Footer>
                             <Button onClick={this.handleAdd}>Save</Button>
