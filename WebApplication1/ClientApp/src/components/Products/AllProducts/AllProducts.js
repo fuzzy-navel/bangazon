@@ -55,17 +55,18 @@ class AllProducts extends Component {
 
   clickUpdateButton = e => {
     const tempProduct = this.state.products.filter(p => {
-      return p.id === e.target.id;
+      return p.id * 1 === e.target.id * 1;
     });
+    console.log('temp product ',tempProduct);
     this.setState({
       isEditing: 1,
-      title: tempProduct.title,
-      category: tempProduct.category,
-      description: tempProduct.description,
-      price: tempProduct.price,
-      quantity: tempProduct.quantity,
-      owner_id: tempProduct.owner_id,
-      id: tempProduct.id,
+      title: tempProduct[0].title,
+      category: tempProduct[0].category,
+      description: tempProduct[0].description,
+      price: tempProduct[0].price,
+      quantity: tempProduct[0].quantity,
+      owner_id: tempProduct[0].owner_Id,
+      id: tempProduct[0].id,
     });
     console.log(this.state);
   };
@@ -93,9 +94,7 @@ class AllProducts extends Component {
   };
 
   render () {
-    const {
-      products,
-    } = this.state;
+    const { products } = this.state;
 
     const output = products.map(product => {
       // Prints all product titles to DOM
@@ -126,42 +125,42 @@ class AllProducts extends Component {
                     <FormControl
                       type="text"
                       name="title"
-                      value={title}
+                      value={this.state.title}
                       onChange={this.handleChange}
                     ></FormControl><br/>
                     <Label>Category: </Label>
                     <FormControl
                       type="number"
                       name="category"
-                      value={category}
+                      value={this.state.category}
                       onChange={this.handleChange}
                     ></FormControl><br/>
                     <Label>Description: </Label>
                     <FormControl
                       type="text"
                       name="description"
-                      value={description}
+                      value={this.state.description}
                       onChange={this.handleChange}
                     ></FormControl><br/>
                     <Label>Price: </Label>
                     <FormControl
                       type="number"
                       name="price"
-                      value={price}
+                      value={this.state.price}
                       onChange={this.handleChange}
                     ></FormControl><br/>
                   <Label>Quantity: </Label>
                     <FormControl
                       type="number"
                       name="quantity"
-                      value={quantity}
+                      value={this.state.quantity}
                       onChange={this.handleChange}
                     ></FormControl><br/>
                   <Label>Owner Id: </Label>
                     <FormControl
                       type="number"
                       name="owner_id"
-                      value={owner_id}
+                      value={this.state.owner_id}
                       onChange={this.handleChange}
                     ></FormControl><br/>
                   <Label>Id: </Label>
@@ -170,7 +169,7 @@ class AllProducts extends Component {
                       readOnly
                       type="number"
                       name="id"
-                      value={id}
+                      value={this.state.id}
                     ></FormControl><br/>
                   </Form>
                 </Panel.Body>
@@ -190,7 +189,7 @@ class AllProducts extends Component {
                       onClick={this.clickUpdateProduct}
                     >Save Changes</Button>
                     <Button
-                      onClick={() => this.props.history.push(`/products/`)}
+                      onClick={() => this.setState({isEditing: 0})}
                     >Cancel</Button>
                   </div>
                 }
