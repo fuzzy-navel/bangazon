@@ -28,7 +28,7 @@ class AllTrainingPrograms extends Component {
     });
   };
 
-  deleteProductFromState = deleted => {
+  deleteTraningProgramFromState = deleted => {
     this.setState({
       trainingPrograms: this.state.products.filter(tP => {
         return tP.id * 1 !== deleted * 1;
@@ -41,7 +41,7 @@ class AllTrainingPrograms extends Component {
     return new Promise((resolve, reject) => {
       Requests.Delete(tpId)
         .then(response => {
-          this.deleteProductFromState(tpId);
+          this.deleteTraningProgramFromState(tpId);
           alert('Record deleted successfully');
           resolve(response);
         })
@@ -50,14 +50,14 @@ class AllTrainingPrograms extends Component {
   };
 
   clickUpdateButton = e => {
-    const tempTrainingProgram = this.state.products.filter(tP => {
+    const tempTrainingProgram = this.state.trainingPrograms.filter(tP => {
       return tP.id * 1 === e.target.id * 1;
     });
     this.setState({
       isEditing: 1,
-      startdate: tempTrainingProgram[0].startdate,
-      enddate: tempTrainingProgram[0].enddate,
-      maxattendees: tempTrainingProgram[0].maxattendees,
+      startdate: tempTrainingProgram[0].start_Date,
+      enddate: tempTrainingProgram[0].end_Date,
+      maxattendees: tempTrainingProgram[0].max_Attendees,
       id: tempTrainingProgram[0].id,
     });
   };
@@ -67,8 +67,16 @@ class AllTrainingPrograms extends Component {
       Requests.Update(this.state, this.state.id)
       .then(response => {
         this.setState({isEditing: 0});
-        alert('Updated Training Program Successfully');
         resolve(response);
+      })
+      Requests.GetAll()
+      .then(tp => {
+        console.log(tp);
+        this.setState({
+          trainingPrograms: tp,
+        });
+        alert('Updated Training Program Successfully');
+        resolve(tp);
       })
       .catch(error => reject(error));
     });
@@ -85,7 +93,7 @@ class AllTrainingPrograms extends Component {
     const { trainingPrograms } = this.state;
 
     const output = trainingPrograms.map(tp => {
-      const {startdate, enddate, maxattendees, id} = trainingPrograms;
+      const {start_Date, end_Date, max_Attendees, id} = tp;
       return (
         <div key={id}>
           <Panel defaultExpanded={false}>
@@ -97,9 +105,9 @@ class AllTrainingPrograms extends Component {
             <Panel.Collapse>
               {!this.state.isEditing ?
                 <Panel.Body>
-                  <h5>Start Date: {startdate}</h5>
-                  <h5>End Date: {enddate}</h5>
-                  <h5>Max Attendees: {maxattendees}</h5>
+                  <h5>Start Date: {start_Date}</h5>
+                  <h5>End Date: {end_Date}</h5>
+                  <h5>Max Attendees: {max_Attendees}</h5>
                   <h5>Id: {id}</h5>
                 </Panel.Body>
               :
@@ -150,7 +158,7 @@ class AllTrainingPrograms extends Component {
                   :
                   <div>
                     <Button
-                      onClick={this.clickUpdateProduct}
+                      onClick={this.clickUpdateTrainingProgram}
                     >Save Changes</Button>
                     <Button
                       onClick={() => this.setState({isEditing: 0})}
