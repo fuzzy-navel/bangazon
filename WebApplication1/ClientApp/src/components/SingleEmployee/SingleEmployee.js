@@ -89,7 +89,6 @@ class SingleEmployee extends Component
       const updatedEmp = this.state.employee[0];
       const empName = updatedEmp.employee_name;
       const depId = updatedEmp.department_id;
-      const isSup = updatedEmp.supervisor;
       var fieldsOk = 0;
       switch (empName) {
         case "":
