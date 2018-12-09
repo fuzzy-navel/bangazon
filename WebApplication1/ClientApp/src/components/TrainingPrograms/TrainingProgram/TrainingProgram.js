@@ -70,10 +70,15 @@ class TrainingProgram extends Component {
 
   render() {
     const attendeesComponent = this.state.attendees.map((attendee) =>
-    {
+    {  
+      const singleEmployee = () =>
+      {
+        this.props.history.push(`/employees/${attendee.employee_id}`)
+      };
+
         return (
           <div key={attendee.employee_id}>
-            <li>{attendee.employee_name}</li>
+            <li onClick={singleEmployee}>{attendee.employee_name}</li>
           </div>
         )
     });
