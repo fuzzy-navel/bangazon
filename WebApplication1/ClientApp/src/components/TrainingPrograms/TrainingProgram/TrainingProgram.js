@@ -12,6 +12,7 @@ class TrainingProgram extends Component {
     maxattendees: 0,
     id: 0,
     isEditing: 0,
+    attendees: [],
   }
 
   componentDidMount() {
@@ -27,6 +28,11 @@ class TrainingProgram extends Component {
           isEditing: 0,
         });
         resolve(tp);
+        Requests.getAttendees(tpId)
+          .then(res =>
+          {
+            this.setState({ attendees: res });
+          })
       })
       .catch(error => reject(error));
     });
@@ -62,7 +68,16 @@ class TrainingProgram extends Component {
     this.setState({ [name]: value });
   };
 
-  render () {
+  render() {
+    const attendeesComponent = this.state.attendees.map((attendee) =>
+    {
+        return (
+          <div key={attendee.employee_id}>
+            <li>{attendee.employee_name}</li>
+          </div>
+        )
+    });
+
     const {startdate, enddate, maxattendees, id, isEditing} = this.state;
     if (!isEditing) {
       return (
@@ -78,6 +93,7 @@ class TrainingProgram extends Component {
           <Button
             onClick={this.clickDeleteTrainingProgram}
           >Delete Record</Button>
+          {attendeesComponent}
         </div>
       );
     }
