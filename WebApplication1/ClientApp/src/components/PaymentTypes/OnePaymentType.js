@@ -1,11 +1,18 @@
 ﻿import React, { Component } from 'react';
 import onePayment from '../../paymentRequest/Payment';
+import { FormControl, Form, Label, Button } from 'react-bootstrap';
 
 
 class OnePaymentType extends Component {
 
     state = {
         payment: [],
+        title: '',
+        customer_id: 0,
+        active: false,
+        payment_id: 0,
+       
+
     }
 
     componentDidMount() {
@@ -20,30 +27,18 @@ class OnePaymentType extends Component {
             });
     }
 
-    updatePaymentClick = () => {
-        return new Promise((resolve, reject) => {
-            onePayment
-                .updatePayment(this.state, this.state.id)
-                .then(response => {
-                    this.setState({
-                        payment: response,
-                    })
-                    resolve(response);
-                })
-                .catch(error => reject(error));
-        });
-    };
-
-
 
     render() {
         const { payment } = this.state;
+        const updatePayment = () => {
+            this.props.history.push(`/paymenttype/${payment.id}`);
+        }
         return (
-                <div className="container">
+            <div className="container">
                 <div className="row" key={payment.id}>
 
                     <h1>Selected Payment Type</h1>
-                        <div className="col"> <h4>Account Number:</h4> {payment.account_number}</div>
+                    <div className="col"> <h4>Account Number:</h4> {payment.account_number}</div>
                     <div className="w-100"></div>
                     <div className="col">Title</div>
                     <div className="col">{payment.title}</div>
@@ -55,12 +50,18 @@ class OnePaymentType extends Component {
                     <div className="col">{payment.active}</div>
                     <div className="w-100"></div>
                     <div className="col">Payment Id</div>
+                    <div className="col">{payment.customer_id}</div>
+                    <div className="w-100"></div>
+                    <div className="col">Status</div>
+                    <div className="col">{payment.active}</div>
+                    <div className="w-100"></div>
+                    <div className="col">Payment Id</div>
                     <div className="col">{payment.id}</div>
-                    <button className="btn btn-success" onClick={this.updatePaymentClick}>Update</button>
-                    </div>
-                </div>
-            );
-    } 
+                    <a className="btn btn-success" onClick={updatePayment}> Update </a>
+                  </div>
+            </div>
+        );
+    }
 }
 
 export default OnePaymentType;
