@@ -52,6 +52,12 @@ class TrainingProgram extends Component {
   };
 
   clickUpdateTrainingProgram = () => {
+    var currentdate = new Date();
+    var tp = this.state
+    if (tp.startdate > currentdate)
+    {
+      console.log(currentdate.getDate);
+    }
     return new Promise((resolve, reject) => {
       Requests.Update(this.state, this.state.id)
       .then(response => {
