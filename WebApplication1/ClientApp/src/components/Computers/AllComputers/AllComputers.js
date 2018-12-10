@@ -56,6 +56,40 @@ class AllComputers extends Component {
         console.log(this.state);
     }
 
+    handleSave = () => {
+        return new Promise((resolve, reject) => {
+            Requests.Add(this.state.addComp)
+                .then(response => {
+                    alert('Computer saved');
+                    this.setState({
+                        addComp: {
+                            purchaseDate: "",
+                            decommissioned: "",
+                            employeeId: 0,
+                            inUse: false,
+                            isMalfunctioning: false,
+                        }
+                    });
+                    this.handleClose();
+                    resolve(response);
+                })
+                .catch(error => reject(error));
+        });
+    }
+
+    handleCancel = () => {
+        this.setState({
+            addComp: {
+                purchaseDate: "",
+                decommissioned: "",
+                employeeId: 0,
+                inUse: false,
+                isMalfunctioning: false,
+            }
+        });
+        this.handleClose();
+    }
+
   render () {
     const { allComputers, addComp } = this.state;
 
@@ -86,7 +120,7 @@ class AllComputers extends Component {
                 <div>
                     <Modal show={this.state.show} onHide={this.handleClose}>
                         <Modal.Header closeButton>
-                            <Modal.Title className="text-center">Add Department</Modal.Title>
+                            <Modal.Title className="text-center">Add Computer</Modal.Title>
                         </Modal.Header>
                         <Modal.Body>
                             <label>Purchase Date: </label>
@@ -98,36 +132,36 @@ class AllComputers extends Component {
                             /><br />
                             <label>Decomissioned: </label>
                             <input
-                                type="number"
-                                name="budget"
-                                value={addComp.decomissioned}
+                                type="text"
+                                name="decommissioned"
+                                value={addComp.decommissioned}
                                 onChange={this.handleChange}
                             /><br />
                             <label>Employee Id: </label>
                             <input
                                 type="number"
-                                name="budget"
-                            //value={addComp.employeeId}
-                            //onChange={this.handleChangeBudget}
+                                name="employeeId"
+                                value={addComp.employeeId}
+                                onChange={this.handleChange}
                             /><br />
                             <label>In Use: </label>
                             <input
-                                type="number"
-                                name="budget"
-                            //value={addComp.inUse}
-                            //onChange={this.handleChangeBudget}
+                                type="text"
+                                name="inUse"
+                                value={addComp.inUse}
+                                onChange={this.handleChange}
                             /><br />
                             <label>Is Malfunctioning: </label>
                             <input
-                                type="number"
-                                name="budget"
-                            //value={addComp.isMalfunctioning}
-                            //onChange={this.handleChangeBudget}
+                                type="text"
+                                name="isMalfunctioning"
+                                value={addComp.isMalfunctioning}
+                                onChange={this.handleChange}
                             /><br />
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button >Save</Button>
-                            <Button >Cancel</Button>
+                            <Button onClick={this.handleSave}>Save</Button>
+                            <Button onClick={this.handleCancel}>Cancel</Button>
                         </Modal.Footer>
                     </Modal>
                 </div>
