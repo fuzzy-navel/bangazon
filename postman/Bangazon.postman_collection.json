@@ -523,6 +523,37 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "GetOrderWithProduct",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://localhost:44398/api/order/ordersByQuery?include=products",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "44398",
+					"path": [
+						"api",
+						"order",
+						"ordersByQuery"
+					],
+					"query": [
+						{
+							"key": "include",
+							"value": "products"
+						}
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
