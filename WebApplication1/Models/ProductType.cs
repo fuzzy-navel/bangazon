@@ -7,7 +7,7 @@ namespace bangazon.Models
 {
     public class ProductType
     {
-        public string category;
+        public string category { get; set; }
         public int id;
     }
 }
