@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28010.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bangazon", "bangazon\bangazon.csproj", "{E1D587A3-5ED7-4074-AAAB-2743FF6D4E67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "bangazonFront", "WebApplication1\bangazonFront.csproj", "{36834A16-92F2-4B35-B630-031FCA4A8789}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "bangazonFront", "WebApplication1\bangazonFront.csproj", "{36834A16-92F2-4B35-B630-031FCA4A8789}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
