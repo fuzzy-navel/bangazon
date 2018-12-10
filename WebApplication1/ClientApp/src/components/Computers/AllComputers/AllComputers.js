@@ -40,11 +40,6 @@ class AllComputers extends Component {
         this.setState({ show: false });
     }
 
-  clickAllComputers = e => {
-    const id = e.target.name;
-    this.props.history.push(`/computers/${id}`);
-    };
-
     handleChange = e => {
         const { name, value } = e.target;
         this.setState(prevState => ({
@@ -95,12 +90,6 @@ class AllComputers extends Component {
 
     const output = allComputers.map(c => {
       return (
-        //<Button
-        //  name={c.id}
-        //  key={c.id}
-        //  value={c.id}
-        //  onClick={this.clickAllComputers}
-        //>{c.id}</Button>
           <SingleComputer
               key={c.id}
               details={c}

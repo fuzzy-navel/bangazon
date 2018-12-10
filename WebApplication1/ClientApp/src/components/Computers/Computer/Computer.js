@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-//import { Form, Label, Button, FormControl } from 'react-bootstrap';
 import { Panel, Button, Form, Label, FormControl } from 'react-bootstrap';
 
 import Requests from '../Requests/Requests';
@@ -8,13 +7,6 @@ import './Computer.css';
 
 class Computer extends Component {
   state = {
-    //id: 0,
-    //purchaseDate: '',
-    //decommissioned: 0,
-    //employeeId: 0,
-    //inUse: 0,
-    //isMalfunctioning: 0,
-    //isEditing: 0,
       id: this.props.details.id,
       purchaseDate: this.props.details.purchase_date,
       decommissioned: this.props.details.decommissioned,
@@ -24,33 +16,12 @@ class Computer extends Component {
       isEditing: false
   }
 
-    componentDidMount() {
-    //const compId = this.props.match.params.id;
-    //return new Promise((resolve, reject) => {
-    //  Requests.GetSingle(compId)
-    //  .then(c => {
-    //    this.setState({
-    //      id: c.id,
-    //      purchaseDate: c.purchase_date,
-    //      decommissioned: c.decommissioned,
-    //      employeeId: c.employee_id,
-    //      inUse: c.in_use,
-    //      isMalfunctioning: c.is_malfunctioning,
-    //      isEditing: 0,
-    //    });
-    //    resolve(c);
-    //  })
-    //  .catch(error => reject(error));
-    //});
-  }
-
   clickDeleteComputer = () => {
     const compId = this.state.id;
     return new Promise((resolve, reject) => {
       Requests.Delete(compId)
       .then(c => {
         alert('Record deleted successfully');
-        this.props.history.push(`/computers/`);
         resolve(c);
       })
       .catch(error => reject(error));
