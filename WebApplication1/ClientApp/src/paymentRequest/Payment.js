@@ -48,7 +48,18 @@ const postPayment = input => {
             });
 }
 
+const updatePayment = (id, paymentType) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .put(`api/paymentType/${id}`, paymentType)
+            .then((res) => {
+                resolve(res);
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    })
+}
 
 
-
-export default { getPayments, getPayment, postPayment};
+export default { getPayments, getPayment, postPayment, updatePayment};

@@ -19,22 +19,6 @@ class PaymentTypes extends Component {
             })
     }
 
-    //updatePaymentClick = () => {
-    //    return new Promise((resolve, reject) => {
-            //paymentRequest
-    //            .updateRequest(this.state, this.state.id)
-    //            .then(response => {
-    //                this.setState({
-    //                    isAvailable: 0,
-    //                })
-    //                alert('Sucessfully Updated')
-    //                resolve(response);
-    //            })
-    //            .catch(error => reject(error));
-    //    });
-    //};
-
-
         render() {
             const paymentComponents = this.state.payments.map((payment) => {
 
@@ -43,7 +27,6 @@ class PaymentTypes extends Component {
                     this.props.history.push(`/paymenttypes/${payment.id}`);
                 };
                 return (
-
                     <div className="container" key={payment.id}>
                         <div className="row">
                             <div className="col">Account Number</div>
@@ -63,13 +46,13 @@ class PaymentTypes extends Component {
                             <div className="col">{payment.id}</div>
                             <div className="w-100"></div>
                         </div>
-                        <Button onClick={() => this.props.history.push('/paymenttype')}>Add Payment Type</Button>
                     </div>
                 );
             });
     return (
         <div className="AllPaymentTypes">
             <h1>Payment Types</h1>
+            <Button onClick={() => this.props.history.push('/paymenttype')}>Add Payment Type</Button>
             <ul className= "Types">
                 {paymentComponents}
             </ul>
