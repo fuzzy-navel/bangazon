@@ -13,6 +13,18 @@ const getAllDepartments = () => {
     });
 };
 
+const getSingleDepartment = (id) => {
+    return new Promise((resolve, reject) => {
+        axios.get(`api/department/${id}`)
+            .then((res) => {
+                resolve(res.data);
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
+};
+
 const addDepartment = (deptObj) => {
     return new Promise((resolve, reject) => {
         axios.post(`/api/department`, deptObj)
@@ -37,8 +49,22 @@ const deleteDepartment = (id) => {
     });
 };
 
+const updateDepartment = (id, deptObj) => {
+    return new Promise((resolve, reject) => {
+        axios.put(`/api/department/${id}`, deptObj)
+            .then((res) => {
+                resolve(res);
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
+};
+
 export default {
     getAllDepartments,
+    getSingleDepartment,
     addDepartment,
-    deleteDepartment
+    deleteDepartment,
+    updateDepartment
 };
