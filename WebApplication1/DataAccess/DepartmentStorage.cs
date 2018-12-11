@@ -11,7 +11,7 @@ namespace bangazon.DataAccess
 {
     public class DepartmentStorage
     {
-        private const string ConnectionInfo = "Server = .\\SQLEXPRESS; Database=Bangazon; Trusted_Connection=True";
+        private const string ConnectionInfo = "Server = (local); Database=Bangazon; Trusted_Connection=True";
 
         public IEnumerable<Department> GetAllDepartments()
         {

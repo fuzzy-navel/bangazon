@@ -28,7 +28,7 @@ class DepartmentSingle extends Component {
             id: this.props.details.id
         };
     }
-
+    
     handleShow() {
         this.setState({ show: true });
     }
