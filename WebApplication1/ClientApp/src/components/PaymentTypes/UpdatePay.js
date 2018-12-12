@@ -1,8 +1,8 @@
 ﻿import React, { Component } from 'react';
-import addPayment from '../../paymentRequest/Payment';
+import onePayment from '../../paymentRequest/Payment';
 import { Form, FormControl, Label, Button } from 'react-bootstrap';
 
-class AddPaymentType extends Component {
+class UpdatePay extends Component {
     state = {
         account_number: 0,
         title: '',
@@ -11,34 +11,48 @@ class AddPaymentType extends Component {
         id: 0,
     }
 
-    addNewPaymentClick = () => {
-        return new Promise((resolve, reject) => {
-            addPayment
-                .postPayment(this.state)
-                .then(response => {
-                    this.props.history.push('/paymenttype/');
-                    resolve(response);
-                })
-                .catch(err => reject(err));
-        });
+    componentDidMount() {
+        const currentId = this.props.match.params.id;
+        onePayment
+            .getPayment(currentId)
+            .then((infoToUpdate) => {
+                this.setState(infoToUpdate);
+            })
+            .catch((err) => {
+                console.error('Not Updating', err);
+            });
+    }
+
+    updatePaymentClick = () => {
+        var updatedPayment = this.state;
+        onePayment.updatePayment(updatedPayment.id, updatedPayment)
+            .then(() => {
+                this.props.history.push(`/paymenttypes/${updatedPayment.id}`);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
     };
+
+   
 
     handleChange = e => {
         const { name, value } = e.target;
         this.setState({
             [name]: value
         });
+        console.log(this.state);
     };
 
     render() {
         const { title } = this.state;
-        const { customer_id} = this.state;
+        const { customer_id } = this.state;
         const { active } = this.state;
         const { id } = this.state;
 
         return (
             <div>
-                <h2>Add New Payment Type</h2>
+                <h2>Update</h2>
                 <Form>
                     <Label>Account Number: </Label>
                     <FormControl
@@ -77,15 +91,15 @@ class AddPaymentType extends Component {
                     /><br />
                 </Form>
                 <Button
-                    onClick={this.addNewPaymentClick}
+                    onClick={this.updatePaymentClick}
                 >Save Changes</Button>
                 <Button
                     onClick={() => this.props.history.push('/paymenttypes/')}
-                >View Updated List</Button>
+                >Cancel</Button>
             </div>
 
         );
     }
 }
 
-export default AddPaymentType;
+export default UpdatePay;
