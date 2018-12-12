@@ -11,11 +11,23 @@ class UpdatePay extends Component {
         id: 0,
     }
 
+    componentDidMount() {
+        const currentId = this.props.match.params.id;
+        onePayment
+            .getPayment(currentId)
+            .then((infoToUpdate) => {
+                this.setState(infoToUpdate);
+            })
+            .catch((err) => {
+                console.error('No info!', err);
+            });
+    }
+
     updatePaymentClick = () => {
         var updatedPayment = this.state;
         onePayment.updatePayment(updatedPayment.id, updatedPayment)
             .then(() => {
-                console.log('success!');
+                this.props.history.push(`/paymenttypes/${updatedPayment.id}`);
             })
             .catch((err) => {
                 console.error(err);
@@ -40,7 +52,7 @@ class UpdatePay extends Component {
 
         return (
             <div>
-                <h2>Add New Payment Type</h2>
+                <h2>Update</h2>
                 <Form>
                     <Label>Account Number: </Label>
                     <FormControl
