@@ -112,12 +112,11 @@ class SingleEmployee extends Component
     const updateEmployee = () => {
       const updatedEmp = this.state.employee[0];
       const id = this.state.employee[0].employee_id;
-      updatedEmp.is_supervisor = updatedEmp.supervisor;
       updatedEmp.name = updatedEmp.employee_name
       employeeRequests.updateEmployee(id, updatedEmp)
         .then(() => {
           alert("Employee successfully updated!")
-          this.props.history.push(`/`);
+          showEditor();
         })
         .catch((err) => {
           console.error(err);
