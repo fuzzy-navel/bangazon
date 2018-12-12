@@ -19,7 +19,7 @@ class UpdatePay extends Component {
                 this.setState(infoToUpdate);
             })
             .catch((err) => {
-                console.error('No info!', err);
+                console.error('Not Updating', err);
             });
     }
 
