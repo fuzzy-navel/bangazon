@@ -74,4 +74,4 @@ const updateEmployee = (id, employee) =>
   });
 };
 
-export default {addEmployee, getEmployees, getEmployee, updateEmployee}
+export default { addEmployee, getEmployees, getEmployee, updateEmployee };

@@ -12,25 +12,32 @@ class Departments extends Component {
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this);
         this.handleAdd = this.handleAdd.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
+        this.getDepartments = this.getDepartments.bind(this);
 
         this.state = {
             departments: [],
             addDept: {
                 name: "",
-                expense_budget: 0
+                expense_budget: 0,
+                supervisor_id: 0
             },
             show: false
         };
     }
 
   componentDidMount() {
-      DepartmentRequests.getAllDepartments()
-          .then((data) => {
-              this.setState({ departments: data });
-          })
-          .catch((err) => {
-              console.error(err, "There was a problem");
-          });
+      this.getDepartments();
+    }
+
+    getDepartments() {
+        DepartmentRequests.getAllDepartments()
+            .then((data) => {
+                this.setState({ departments: data });
+            })
+            .catch((err) => {
+                console.error(err, "There was a problem");
+            });
     }
 
     handleShow() {
@@ -53,6 +60,12 @@ class Departments extends Component {
         this.setState({ addDept });
     };
 
+    handleChangeSupervisor = e => {
+        const addDept = { ...this.state.addDept };
+        addDept.supervisor_id = e.target.value * 1;
+        this.setState({ addDept });
+    }
+
     handleAdd() {
         const deptObj = this.state.addDept;
 
@@ -60,17 +73,32 @@ class Departments extends Component {
             .then(() => {
                 alert("Added Department Successfully");
 
-                this.handleClose();
-
                 this.setState({
                     addDept: {
                         name: "",
-                        expense_budget: 0
+                        expense_budget: 0,
+                        supervisor_id: 0
                     }
                 });
+
+                this.handleClose();
+
+                this.getDepartments();
             })
             .catch((err) => {
                 console.error(err, "Error Adding Department");
+            });
+    }
+
+    handleDelete(e) {
+        console.log(e);
+        DepartmentRequests.deleteDepartment(e.target.id)
+            .then(() => {
+                alert("Deleted Department Successfully");
+                this.getDepartments();
+            })
+            .catch((err) => {
+                console.error(err, "Error Deleting Department");
             });
     }
 
@@ -83,6 +111,7 @@ class Departments extends Component {
                 <DepartmentSingle
                     key={trip.id}
                     details={trip}
+                    delete={this.handleDelete}
                 />
             );
         });
@@ -114,6 +143,13 @@ class Departments extends Component {
                                     value={addDept.expense_budget}
                                     onChange={this.handleChangeBudget}
                                 /><br />
+                                <label>Supervisor Id</label>
+                                <input
+                                    type="number"
+                                    name="supervisor_id"
+                                    value={addDept.supervisor_id}
+                                    onChange={this.handleChangeSupervisor}
+                                />
                         </Modal.Body>
                         <Modal.Footer>
                             <Button onClick={this.handleAdd}>Save</Button>
@@ -124,7 +160,7 @@ class Departments extends Component {
             </div>
         );
   }
-};
+}
 
 export default Departments;
 
