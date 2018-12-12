@@ -9,13 +9,13 @@ using Microsoft.Extensions.Configuration;
 
 namespace bangazon.DataAccess
 {
-    public class OrderStorage
+    public class OrderRepository
     {
         static List<Order> _orders = new List<Order>();
 
         private readonly string ConnectionString;
 
-        public OrderStorage(IConfiguration config)
+        public OrderRepository(IConfiguration config)
         {
             ConnectionString = config.GetSection("ConnectionString").Value;
         }

@@ -9,13 +9,13 @@ using Microsoft.Extensions.Configuration;
 
 namespace bangazon.DataAccess
 {
-    public class OrderStorage
+    public class OrderRepository
     {
         static List<Order> _orders = new List<Order>();
 
         private readonly string ConnectionString;
 
-        public OrderStorage(IConfiguration config)
+        public OrderRepository(IConfiguration config)
         {
             ConnectionString = config.GetSection("ConnectionString").Value;
         }
@@ -49,7 +49,7 @@ namespace bangazon.DataAccess
                                                         Id = id 
                                                       FROM orders as o               
                                                       WHERE o.id = @id",
-                                                      new { id = id}
+                                                      new { id = id }
                                                       );
                 return result.ToList();
             }
@@ -65,7 +65,7 @@ namespace bangazon.DataAccess
                                                     [order_status], 
                                                     [can_complete], 
                                                     [payment_type_id])
-                                                    VALUES(@CustomerId, @OrderStatus, @CanComplete, @PaymentTypeId)", order 
+                                                    VALUES(@CustomerId, @OrderStatus, @CanComplete, @PaymentTypeId)", order
                                                   );
 
                 return result == 1;
@@ -169,6 +169,52 @@ namespace bangazon.DataAccess
             }
 
         }
-        
+        // 8) ENDPOINT TO RETRIEVE PRODUCT INFO ALONG WITH ORDER INFO USING ?_include=products
+
+        public List<OrderWithProduct> GetOrderWithProducts()
+        {
+            using (var connection = new SqlConnection(ConnectionString))
+            {
+                var orderDetails = connection.Query<Order>(@"SELECT 
+                                                            CustomerId = o.customer_id,
+                                                            OrderStatus = o.order_status,
+                                                            CanComplete = o.can_complete,
+                                                            PaymentTypeId = o.payment_type_id,
+                                                            OrderId = o.id
+                                                            FROM orders AS o 
+                                                            ");
+                List<OrderWithProduct> orders = new List<OrderWithProduct>();
+                foreach (var order in orderDetails)
+                {
+                    var orderWithProduct = new OrderWithProduct
+                    {
+                        CustomerId = order.CustomerId,
+                        OrderStatus = order.OrderStatus,
+                        CanComplete = order.CanComplete,
+                        PaymentTypeId = order.PaymentTypeId,
+                        OrderId = order.Id
+                    };
+
+                    var productDetails = connection.Query<Product>(@"SELECT 
+                                                                Title = p.title
+                                                                FROM product AS p
+                                                                join order_product_pair as opp on p.id = opp.product_id
+                                                                WHERE opp.order_id = @OrderId", new { order.Id });
+                    if (productDetails.Any())
+                    {
+                        foreach (var product in productDetails)
+                        {
+                            orderWithProduct.ProductTitle.Add(product.Title);
+                        }
+                        orders.Add(orderWithProduct);
+
+                    }
+
+                }
+                return orders.ToList();
+
+            }
+
+        }
     }
 }

@@ -63,7 +63,7 @@ class SingleOrder extends Component {
     }
 
     render() {
-        const { order } = this.state;
+        //const { order } = this.state;
 
         return (
             <div className="col-sm-4 col-med-2">

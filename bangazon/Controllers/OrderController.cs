@@ -14,12 +14,12 @@ namespace bangazon.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
-        private readonly OrderStorage _orders;
+        private readonly OrderRepository _orders;
 
 
         public OrderController(IConfiguration config)
         {
-            _orders = new OrderStorage(config);
+            _orders = new OrderRepository(config);
 
         }
 

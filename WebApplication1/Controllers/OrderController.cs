@@ -14,12 +14,12 @@ namespace bangazon.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
-        private readonly OrderStorage _orders;
+        private readonly OrderRepository _orders;
 
 
         public OrderController(IConfiguration config)
         {
-            _orders = new OrderStorage(config);
+            _orders = new OrderRepository(config);
 
         }
 
@@ -29,15 +29,18 @@ namespace bangazon.Controllers
         {
             if (completed == true)
             {
-                return Ok(_orders.QueryCompletedOrders());
+                var completedOrders = _orders.QueryCompletedOrders();
+                return Ok(completedOrders);
             }
             else if (completed == false)
             {
-                return Ok(_orders.QueryIncompleteOrders());
+                var incompleteOrders = _orders.QueryIncompleteOrders();
+                return Ok(incompleteOrders);
             }
             else if (completed == null)
             {
-                return Ok(_orders.GetOrders());
+                var allOrders = _orders.GetOrders();
+                return Ok(allOrders);
             }
             throw new ArgumentException("something went wrong!");
 
@@ -47,28 +50,32 @@ namespace bangazon.Controllers
         [HttpGet("orderById/{id}")]
         public IActionResult GetOrderById(int id)
         {
-            return Ok(_orders.GetOrderById(id));
+            var getById = _orders.GetOrderById(id);
+            return Ok(getById);
         }
      
         // #3
         [HttpPost("addOrder")]
         public IActionResult PostOrder(Order order)
         {
-            return Ok(_orders.PostOrder(order));
+            var newOrder = _orders.PostOrder(order);
+            return Ok(newOrder);
         }
 
         // #4
         [HttpPut("{id}")]
         public IActionResult UpdateOrder(int id, Order order)
         {
-            return Ok(_orders.UpdateOrderInfo(id, order));
+            var replaceValues = _orders.UpdateOrderInfo(id, order);
+            return Ok(replaceValues);
         }
 
         // #5
         [HttpDelete("{id}")]
         public IActionResult DeleteOrder(int id)
         {
-            return Ok(_orders.DeleteOrderById(id));
+            var deleteValues = _orders.DeleteOrderById(id);
+            return Ok(deleteValues);
         }
 
         // #7
@@ -77,11 +84,16 @@ namespace bangazon.Controllers
         {
             if (include == "customers")
             {
-                return Ok(_orders.GetOrdersAndCustomers());
+                var withCustomerData = _orders.GetOrdersAndCustomers();
+                return Ok(withCustomerData);
+            }
+            if (include == "products")
+            {
+                var withProductData = _orders.GetOrderWithProducts();
+                return Ok(withProductData);
             }
             throw new ArgumentException("something went wrong!");
         }
-
 
     }
 }
