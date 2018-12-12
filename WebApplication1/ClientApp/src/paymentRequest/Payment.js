@@ -5,35 +5,12 @@ const getPayments = () => {
     return new Promise((resolve, reject) => {
         axios
             .get(`/api/paymentType/`)
-            .then(res => {
-                const paymentTypes = [];
-                if (res.data !== null) {
-                    Object.keys(res.data).forEach(payKey => {
-                        res.data[payKey].id = payKey;
-                        paymentTypes.push(res.data[payKey]);
-                    });
-                }
-                resolve(paymentTypes);
-            })
-            .catch((err) => {
-                reject(err);
-            });
+            .then(payment => resolve(payment.data))
+            .catch(error => reject(error));
     });
-};
+}
 
 
-//const getPayment = (id) => {
-//    return new Promise((resolve, reject) => {
-//        axios
-//            .get(`/api/PaymentType/${id}`)
-//            .then((res) => {
-//                resolve(res.data);
-//            })
-//            .catch((err) => {
-//                reject(err);
-//            });
-//    });
-//};
 const getPayment = id => {
     return new Promise((resolve, reject) => {
         axios
@@ -43,19 +20,35 @@ const getPayment = id => {
     });
 }
 
-//const postPayment = (newPayment) => {
-//    return new Promise((resolve, reject) => {
-//        axios
-//            .post(`/api/paymentType`, newPayment)
-//            .then(res => {
-//                resolve(res);
-//            })
-//            .catch(err => {
-//                reject(err);
-//            });
-//    });
-//};
+const postPayment = input => {
+    return new Promise((resolve, reject) => {
+        axios
+            .post(`api/paymentType`, {
+                account_number: input.account_number,
+                customer_id: input.customer_id,
+                active: input.active,
+                title: input.price,
+
+            })
+            .then(res => 
+                resolve(res))
+            .catch(err =>
+                reject(err))
+            });
+}
+
+const updatePayment = (id, paymentType) => {
+    return new Promise((resolve, reject) => {
+        axios
+            .put(`api/paymentType/${id}`, paymentType)
+            .then((res) => {
+                resolve(res);
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    })
+}
 
 
-
-export default { getPayments, getPayment,};
+export default { getPayments, getPayment, postPayment, updatePayment};

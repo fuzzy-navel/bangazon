@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import paymentRequest from '../../paymentRequest/Payment';
 import './PaymentTypes.css'
+import { Button } from 'react-bootstrap';
 
 class PaymentTypes extends Component {
 
@@ -18,31 +19,14 @@ class PaymentTypes extends Component {
             })
     }
 
-    //updatePaymentClick = () => {
-    //    return new Promise((resolve, reject) => {
-            //paymentRequest
-    //            .updateRequest(this.state, this.state.id)
-    //            .then(response => {
-    //                this.setState({
-    //                    isAvailable: 0,
-    //                })
-    //                alert('Sucessfully Updated')
-    //                resolve(response);
-    //            })
-    //            .catch(error => reject(error));
-    //    });
-    //};
-
-
         render() {
             const paymentComponents = this.state.payments.map((payment) => {
 
-                const onePayment = () =>   //Button routes to single customer page
+                const onePayment = () =>   
                 {
                     this.props.history.push(`/paymenttypes/${payment.id}`);
                 };
                 return (
-
                     <div className="container" key={payment.id}>
                         <div className="row">
                             <div className="col">Account Number</div>
@@ -60,6 +44,7 @@ class PaymentTypes extends Component {
                             <div className="w-100"></div>
                             <div className="col">Payment Id</div>
                             <div className="col">{payment.id}</div>
+                            <div className="w-100"></div>
                         </div>
                     </div>
                 );
@@ -67,6 +52,7 @@ class PaymentTypes extends Component {
     return (
         <div className="AllPaymentTypes">
             <h1>Payment Types</h1>
+            <Button onClick={() => this.props.history.push('/paymenttype')}>Add Payment Type</Button>
             <ul className= "Types">
                 {paymentComponents}
             </ul>
