@@ -35,6 +35,7 @@ namespace bangazon.Controllers
         [HttpPut("{id}")]
         public IActionResult Update(int id, Computer computer)
         {
+
             return Ok(_storage.UpdateComputer(id, computer));
         }
 

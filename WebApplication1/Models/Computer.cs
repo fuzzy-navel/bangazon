@@ -13,5 +13,7 @@ namespace bangazon.Models
         public int employee_id { get; set; }
         public bool in_use { get; set; }
         public bool is_malfunctioning { get; set; }
+        public string make { get; set; }
+        public string model { get; set; }
     }
 }
