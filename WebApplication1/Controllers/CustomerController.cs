@@ -59,12 +59,20 @@ namespace bangazon.Controllers
       [HttpPost]
       public IActionResult AddCustomer(Customer customer)
       {
+         if (customer.first_name == null || customer.last_name == null)
+         {
+            return BadRequest();
+         }
         return Ok(_storage.AddCustomer(customer));
       }
 
       [HttpPut("{id}")]
       public IActionResult UpdateCustomer(Customer customer, int id)
       {
+          if (customer.first_name == null || customer.last_name == null)
+          {
+            return BadRequest();
+          }
         return Ok(_storage.UpdateCustomer(customer, id));
       }
 
