@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import AddOrder from '../Orders/AddOrder';
 import Search from '../Orders/Search';
 import { Button } from 'react-bootstrap';
 import orderRequests from '../../OrderRequests/OrderRequests';
