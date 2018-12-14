@@ -4,6 +4,7 @@ using Dapper;
 using System.Data.SqlClient;
 using System;
 using System.Linq;
+using System.Data;
 
 namespace bangazon.Controllers
 {
@@ -74,8 +75,8 @@ namespace bangazon.Controllers
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
-                var validateInput = true;
                 connection.Open();
+                var validateInput = true;
                 var preUpdateComputer = connection.Query<Computer>(@"select * from computer");
 
                 // purchase date must be older than decommissioned date
@@ -99,11 +100,10 @@ namespace bangazon.Controllers
                 for (var i = 0; i < preUpdateComputer.Count(); i++)
                 {
                     // employees can only have one computer
-                    if (preUpdateComputer.ElementAt(0).employee_id == computer.employee_id)
+                    if (preUpdateComputer.ElementAt(i).employee_id == computer.employee_id)
                     {
                         validateInput = false;
                     }
-                    // 
                 }
 
                 if (validateInput)
