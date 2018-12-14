@@ -39,10 +39,10 @@ namespace bangazon.Controllers
         }
 
         //localhost:44398/api/Computer/3
-        // If its marked 'in use', then it cannot be assigned to a new employee
-        // if its marked 'in use = 0', then it cannot be assigned to an employee
+        // --If its marked 'in use', then it cannot be assigned to a new employee
+        // --if its marked 'in use = 0', then it cannot be assigned to an employee
         // 1 computer per employee
-        // purchase data has to be before decomm. date
+        // --purchase data has to be before decomm. date
         // make model of computers(change in DB)
         public bool UpdateComputer(int id, Computer computer)
         {
@@ -74,22 +74,50 @@ namespace bangazon.Controllers
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
+                var validateInput = true;
                 connection.Open();
-
                 var preUpdateComputer = connection.Query<Computer>(@"select * from computer");
 
-                if (computer.in_use && computer.employee_id > 0)
+                // purchase date must be older than decommissioned date
+                if (computer.purchase_date > computer.decommissioned)
                 {
-                    // okay to add
+                    validateInput = false;
                 }
 
+                // if a computer is in use, it must have an employee id
+                if (computer.in_use && computer.employee_id == 0)
+                {
+                    validateInput = false;
+                }
 
+                // if a computer has an employee id, in_use must be true
+                if (computer.employee_id > 0 && computer.in_use == false)
+                {
+                    validateInput = false;
+                }
 
-                var result3 = connection.Execute(@"INSERT into [dbo].[computer]
-                                                ([purchase_date], [decommissioned], [employee_id], [in_use], [is_malfunctioning], [make], [model])
-                                                 VALUES (@purchase_date, @decommissioned, @employee_id, @in_use, @is_malfunctioning, @make, @model)", computer);
+                for (var i = 0; i < preUpdateComputer.Count(); i++)
+                {
+                    // employees can only have one computer
+                    if (preUpdateComputer.ElementAt(0).employee_id == computer.employee_id)
+                    {
+                        validateInput = false;
+                    }
+                    // 
+                }
 
-                return result3 == 1;
+                if (validateInput)
+                {
+                    var result3 = connection.Execute(
+                        @"INSERT into [dbo].[computer]
+                        ([purchase_date], [decommissioned], [employee_id], [in_use], [is_malfunctioning], [make], [model])
+                        VALUES (@purchase_date, @decommissioned, @employee_id, @in_use, @is_malfunctioning, @make, @model)", computer);
+
+                    return result3 == 1;
+                } else
+                {
+                    return false;
+                }
             } 
         }
       
