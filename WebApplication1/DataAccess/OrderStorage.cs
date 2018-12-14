@@ -46,7 +46,7 @@ namespace bangazon.DataAccess
                                                         OrderStatus = order_status, 
                                                         CanComplete = can_complete,
                                                         PaymentTypeId = payment_type_id, 
-                                                        OrderId = id 
+                                                        Id = id 
                                                       FROM orders as o               
                                                       WHERE o.id = @id",
                                                       new { id = id }
