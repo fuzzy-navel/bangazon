@@ -1,7 +1,7 @@
 ﻿import axios from 'axios';
 
-const getOrders = () => {
-    const apiPath = `api/order/orders/`;
+const getOrders = (completed) => {
+    const apiPath = `api/order/orders?completed=${completed}`;
     return new Promise((resolve, reject) => {
         axios
             .get(apiPath)

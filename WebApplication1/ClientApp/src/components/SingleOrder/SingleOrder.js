@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
 import orderRequests from '../../OrderRequests/OrderRequests';
-import { Button, Label } from 'react-bootstrap';
+import { Button, Label, Checkbox } from 'react-bootstrap';
 
 
 
@@ -24,7 +24,7 @@ class SingleOrder extends Component {
                 this.setState({
                     order: order.data[0]
                 })
-
+                .get
             })
             .catch(error => console.error(error));
     };

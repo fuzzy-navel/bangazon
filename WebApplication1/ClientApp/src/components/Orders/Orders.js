@@ -1,36 +1,82 @@
 import React, { Component } from 'react';
 import Search from '../Orders/Search';
-import { Button } from 'react-bootstrap';
+import { Button, DropdownButton, MenuItem } from 'react-bootstrap';
 import orderRequests from '../../OrderRequests/OrderRequests';
 import './Orders.css';
+import OrderRequests from '../../OrderRequests/OrderRequests';
 
 class Orders extends Component {
+    constructor(props, context) {
+        super(props, context);
+
+        this.orderTypeSelection = this.orderTypeSelection.bind(this);
+    }
+
     state = {
         orders: []
     };
 
     //******************GET & DISPLAY ALL ORDERS**********************//
     componentDidMount() {
-        const apiPath = `api/order/orders`;
-        return new Promise((resolve, reject) => {
-            orderRequests
-                .getOrders(apiPath)
-                .then(orders => {
-                    this.setState({
-                        orders: orders.data
-                    })
-                    resolve(orders);
-                })
-                .catch(error => reject(error));
+        orderRequests
+            .getOrders('')
+            .then(orders => {
+                this.setState({
+                    orders: orders.data
                 });
-        };
-        
+                //resolve(orders);
+            })
+            .catch(error => console.log(error));
+    }
+
+    orderTypeSelection = (eventKey) => {
+        console.log(this);
+        console.log(eventKey.target.id);
+        switch (eventKey.target.id) {
+            case "1":
+                OrderRequests.getOrders('').then(
+                    orders => {
+                        this.setState({
+                            orders: orders.data
+                        });
+                    });
+                
+                break;
+            case "2":
+                OrderRequests.getOrders(false).then(
+                    orders => {
+                        this.setState({
+                            orders: orders.data
+                        });
+                    });
+
+                break;
+            case "3":
+                OrderRequests.getOrders(true).then(
+                    orders => {
+                        this.setState({
+                            orders: orders.data
+                        });
+                    });
+
+                break;
+            //case 4:
+            //    OrderRequests.getOrderById(id);
+            //    break;
+
+        }
+
+
+        console.log(this);
+    }
+
     render() {
         const { orders } = this.state;
         const addNewOrder = () => {
             this.props.history.push('/orders/addOrder');
         };
-        
+
+
         const orderComponents = orders.map((order) => {
             const selectedOrder = () => {
                 this.props.history.push(`/orders/${order.id}`);
@@ -55,7 +101,7 @@ class Orders extends Component {
             );
         });
 
-    
+
         return (
             <div className="orders">
                 <div className="search">
@@ -63,6 +109,19 @@ class Orders extends Component {
                         onSearch={this.updateSearchInput}
                         searchInput={this.state.searchInput}
                     />
+                    <DropdownButton
+                        //bsStyle={title.toLowerCase()}
+                        //title={title}
+                        //key={i}
+                        //id={`dropdown-basic-${i}`}
+                        
+                    >
+                        <MenuItem eventKey="1" id="1" onClick={this.orderTypeSelection}> All Orders </MenuItem>
+                        <MenuItem eventKey="2" id="2" onClick={this.orderTypeSelection}> Open Orders </MenuItem>
+                        <MenuItem eventKey="3" id="3" onClick={this.orderTypeSelection}> Closed Orders </MenuItem>
+                        <MenuItem eventKey="4" id="4" onClick={this.orderTypeSelection}> Single Order By Id </MenuItem>
+                        <MenuItem divider />
+                    </DropdownButton>
 
                 </div>
                 <Button onClick={addNewOrder}> Add Order </Button>
