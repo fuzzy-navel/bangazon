@@ -57,22 +57,35 @@ namespace bangazon.Controllers
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                
-                var result4 = connection.Execute(@"Update computer
-                                                SET purchase_date = @purchase_date, decommissioned = @decommissioned, employee_id = @employee_id, in_use = @in_use, is_malfunctioning = @is_malfunctioning
-                                                Where id = @id",
-                                                new
-                                                {
-                                                    id,
-                                                    computer.purchase_date,
-                                                    computer.decommissioned,
-                                                    computer.employee_id,
-                                                    computer.in_use,
-                                                    computer.is_malfunctioning
-                                                });
+                // validates input computer before updating it
+                var checkComputerResults = _checks.CheckComputer(computer, "put");
 
+                if (checkComputerResults)
+                {
+                    var result4 = connection.Execute(
+                        @"UPDATE computer
+                        SET purchase_date = @purchase_date, decommissioned = @decommissioned, employee_id = @employee_id, in_use = @in_use, is_malfunctioning = @is_malfunctioning, make = @make, model = @model
+                        WHERE id = @id",
+                        new
+                        {
+                            id,
+                            computer.purchase_date,
+                            computer.decommissioned,
+                            computer.employee_id,
+                            computer.in_use,
+                            computer.is_malfunctioning,
+                            computer.make,
+                            computer.model
+                        });
 
-                return result4 == 1;
+                    return result4 == 1;
+
+                }
+                else
+                {
+                    return false;
+                }
+
             }
 
         }
@@ -84,7 +97,7 @@ namespace bangazon.Controllers
             {
                 connection.Open();
                 // validates input computer before adding it
-                var checkComputerResults = _checks.CheckComputer(computer);
+                var checkComputerResults = _checks.CheckComputer(computer, "post");
 
                 if (checkComputerResults)
                 {
