@@ -38,9 +38,13 @@ class AddCustomer extends Component
   formValidation = () =>
   {
     var myForm = this.state.newCustomer;
-    if (myForm.first_name === '' || myForm.last_name === '')
+    if (myForm.first_name === '')
     {
-      alert('You left some fields blank amigo');
+      alert('A first name is required for a new customer.');
+    }
+    else if (myForm.last_name === '')
+    {
+      alert('A last name is required for a new customer.')
     }
     else
     {
