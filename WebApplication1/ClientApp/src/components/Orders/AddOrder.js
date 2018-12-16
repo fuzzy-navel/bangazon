@@ -40,7 +40,6 @@ class AddOrder extends React.Component {
 
 
     render() {
-        //const { customerId, orderStatus, canComplete, paymentTypeId } = this.state;
         return (
             <div className="col-xs-8 col-xs-offset-2">
                 <h2>Add an order</h2>
@@ -53,7 +52,7 @@ class AddOrder extends React.Component {
                         onChange={this.handleInputChange}
                         className="form-control"
                     />
-                    <Label> Order Status: </Label>
+                    <Label> Closed Order: </Label>
                     <FormControl
                         type="text"
                         name="orderStatus"

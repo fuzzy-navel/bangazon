@@ -24,14 +24,12 @@ class Orders extends Component {
                 this.setState({
                     orders: orders.data
                 });
-                //resolve(orders);
             })
             .catch(error => console.log(error));
     }
 
     orderTypeSelection = (eventKey) => {
-        console.log(this);
-        console.log(eventKey.target.id);
+        
         switch (eventKey.target.id) {
             case "1":
                 OrderRequests.getOrders('').then(
@@ -60,14 +58,20 @@ class Orders extends Component {
                     });
 
                 break;
-            //case 4:
-            //    OrderRequests.getOrderById(id);
-            //    break;
+            default: OrderRequests.getOrders('').then(
+                orders => {
+                    this.setState({
+                        orders: orders.data
+                    });
+                });
+
+                break;
+
+            
 
         }
 
 
-        console.log(this);
     }
 
     render() {
@@ -88,7 +92,7 @@ class Orders extends Component {
                             <tr>
                                 <td>Order Id: {order.id}</td>
                                 <td>Customer Id: {order.customerId}</td>
-                                <td>Order Status: {order.orderStatus.toString()}</td>
+                                <td>Closed Order: {order.orderStatus.toString()}</td>
                                 <td>Order Complete: {order.canComplete.toString()}</td>
                                 <td>Payment Type Id: {order.paymentTypeId}</td>
                                 <td>
@@ -110,16 +114,13 @@ class Orders extends Component {
                         searchInput={this.state.searchInput}
                     />
                     <DropdownButton
-                        //bsStyle={title.toLowerCase()}
-                        //title={title}
-                        //key={i}
-                        //id={`dropdown-basic-${i}`}
+                        id=''
+                        title="Make a Selection"
                         
                     >
                         <MenuItem eventKey="1" id="1" onClick={this.orderTypeSelection}> All Orders </MenuItem>
                         <MenuItem eventKey="2" id="2" onClick={this.orderTypeSelection}> Open Orders </MenuItem>
                         <MenuItem eventKey="3" id="3" onClick={this.orderTypeSelection}> Closed Orders </MenuItem>
-                        <MenuItem eventKey="4" id="4" onClick={this.orderTypeSelection}> Single Order By Id </MenuItem>
                         <MenuItem divider />
                     </DropdownButton>
 
