@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Checkbox, Modal } from 'react-bootstrap';
 import SingleComputer from '../Computer/Computer';
 
 import Requests from '../Requests/Requests';
@@ -32,10 +32,6 @@ class AllComputers extends Component {
     });
     };
 
-    handleShow = () => {
-        this.setState({ show: true });
-    }
-
     handleClose = () => {
         this.setState({ show: false });
     }
@@ -48,7 +44,16 @@ class AllComputers extends Component {
                 [name]: value
             }
         }));
-        console.log(this.state);
+    }
+
+    toggleCheckbox = e => {
+        const { name } = e.target;
+        this.setState(prevState => ({
+            addComp: {
+                ...prevState.addComp,
+                [name]: !this.state.addComp[name]
+            }
+        }));
     }
 
     handleSave = () => {
@@ -103,7 +108,7 @@ class AllComputers extends Component {
         <div>
           <h2>All Computers</h2>
           <Button
-              onClick={this.handleShow}
+              onClick={() => this.setState({ show: true })}
           >Add Computer</Button>
 
                 <div>
@@ -119,7 +124,7 @@ class AllComputers extends Component {
                                 value={addComp.purchaseDate}
                                 onChange={this.handleChange}
                             /><br />
-                            <label>Decomissioned: </label>
+                            <label>Decomissioned Date: </label>
                             <input
                                 type="text"
                                 name="decommissioned"
@@ -134,19 +139,17 @@ class AllComputers extends Component {
                                 onChange={this.handleChange}
                             /><br />
                             <label>In Use: </label>
-                            <input
-                                type="text"
+                            <Checkbox
                                 name="inUse"
-                                value={addComp.inUse}
-                                onChange={this.handleChange}
-                            /><br />
+                                checked={!!addComp.inUse || false}
+                                onChange={this.toggleCheckbox}
+                            ></Checkbox><br />
                             <label>Is Malfunctioning: </label>
-                            <input
-                                type="text"
+                            <Checkbox
                                 name="isMalfunctioning"
-                                value={addComp.isMalfunctioning}
-                                onChange={this.handleChange}
-                            /><br />
+                                checked={!!addComp.isMalfunctioning || false}
+                                onChange={this.toggleCheckbox}
+                            ></Checkbox><br />
                         </Modal.Body>
                         <Modal.Footer>
                             <Button onClick={this.handleSave}>Save</Button>
