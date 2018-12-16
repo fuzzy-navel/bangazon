@@ -4,19 +4,25 @@ import SingleComputer from '../Computer/Computer';
 
 import Requests from '../Requests/Requests';
 
+
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
+import {SingleDatePicker} from 'react-dates';
+
 import './AllComputers.css';
 
 class AllComputers extends Component {
   state = {
       allComputers: [],
       addComp: {
-          purchaseDate: "",
-          decommissioned: "",
+          purchaseDate: null,
+          decommissioned: null,
           employeeId: 0,
           inUse: false,
           isMalfunctioning: false,
+          focused: null
       },
-      show: false
+      show: false,
   }
 
   componentDidMount() {
@@ -90,6 +96,16 @@ class AllComputers extends Component {
         this.handleClose();
     }
 
+    handleDateChange = () => {
+
+    }
+
+    handleFocusChange = () => {
+        // onFocusChange={({ focused }) =>
+        //   this.setState({ addComp: {focused }})
+        // }
+    }
+
   render () {
     const { allComputers, addComp } = this.state;
 
@@ -124,6 +140,22 @@ class AllComputers extends Component {
                                 value={addComp.purchaseDate}
                                 onChange={this.handleChange}
                             /><br />
+                            <SingleDatePicker
+                                isOutsideRange={() => false}
+                                inputIconPosition="after"
+                                small={true}
+                                block={false}
+                                numberOfMonths={1}
+                                date={this.state.addComp.purchaseDate}
+                                onDateChange={this.handleDateChange}
+                                focused={this.state.addComp.focused}
+                                // onFocusChange={({ focused }) =>
+                                //   this.setState({ addComp: {focused }})
+                                // }
+                                onFocusChange={this.handleFocusChange}
+                                openDirection="down"
+                                hideKeyboardShortcutsPanel={true}
+                            />
                             <label>Decomissioned Date: </label>
                             <input
                                 type="text"
