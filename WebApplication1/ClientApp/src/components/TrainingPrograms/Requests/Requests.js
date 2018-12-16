@@ -59,4 +59,23 @@ const Update = (input, id) => {
   });
 }
 
-export default {GetAll, GetSingle, Add, Delete, Update};
+const getAttendees = (id) =>
+{
+  return new Promise((resolve, reject) =>
+  {
+    axios.get(`api/trainingprogram/${id}/attendees`)
+      .then((res) =>
+      {
+        if (res != null)
+        {
+          resolve(res.data);
+        }
+      })
+      .catch((err) =>
+      {
+        reject(err);
+      });
+  })
+}
+
+export default {GetAll, GetSingle, Add, Delete, Update, getAttendees};
