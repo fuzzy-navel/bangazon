@@ -4,7 +4,7 @@ import SingleComputer from '../Computer/Computer';
 
 import Requests from '../Requests/Requests';
 
-
+import moment from 'moment';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import {SingleDatePicker} from 'react-dates';
@@ -99,14 +99,15 @@ class AllComputers extends Component {
     }
 
     handleDateChange = e => {
-        // date2 => this.setState({ date2 })
-        console.log(e);
-        console.log(e._d)
-        const {id, date} = e.target;
+        let chosenDate = moment(e._d,'YYYY-MM-DD');
+        chosenDate = chosenDate.format('YYYY-MM-DD');
+        console.log(chosenDate);
+        console.log(e.target.id);
+        const {id} = e.target;
         this.setState(prevState => ({
             addComp: {
                 ...prevState.addComp,
-                [id]: date
+                [id]: chosenDate
             }
         }));
         console.log(this.state.addComp.purchaseDate);
@@ -158,9 +159,8 @@ class AllComputers extends Component {
                                 focused={this.state.focusedPurchase}
                                 onFocusChange={({ focused: focusedPurchase }) => this.setState({ focusedPurchase })}
                                 openDirection="down"
-                                showDropdowns={true}
                                 hideKeyboardShortcutsPanel={true}
-
+                                displayFormat={"DD/MM/YYYY"}
                             /><br/>
                             <label>Decomissioned Date: </label>
                             <SingleDatePicker
