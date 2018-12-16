@@ -20,8 +20,10 @@ class AllComputers extends Component {
           employeeId: 0,
           inUse: false,
           isMalfunctioning: false,
-          focused: null
-      },
+        },
+        focusedPurchase: null,
+        focusedDecomm: null,
+
       show: false,
   }
 
@@ -134,13 +136,8 @@ class AllComputers extends Component {
                         </Modal.Header>
                         <Modal.Body>
                             <label>Purchase Date: </label>
-                            <input
-                                type="text"
-                                name="purchaseDate"
-                                value={addComp.purchaseDate}
-                                onChange={this.handleChange}
-                            /><br />
                             <SingleDatePicker
+                                id={"abc"}
                                 isOutsideRange={() => false}
                                 inputIconPosition="after"
                                 small={true}
@@ -148,21 +145,26 @@ class AllComputers extends Component {
                                 numberOfMonths={1}
                                 date={this.state.addComp.purchaseDate}
                                 onDateChange={this.handleDateChange}
-                                focused={this.state.addComp.focused}
-                                // onFocusChange={({ focused }) =>
-                                //   this.setState({ addComp: {focused }})
-                                // }
-                                onFocusChange={this.handleFocusChange}
+                                focused={this.state.focusedPurchase}
+                                onFocusChange={({ focused: focusedPurchase }) => this.setState({ focusedPurchase })}
                                 openDirection="down"
                                 hideKeyboardShortcutsPanel={true}
-                            />
+                            /><br/>
                             <label>Decomissioned Date: </label>
-                            <input
-                                type="text"
-                                name="decommissioned"
-                                value={addComp.decommissioned}
-                                onChange={this.handleChange}
-                            /><br />
+                            <SingleDatePicker
+                                id={"def"}
+                                isOutsideRange={() => false}
+                                inputIconPosition="after"
+                                small={true}
+                                block={false}
+                                numberOfMonths={1}
+                                date={this.state.addComp.decommissioned}
+                                onDateChange={this.handleDateChange}
+                                focused={this.state.focusedDecomm}
+                                onFocusChange={({ focused: focusedDecomm }) => this.setState({ focusedDecomm })}
+                                openDirection="down"
+                                hideKeyboardShortcutsPanel={true}
+                            /><br/>
                             <label>Employee Id: </label>
                             <input
                                 type="number"
