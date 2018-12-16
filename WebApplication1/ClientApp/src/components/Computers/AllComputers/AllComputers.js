@@ -98,8 +98,18 @@ class AllComputers extends Component {
         this.handleClose();
     }
 
-    handleDateChange = () => {
-
+    handleDateChange = e => {
+        // date2 => this.setState({ date2 })
+        console.log(e);
+        console.log(e._d)
+        const {id, date} = e.target;
+        this.setState(prevState => ({
+            addComp: {
+                ...prevState.addComp,
+                [id]: date
+            }
+        }));
+        console.log(this.state.addComp.purchaseDate);
     }
 
     handleFocusChange = () => {
@@ -137,7 +147,7 @@ class AllComputers extends Component {
                         <Modal.Body>
                             <label>Purchase Date: </label>
                             <SingleDatePicker
-                                id={"abc"}
+                                id={"purchaseDate"}
                                 isOutsideRange={() => false}
                                 inputIconPosition="after"
                                 small={true}
@@ -148,11 +158,13 @@ class AllComputers extends Component {
                                 focused={this.state.focusedPurchase}
                                 onFocusChange={({ focused: focusedPurchase }) => this.setState({ focusedPurchase })}
                                 openDirection="down"
+                                showDropdowns={true}
                                 hideKeyboardShortcutsPanel={true}
+
                             /><br/>
                             <label>Decomissioned Date: </label>
                             <SingleDatePicker
-                                id={"def"}
+                                id={"decommissioned"}
                                 isOutsideRange={() => false}
                                 inputIconPosition="after"
                                 small={true}
