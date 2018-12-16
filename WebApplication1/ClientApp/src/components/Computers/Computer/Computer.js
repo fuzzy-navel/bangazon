@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Panel, Button, Form, Label, FormControl } from 'react-bootstrap';
+import { Checkbox, Panel, Button, Form, Label, FormControl } from 'react-bootstrap';
 
 import Requests from '../Requests/Requests';
 
@@ -59,15 +59,21 @@ class Computer extends Component {
             });
     }
 
-  handleChange = e => {
-    const { name, value } = e.target;
-    this.setState({ [name]: value });
+    handleChange = e => {
+        const { name, value } = e.target;
+        this.setState({ [name]: value });
     };
+
+    toggleCheckbox = e => {
+        const { name } = e.target;
+        this.setState({[name]: !this.state[name]});
+    };
+
 
     render() {
         const { id, purchaseDate, decommissioned, employeeId, inUse, isMalfunctioning, isEditing } = this.state;
 
-        
+
         if (!isEditing) {
             return (
                 <div>
@@ -81,7 +87,7 @@ class Computer extends Component {
                             <Panel.Body>
                                 <p>Id: {id}</p>
                                 <p>Purchase Date: {purchaseDate}</p>
-                                <p>Decommissioned: 
+                                <p>Decommissioned:
                             {decommissioned ?
                                         decommissioned.toString() :
                                         " Null"}
@@ -98,7 +104,9 @@ class Computer extends Component {
                     </Panel>
                 </div>
             );
-        } else {
+        }
+        else // the following is for isEditing = 1
+        {
             return (
                 <div>
                     <Panel id="collapsible-panel-example-2" defaultExpanded={false}>
@@ -131,17 +139,19 @@ class Computer extends Component {
                                   onChange={this.handleChange}
                                 /><br/>
                                 <Label>In Use: </Label>
-                                <FormControl
-                                  name="inUse"
-                                  value={inUse.toString()}
-                                  onChange={this.handleChange}
-                                /><br/>
+                                <Checkbox
+                                    key={id}
+                                    name="inUse"
+                                    checked={inUse}
+                                    onChange={this.toggleCheckbox}
+                                ></Checkbox>
                                 <Label>Malfunctioning: </Label>
-                                <FormControl
-                                  name="isMalfunctioning"
-                                  value={isMalfunctioning.toString()}
-                                  onChange={this.handleChange}
-                                /><br/>
+                                <Checkbox
+                                    key={id}
+                                    name="isMalfunctioning"
+                                    checked={isMalfunctioning}
+                                    onChange={this.toggleCheckbox}
+                                ></Checkbox>
                                 <Label>Id: </Label>
                                 <FormControl
                                   disabled
