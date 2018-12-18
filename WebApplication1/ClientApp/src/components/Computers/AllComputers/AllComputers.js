@@ -122,10 +122,18 @@ class AllComputers extends Component {
     const { allComputers, addComp } = this.state;
 
     const output = allComputers.map(c => {
-      return (
+        let convertedPurchase = c.purchase_date;
+        let convertedDecomm = c.purchase_date;
+        convertedPurchase = convertedPurchase.split('T');
+        convertedDecomm = convertedDecomm.split('T');
+        // this conversion is needed because data from the database
+        //    is in datetime format and not date.
+        return (
           <SingleComputer
               key={c.id}
               details={c}
+              purchaseDate={convertedPurchase[0]}
+              decommDate={convertedDecomm[0]}
           />
       );
     });

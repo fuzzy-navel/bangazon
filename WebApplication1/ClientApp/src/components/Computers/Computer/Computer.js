@@ -6,10 +6,10 @@ import Requests from '../Requests/Requests';
 import './Computer.css';
 
 class Computer extends Component {
-  state = {
+    state = {
       id: this.props.details.id,
-      purchaseDate: this.props.details.purchase_date,
-      decommissioned: this.props.details.decommissioned,
+      purchaseDate: this.props.purchaseDate,
+      decommissioned: this.props.decommDate,
       employeeId: this.props.details.employee_id,
       inUse: this.props.details.in_use,
       isMalfunctioning: this.props.details.is_malfunctioning,
@@ -124,19 +124,21 @@ class Computer extends Component {
                             <Panel.Body>
                             <Form>
                                 <Label>Purchase Date: </Label>
-                                <FormControl
-                                  name="purchaseDate"
-                                  value={purchaseDate}
-                                  onChange={this.handleChange}
-                                /><br/>
-                                <Label>Decommissioned: </Label>
-                                <FormControl
-                                    name="decommissioned"
-                                    value={decommissioned ?
-                                    decommissioned.toString() :
-                                    "Null"}
+                                <input
+                                    type="date"
+                                    id="purchaseDate"
+                                    name="purchaseDate"
+                                    value={purchaseDate}
                                     onChange={this.handleChange}
-                                /><br/>
+                                /><br />
+                                <Label>Decommissioned: </Label>
+                                <input
+                                    type="date"
+                                    id="decommissioned"
+                                    name="decommissioned"
+                                    value={decommissioned}
+                                    onChange={this.handleChange}
+                                /><br />
                                 <Label>Employee Id: </Label>
                                 <FormControl
                                   name="employeeId"
