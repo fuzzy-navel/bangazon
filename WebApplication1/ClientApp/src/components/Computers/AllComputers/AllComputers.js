@@ -4,11 +4,6 @@ import SingleComputer from '../Computer/Computer';
 
 import Requests from '../Requests/Requests';
 
-import moment from 'moment';
-import 'react-dates/initialize';
-import 'react-dates/lib/css/_datepicker.css';
-import {SingleDatePicker} from 'react-dates';
-
 import './AllComputers.css';
 
 class AllComputers extends Component {
@@ -23,6 +18,12 @@ class AllComputers extends Component {
           make: "",
           model: "",
       },
+      isValidPurchase: false,
+      isValidDecomm: true,
+      isValidInUse: false,
+      isValidIsMalfunctioning: true,
+      isValidMake: false,
+      isValidModel: false,
       show: false
   }
 
