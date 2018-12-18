@@ -34,6 +34,8 @@ const Add = input => {
         employee_id: input.employeeId,
         in_use: JSON.parse(input.inUse),
         is_malfunctioning: JSON.parse(input.isMalfunctioning),
+        make: input.make,
+        model: input.model,
       })
       .then(response => resolve (response))
       .catch(error => reject(error));

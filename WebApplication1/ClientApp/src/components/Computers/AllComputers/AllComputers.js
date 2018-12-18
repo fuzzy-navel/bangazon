@@ -15,6 +15,8 @@ class AllComputers extends Component {
           employeeId: 0,
           inUse: false,
           isMalfunctioning: false,
+          make: "",
+          model: "",
       },
       show: false
   }
@@ -119,14 +121,16 @@ class AllComputers extends Component {
                         <Modal.Body>
                             <label>Purchase Date: </label>
                             <input
-                                type="text"
+                                type="date"
+                                id="purchaseDate"
                                 name="purchaseDate"
                                 value={addComp.purchaseDate}
                                 onChange={this.handleChange}
                             /><br />
                             <label>Decomissioned Date: </label>
                             <input
-                                type="text"
+                                type="date"
+                                id="decommissioned"
                                 name="decommissioned"
                                 value={addComp.decommissioned}
                                 onChange={this.handleChange}
@@ -150,6 +154,22 @@ class AllComputers extends Component {
                                 checked={!!addComp.isMalfunctioning || false}
                                 onChange={this.toggleCheckbox}
                             ></Checkbox><br />
+                            <label>Make: (I.E., Dell)</label>
+                            <input
+                                type="text"
+                                id="make"
+                                name="make"
+                                value={addComp.make}
+                                onChange={this.handleChange}
+                            /><br />
+                            <label>Model: (I.E., XPS 15)</label>
+                            <input
+                                type="text"
+                                id="model"
+                                name="model"
+                                value={addComp.model}
+                                onChange={this.handleChange}
+                            /><br />
                         </Modal.Body>
                         <Modal.Footer>
                             <Button onClick={this.handleSave}>Save</Button>
