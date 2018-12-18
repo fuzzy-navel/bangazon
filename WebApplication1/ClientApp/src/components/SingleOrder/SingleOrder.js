@@ -1,5 +1,7 @@
 ﻿import React, { Component } from 'react';
 import orderRequests from '../../OrderRequests/OrderRequests';
+import { Button, Label } from 'react-bootstrap';
+
 
 
 
@@ -22,7 +24,6 @@ class SingleOrder extends Component {
                 this.setState({
                     order: order.data[0]
                 })
-
             })
             .catch(error => console.error(error));
     };
@@ -43,7 +44,7 @@ class SingleOrder extends Component {
     toggleShowEditForm = () => {
         this.setState({
             showEditForm: !this.state.showEditForm,
-            order: { ...this.state.order },
+            order: { ...this.state.order }
         });
     }
 
@@ -55,15 +56,14 @@ class SingleOrder extends Component {
                 .then((response) => {
                     this.setState({
                         showEditForm: 0
-                    })
-                    resolve(response)
+                    });
+                    resolve(response);
                 })
                 .catch(error => reject(error));
         });
     }
 
     render() {
-        const { order } = this.state;
 
         return (
             <div className="col-sm-4 col-med-2">
@@ -71,14 +71,14 @@ class SingleOrder extends Component {
                     <div className="caption">
                         <h3> Order Number: {this.state.order.id}</h3>
                         <p>Customer Number: {this.state.order.customerId}</p>
-                        <p>Order Status: {this.state.order.orderStatus ?
+                        <p> Closed Order: {this.state.order.orderStatus ?
                              this.state.order.orderStatus.toString() : "Null" }</p>
                         <p>Order Complete: {this.state.order.canComplete.toString()}</p>
                         <p>Payment Type Number: {this.state.order.paymentTypeId}</p>
                         <p><button type="button" className="btn btn-primary" id={this.state.order.id} onClick={this.toggleShowEditForm}>Edit Details</button></p>
                     </div>
                     <div className={this.state.showEditForm ? '' : 'hide'}>
-                        <label> Order Status: </label>
+                        <Label> Closed Order: </Label>
                         <input
                             type="text"
                             name="orderStatus"
@@ -86,7 +86,7 @@ class SingleOrder extends Component {
                             value={this.state.orderStatus}
                             className="form-control"
                         />
-                        <label> Order Complete: </label>
+                        <Label> Order Complete: </Label>
 
                         <input
                             type="text"
@@ -95,7 +95,7 @@ class SingleOrder extends Component {
                             value={this.state.canComplete}
                             className="form-control"
                         />
-                        <label> Payment Type Id: </label>
+                        <Label> Payment Type Id: </Label>
 
                         <input
                             type="text"
@@ -104,7 +104,7 @@ class SingleOrder extends Component {
                             value={this.state.paymentTypeId}
                             className="form-control"
                         />
-                        <button className="btn btn-default" type="button" onClick={this.UpdateOrderClick}>Save</button>
+                        <Button className="btn btn-default" type="button" onClick={this.UpdateOrderClick}>Save</Button>
                     </div>
                 </div>
             </div>
