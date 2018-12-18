@@ -1,7 +1,6 @@
 ﻿import React, { Component } from 'react';
 import onePayment from '../../paymentRequest/Payment';
-import { FormControl, Form, Label, Button } from 'react-bootstrap';
-
+import './OnePayment.css'
 
 class OnePaymentType extends Component {
 
@@ -34,7 +33,7 @@ class OnePaymentType extends Component {
             this.props.history.push(`/paymenttype/${payment.id}`);
         }
         return (
-            <div className="container">
+            <div className="onePayContainer">
                 <div className="row" key={payment.id}>
 
                     <h1>Selected Payment Type</h1>

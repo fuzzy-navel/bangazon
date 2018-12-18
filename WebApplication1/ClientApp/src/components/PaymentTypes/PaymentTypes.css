@@ -1,0 +1,16 @@
+.paymentAccount {
+    color: red;
+}
+
+.paymentContainer {
+    border: 5px solid blue;
+    padding: 20px;
+    margin-bottom: 26px;
+    margin-right: 500px;
+    
+}
+
+.btn-default{
+    margin-bottom:20px;
+}
+
