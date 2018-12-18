@@ -4,14 +4,19 @@ import SingleComputer from '../Computer/Computer';
 
 import Requests from '../Requests/Requests';
 
+import moment from 'moment';
+import 'react-dates/initialize';
+import 'react-dates/lib/css/_datepicker.css';
+import {SingleDatePicker} from 'react-dates';
+
 import './AllComputers.css';
 
 class AllComputers extends Component {
   state = {
       allComputers: [],
       addComp: {
-          purchaseDate: "",
-          decommissioned: "",
+          purchaseDate: null,
+          decommissioned: null,
           employeeId: 0,
           inUse: false,
           isMalfunctioning: false,
@@ -90,6 +95,27 @@ class AllComputers extends Component {
             }
         });
         this.handleClose();
+    }
+
+    handleDateChange = e => {
+        let chosenDate = moment(e._d,'YYYY-MM-DD');
+        chosenDate = chosenDate.format('YYYY-MM-DD');
+        console.log(chosenDate);
+        console.log(e.target.id);
+        const {id} = e.target;
+        this.setState(prevState => ({
+            addComp: {
+                ...prevState.addComp,
+                [id]: chosenDate
+            }
+        }));
+        console.log(this.state.addComp.purchaseDate);
+    }
+
+    handleFocusChange = () => {
+        // onFocusChange={({ focused }) =>
+        //   this.setState({ addComp: {focused }})
+        // }
     }
 
   render () {
