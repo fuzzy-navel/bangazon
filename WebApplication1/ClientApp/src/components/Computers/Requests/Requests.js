@@ -35,7 +35,7 @@ const Add = input => {
         in_use: JSON.parse(input.inUse),
         is_malfunctioning: JSON.parse(input.isMalfunctioning),
         make: input.make,
-        model: input.model
+        model: input.model,
       })
       .then(response => resolve (response))
       .catch(error => {

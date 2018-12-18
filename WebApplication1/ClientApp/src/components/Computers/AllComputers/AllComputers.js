@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Modal } from 'react-bootstrap';
+import { Button, Checkbox, Modal } from 'react-bootstrap';
 import SingleComputer from '../Computer/Computer';
 
 import Requests from '../Requests/Requests';
@@ -16,8 +16,14 @@ class AllComputers extends Component {
           inUse: false,
           isMalfunctioning: false,
           make: "",
-          model: ""
+          model: "",
       },
+      isValidPurchase: false,
+      isValidDecomm: true,
+      isValidInUse: false,
+      isValidIsMalfunctioning: true,
+      isValidMake: false,
+      isValidModel: false,
       show: false
   }
 
@@ -34,10 +40,6 @@ class AllComputers extends Component {
     });
     };
 
-    handleShow = () => {
-        this.setState({ show: true });
-    }
-
     handleClose = () => {
         this.setState({ show: false });
     }
@@ -50,7 +52,16 @@ class AllComputers extends Component {
                 [name]: value
             }
         }));
-        console.log(this.state);
+    }
+
+    toggleCheckbox = e => {
+        const { name } = e.target;
+        this.setState(prevState => ({
+            addComp: {
+                ...prevState.addComp,
+                [name]: !this.state.addComp[name]
+            }
+        }));
     }
 
     handleSave = () => {
@@ -91,6 +102,21 @@ class AllComputers extends Component {
         this.handleClose();
     }
 
+    handleDateChange = e => {
+        let chosenDate = moment(e._d,'YYYY-MM-DD');
+        chosenDate = chosenDate.format('YYYY-MM-DD');
+        console.log(chosenDate);
+        console.log(e.target.id);
+        const {id} = e.target;
+        this.setState(prevState => ({
+            addComp: {
+                ...prevState.addComp,
+                [id]: chosenDate
+            }
+        }));
+        console.log(this.state.addComp.purchaseDate);
+    }
+
   render () {
     const { allComputers, addComp } = this.state;
 
@@ -109,7 +135,7 @@ class AllComputers extends Component {
         <div>
           <h2>All Computers</h2>
           <Button
-              onClick={this.handleShow}
+              onClick={() => this.setState({ show: true })}
           >Add Computer</Button>
 
                 <div>
@@ -120,14 +146,16 @@ class AllComputers extends Component {
                         <Modal.Body>
                             <label>Purchase Date: </label>
                             <input
-                                type="text"
+                                type="date"
+                                id="purchaseDate"
                                 name="purchaseDate"
                                 value={addComp.purchaseDate}
                                 onChange={this.handleChange}
                             /><br />
-                            <label>Decomissioned: </label>
+                            <label>Decomissioned Date: </label>
                             <input
-                                type="text"
+                                type="date"
+                                id="decommissioned"
                                 name="decommissioned"
                                 value={addComp.decommissioned}
                                 onChange={this.handleChange}
@@ -140,17 +168,31 @@ class AllComputers extends Component {
                                 onChange={this.handleChange}
                             /><br />
                             <label>In Use: </label>
+                            <Checkbox
+                                name="inUse"
+                                checked={!!addComp.inUse || false}
+                                onChange={this.toggleCheckbox}
+                            ></Checkbox><br />
+                            <label>Is Malfunctioning: </label>
+                            <Checkbox
+                                name="isMalfunctioning"
+                                checked={!!addComp.isMalfunctioning || false}
+                                onChange={this.toggleCheckbox}
+                            ></Checkbox><br />
+                            <label>Make: (I.E., Dell)</label>
                             <input
                                 type="text"
-                                name="inUse"
-                                value={addComp.inUse}
+                                id="make"
+                                name="make"
+                                value={addComp.make}
                                 onChange={this.handleChange}
                             /><br />
-                            <label>Is Malfunctioning: </label>
+                            <label>Model: (I.E., XPS 15)</label>
                             <input
                                 type="text"
-                                name="isMalfunctioning"
-                                value={addComp.isMalfunctioning}
+                                id="model"
+                                name="model"
+                                value={addComp.model}
                                 onChange={this.handleChange}
                             /><br />
                             <label>Make: (I.E., Dell)</label>

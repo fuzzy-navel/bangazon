@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Form, FormControl, Label, Button } from 'react-bootstrap';
+import { Checkbox, Form, FormControl, Label, Button } from 'react-bootstrap';
 
 import Requests from '../Requests/Requests';
 
@@ -10,8 +10,8 @@ class AddComputer extends Component {
     purchaseDate: '',
     decommissioned: 0,
     employeeId: 0,
-    inUse: 0,
-    isMalfunctioning: 0,
+    inUse: false,
+    isMalfunctioning: false,
   };
 
   clickAddNewComputer = () => {
@@ -30,6 +30,11 @@ class AddComputer extends Component {
     const {name, value} = e.target;
     this.setState({ [name]: value });
   };
+
+  toggleCheckbox = e => {
+    const { name } = e.target;
+    this.setState({[name]: !this.state[name]});
+};
 
   render() {
     const {purchaseDate, decommissioned, employeeId, inUse, isMalfunctioning} = this.state;
@@ -60,19 +65,17 @@ class AddComputer extends Component {
             onChange={this.handleChange}
           /><br/>
           <Label>In Use? </Label>
-          <FormControl
-            type="number"
+          <Checkbox
             name="inUse"
-            value={inUse}
-            onChange={this.handleChange}
-          /><br/>
+            checked={inUse}
+            onChange={this.toggleCheckbox}
+          ></Checkbox><br/>
           <Label>Is Malfunctioning? </Label>
-          <FormControl
-            type="number"
+          <Checkbox
             name="isMalfunctioning"
-            value={isMalfunctioning}
-            onChange={this.handleChange}
-          /><br/>
+            checked={isMalfunctioning}
+            onChange={this.toggleCheckbox}
+          ></Checkbox><br/>
         </Form>
         <Button
           onClick={this.clickAddNewComputer}
