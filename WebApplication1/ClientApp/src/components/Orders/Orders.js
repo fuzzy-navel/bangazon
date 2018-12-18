@@ -41,7 +41,7 @@ class Orders extends Component {
                 
                 break;
             case "2":
-                OrderRequests.getOrders(false).then(
+                OrderRequests.getOrders(true).then(
                     orders => {
                         this.setState({
                             orders: orders.data
@@ -50,7 +50,7 @@ class Orders extends Component {
 
                 break;
             case "3":
-                OrderRequests.getOrders(true).then(
+                OrderRequests.getOrders(false).then(
                     orders => {
                         this.setState({
                             orders: orders.data
@@ -82,6 +82,9 @@ class Orders extends Component {
 
 
         const orderComponents = orders.map((order) => {
+            const orderStatus = (order.orderStatus === true ? "Open" : "Closed");
+            
+            
             const selectedOrder = () => {
                 this.props.history.push(`/orders/${order.id}`);
             };
@@ -92,7 +95,7 @@ class Orders extends Component {
                             <tr>
                                 <td>Order Id: {order.id}</td>
                                 <td>Customer Id: {order.customerId}</td>
-                                <td>Closed Order: {order.orderStatus.toString()}</td>
+                                <td>Order Status: {orderStatus}</td>
                                 <td>Order Complete: {order.canComplete.toString()}</td>
                                 <td>Payment Type Id: {order.paymentTypeId}</td>
                                 <td>
@@ -118,7 +121,7 @@ class Orders extends Component {
                         title="Make a Selection"
                         
                     >
-                        <MenuItem eventKey="1" id="1" onClick={this.orderTypeSelection}> All Orders </MenuItem>
+                        <MenuItem eventKey="1" id="1" onClick={this.orderTypeSelection} active> All Orders </MenuItem>
                         <MenuItem eventKey="2" id="2" onClick={this.orderTypeSelection}> Open Orders </MenuItem>
                         <MenuItem eventKey="3" id="3" onClick={this.orderTypeSelection}> Closed Orders </MenuItem>
                         <MenuItem divider />
