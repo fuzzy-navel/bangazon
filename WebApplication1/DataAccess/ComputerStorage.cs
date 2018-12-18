@@ -70,8 +70,9 @@ namespace bangazon.Controllers
             {
                 connection.Open();
 
-                var result3 = connection.Execute(@"Insert into [dbo].[computer]([purchase_date], [decommissioned], [employee_id], [in_use], [is_malfunctioning])
-                                                 VALUES (@purchase_date, @decommissioned, @employee_id, @in_use, @is_malfunctioning)", computer);
+                var result3 = connection.Execute(
+                    @"Insert into [dbo].[computer]([purchase_date], [decommissioned], [employee_id], [in_use], [is_malfunctioning], [make], [model])
+                    VALUES (@purchase_date, @decommissioned, @employee_id, @in_use, @is_malfunctioning, @make, @model)", computer);
 
                 return result3 == 1;
             } 
