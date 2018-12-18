@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
 import orderRequests from '../../OrderRequests/OrderRequests';
-import { Button, Label } from 'react-bootstrap';
+import { Button, Label, Checkbox } from 'react-bootstrap';
 
 
 
@@ -79,13 +79,14 @@ class SingleOrder extends Component {
                     </div>
                     <div className={this.state.showEditForm ? '' : 'hide'}>
                         <Label> Order Status: </Label>
-                        <input
-                            type="text"
+                        
+                        <Checkbox
                             name="orderStatus"
+                            checked={this.state.orderStatus}
                             onChange={this.handleInputChange}
-                            value={this.state.orderStatus}
-                            className="form-control"
                         />
+                            
+        
                         <Label> Order Complete: </Label>
 
                         <input
