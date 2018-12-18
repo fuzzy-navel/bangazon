@@ -64,6 +64,7 @@ class SingleOrder extends Component {
     }
 
     render() {
+        const orderStatusMsg = (this.state.order.orderStatus === true ? "Open" : "Closed");
 
         return (
             <div className="col-sm-4 col-med-2">
@@ -71,14 +72,13 @@ class SingleOrder extends Component {
                     <div className="caption">
                         <h3> Order Number: {this.state.order.id}</h3>
                         <p>Customer Number: {this.state.order.customerId}</p>
-                        <p> Closed Order: {this.state.order.orderStatus ?
-                             this.state.order.orderStatus.toString() : "Null" }</p>
+                        <p> Order Status: {orderStatusMsg}</p>
                         <p>Order Complete: {this.state.order.canComplete.toString()}</p>
                         <p>Payment Type Number: {this.state.order.paymentTypeId}</p>
                         <p><button type="button" className="btn btn-primary" id={this.state.order.id} onClick={this.toggleShowEditForm}>Edit Details</button></p>
                     </div>
                     <div className={this.state.showEditForm ? '' : 'hide'}>
-                        <Label> Closed Order: </Label>
+                        <Label> Order Status: </Label>
                         <input
                             type="text"
                             name="orderStatus"

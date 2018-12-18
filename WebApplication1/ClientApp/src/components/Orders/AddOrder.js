@@ -52,7 +52,7 @@ class AddOrder extends React.Component {
                         onChange={this.handleInputChange}
                         className="form-control"
                     />
-                    <Label> Closed Order: </Label>
+                    <Label> Order Status: </Label>
                     <FormControl
                         type="text"
                         name="orderStatus"
