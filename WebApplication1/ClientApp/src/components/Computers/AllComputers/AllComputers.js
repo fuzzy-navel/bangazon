@@ -15,6 +15,8 @@ class AllComputers extends Component {
           employeeId: 0,
           inUse: false,
           isMalfunctioning: false,
+          make: "",
+          model: ""
       },
       show: false
   }
@@ -63,6 +65,8 @@ class AllComputers extends Component {
                             employeeId: 0,
                             inUse: false,
                             isMalfunctioning: false,
+                            make: "",
+                            model: ""
                         }
                     });
                     this.handleClose();
@@ -80,6 +84,8 @@ class AllComputers extends Component {
                 employeeId: 0,
                 inUse: false,
                 isMalfunctioning: false,
+                make: "",
+                model: ""
             }
         });
         this.handleClose();
@@ -145,6 +151,22 @@ class AllComputers extends Component {
                                 type="text"
                                 name="isMalfunctioning"
                                 value={addComp.isMalfunctioning}
+                                onChange={this.handleChange}
+                            /><br />
+                            <label>Make: (I.E., Dell)</label>
+                            <input
+                                type="text"
+                                id="make"
+                                name="make"
+                                value={addComp.make}
+                                onChange={this.handleChange}
+                            /><br />
+                            <label>Model: (I.E., XPS 15)</label>
+                            <input
+                                type="text"
+                                id="model"
+                                name="model"
+                                value={addComp.model}
                                 onChange={this.handleChange}
                             /><br />
                         </Modal.Body>

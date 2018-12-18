@@ -10,7 +10,7 @@ namespace bangazon.Models
     {
         public int id { get; set; }
         [Required]
-        [DataType(DataType.Date)]
+        //[DataType(DataType.Date)]
         public DateTime purchase_date { get; set; }
         [DataType(DataType.Date)]
         public DateTime? decommissioned { get; set; }

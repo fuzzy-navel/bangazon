@@ -34,14 +34,29 @@ namespace bangazon.Controllers
         [HttpPut("{id}")]
         public IActionResult Update(int id, Computer computer)
         {
-
-            return Ok(_storage.UpdateComputer(id, computer));
+            var result = _storage.UpdateComputer(id, computer);
+            if (result)
+            {
+                return Ok(_storage.UpdateComputer(id, computer));
+            }
+            else
+            {
+                return BadRequest("Error during the UpdateComputer() method.");
+            }
         }
 
         [HttpPost]
         public IActionResult AddComputer(Computer computer)
         {
-            return Ok(_storage.AddComputer(computer));
+            var result = _storage.AddComputer(computer);
+            if (result)
+            {
+                return Ok(_storage.AddComputer(computer));
+            }
+            else
+            {
+                return BadRequest("Error during the AddComputer() method.");
+            }
         }
 
         [HttpDelete("{id}")]

@@ -13,6 +13,8 @@ class Computer extends Component {
       employeeId: this.props.details.employee_id,
       inUse: this.props.details.in_use,
       isMalfunctioning: this.props.details.is_malfunctioning,
+      make: this.props.details.make,
+      model: this.props.details.model,
       isEditing: false
   }
 
@@ -51,6 +53,8 @@ class Computer extends Component {
                     employeeId: res.employee_id,
                     inUse: res.in_use,
                     isMalfunctioning: res.is_malfunctioning,
+                    make: res.make,
+                    model: res.model,
                     isEditing: false
                 });
             })
@@ -65,9 +69,9 @@ class Computer extends Component {
     };
 
     render() {
-        const { id, purchaseDate, decommissioned, employeeId, inUse, isMalfunctioning, isEditing } = this.state;
+        const { id, purchaseDate, decommissioned, employeeId, inUse, isMalfunctioning, make, model, isEditing } = this.state;
 
-        
+
         if (!isEditing) {
             return (
                 <div>
@@ -81,7 +85,7 @@ class Computer extends Component {
                             <Panel.Body>
                                 <p>Id: {id}</p>
                                 <p>Purchase Date: {purchaseDate}</p>
-                                <p>Decommissioned: 
+                                <p>Decommissioned:
                             {decommissioned ?
                                         decommissioned.toString() :
                                         " Null"}
@@ -89,6 +93,8 @@ class Computer extends Component {
                                 <p>Employee Id: {employeeId}</p>
                                 <p>In Use: {inUse.toString()}</p>
                                 <p>Is Malfunctioning: {isMalfunctioning.toString()}</p>
+                                <p>Make: {make}</p>
+                                <p>Model: {model}</p>
                             </Panel.Body>
                             <Panel.Footer>
                                 <Button onClick={() => this.setState({ isEditing: true })}>Update</Button>
@@ -140,6 +146,18 @@ class Computer extends Component {
                                 <FormControl
                                   name="isMalfunctioning"
                                   value={isMalfunctioning.toString()}
+                                  onChange={this.handleChange}
+                                /><br/>
+                                <Label>Make: </Label>
+                                <FormControl
+                                  name="make"
+                                  value={make}
+                                  onChange={this.handleChange}
+                                /><br/>
+                                <Label>Model: </Label>
+                                <FormControl
+                                  name="model"
+                                  value={model}
                                   onChange={this.handleChange}
                                 /><br/>
                                 <Label>Id: </Label>

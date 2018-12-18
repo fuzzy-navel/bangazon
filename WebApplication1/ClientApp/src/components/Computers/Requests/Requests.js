@@ -34,9 +34,14 @@ const Add = input => {
         employee_id: input.employeeId,
         in_use: JSON.parse(input.inUse),
         is_malfunctioning: JSON.parse(input.isMalfunctioning),
+        make: input.make,
+        model: input.model
       })
       .then(response => resolve (response))
-      .catch(error => reject(error));
+      .catch(error => {
+        console.log("Error during the HTTP POST method, ", error);
+        reject(error);
+      });
   });
 }
 
@@ -64,9 +69,14 @@ const Update = (input, id) => {
         employee_id: input.employeeId,
         in_use: JSON.parse(input.inUse),
         is_malfunctioning: JSON.parse(input.isMalfunctioning),
+        make: input.make,
+        model: input.model
       })
       .then(response => resolve (response))
-      .catch(error => reject(error));
+      .catch(error => {
+        console.log("Error during the HTTP PUT method, ", error);
+        reject(error);
+      });
   });
 }
 

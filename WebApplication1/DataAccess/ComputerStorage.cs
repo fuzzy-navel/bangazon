@@ -47,11 +47,6 @@ namespace bangazon.Controllers
         }
 
         //localhost:44398/api/Computer/3
-        // --If its marked 'in use', then it cannot be assigned to a new employee
-        // --if its marked 'in use = 0', then it cannot be assigned to an employee
-        // 1 computer per employee
-        // --purchase data has to be before decomm. date
-        // make model of computers(change in DB)
         public bool UpdateComputer(int id, Computer computer)
         {
             using (var connection = new SqlConnection(ConnectionString))
