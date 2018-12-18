@@ -9,13 +9,13 @@ using Microsoft.Extensions.Configuration;
 
 namespace bangazon.DataAccess
 {
-    public class OrderStorage
+    public class OrderRepository
     {
         static List<Order> _orders = new List<Order>();
 
         private readonly string ConnectionString;
 
-        public OrderStorage(IConfiguration config)
+        public OrderRepository(IConfiguration config)
         {
             ConnectionString = config.GetSection("ConnectionString").Value;
         }
@@ -99,15 +99,15 @@ namespace bangazon.DataAccess
         }
 
         // 5) DELETE AN ORDER
-        public bool DeleteOrderById(int id)
-        {
-            using (var connection = new SqlConnection(ConnectionString))
-            {
-                connection.Open();
-                var result = connection.Execute(@"DELETE FROM [dbo].[orders] WHERE id = @OrderId", new { id });
-                return result == 1;
-            }
-        }
+        //public bool DeleteOrderById(int id)
+        //{
+        //    using (var connection = new SqlConnection(ConnectionString))
+        //    {
+        //        connection.Open();
+        //        var result = connection.Execute(@"DELETE FROM [dbo].[orders] WHERE id = @OrderId", new { id });
+        //        return result == 1;
+        //    }
+        //}
 
         // 6) ENDPOINT TO RETRIEVE ORDERS USING THE '?can_complete=false' QUERY STRING PARAMETER
         public List<Order> QueryIncompleteOrders()
@@ -120,7 +120,7 @@ namespace bangazon.DataAccess
                                                         OrderStatus = order_status, 
                                                         CanComplete = can_complete,
                                                         PaymentTypeId = payment_type_id, 
-                                                        OrderId = id 
+                                                        Id = id 
                                                       FROM orders
                                                       WHERE order_status = 0");
                 return result.ToList();
@@ -138,7 +138,7 @@ namespace bangazon.DataAccess
                                                         OrderStatus = order_status,
                                                         CanComplete = can_complete,
                                                         PaymentTypeId = payment_type_id,
-                                                        OrderId = id
+                                                        Id = id
                                                       FROM orders
                                                       WHERE order_status = 1");
 
@@ -193,14 +193,14 @@ namespace bangazon.DataAccess
                         OrderStatus = order.OrderStatus,
                         CanComplete = order.CanComplete,
                         PaymentTypeId = order.PaymentTypeId,
-                        OrderId = order.OrderId
+                        OrderId = order.Id
                     };
 
                     var productDetails = connection.Query<Product>(@"SELECT 
                                                                 Title = p.title
                                                                 FROM product AS p
                                                                 join order_product_pair as opp on p.id = opp.product_id
-                                                                WHERE opp.order_id = @OrderId", new { order.OrderId });
+                                                                WHERE opp.order_id = @OrderId", new { order.Id });
                     if (productDetails.Any())
                     {
                         foreach (var product in productDetails)

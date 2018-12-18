@@ -35,8 +35,25 @@ class AddCustomer extends Component
     this.formFieldStringState('last_name', e);
   };
 
-  submitNewCustomer = (e) => {
-    e.preventDefault();
+  formValidation = () =>
+  {
+    var myForm = this.state.newCustomer;
+    if (myForm.first_name === '')
+    {
+      alert('A first name is required for a new customer.');
+    }
+    else if (myForm.last_name === '')
+    {
+      alert('A last name is required for a new customer.')
+    }
+    else
+    {
+      this.submitNewCustomer(myForm);
+    }
+  }
+
+  submitNewCustomer = (e) =>
+  {
     customerRequests.addCustomer(this.state.newCustomer);
     this.props.history.push(`/`);
   };
@@ -59,7 +76,7 @@ class AddCustomer extends Component
         </div>
         <div className="row">
           <div className="col-md-3">
-            <button className="btn btn-primary" onClick={this.submitNewCustomer}>Submit</button>
+            <button className="btn btn-primary" onClick={this.formValidation}>Submit</button>
           </div>
         </div>
       </div>  
