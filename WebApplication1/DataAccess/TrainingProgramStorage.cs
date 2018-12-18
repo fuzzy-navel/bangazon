@@ -131,7 +131,7 @@ namespace bangazon.DataAccess
           {
             connection.Open();
             var result = connection.Query<Employee>(
-              @"select e.is_supervisor, e.department_id as department_id ,e.name as employee_name, e.id from employee as e
+              @"select e.is_supervisor, e.department_id as department_id ,e.name as employee_name, e.id as employee_id from employee as e
 	            left join employee_training_program_pair as et on e.id = et.employee_id
 	            join training_programs as t on t.id = et.training_program_id
 	            and t.id = @id", new { id = id }

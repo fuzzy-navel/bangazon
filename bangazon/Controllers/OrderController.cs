@@ -14,12 +14,12 @@ namespace bangazon.Controllers
     [ApiController]
     public class OrderController : ControllerBase
     {
-        private readonly OrderStorage _orders;
+        private readonly OrderRepository _orders;
 
 
         public OrderController(IConfiguration config)
         {
-            _orders = new OrderStorage(config);
+            _orders = new OrderRepository(config);
 
         }
 
@@ -71,12 +71,12 @@ namespace bangazon.Controllers
         }
 
         // #5
-        [HttpDelete("{id}")]
-        public IActionResult DeleteOrder(int id)
-        {
-            var deleteValues = _orders.DeleteOrderById(id);
-            return Ok(deleteValues);
-        }
+        //[HttpDelete("{id}")]
+        //public IActionResult DeleteOrder(int id)
+        //{
+        //    var deleteValues = _orders.DeleteOrderById(id);
+        //    return Ok(deleteValues);
+        //}
 
         // #7 && #8
         [HttpGet("ordersByQuery")]

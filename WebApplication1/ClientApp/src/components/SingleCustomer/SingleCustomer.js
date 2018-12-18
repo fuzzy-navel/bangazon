@@ -83,6 +83,7 @@ class SingleCustomer extends Component
         <div className="row" key={customer.id}>
           <div className="col-md-3">
             <h3>{customer.first_name} {customer.last_name}</h3>
+            <h4>Id: {customer.id}</h4>
             <h4>Customer since: {customer.date_joined}</h4>
             <h4>Active: {customer.active.toString()}</h4>
           </div>
