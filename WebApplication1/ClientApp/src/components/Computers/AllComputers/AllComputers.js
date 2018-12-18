@@ -15,8 +15,8 @@ class AllComputers extends Component {
   state = {
       allComputers: [],
       addComp: {
-          purchaseDate: null,
-          decommissioned: null,
+          purchaseDate: "",
+          decommissioned: "",
           employeeId: 0,
           inUse: false,
           isMalfunctioning: false,
@@ -110,12 +110,6 @@ class AllComputers extends Component {
             }
         }));
         console.log(this.state.addComp.purchaseDate);
-    }
-
-    handleFocusChange = () => {
-        // onFocusChange={({ focused }) =>
-        //   this.setState({ addComp: {focused }})
-        // }
     }
 
   render () {
