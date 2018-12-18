@@ -37,7 +37,11 @@ const Add = input => {
         make: input.make,
         model: input.model,
       })
-      .then(response => resolve (response))
+      .then(response => {
+        console.log(response);
+        console.log(response.data);
+        resolve (response);
+      })
       .catch(error => {
         console.log("Error during the HTTP POST method, ", error);
         reject(error);

@@ -83,7 +83,7 @@ class Computer extends Component {
                     <Panel id="collapsible-panel-example-2" defaultExpanded={false}>
                         <Panel.Heading>
                             <Panel.Title toggle>
-                                {this.state.id}
+                                Computer Id: {this.state.id}
                             </Panel.Title>
                         </Panel.Heading>
                         <Panel.Collapse>
@@ -91,9 +91,9 @@ class Computer extends Component {
                                 <p>Id: {id}</p>
                                 <p>Purchase Date: {purchaseDate}</p>
                                 <p>Decommissioned:
-                            {decommissioned ?
-                                        decommissioned.toString() :
-                                        " Null"}
+                                    {decommissioned ?
+                                    decommissioned.toString() :
+                                    " Null"}
                                 </p>
                                 <p>Employee Id: {employeeId}</p>
                                 <p>In Use: {inUse.toString()}</p>
@@ -157,6 +157,18 @@ class Computer extends Component {
                                     checked={isMalfunctioning}
                                     onChange={this.toggleCheckbox}
                                 ></Checkbox>
+                                <Label>Make: </Label>
+                                <FormControl
+                                  name="make"
+                                  value={make}
+                                  onChange={this.handleChange}
+                                /><br/>
+                                <Label>Model: </Label>
+                                <FormControl
+                                  name="model"
+                                  value={model}
+                                  onChange={this.handleChange}
+                                /><br/>
                                 <Label>Id: </Label>
                                 <FormControl
                                   disabled

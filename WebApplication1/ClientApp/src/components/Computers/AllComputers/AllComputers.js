@@ -66,10 +66,23 @@ class AllComputers extends Component {
 
     handleSave = () => {
         return new Promise((resolve, reject) => {
-            Requests.Add(this.state.addComp)
+            const incomingComputer = this.state.addComp;
+            const tempComputerFormatted =
+            {   // all this because the naming format is different
+                id: incomingComputer.id,
+                purchase_date: incomingComputer.purchaseDate,
+                decommissioned: incomingComputer.decommissioned,
+                employee_id: incomingComputer.employeeId,
+                in_use: incomingComputer.inUse,
+                is_malfunctioning: incomingComputer.isMalfunctioning,
+                make: incomingComputer.make,
+                model: incomingComputer.model
+            }
+            Requests.Add(incomingComputer)
                 .then(response => {
                     alert('Computer saved');
                     this.setState({
+                        allComputers: [...this.state.allComputers, tempComputerFormatted],
                         addComp: {
                             purchaseDate: "",
                             decommissioned: "",
@@ -80,10 +93,13 @@ class AllComputers extends Component {
                             model: ""
                         }
                     });
-                    this.handleClose();
+                    this.handleCancel();
                     resolve(response);
                 })
-                .catch(error => reject(error));
+                .catch(error => {
+                    alert("Error during the save process");
+                    reject(error);
+                  });
         });
     }
 
@@ -100,21 +116,6 @@ class AllComputers extends Component {
             }
         });
         this.handleClose();
-    }
-
-    handleDateChange = e => {
-        let chosenDate = moment(e._d,'YYYY-MM-DD');
-        chosenDate = chosenDate.format('YYYY-MM-DD');
-        console.log(chosenDate);
-        console.log(e.target.id);
-        const {id} = e.target;
-        this.setState(prevState => ({
-            addComp: {
-                ...prevState.addComp,
-                [id]: chosenDate
-            }
-        }));
-        console.log(this.state.addComp.purchaseDate);
     }
 
   render () {
@@ -179,22 +180,6 @@ class AllComputers extends Component {
                                 checked={!!addComp.isMalfunctioning || false}
                                 onChange={this.toggleCheckbox}
                             ></Checkbox><br />
-                            <label>Make: (I.E., Dell)</label>
-                            <input
-                                type="text"
-                                id="make"
-                                name="make"
-                                value={addComp.make}
-                                onChange={this.handleChange}
-                            /><br />
-                            <label>Model: (I.E., XPS 15)</label>
-                            <input
-                                type="text"
-                                id="model"
-                                name="model"
-                                value={addComp.model}
-                                onChange={this.handleChange}
-                            /><br />
                             <label>Make: (I.E., Dell)</label>
                             <input
                                 type="text"
