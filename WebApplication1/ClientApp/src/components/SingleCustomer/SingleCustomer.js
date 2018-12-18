@@ -1,6 +1,6 @@
 ﻿import React, { Component } from 'react';
 import './SingleCustomer.css'
-import customerRequests from '../../CustomerRequests/customerRequests';
+import customerRequests from '../../Requests/customerRequests';
 
 class SingleCustomer extends Component
 {

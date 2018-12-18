@@ -1,5 +1,5 @@
 ﻿import React, { Component } from 'react';
-import employeeRequests from '../../EmployeeRequests/employeeRequests';
+import employeeRequests from '../../Requests/employeeRequests';
 
 const defaultEmployee =
 {

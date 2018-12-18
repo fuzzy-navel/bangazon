@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import customerRequests from '../../CustomerRequests/customerRequests';
+import customerRequests from '../../../Requests/customerRequests';
 import './Customers.css'
 
 class Customers extends Component {

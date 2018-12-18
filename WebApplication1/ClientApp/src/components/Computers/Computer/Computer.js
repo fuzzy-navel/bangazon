@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Panel, Button, Form, Label, FormControl } from 'react-bootstrap';
 
-import Requests from '../Requests/Requests';
+import Requests from '../../../Requests/ComputerRequest';
 
 import './Computer.css';
 
 class Computer extends Component {
-  state = {
+    state = {
       id: this.props.details.id,
       purchaseDate: this.props.details.purchase_date,
       decommissioned: this.props.details.decommissioned,

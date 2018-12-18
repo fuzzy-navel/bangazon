@@ -1,5 +1,5 @@
 ﻿import React, { Component } from 'react';
-import customerRequests from '../../CustomerRequests/customerRequests';
+import customerRequests from '../../../Requests/customerRequests';
 
 const today = new Date();
 const dateTime = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();

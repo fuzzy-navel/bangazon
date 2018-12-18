@@ -2,7 +2,7 @@
 
 import { Form, FormControl, Button, Label } from 'react-bootstrap';
 
-import orderRequests from '../../OrderRequests/OrderRequests';
+import orderRequests from '../../Requests/OrderRequests';
 
 
 

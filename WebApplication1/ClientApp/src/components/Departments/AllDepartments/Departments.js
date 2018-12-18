@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 import DepartmentSingle from '../DepartmentSingle/DepartmentSingle';
-import DepartmentRequests from '../../databaseRequests/departments';
+import DepartmentRequests from '../../../Requests/departments';
 
 import './Departments.css';
 

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Button, Form, FormControl, Label } from 'react-bootstrap';
 
-import Requests from '../Requests/Requests';
+import Requests from '../ProdRequests/Requests';
 
 import './ProdType.css';
 

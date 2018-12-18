@@ -1,7 +1,7 @@
 ﻿import React, { Component } from 'react';
 import { Panel, Button } from 'react-bootstrap';
-import EmployeeList from '../EmployeeList/EmployeeList';
-import DatabaseRequests from '../../databaseRequests/departments';
+import EmployeeList from '../../EmployeeList/EmployeeList';
+import DatabaseRequests from '../../../Requests/departments';
 
 import './DepartmentSingle.css';
 

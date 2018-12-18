@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import SingleComputer from '../Computer/Computer';
 
-import Requests from '../Requests/Requests';
+import Requests from '../../../Requests/ComputerRequest';
 
 import './AllComputers.css';
 

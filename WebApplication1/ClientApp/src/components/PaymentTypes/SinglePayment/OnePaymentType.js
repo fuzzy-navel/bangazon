@@ -1,5 +1,5 @@
 ﻿import React, { Component } from 'react';
-import onePayment from '../../paymentRequest/Payment';
+import onePayment from '../../../Requests/Payment';
 import { FormControl, Form, Label, Button } from 'react-bootstrap';
 
 

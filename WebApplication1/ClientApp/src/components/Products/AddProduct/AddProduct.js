@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Form, FormControl, Button, Label} from 'react-bootstrap';
 
-import Requests from '../Requests/Requests';
+import Requests from '../../../Requests/Product';
 
 import './AddProduct.css';
 

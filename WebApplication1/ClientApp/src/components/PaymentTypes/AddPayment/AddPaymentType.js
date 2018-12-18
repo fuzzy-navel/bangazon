@@ -1,5 +1,5 @@
 ﻿import React, { Component } from 'react';
-import addPayment from '../../paymentRequest/Payment';
+import addPayment from '../../../Requests/Payment';
 import { Form, FormControl, Label, Button } from 'react-bootstrap';
 
 class AddPaymentType extends Component {

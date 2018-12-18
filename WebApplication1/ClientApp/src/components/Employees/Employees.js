@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import employeeRequests from '../../EmployeeRequests/employeeRequests';
+import React, { Component } from 'react';
+import employeeRequests from '../../Requests/employeeRequests';
 import './Employees.css'
 
 class Employees extends Component

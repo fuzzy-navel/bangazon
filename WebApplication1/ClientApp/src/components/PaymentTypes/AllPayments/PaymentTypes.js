@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import paymentRequest from '../../paymentRequest/Payment';
+import paymentRequest from '../../../Requests/Payment';
 import './PaymentTypes.css'
 import { Button } from 'react-bootstrap';
 

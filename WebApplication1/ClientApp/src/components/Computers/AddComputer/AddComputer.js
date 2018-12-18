@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Form, FormControl, Label, Button } from 'react-bootstrap';
 
-import Requests from '../Requests/Requests';
+import Requests from '../../../Requests/ComputerRequest';
 
 import './AddComputer.css';
 
