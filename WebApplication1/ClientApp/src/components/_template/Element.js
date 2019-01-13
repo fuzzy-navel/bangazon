@@ -7,7 +7,7 @@ import SingleElement from './SingleElement/SingleElement';
 
 import './Element.css';
 
-const Products = () => (
+const Element = () => (
   <Switch>
     <Route exact path='/element' component={AllElements} />
     <Route path='/element/addelement' component={AddElement} />
