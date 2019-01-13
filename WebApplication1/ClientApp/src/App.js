@@ -18,6 +18,7 @@ import AddCustomer from './components/Customers/AddCustomer';
 import AddEmployee from './components/Employees/AddEmployee';
 import SingleEmployee from './components/SingleEmployee/SingleEmployee';
 import OrderRoutes from './components/Orders/OrderRoutes';
+import Element from './components/_template/Element';
 
 
 
@@ -50,10 +51,12 @@ class App extends Component
                 <Route path='/producttypes' component={ProductTypes} />
                 <Route path='/trainingprograms' component={TrainingPrograms} />
 
+                <Route exact path='/element' component={Element} />
+
               </Switch>
             </div>
           </div>
-          
+
         </div>
       </BrowserRouter>
     )
