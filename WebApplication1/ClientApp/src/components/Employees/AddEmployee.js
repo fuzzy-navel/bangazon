@@ -52,9 +52,25 @@ class AddEmployee extends Component
     this.formFieldBoolState('is_supervisor', e);
   };
 
-  submitNewEmployee = (e) =>
+  fieldChecker = () =>
   {
-    e.preventDefault();
+    var employee = this.state.newEmployee;
+    if (employee.name === "")
+    {
+      alert("Please include a name.");
+    }
+    else if (employee.department_id <= 0)
+    {
+      alert("The department id cannot be less than 1");
+    }
+    else
+    {
+     this.submitNewEmployee();
+    }    
+  }
+
+  submitNewEmployee = () =>
+  {
     employeeRequests.addEmployee(this.state.newEmployee);
     this.props.history.push(`/`)
   };
@@ -78,7 +94,7 @@ class AddEmployee extends Component
             <input id="isSupervisor" onChange={this.isSupervisorChange}/>
           </div>
           <div>
-            <button className="btn btn-primary" onClick={this.submitNewEmployee}>Add Employee</button> 
+            <button className="btn btn-primary" onClick={this.fieldChecker}>Add Employee</button> 
           </div>
         </div>
       </div>
