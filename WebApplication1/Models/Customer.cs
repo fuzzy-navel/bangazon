@@ -8,12 +8,12 @@ namespace bangazon.Models
 {
   public class Customer
   {
-    [Required]
+    [Required(ErrorMessage = "First name is Required")]
     public string first_name {get; set;}
 
     public int id {get; set;}
 
-    [Required]
+    [Required(ErrorMessage = "Last name is required")]
     public string last_name { get; set; }
 
     public DateTime date_joined { get; set; }
