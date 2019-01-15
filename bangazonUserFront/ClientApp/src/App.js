@@ -17,7 +17,7 @@ export default class App extends Component {
           <Route path='/counter' component={Counter} />
           <Route path='/fetchdata' component={FetchData} />
           <Route path='/user' component={Users} />
-        </Switch>        
+        </Switch>
       </BrowserRouter>
     );
   }
