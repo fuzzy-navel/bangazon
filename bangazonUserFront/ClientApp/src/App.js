@@ -14,8 +14,8 @@ export default class App extends Component {
           <div className="container">
              <div className="row">
               <Switch>
-                <Route component={Products} exact path='/products/' />
                 <Route component={SingleProduct} path='/products/:id' />
+                <Route component={Products} path='/products' />
               </Switch>
             </div>
           </div>

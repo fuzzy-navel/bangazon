@@ -18,6 +18,9 @@ tr {
   color: #2d2d2d;
   background-color: white;
 }
+.red-text {
+  color: red;
+}
 
 
 /* Forms */

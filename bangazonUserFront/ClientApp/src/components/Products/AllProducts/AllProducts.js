@@ -37,12 +37,16 @@ class AllProducts extends Component {
       // Prints all product titles to DOM
       const {title, category, description, price, quantity, id} = product;
       return (
-        <tr id={id}>
+        <tr id={id} onClick={() => this.props.history.push(`/products/${id}`)}>
           <td>{category}</td>
           <td>{title}</td>
           <td>{description}</td>
           <td>{price}</td>
-          <td>{quantity}</td>
+          {quantity ?
+            <td>{quantity}</td>
+            :
+            <td className="red-text">{quantity}</td>
+          }
         </tr>
       );
     });
@@ -52,7 +56,7 @@ class AllProducts extends Component {
         <h2>All Products</h2>
         <Table condensed hover>
           <thead>
-            <tr onClick={() => this.props.history.push(`/products/${this.state.id}`)}>
+            <tr>
               <th>Category</th>
               <th>Title</th>
               <th>Description</th>

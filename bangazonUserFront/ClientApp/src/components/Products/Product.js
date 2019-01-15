@@ -8,8 +8,8 @@ import './Product.css';
 
 const Product = () => (
   <Switch>
-    <Route exact path='products' component={AllProducts} />
-    <Route path='products/:id' component={SingleProduct} />
+    <Route path='/products' component={AllProducts} />
+    <Route path='/products/:id' component={SingleProduct} />
   </Switch>
 )
 

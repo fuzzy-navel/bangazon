@@ -4,7 +4,7 @@ import Requests from '../../Requests/ProductRequests';
 
 import './SingleProduct.css';
 
-class SingleElement extends Component {
+class SingleProduct extends Component {
   state = {
     category: 0,
     price: 0,
@@ -41,7 +41,7 @@ class SingleElement extends Component {
       <div>
         <Panel>
           <h2>{title}</h2>
-            <img src="https://via.placeholder.com/150&text=NSS+E7" alt={title}/>
+            <img src="https://via.placeholder.com/150&text=Bangazon" alt={title}/>
             <p>Description: {description}</p>
             <p>Price: {price}</p>
             <p>Quantity: {quantity}</p>
@@ -50,7 +50,7 @@ class SingleElement extends Component {
             {quantity ?
               <Button onClick={() => this.setState({})}>Add to Cart</Button>
             :
-              <Button>Out of Stock</Button>
+              <Button disabled>Out of Stock</Button>
             }
         </Panel>
       </div>
@@ -58,4 +58,4 @@ class SingleElement extends Component {
   }
 };
 
-export default SingleElement;
+export default SingleProduct;
