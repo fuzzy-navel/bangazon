@@ -34,20 +34,23 @@ class SingleElement extends Component {
 
   render () {
     const {title, category, description, price, quantity, id} = this.state;
+
     return (
       <div>
-        <h2>{title}</h2>
-          <img src="https://via.placeholder.com/150&text=NSS+E7" alt={title}/>
-          <p>Description: {description}</p>
-          <p>Price: {price}</p>
-          <p>Quantity: {quantity}</p>
-          <p>Category: {category}</p>
-          <p>Id: {id}</p>
-          {quantity ?
-            <Button onClick={() => this.setState({})}>Add to Cart</Button>
-          :
-            <Button>Out of Stock</Button>
-          }
+        <Panel>
+          <h2>{title}</h2>
+            <img src="https://via.placeholder.com/150&text=NSS+E7" alt={title}/>
+            <p>Description: {description}</p>
+            <p>Price: {price}</p>
+            <p>Quantity: {quantity}</p>
+            <p>Category: {category}</p>
+            <p>Id: {id}</p>
+            {quantity ?
+              <Button onClick={() => this.setState({})}>Add to Cart</Button>
+            :
+              <Button>Out of Stock</Button>
+            }
+        </Panel>
       </div>
     );
   }
