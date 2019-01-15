@@ -4,14 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using bangazon.DataAccess;
 using bangazon.Models;
+using bangazonUserFront.Controllers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace bangazon.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class PaymentTypeController : ControllerBase
+    public class PaymentTypeController : SecureControllerBaseController
     {
         public PaymentStorage _storage;
         public PaymentTypeController()

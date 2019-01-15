@@ -4,15 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using bangazon.DataAccess;
 using bangazon.Models;
+using bangazonUserFront.Controllers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
 namespace bangazon.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CustomerController : ControllerBase
+    public class CustomerController : SecureControllerBaseController
     {
 
       private readonly CustomerStorage _storage;

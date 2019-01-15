@@ -7,12 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 using bangazon.DataAccess;
 using bangazon.Models;
 using Microsoft.Extensions.Configuration;
+using bangazonUserFront.Controllers;
 
 namespace bangazon.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class OrderController : ControllerBase
+    public class OrderController : SecureControllerBaseController
     {
         private readonly OrderRepository _orders;
 
