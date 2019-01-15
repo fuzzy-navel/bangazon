@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import { Button, Panel } from 'react-bootstrap';
+import Requests from '../../Requests/ProductRequests';
 
-import './SingleElement.css';
+import './SingleProduct.css';
 
 class SingleElement extends Component {
   state = {

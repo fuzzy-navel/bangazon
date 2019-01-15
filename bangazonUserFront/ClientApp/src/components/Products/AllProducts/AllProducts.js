@@ -52,7 +52,7 @@ class AllProducts extends Component {
         <h2>All Products</h2>
         <Table condensed hover>
           <thead>
-            <tr onClick={() => this.props.history.push(`/products/${id}`)}>
+            <tr onClick={() => this.props.history.push(`/products/${this.state.id}`)}>
               <th>Category</th>
               <th>Title</th>
               <th>Description</th>
