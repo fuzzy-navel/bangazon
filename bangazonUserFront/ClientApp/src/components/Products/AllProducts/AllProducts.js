@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Table } from 'react-bootstrap';
+import { Col, Table } from 'react-bootstrap';
 
+import Sidebar from '../../Sidebar/Sidebar';
 import Requests from '../../Requests/ProductRequests';
 
 import './AllProducts.css';
@@ -8,6 +9,7 @@ import './AllProducts.css';
 class AllProducts extends Component {
   state = {
     products: [],
+    currentCategory: "All Categories",
     title: '',
     category: 0,
     description: '',
@@ -31,44 +33,62 @@ class AllProducts extends Component {
     });
   };
 
-  render () {
-    const { products } = this.state;
-    const output = products.map(product => {
-      // Prints all product titles to DOM
-      const {title, category, description, price, quantity, id} = product;
-      return (
-        <tr id={id} onClick={() => this.props.history.push(`/products/${id}`)}>
-          <td>{category}</td>
-          <td>{title}</td>
-          <td>{description}</td>
-          <td>{price}</td>
-          {quantity ?
-            <td>{quantity}</td>
-            :
-            <td className="red-text">{quantity}</td>
-          }
-        </tr>
-      );
+  sidebarCallback = category => {
+    this.setState({
+      currentCategory: category
     });
+  };
+
+  render() {
+    const { products } = this.state;
+    let output = products
+      .filter(product => {
+        return (
+          product.category === this.state.currentCategory ||
+          this.state.currentCategory === "All Categories"
+        );
+      })
+      .map(product => {
+        const { title, category, description, price, quantity, id } = product;
+        return (
+          <tr
+            id={id}
+            onClick={() => this.props.history.push(`/products/${id}`)}
+          >
+            <td>{category}</td>
+            <td>{title}</td>
+            <td>{description}</td>
+            <td>{price}</td>
+            {quantity ? (
+              <td>{quantity}</td>
+            ) : (
+              <td className="red-text">{quantity}</td>
+            )}
+          </tr>
+        );
+      });
 
     return (
-      <div className="div-productsAll">
-        <h2>All Products</h2>
-        <Table condensed hover>
-          <thead>
-            <tr>
-              <th>Category</th>
-              <th>Title</th>
-              <th>Description</th>
-              <th>Price</th>
-              <th>Quantity</th>
-            </tr>
-          </thead>
-          <tbody>
-            {output}
-          </tbody>
-        </Table>
-      </div>
+      <Col xs={12}>
+        <Col xs={12} sm={3} className="sidebar-menu">
+          <Sidebar callbackFromParent={this.sidebarCallback} />
+        </Col>
+        <Col xs={12} sm={9}>
+          <h2>{this.state.currentCategory}</h2>
+          <Table condensed hover>
+            <thead>
+              <tr>
+                <th>Category</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Quantity</th>
+              </tr>
+            </thead>
+            <tbody>{output}</tbody>
+          </Table>
+        </Col>
+      </Col>
     );
   }
 };
