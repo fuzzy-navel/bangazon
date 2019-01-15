@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Table } from 'react-bootstrap';
-import { Button, Checkbox, ControlLabel, FormControl, FormGroup } from 'react-bootstrap';
 
 import Requests from '../../Requests/ProductRequests';
 
@@ -16,7 +15,6 @@ class AllProducts extends Component {
     quantity: 0,
     owner_id: 0,
     id: 0,
-    isEditing: 0,
   }
 
   componentDidMount() {
@@ -32,38 +30,38 @@ class AllProducts extends Component {
       .catch(error => reject(error));
     });
   };
+
   render () {
+    const { products } = this.state;
+    const output = products.map(product => {
+      // Prints all product titles to DOM
+      const {title, category, description, price, quantity, id} = product;
+      return (
+        <tr id={id}>
+          <td>{category}</td>
+          <td>{title}</td>
+          <td>{description}</td>
+          <td>{price}</td>
+          <td>{quantity}</td>
+        </tr>
+      );
+    });
+
     return (
-      <div className="">
+      <div className="div-productsAll">
         <h2>All Products</h2>
         <Table condensed hover>
           <thead>
-            <tr>
-              <th>#</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Username</th>
+            <tr onClick={() => this.props.history.push(`/products/${id}`)}>
+              <th>Category</th>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Price</th>
+              <th>Quantity</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>1</td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mark.otto</td>
-            </tr>
-            <tr>
-              <td>2</td>
-              <td>Jacob</td>
-              <td>Thornton</td>
-              <td>@jthornton</td>
-            </tr>
-            <tr>
-            <td>3</td>
-              <td>Steve</td>
-              <td>O</td>
-              <td>@steveo</td>
-            </tr>
+            {output}
           </tbody>
         </Table>
       </div>
