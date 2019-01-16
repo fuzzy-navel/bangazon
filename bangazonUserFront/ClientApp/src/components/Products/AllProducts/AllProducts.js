@@ -50,7 +50,6 @@ class AllProducts extends Component {
       })
       .map(product => {
         const { title, category, description, price, quantity, id } = product;
-        console.log('allproducts id', id);
         return (
           <tr
             id={id}
@@ -59,7 +58,7 @@ class AllProducts extends Component {
             <td>{category}</td>
             <td>{title}</td>
             <td>{description}</td>
-            <td>{price}</td>
+            <td>${price}</td>
             {quantity ? (
               <td>{quantity}</td>
             ) : (

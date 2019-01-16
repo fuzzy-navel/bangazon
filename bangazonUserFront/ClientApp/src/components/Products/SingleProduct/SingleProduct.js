@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Panel } from 'react-bootstrap';
+import { Button, Col, Image, Panel } from 'react-bootstrap';
 import Requests from '../../Requests/ProductRequests';
 
 import './SingleProduct.css';
@@ -39,22 +39,24 @@ class SingleProduct extends Component {
     const {title, category, description, price, quantity, id} = this.state;
 
     return (
-      <div>
-        <Panel>
-          <h2>{title}</h2>
-            <img src="https://via.placeholder.com/150&text=Bangazon" alt={title}/>
+      <Col xs={6} xsOffset={3}>
+        <Panel className="panel-product">
+          <h2 className="h2-product">{title}</h2>
+            <div className="image-product">
+              <Image src="https://via.placeholder.com/500&text=Bangazon" alt={title} responsive/>
+            </div>
             <p>Description: {description}</p>
-            <p>Price: {price}</p>
+            <p>Price: ${price}</p>
             <p>Quantity: {quantity}</p>
             <p>Category: {category}</p>
             <p>Id: {id}</p>
             {quantity ?
-              <Button onClick={() => this.setState({})}>Add to Cart</Button>
+              <Button bsStyle="primary" className="pull-right" onClick={() => this.setState({})}>Add to Cart</Button>
             :
-              <Button disabled>Out of Stock</Button>
+              <Button bsStyle="danger" className="pull-right" disabled>Out of Stock</Button>
             }
         </Panel>
-      </div>
+      </Col>
     );
   }
 };
