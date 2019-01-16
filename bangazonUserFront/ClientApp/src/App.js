@@ -78,7 +78,10 @@ class App extends Component {
             <div>
                 <BrowserRouter>
                     <div>
-                        <h1>Hello World</h1>
+                        <Navibar
+                            authed={this.state.authed}
+                            runAway={this.runAway}
+                        />
                         <div>
                             <Switch>
                                 <Route path="/" exact component={Home} />
