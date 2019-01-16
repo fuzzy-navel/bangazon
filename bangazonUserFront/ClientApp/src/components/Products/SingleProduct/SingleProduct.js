@@ -20,6 +20,7 @@ class SingleProduct extends Component {
       Requests.GetSingle(productId)
       .then(product => {
         // sets state with product
+        console.log('singleee',product);
         this.setState({
           category: product.category,
           price: product.price,

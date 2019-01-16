@@ -15,7 +15,11 @@ const GetSingle = id => {
   return new Promise((resolve, reject) => {
     axios
       .get(apiPath)
-      .then(product => resolve (product.data[0]))
+      // .then(product => resolve (product.data[0]))
+      .then(product => {
+        console.log('REQUEST', product)
+        resolve(product.data[0]);
+      })
       .catch(error => reject(error));
   });
 }
