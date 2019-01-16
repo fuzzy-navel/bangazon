@@ -4,6 +4,8 @@ import { BrowserRouter, Redirect, Switch } from 'react-router-dom';
 import firebase from 'firebase';
 import fbConnection from './firebaseRequests/connection';
 
+import Login from './components/Login/Login';
+import Register from './components/Register/Register';
 import { Layout } from './components/Layout';
 import { Home } from './components/Home';
 import { FetchData } from './components/FetchData';
@@ -44,16 +46,55 @@ const PublicRoute = ({ component: Component, authed, ...rest }) => {
     );
 };
 
-export default class App extends Component {
-  displayName = App.name
+class App extends Component {
+    displayName = App.name
 
-  render() {
-    return (
-      <Layout>
-        <Route exact path='/' component={Home} />
-        <Route path='/counter' component={Counter} />
-        <Route path='/fetchdata' component={FetchData} />
-      </Layout>
-    );
-  }
+    state = {
+        authed: false
+    }
+
+    componentDidMount() {
+        this.removeListener = firebase.auth().onAuthStateChanged((user) => {
+            if (user) {
+                this.setState({ authed: true });
+            } else {
+                this.setState({ authed: false });
+            }
+        });
+    }
+
+    componentWillUnmount() {
+        this.removeListener();
+    }
+
+    runAway = () => {
+        this.setState({ authed: false });
+    }
+
+    render() {
+        return (
+            <div>
+                <BrowserRouter>
+                    <div>
+                        {/*NavBar*/}
+                        <Login />
+                    </div>
+                    <div>
+                        <PublicRoute
+                            path="/register"
+                            authed={this.state.authed}
+                            component={Register}
+                        />
+                        <PublicRoute
+                            path="/login"
+                            authed={this.state.authed}
+                            component={Login}
+                        />
+                    </div>
+                </BrowserRouter>
+            </div>
+        );
+    }
 }
+
+export default App;
