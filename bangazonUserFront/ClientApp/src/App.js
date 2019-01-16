@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
 import { Route } from 'react-router';
 import { BrowserRouter, Redirect, Switch } from 'react-router-dom';
 import firebase from 'firebase';
@@ -8,6 +7,7 @@ import fbConnection from './firebaseRequests/connection';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import Home from './components/Home/Home';
+import Navibar from './components/Navibar/Navibar';
 //import { Layout } from './components/Layout';
 //import { Home } from './components/Home';
 //import { FetchData } from './components/FetchData';
@@ -28,38 +28,6 @@ const PrivateRoute = ({ component: Component, authed, ...rest }) => {
                     )
             }
         />
-=======
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Navibar from './components/Navibar/Navibar';
-
-//import { Layout } from './components/Layout';
-//import { Home } from './components/Home';
-//import { FetchData } from './components/FetchData';
-//import { Counter } from './components/Counter';
-
-export default class App extends Component {
-  //displayName = App.name
-
-  render() {
-      return (
-          <BrowserRouter>
-              <div>
-                  <Navibar />
-                  <div className="container">
-                      <div className="row">
-                          <Switch>
-                          </Switch>
-                      </div>
-                  </div>
-              </div>
-          </BrowserRouter>
-
-      //<Layout>
-      //  <Route exact path='/' component={Home} />
-      //  <Route path='/counter' component={Counter} />
-      //  <Route path='/fetchdata' component={FetchData} />
-      //</Layout>
->>>>>>> master
     );
 };
 
