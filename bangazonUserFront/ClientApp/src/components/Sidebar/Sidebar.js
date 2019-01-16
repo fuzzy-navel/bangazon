@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Button, ButtonGroup } from "react-bootstrap";
 
+import './Sidebar.css';
+
 class Sidebar extends Component {
   state = {
     activeCategory: "All Categories"
