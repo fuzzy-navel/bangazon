@@ -1,14 +1,14 @@
 ﻿import React, { Component } from 'react';
 import '../PaymentType.css';
 
-class AllPaymentTypes extends Component {
+class AddPaymentType extends Component {
     render() {
         return (
-            <div className="AllPay">
-                <h2>ShowAll</h2>
+            <div className="AddPay">
+                <h2>ADDPAYMENT</h2>
             </div>
         );
     }
 }
 
-export default AllPaymentTypes;
+export default AddPaymentType;
