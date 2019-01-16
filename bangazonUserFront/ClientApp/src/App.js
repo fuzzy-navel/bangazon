@@ -6,10 +6,11 @@ import fbConnection from './firebaseRequests/connection';
 
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
-import { Layout } from './components/Layout';
-import { Home } from './components/Home';
-import { FetchData } from './components/FetchData';
-import { Counter } from './components/Counter';
+import Home from './components/Home/Home';
+//import { Layout } from './components/Layout';
+//import { Home } from './components/Home';
+//import { FetchData } from './components/FetchData';
+//import { Counter } from './components/Counter';
 fbConnection();
 
 const PrivateRoute = ({ component: Component, authed, ...rest }) => {
@@ -76,20 +77,22 @@ class App extends Component {
             <div>
                 <BrowserRouter>
                     <div>
-                        {/*NavBar*/}
-                        <Login />
-                    </div>
-                    <div>
-                        <PublicRoute
-                            path="/register"
-                            authed={this.state.authed}
-                            component={Register}
-                        />
-                        <PublicRoute
-                            path="/login"
-                            authed={this.state.authed}
-                            component={Login}
-                        />
+                        <h1>Hello World</h1>
+                        <div>
+                            <Switch>
+                                <Route path="/" exact component={Home} />
+                            </Switch>
+                            <PublicRoute
+                                path="/register"
+                                authed={this.state.authed}
+                                component={Register}
+                            />
+                            <PublicRoute
+                                path="/login"
+                                authed={this.state.authed}
+                                component={Login}
+                            />
+                        </div>
                     </div>
                 </BrowserRouter>
             </div>
