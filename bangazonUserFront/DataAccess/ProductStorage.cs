@@ -23,7 +23,17 @@ namespace bangazon.DataAccess
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                var result = connection.Query<Product>(@"select * from product");
+                var result = connection.Query<Product>(
+                    @"SELECT 
+                        product_types.category as category, 
+                        product.id as id, 
+                        product.categoryId as categoryId, 
+                        product.price as price, 
+                        product.title as title, 
+                        product.description as description, 
+                        product.quantity as quantity
+                    FROM product
+                        INNER JOIN dbo.product_types ON dbo.product.categoryId = dbo.product_types.id");
                 return result;
             }
         }
@@ -33,9 +43,11 @@ namespace bangazon.DataAccess
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                var result = connection.Query<Product>(@"select * 
-                                from product as p
-                                where p.id = @id", new { id });
+                var result = connection.Query<Product>(
+                    @"SELECT *, product_types.category AS category
+                    FROM product
+                        INNER JOIN dbo.product_types ON dbo.product.categoryId = dbo.product_types.id
+                    WHERE product.id = @id", new { id });
                 return result;
             }
         }
@@ -47,8 +59,8 @@ namespace bangazon.DataAccess
                 db.Open();
 
                 var result = db.Execute(
-                        @"insert into [dbo].[product]([category], [price], [title], [description], [quantity], [owner_id])
-                        VALUES (@category, @price, @title, @description, @quantity, @owner_id)", product
+                        @"insert into [dbo].[product]([category], [categoryName], [price], [title], [description], [quantity], [owner_id])
+                        VALUES (@category, @null, @price, @title, @description, @quantity, @owner_id)", product
                 );
                 return result == 1;
             }
@@ -60,11 +72,11 @@ namespace bangazon.DataAccess
             {
                 db.Open();
                 var result = db.Execute(@"UPDATE [dbo].[product]
-                    SET [category] = @category, [price] = @price, [title] = @title, [description] = @description, [quantity] = @quantity, [owner_id] = @owner_id
+                    SET [category] = @category, [categoryName] = @categoryname, [price] = @price, [title] = @title, [description] = @description, [quantity] = @quantity, [owner_id] = @owner_id
                     WHERE id = @id", 
                     new {
                         id,
-                        category = product.Category,
+                        categoryId = product.CategoryId,
                         price = product.Price,
                         title = product.Title,
                         description = product.Description,
