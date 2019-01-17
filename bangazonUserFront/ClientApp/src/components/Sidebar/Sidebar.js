@@ -8,8 +8,6 @@ class Sidebar extends Component {
     activeCategory: "All Categories"
   };
 
-  componentDidMount() {}
-
   buttonClicked = e => {
     const activeCategory = e.target.id;
     this.setState({ activeCategory });
