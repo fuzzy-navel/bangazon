@@ -45,7 +45,7 @@ class Products extends Component {
             <h3 className="h2-category">{category.category}</h3>
             <div className="image-category">
               <Image
-                src={`https://via.placeholder.com/275&text=${category.category}`}
+                src={`https://via.placeholder.com/275&text=${category.count}`}
                 alt={category.category}
                 responsive
               />
