@@ -14,12 +14,10 @@ export default class App extends Component {
           <div className="container">
              <div className="row">
               <Switch>
-                <Route component={SingleProduct} path='/products/:id' />
-                <Route component={Products} path='/products' />
+                <Route component={Shop} path="/shop" />
               </Switch>
             </div>
           </div>
-
         </div>
       </BrowserRouter>
     );
