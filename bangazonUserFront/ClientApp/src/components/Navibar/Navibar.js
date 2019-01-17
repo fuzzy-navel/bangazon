@@ -27,6 +27,19 @@ export class Navibar extends Component {
                 <Navbar.Collapse>
                     <Nav>
                         authed ? (
+                        <LinkContainer to="/products">
+                            <NavItem className="nav navbar-left" href="/products">View Categories</NavItem>
+                        </LinkContainer>
+
+                        <LinkContainer to="/search">
+                            <Navbar.Form pullLeft> 
+                                <FormGroup>
+                                    <FormControl type="text" placeholder="search for product" />
+                                </FormGroup>{' '}
+                                <Button type="submit">Submit</Button>
+                                </Navbar.Form>
+                        </LinkContainer>
+
                         <LinkContainer to="/myAccount">
                             <NavItem href="/myAccount">My Account</NavItem>
                         </LinkContainer>
@@ -41,19 +54,6 @@ export class Navibar extends Component {
                         )
                         :
                         (
-                        <LinkContainer to="/products">
-                            <NavItem className="nav navbar-left" href="/products">View Categories</NavItem>
-                        </LinkContainer>
-
-
-                        <LinkContainer to="/search">
-                            <Navbar.Form pullLeft> 
-                                <FormGroup>
-                                    <FormControl type="text" placeholder="search for product" />
-                                </FormGroup>{' '}
-                                <Button type="submit">Submit</Button>
-                                </Navbar.Form>
-                        </LinkContainer>
 
                         <LinkContainer to="/login">
                             <NavItem href="/login">Login</NavItem>
