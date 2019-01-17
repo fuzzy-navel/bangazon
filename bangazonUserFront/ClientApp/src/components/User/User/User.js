@@ -9,16 +9,16 @@ class User extends Component
       user: [],
     }
 
-  //componentDidMount()
-  //{
-  //  requests.getUser(3).then((res) =>
-  //  {
-  //    this.setState({ user: res });
-  //  }).catch((err) =>
-  //  {
-  //  console.error(err);
-  //  });
-  //}
+  componentDidMount()
+  {
+    requests.getUser(3).then((res) =>
+    {
+      this.setState({ user: res });
+    }).catch((err) =>
+    {
+    console.error(err);
+    });
+  }
 
   render()
   {

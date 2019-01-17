@@ -29,8 +29,8 @@ export class Navibar extends Component {
                 <Navbar.Collapse>
                     <Nav>
                         authed ? (
-                        <LinkContainer to="/myAccount">
-                            <NavItem href="/myAccount">My Account</NavItem>
+                        <LinkContainer to="/user">
+                            <NavItem href="/user">My Account</NavItem>
                         </LinkContainer>
 
                         <LinkContainer to="/cart">

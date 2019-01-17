@@ -17,16 +17,6 @@ fbConnection();
 
 const PrivateRoute = ({ component: Component, authed, ...rest }) => {
     return (
-<<<<<<< HEAD
-      <BrowserRouter>
-        <Switch>
-          <Route exact path='/' component={Home} />
-          <Route path='/counter' component={Counter} />
-          <Route path='/fetchdata' component={FetchData} />
-          <Route path='/user' component={Users} />
-        </Switch>
-      </BrowserRouter>
-=======
         <Route
             {...rest}
             render={props =>
@@ -39,7 +29,6 @@ const PrivateRoute = ({ component: Component, authed, ...rest }) => {
                     )
             }
         />
->>>>>>> shitBroke
     );
 };
 
@@ -108,6 +97,7 @@ class App extends Component {
                                 authed={this.state.authed}
                                 component={Login}
                             />
+                           <PrivateRoute path="/user" authed={this.state.authed} component={Users}/>
                         </div>
                     </div>
                 </BrowserRouter>
