@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, ButtonGroup } from "react-bootstrap";
 
-import './Sidebar.css';
+import "./Sidebar.css";
 
 class Sidebar extends Component {
   state = {
@@ -19,6 +19,7 @@ class Sidebar extends Component {
   render() {
     const categories = [
       "All Categories",
+      "All Products",
       "Automotive",
       "Books",
       "Computers",

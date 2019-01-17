@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import Products from './components/Products/Product';
-import SingleProduct from './components/Products/SingleProduct/SingleProduct';
+import Shop from './components/Shop/Shop';
 
 export default class App extends Component {
   displayName = App.name
