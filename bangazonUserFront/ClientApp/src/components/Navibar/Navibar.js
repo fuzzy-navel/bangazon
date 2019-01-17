@@ -1,10 +1,9 @@
 ﻿import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { Navbar, Nav, NavItem, Button, FormGroup, FormControl } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
-//import authRequests from '';
 
 import './Navibar.css';
 
@@ -12,11 +11,11 @@ export class Navibar extends Component {
     
     render()
     {
-        //const { authed, unAuthed } = this.props;
-        //const signoutClickEvent = () => {
-        //    authRequests.signoutUser();
-        //    unAuthed();
-        //};
+        const { authed, runAway } = this.props;
+        const signoutClickEvent = () => {
+        //    authRequests.logoutUser();
+        //    runAway();
+        };
         return (
             <Navbar inverse collapseOnSelect>
                 <Navbar.Header>
@@ -36,8 +35,8 @@ export class Navibar extends Component {
                             <NavItem href="/cart">Cart</NavItem>
                         </LinkContainer>
 
-                        <LinkContainer to="/signout">
-                            <NavItem href="/signout">Sign Out</NavItem>
+                        <LinkContainer to="/" onClick={signoutClickEvent}>
+                           <NavItem href="/signout">Sign Out</NavItem>
                         </LinkContainer>
                         )
                         :
@@ -46,16 +45,19 @@ export class Navibar extends Component {
                             <NavItem className="nav navbar-left" href="/products">View Categories</NavItem>
                         </LinkContainer>
 
+
+                        <LinkContainer to="/search">
+                            <Navbar.Form pullLeft> 
+                                <FormGroup>
+                                    <FormControl type="text" placeholder="search for product" />
+                                </FormGroup>{' '}
+                                <Button type="submit">Submit</Button>
+                                </Navbar.Form>
+                        </LinkContainer>
+
                         <LinkContainer to="/login">
                             <NavItem href="/login">Login</NavItem>
                         </LinkContainer>
-
-                        <LinkContainer to="/search">
-                            <form className="navbar-form" action="">
-                                <input type="text" placeholder="search for product" />
-                            </form>
-                        </LinkContainer>
-
                         )
                         </Nav>
                 </Navbar.Collapse>
