@@ -32,7 +32,9 @@ export class Navibar extends Component {
                         <LinkContainer to="/user">
                             <NavItem href="/user">My Account</NavItem>
                         </LinkContainer>
-
+                        <LinkContainer to="/paymentTypes">
+                          <NavItem href="/paymentTypes">Payment Types</NavItem>
+                        </LinkContainer>
                         <LinkContainer to="/cart">
                             <NavItem href="/cart">Cart</NavItem>
                         </LinkContainer>

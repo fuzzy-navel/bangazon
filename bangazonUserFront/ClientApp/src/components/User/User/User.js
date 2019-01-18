@@ -1,5 +1,8 @@
 ﻿import React, { Component } from 'react';
 import requests from '../Requests/Requests';
+import AllPaymentTypes from '../../PaymentType/AllPaymentTypes/AllPaymentTypes';
+import AddPaymentTypes from '../../PaymentType/AddPaymentType/AddPaymentType';
+import SinglePaymentType from '../../PaymentType/SinglePaymentType/SinglePaymentType';
 import './User.css';
 
 class User extends Component
@@ -38,6 +41,9 @@ class User extends Component
                 <h4>Id: {this.state.user.id}</h4>
               </div>
             </div>
+            <AllPaymentTypes />
+            <AddPaymentTypes />
+            <SinglePaymentType />
           </div>
         </div>
       </div>

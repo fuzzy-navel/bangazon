@@ -82,20 +82,20 @@ class App extends Component {
                         />
                         <div>
                             <Switch>
-                                <Route path="/" exact component={Home} />
-                            </Switch>
-                            <PublicRoute
+                              <Route path="/" exact component={Home} />
+                              <PublicRoute
                                 path="/register"
                                 authed={this.state.authed}
                                 component={Register}
-                            />
-                            <PublicRoute
+                              />
+                              <PublicRoute
                                 path="/login"
                                 authed={this.state.authed}
                                 component={Login}
-                            />
-                            <PrivateRoute path="/user" authed={this.state.authed} component={Users} />
-                            <PublicRoute path="/paymentTypes" authed={this.state.authed} component={PaymentType}/>
+                              />
+                              <PrivateRoute path="/user" authed={this.state.authed} component={Users} />
+                              <PrivateRoute path="/paymentTypes" authed={this.state.authed} component={PaymentType} />
+                            </Switch>
                         </div>
                     </div>
                 </BrowserRouter>
