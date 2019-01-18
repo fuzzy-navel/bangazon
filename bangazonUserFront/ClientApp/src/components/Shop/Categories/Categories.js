@@ -40,7 +40,7 @@ class Products extends Component {
     const { categories } = this.state;
     let output = categories.map(category => {
       return (
-        <Col xs={4}>
+        <Col xs={4} key={category.category}>
           <Panel className="panel-category">
             <h3 className="h2-category">{category.category}</h3>
             <div className="image-category">

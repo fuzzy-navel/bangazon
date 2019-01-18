@@ -41,7 +41,7 @@ class Sidebar extends Component {
       return (
         <button
           id={cat}
-          block
+          key={cat}
           onClick={this.buttonClicked}
           className={classNamesToUse}
         >

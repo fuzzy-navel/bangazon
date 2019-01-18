@@ -3,6 +3,7 @@ import { Col, Table } from "react-bootstrap";
 
 import Requests from "../../Requests/ProductRequests";
 
+import './Products.css';
 class Products extends Component {
   state = {
     products: [],
@@ -68,7 +69,7 @@ class Products extends Component {
       .map(product => {
         const { title, category, description, price, quantity, id } = product;
         return (
-          <tr>
+          <tr key={id}>
             <td id={id} onClick={this.btnClick}>
               {category}
             </td>
@@ -95,7 +96,7 @@ class Products extends Component {
       });
 
     return (
-      <Col xs={12}>
+      <Col xs={12} id={this.state.sidebar}>
         <h2>{this.state.sidebar}</h2>
         <Table condensed hover>
           <thead>

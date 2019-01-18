@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { Checkbox, Col, ControlLabel, Label } from "react-bootstrap";
-
-import Requests from "../../Requests/ProductRequests";
+import { Checkbox, Col, Label } from "react-bootstrap";
 
 class FilterProducts extends Component {
   state = {

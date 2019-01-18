@@ -15,12 +15,11 @@ class SingleProduct extends Component {
   };
 
   componentDidMount() {
-    const productId = this.props.match.params.id;
+    const productId = this.props.productId;
     return new Promise((resolve, reject) => {
       Requests.GetSingle(productId)
         .then(product => {
           // sets state with product
-          console.log("singleee", product);
           this.setState({
             category: product.category,
             price: product.price,
