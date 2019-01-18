@@ -1,10 +1,15 @@
-﻿//import React, { Component } from 'react';
-//import { Route } from 'react-router';
-//import SinglePaymentType from '';
+﻿import React from 'react';
+import { Switch, Route } from 'react-router';
+import SinglePaymentType from './SinglePaymentType/SinglePaymentType';
+import AllPaymentType from './AllPaymentTypes/AllPaymentTypes';
+import AddPaymentType from './AddPaymentType/AddPaymentType';
 
-//export default class App extends Component {
-//    render() {
-//        return (
-//            )
-//    }
-//}
+const PaymentTypes = () => (
+  <Switch>
+    <Route exact path='/paymentTypes' component={AllPaymentType} />
+    <Route exact path='/paymentTypes/addPayment' component={AddPaymentType} />
+    <Route exact path='/paymentType/:id' component={SinglePaymentType} />
+  </Switch>
+)
+
+export default PaymentTypes;

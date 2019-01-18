@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import  AllPaymentTypes  from './components/PaymentType/AllPaymentTypes/AllPaymentTypes';
-import SinglePaymentType from './components/PaymentType/SinglePaymentType/SinglePaymentType';
-import AddPayment from './components/PaymentType/AddPaymentType/AddPaymentType';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
-
-
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'; 
 import firebase from 'firebase';
 import fbConnection from './firebaseRequests/connection';
 import Users from './components/User/Users';
@@ -12,6 +7,7 @@ import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import Home from './components/Home/Home';
 import Navibar from './components/Navibar/Navibar';
+import PaymentType from './components/PaymentType/PaymentType';
 
 fbConnection();
 
@@ -98,22 +94,8 @@ class App extends Component {
                                 authed={this.state.authed}
                                 component={Login}
                             />
-                            <PublicRoute
-                                
-                                authed={this.state.authed}
-                                component={AddPayment}
-                            />
-                             <PublicRoute
-                               
-                                authed={this.state.authed}
-                                component={AllPaymentTypes}
-                            />
-                            <PublicRoute
-
-                                authed={this.state.authed}
-                                component={SinglePaymentType}
-                            />
-                           <PrivateRoute path="/user" authed={this.state.authed} component={Users}/>
+                            <PrivateRoute path="/user" authed={this.state.authed} component={Users} />
+                            <PublicRoute path="/paymentTypes" authed={this.state.authed} component={PaymentType}/>
                         </div>
                     </div>
                 </BrowserRouter>
