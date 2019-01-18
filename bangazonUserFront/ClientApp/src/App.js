@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, BrowserRouter, Switch } from 'react-router-dom';
+
 import Navibar from './components/Navibar/Navibar';
 
-//import { Layout } from './components/Layout';
-//import { Home } from './components/Home';
-//import { FetchData } from './components/FetchData';
-//import { Counter } from './components/Counter';
+
+import './App.css';
 
 export default class App extends Component {
-  //displayName = App.name
 
   render() {
       return (
@@ -18,17 +16,18 @@ export default class App extends Component {
                   <div className="container">
                       <div className="row">
                           <Switch>
+                              <Route path="/" exact component={Home} />
+                              
+
                           </Switch>
                       </div>
                   </div>
               </div>
           </BrowserRouter>
 
-      //<Layout>
-      //  <Route exact path='/' component={Home} />
-      //  <Route path='/counter' component={Counter} />
-      //  <Route path='/fetchdata' component={FetchData} />
-      //</Layout>
+      
     );
   }
 }
+
+export default App;

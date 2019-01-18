@@ -27,8 +27,8 @@ export class Navibar extends Component {
                 <Navbar.Collapse>
                     <Nav>
                         authed ? (
-                        <LinkContainer to="/products">
-                            <NavItem className="nav navbar-left" href="/products">View Categories</NavItem>
+                        <LinkContainer to="/shop">
+                            <NavItem className="nav navbar-left" href="/shop">View Categories</NavItem>
                         </LinkContainer>
 
                         <LinkContainer to="/search">
