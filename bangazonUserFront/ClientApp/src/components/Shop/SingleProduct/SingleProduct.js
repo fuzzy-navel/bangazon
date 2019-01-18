@@ -39,7 +39,7 @@ class SingleProduct extends Component {
     const { title, category, description, price, quantity, id } = this.state;
 
     return (
-      <Col xs={6} xsOffset={3}>
+      <Col xs={8} xsOffset={2}>
         <Panel className="panel-product">
           <h2 className="h2-product">{title}</h2>
           <div className="image-product">

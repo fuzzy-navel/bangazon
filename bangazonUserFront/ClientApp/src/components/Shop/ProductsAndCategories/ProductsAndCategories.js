@@ -5,6 +5,7 @@ import Sidebar from "../../Sidebar/Sidebar";
 import Products from "../Products/Products";
 import Categories from "../Categories/Categories";
 import SingleProduct from "../SingleProduct/SingleProduct";
+import FilterProducts from "../FilterProducts/FilterProducts";
 
 import "./ProductsAndCategories.css";
 
@@ -12,7 +13,9 @@ class ProductsAndCategories extends Component {
   state = {
     products: [],
     sidebar: "All Categories",
+    showInStockOnly: false,
     activeProduct: 0,
+    productId: null,
     displaySingleProduct: false,
     displayProducts: false,
     displayCategories: true,
@@ -58,6 +61,10 @@ class ProductsAndCategories extends Component {
     this.setState({ productId });
   };
 
+  filterCallback = showInStockOnly => {
+    this.setState({ showInStockOnly });
+  };
+
   render() {
     return (
       <div>
@@ -66,14 +73,21 @@ class ProductsAndCategories extends Component {
             <Sidebar callbackFromParent={this.sidebarCallback} />
           </Col>
           <Col xs={12} sm={9}>
-            {this.state.displaySingleProduct ? (
-              <SingleProduct sidebar={this.state.sidebar} />
+          {this.state.displaySingleProduct ? (
+              <SingleProduct
+                sidebar={this.state.sidebar}
+                productId={this.state.productId}
+              />
             ) : null}
             {this.state.displayProducts ? (
-              <Products
-                sidebar={this.state.sidebar}
-                callbackFromParent={this.productsCallback}
-              />
+              <div>
+                <FilterProducts callbackFromParent={this.filterCallback} />
+                <Products
+                  sidebar={this.state.sidebar}
+                  showInStockOnly={this.state.showInStockOnly}
+                  callbackFromParent={this.productsCallback}
+                />
+              </div>
             ) : null}
             {this.state.displayCategories ? (
               <Categories sidebar={this.state.sidebar} />

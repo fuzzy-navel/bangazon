@@ -8,6 +8,7 @@ class Products extends Component {
     products: [],
     activeProduct: "",
     sidebar: "",
+    showInStockOnly: false,
     title: "",
     category: 0,
     description: "",
@@ -25,7 +26,10 @@ class Products extends Component {
         this.setState({
           products: products
         })
-        this.setState({ sidebar: this.props.sidebar });
+        this.setState({
+          sidebar: this.props.sidebar,
+          showInStockOnly: this.props.showInStockOnly
+        });
         resolve (products);
       })
       .catch(error => reject(error));
@@ -34,15 +38,13 @@ class Products extends Component {
 
   componentWillReceiveProps() {
     this.setState((state, props) => ({
-      sidebar: props.sidebar
+      sidebar: props.sidebar,
+      showInStockOnly: props.showInStockOnly
     }));
   }
 
   btnClick = e => {
     const activeProduct = e.target.id;
-
-    console.log("product button clicked:", e.target.id);
-
     this.setState({ activeProduct });
     this.props.callbackFromParent(activeProduct);
   };
@@ -50,6 +52,13 @@ class Products extends Component {
   render() {
     const { products } = this.state;
     let output = products
+      .filter(product => {
+        if (this.state.showInStockOnly) {
+          return product.quantity > 0;
+        } else {
+          return product;
+        }
+      })
       .filter(product => {
         return (
           product.category === this.state.sidebar ||
