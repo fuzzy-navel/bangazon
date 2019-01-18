@@ -10,7 +10,9 @@ class User extends Component
     }
 
   componentDidMount()
-  {
+  { 
+    requests.setAuthStuff();
+
     requests.getUser(3).then((res) =>
     {
       this.setState({ user: res });
