@@ -7,7 +7,8 @@ import './Categories.css';
 
 class Products extends Component {
   state = {
-    categories: []
+    categories: [],
+    lastProducts: [],
   };
 
   componentDidMount() {
@@ -16,9 +17,20 @@ class Products extends Component {
       .then(producttypes => {
         this.setState({ categories: producttypes });
         resolve (producttypes);
+      });
+      Requests.GetLastThreeProductsByCategory()
+      .then(lastProducts => {
+        this.setState({ lastProducts });
+        console.log('lastProducts',lastProducts);
+        console.log('lastProducts state',this.state.lastProducts);
+        console.log('categ',this.state.categories);
+        resolve (lastProducts);
       })
       .catch(error => reject(error));
     });
+
+
+
   }
   // componentDidMount() {
   //   this.setState({
@@ -37,8 +49,23 @@ class Products extends Component {
   // }
 
   render() {
-    const { categories } = this.state;
+    const { categories, lastProducts } = this.state;
+    // console.log('render catg',this.state.categories);
+    // console.log('render last',this.state.lastProducts);
     let output = categories.map(category => {
+      // console.log('map category', category);
+      let title1 = "";
+      let title2 = "";
+      let title3 = "";
+      for (let i = 0; i < lastProducts.length; i++) {
+        if (lastProducts[i].category == category.category) {
+          // console.log('test',lastProducts[i].category);
+          title1 += `${lastProducts[i].title}`;
+          title2 += `${lastProducts[i+1].title}`;
+          title3 += `${lastProducts[i+2].title}`;
+          break;
+        }
+      }
       return (
         <Col xs={4} key={category.category}>
           <Panel className="panel-category">
@@ -50,6 +77,9 @@ class Products extends Component {
                 responsive
               />
             </div>
+            <p>{title1}</p>
+            <p>{title2}</p>
+            <p>{title3}</p>
           </Panel>
         </Col>
       );
