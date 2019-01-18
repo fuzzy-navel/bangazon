@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router';
-import { Layout } from './components/Layout';
 import  AllPaymentTypes  from './components/PaymentType/AllPaymentTypes/AllPaymentTypes';
 import SinglePaymentType from './components/PaymentType/SinglePaymentType/SinglePaymentType';
 import AddPayment from './components/PaymentType/AddPaymentType/AddPaymentType';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Navibar from './components/Navibar/Navibar';
-import { BrowserRouter, Redirect, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
+
+
 import firebase from 'firebase';
 import fbConnection from './firebaseRequests/connection';
- import Users from './components/User/Users';
+import Users from './components/User/Users';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import Home from './components/Home/Home';
@@ -48,6 +46,7 @@ const PublicRoute = ({ component: Component, authed, ...rest }) => {
                     )
             }
         />
+
     );
 };
 
