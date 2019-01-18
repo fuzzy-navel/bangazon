@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, ButtonGroup } from "react-bootstrap";
+import { ButtonGroup } from "react-bootstrap";
 
 import "./Sidebar.css";
 
@@ -28,11 +28,25 @@ class Sidebar extends Component {
       "Tools",
       "Toys"
     ];
+
     const output = categories.map(cat => {
+      // determines if this sidebar item is active or not
+      let classNamesToUse = "";
+      if (cat === this.state.activeCategory) {
+        classNamesToUse = "sidebar-button sidebar-active";
+      } else {
+        classNamesToUse = "sidebar-button";
+      }
+
       return (
-        <Button bsSize="large" id={cat} block onClick={this.buttonClicked}>
+        <button
+          id={cat}
+          block
+          onClick={this.buttonClicked}
+          className={classNamesToUse}
+        >
           {cat}
-        </Button>
+        </button>
       );
     });
 
