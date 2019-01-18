@@ -31,11 +31,11 @@ class User extends Component
           <div className="col-md-3">
             <div class="panel panel-default">
               <div class="panel-heading">
-                <h3 class="panel-title userName">User Name</h3>
+                <h3 class="panel-title userName">{this.state.user.first_name} {this.state.user.last_name}</h3>
               </div>
               <div class="panel-body">
-                <h4>Customer Since: </h4>
-                <h4>Id: </h4>
+                <h4>Customer Since: {this.state.user.date_joined}</h4>
+                <h4>Id: {this.state.user.id}</h4>
               </div>
             </div>
           </div>

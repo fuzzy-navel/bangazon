@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-
 import { Route } from 'react-router';
 import { BrowserRouter, Redirect, Switch } from 'react-router-dom';
 import firebase from 'firebase';
