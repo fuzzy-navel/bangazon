@@ -1,0 +1,15 @@
+﻿const constants = {
+  bangazonConfig: {
+	databaseURL: '',
+  },
+  firebaseConfig: {
+    apiKey: '',
+    authDomain: '',
+    databaseURL: '',
+    projectId: '',
+    storageBucket: '',
+    messagingSenderId: '',
+  },
+};
+
+export default constants;

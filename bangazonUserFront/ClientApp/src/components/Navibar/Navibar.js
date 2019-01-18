@@ -3,20 +3,21 @@ import { Link } from 'react-router-dom';
 
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import Login from '../Login/Login';
 
-//import authRequests from '';
+import authRequests from '../../firebaseRequests/auth';
 
 import './Navibar.css';
 
 export class Navibar extends Component {
-    
     render()
     {
-        //const { authed, unAuthed } = this.props;
-        //const signoutClickEvent = () => {
-        //    authRequests.signoutUser();
-        //    unAuthed();
-        //};
+        const { authed, runAway } = this.props;
+
+        const signoutClickEvent = () => {
+            authRequests.logoutUser();
+            runAway();
+        };
         return (
             <Navbar inverse collapseOnSelect>
                 <Navbar.Header>
@@ -28,16 +29,16 @@ export class Navibar extends Component {
                 <Navbar.Collapse>
                     <Nav>
                         authed ? (
-                        <LinkContainer to="/myAccount">
-                            <NavItem href="/myAccount">My Account</NavItem>
+                        <LinkContainer to="/user">
+                            <NavItem href="/user">My Account</NavItem>
                         </LinkContainer>
 
                         <LinkContainer to="/cart">
                             <NavItem href="/cart">Cart</NavItem>
                         </LinkContainer>
 
-                        <LinkContainer to="/signout">
-                            <NavItem href="/signout">Sign Out</NavItem>
+                        <LinkContainer to="/" onClick={signoutClickEvent}>
+                            <NavItem href="/">Sign Out</NavItem>
                         </LinkContainer>
                         )
                         :
