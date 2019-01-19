@@ -1,4 +1,7 @@
 ﻿const constants =  {
+bangazonConfig: {
+        databaseURL: ''
+    },
   firebaseConfig: {
     apiKey: '',
     authDomain: '',
