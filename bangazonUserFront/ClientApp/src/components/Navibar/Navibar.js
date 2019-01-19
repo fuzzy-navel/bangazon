@@ -1,7 +1,7 @@
 ﻿import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { Navbar, Nav, NavItem, Button, FormGroup, FormControl } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
 
 import authRequests from '../../firebaseRequests/auth';
@@ -27,30 +27,38 @@ export class Navibar extends Component {
                 </Navbar.Header>
                 <Navbar.Collapse>
                     <Nav>
+
+                        <LinkContainer to="/shop">
+                            <NavItem className="nav navbar-left">View Categories</NavItem>
+                        </LinkContainer>
+
                         <LinkContainer to="/myAccount">
-                            <NavItem href="/myAccount">My Account</NavItem>
+                            <NavItem>My Account</NavItem>
                         </LinkContainer>
 
                         <LinkContainer to="/cart">
-                            <NavItem href="/cart">Cart</NavItem>
+                            <NavItem>Cart</NavItem>
                         </LinkContainer>
 
-                        <LinkContainer to="/" onClick={signoutClickEvent}>
-                            <NavItem href="/">Sign Out</NavItem>
-                        </LinkContainer>
-
-                        <LinkContainer to="/shop">
-                            <NavItem className="nav navbar-left" href="/shop">View Categories</NavItem>
-                        </LinkContainer>
-
-                        <LinkContainer to="/login">
-                            <NavItem href="/login">Login</NavItem>
-                        </LinkContainer>
-
+                        if (authed == true) {
+                            <LinkContainer to="/" onClick={signoutClickEvent}>
+                                <NavItem>Sign Out</NavItem>
+                            </LinkContainer>
+                        } else {
+                            <LinkContainer to="/login">
+                                <NavItem>Login</NavItem>
+                            </LinkContainer>
+                        }
+                                
                         <LinkContainer to="/search">
-                            <form className="navbar-form" action="">
-                                <input type="text" placeholder="search for product" />
-                            </form>
+                            <NavItem>
+                                <Navbar.Form pullLeft>
+                                    <FormGroup>
+                                        <FormControl type="text" placeholder="search for product" />
+                                    </FormGroup>{' '}
+                                    <Button type="submit">Submit</Button>
+                                </Navbar.Form>
+                            </NavItem>
                         </LinkContainer>
 
                         </Nav>
