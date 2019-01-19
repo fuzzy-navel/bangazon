@@ -1,19 +1,14 @@
 ﻿import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { Navbar, Nav, NavItem, Button, FormGroup, FormControl } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import Login from '../Login/Login';
 
 import authRequests from '../../firebaseRequests/auth';
 
 import './Navibar.css';
 
 export class Navibar extends Component {
-<<<<<<< HEAD
-=======
-
->>>>>>> master
     render()
     {
         const { authed, runAway } = this.props;
@@ -32,35 +27,50 @@ export class Navibar extends Component {
                 </Navbar.Header>
                 <Navbar.Collapse>
                     <Nav>
+
                         authed ? (
                         <LinkContainer to="/user">
                             <NavItem href="/user">My Account</NavItem>
                         </LinkContainer>
                         <LinkContainer to="/cart">
                             <NavItem href="/cart">Cart</NavItem>
+
+
+                        <LinkContainer to="/shop">
+                            <NavItem className="nav navbar-left">View Categories</NavItem>
+
                         </LinkContainer>
 
-                        <LinkContainer to="/" onClick={signoutClickEvent}>
-                            <NavItem href="/">Sign Out</NavItem>
+                        <LinkContainer to="/myAccount">
+                            <NavItem>My Account</NavItem>
                         </LinkContainer>
+
+                        <LinkContainer to="/cart">
+                            <NavItem>Cart</NavItem>
+                        </LinkContainer>
+
+                        { authed ? (
+                            <LinkContainer to="/" onClick={signoutClickEvent}>
+                                <NavItem>Sign Out</NavItem>
+                            </LinkContainer>
+                        ) : (
+                            <LinkContainer to="/login">
+                                <NavItem>Login</NavItem>
+                            </LinkContainer>
                         )
-                        :
-                        (
-                        <LinkContainer to="/products">
-                            <NavItem className="nav navbar-left" href="/shop">View Categories</NavItem>
-                        </LinkContainer>
-
-                        <LinkContainer to="/login">
-                            <NavItem href="/login">Login</NavItem>
-                        </LinkContainer>
-
+                        }
+                                
                         <LinkContainer to="/search">
-                            <form className="navbar-form" action="">
-                                <input type="text" placeholder="search for product" />
-                            </form>
+                            <NavItem>
+                                <Navbar.Form pullLeft>
+                                    <FormGroup>
+                                        <FormControl type="text" placeholder="search for product" />
+                                    </FormGroup>{' '}
+                                    <Button type="submit">Submit</Button>
+                                </Navbar.Form>
+                            </NavItem>
                         </LinkContainer>
 
-                        )
                         </Nav>
                 </Navbar.Collapse>
             </Navbar>
