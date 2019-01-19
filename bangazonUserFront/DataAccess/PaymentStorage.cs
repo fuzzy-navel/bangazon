@@ -17,7 +17,7 @@ namespace bangazon.DataAccess
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                var result = connection.Query<PaymentType>(@"select * from payment_type");
+                var result = connection.Query<PaymentType>(@"select * from payment_type where customer_id = 3");
 
                 return result;
 

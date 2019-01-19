@@ -79,9 +79,6 @@ class AddPaymentType extends Component {
                 <Button
                     onClick={this.addNewPaymentClick}
                 >Save Changes</Button>
-                <Button
-                    onClick={() => this.props.history.push('/paymenttypes/')}
-                >View Updated List</Button>
             </div>
 
         );
