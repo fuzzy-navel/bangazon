@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+
+import Shop from './components/Shop/Shop';
 import Navibar from './components/Navibar/Navibar';
 
 //import { Layout } from './components/Layout';
@@ -18,6 +20,7 @@ export default class App extends Component {
                   <div className="container">
                       <div className="row">
                           <Switch>
+                            <Route component={Shop} path="/shop" />
                           </Switch>
                       </div>
                   </div>

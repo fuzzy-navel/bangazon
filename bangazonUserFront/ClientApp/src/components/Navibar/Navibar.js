@@ -9,7 +9,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import './Navibar.css';
 
 export class Navibar extends Component {
-    
+
     render()
     {
         //const { authed, unAuthed } = this.props;
@@ -43,7 +43,7 @@ export class Navibar extends Component {
                         :
                         (
                         <LinkContainer to="/products">
-                            <NavItem className="nav navbar-left" href="/products">View Categories</NavItem>
+                            <NavItem className="nav navbar-left" href="/shop">View Categories</NavItem>
                         </LinkContainer>
 
                         <LinkContainer to="/login">
