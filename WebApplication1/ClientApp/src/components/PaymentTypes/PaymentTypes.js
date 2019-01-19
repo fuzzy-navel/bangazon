@@ -52,7 +52,6 @@ class PaymentTypes extends Component {
     return (
         <div className="AllPaymentTypes">
             <h1>Payment Types</h1>
-            <Button onClick={() => this.props.history.push('/paymenttype')}>Add Payment Type</Button>
             <ul className="types">
                 {paymentComponents}
             </ul>
