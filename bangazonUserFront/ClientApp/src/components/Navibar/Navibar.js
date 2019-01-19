@@ -40,14 +40,15 @@ export class Navibar extends Component {
                             <NavItem>Cart</NavItem>
                         </LinkContainer>
 
-                        if (authed == true) {
+                        { authed ? (
                             <LinkContainer to="/" onClick={signoutClickEvent}>
                                 <NavItem>Sign Out</NavItem>
                             </LinkContainer>
-                        } else {
+                        ) : (
                             <LinkContainer to="/login">
                                 <NavItem>Login</NavItem>
                             </LinkContainer>
+                        )
                         }
                                 
                         <LinkContainer to="/search">
