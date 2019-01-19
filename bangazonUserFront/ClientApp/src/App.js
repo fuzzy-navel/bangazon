@@ -6,7 +6,7 @@ import { Route, BrowserRouter, Switch } from 'react-router-dom';
 import Navibar from './components/Navibar/Navibar';
 
 
-import './App.css';
+//import './App.css';
 
 class App extends Component {
 
