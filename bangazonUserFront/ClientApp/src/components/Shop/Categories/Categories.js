@@ -9,6 +9,7 @@ class Products extends Component {
   state = {
     categories: [],
     lastProducts: [],
+    activeCategory: "All Categories"
   };
 
   componentDidMount() {
@@ -28,9 +29,6 @@ class Products extends Component {
       })
       .catch(error => reject(error));
     });
-
-
-
   }
   // componentDidMount() {
   //   this.setState({
@@ -47,19 +45,20 @@ class Products extends Component {
   //     ]
   //   });
   // }
+  buttonClicked = e => {
+    const activeCategory = e.target.id;
+    this.setState({ activeCategory });
+    this.props.callbackFromParent(activeCategory);
+  };
 
   render() {
     const { categories, lastProducts } = this.state;
-    // console.log('render catg',this.state.categories);
-    // console.log('render last',this.state.lastProducts);
     let output = categories.map(category => {
-      // console.log('map category', category);
       let title1 = "";
       let title2 = "";
       let title3 = "";
       for (let i = 0; i < lastProducts.length; i++) {
         if (lastProducts[i].category == category.category) {
-          // console.log('test',lastProducts[i].category);
           title1 += `${lastProducts[i].title}`;
           title2 += `${lastProducts[i+1].title}`;
           title3 += `${lastProducts[i+2].title}`;
@@ -68,7 +67,7 @@ class Products extends Component {
       }
       return (
         <Col xs={4} key={category.category}>
-          <Panel className="panel-category">
+          <Panel className="panel-category" id={category.category} onClick={this.buttonClicked}>
             <h3 className="h2-category">{category.category}</h3>
             <div className="image-category">
               <Image
@@ -86,7 +85,7 @@ class Products extends Component {
     });
 
     return (
-      <Col xs={12}>
+      <Col xs={12} className="categories">
         <h2>All Categories</h2>
         {output};
       </Col>
