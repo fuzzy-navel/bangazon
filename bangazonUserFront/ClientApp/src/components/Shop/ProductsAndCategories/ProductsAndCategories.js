@@ -67,34 +67,46 @@ class ProductsAndCategories extends Component {
 
   render() {
     return (
-      <div>
-        <Col xs={12}>
-          <Col xs={12} sm={3} className="sidebar-menu">
-            <Sidebar callbackFromParent={this.sidebarCallback} />
-          </Col>
-          <Col xs={12} sm={9}>
-          {this.state.displaySingleProduct ? (
-              <SingleProduct
-                sidebar={this.state.sidebar}
-                productId={this.state.productId}
-              />
-            ) : null}
-            {this.state.displayProducts ? (
-              <div>
-                <FilterProducts callbackFromParent={this.filterCallback} />
-                <Products
-                  sidebar={this.state.sidebar}
-                  showInStockOnly={this.state.showInStockOnly}
-                  callbackFromParent={this.productsCallback}
-                />
-              </div>
-            ) : null}
-            {this.state.displayCategories ? (
-              <Categories sidebar={this.state.sidebar} />
-            ) : null}
-          </Col>
+      <Col xs={12} className="col-container reset-margin-padding">
+        <Col xs={12} sm={3} className="col-sidebar reset-margin-padding">
+          <Sidebar
+            callbackFromParent={this.sidebarCallback} />
         </Col>
-      </div>
+        <Col
+          xs={12}
+          sm={9}
+          className="col-products-categories reset-margin-padding"
+        >
+          {this.state.displaySingleProduct ? (
+            <SingleProduct
+              className="reset-margin-padding"
+              sidebar={this.state.sidebar}
+              productId={this.state.productId}
+            />
+          ) : null}
+          {this.state.displayProducts ? (
+            <div>
+              <FilterProducts
+                className="reset-margin-padding"
+                callbackFromParent={this.filterCallback}
+              />
+              <Products
+                className="reset-margin-padding"
+                sidebar={this.state.sidebar}
+                showInStockOnly={this.state.showInStockOnly}
+                callbackFromParent={this.productsCallback}
+              />
+            </div>
+          ) : null}
+          {this.state.displayCategories ? (
+            <Categories
+              className="reset-margin-padding"
+              sidebar={this.state.sidebar}
+              callbackFromParent={this.sidebarCallback}
+            />
+          ) : null}
+        </Col>
+      </Col>
     );
   }
 }

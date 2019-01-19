@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button, Col, Glyphicon, Image, Panel } from "react-bootstrap";
+import { Button, Col, Image, Panel } from "react-bootstrap";
 import Requests from "../../Requests/ProductRequests";
 
 import "./SingleProduct.css";
@@ -71,9 +71,6 @@ class SingleProduct extends Component {
             </Button>
           )}
         </Panel>
-        <Button onClick={() => this.props.history.goBack()}>
-          <Glyphicon glyph="arrow-left" /> Back
-        </Button>
       </Col>
     );
   }

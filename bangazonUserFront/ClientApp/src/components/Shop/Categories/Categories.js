@@ -22,9 +22,6 @@ class Products extends Component {
       Requests.GetLastThreeProductsByCategory()
       .then(lastProducts => {
         this.setState({ lastProducts });
-        console.log('lastProducts',lastProducts);
-        console.log('lastProducts state',this.state.lastProducts);
-        console.log('categ',this.state.categories);
         resolve (lastProducts);
       })
       .catch(error => reject(error));
@@ -47,6 +44,7 @@ class Products extends Component {
   // }
   buttonClicked = e => {
     const activeCategory = e.target.id;
+    console.log('buttonclicked',e.target.id);
     this.setState({ activeCategory });
     this.props.callbackFromParent(activeCategory);
   };
@@ -58,7 +56,7 @@ class Products extends Component {
       let title2 = "";
       let title3 = "";
       for (let i = 0; i < lastProducts.length; i++) {
-        if (lastProducts[i].category == category.category) {
+        if (lastProducts[i].category === category.category) {
           title1 += `${lastProducts[i].title}`;
           title2 += `${lastProducts[i+1].title}`;
           title3 += `${lastProducts[i+2].title}`;
@@ -66,13 +64,22 @@ class Products extends Component {
         }
       }
       return (
-        <Col xs={4} key={category.category}>
-          <Panel className="panel-category" id={category.category} onClick={this.buttonClicked}>
+        <Col
+          xs={4}
+          key={category.category}
+          id={category.category}
+          onClick={this.buttonClicked} >
+          <Panel
+            className="panel-category"
+            id={category.category}
+            onClick={this.buttonClicked} >
             <h3 className="h2-category">{category.category}</h3>
             <div className="image-category">
               <Image
                 src={`https://via.placeholder.com/275&text=${category.count}`}
                 alt={category.category}
+                id={category.category}
+                onClick={this.buttonClicked}
                 responsive
               />
             </div>

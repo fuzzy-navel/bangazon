@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Checkbox, Col, Label } from "react-bootstrap";
 
+import "./FilterProducts.css";
 class FilterProducts extends Component {
   state = {
     inUse: false
@@ -14,10 +15,13 @@ class FilterProducts extends Component {
 
   render() {
     return (
-      <Col xs={12}>
-        <Label>In Stock Only? </Label>
+      <Col xs={12} className="checkbox-instock reset-margin-padding">
+        <Label className="reset-margin-padding checkbox-label">
+          In Stock Only?{" "}
+        </Label>
         <Checkbox
           name="inUse"
+          className="reset-margin-padding checkbox"
           checked={this.state.inUse}
           onChange={this.toggleCheckbox}
         />
