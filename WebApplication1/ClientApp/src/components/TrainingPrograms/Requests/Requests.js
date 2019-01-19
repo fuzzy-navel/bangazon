@@ -66,7 +66,7 @@ const getAttendees = (id) =>
     axios.get(`api/trainingprogram/${id}/attendees`)
       .then((res) =>
       {
-        if (res != null)
+        if (res !== null)
         {
           resolve(res.data);
         }
