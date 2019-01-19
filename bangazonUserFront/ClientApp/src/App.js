@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router';
-import { BrowserRouter, Redirect, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'; 
 import firebase from 'firebase';
 import fbConnection from './firebaseRequests/connection';
+import Users from './components/User/Users';
+
 
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import Home from './components/Home/Home';
-import Navibar from './components/Navibar/Navibar';
 import Shop from './components/Shop/Shop';
-//import { Layout } from './components/Layout';
-//import { Home } from './components/Home';
-//import { FetchData } from './components/FetchData';
-//import { Counter } from './components/Counter';
+import Navibar from './components/Navibar/Navibar';
+import PaymentType from './components/PaymentType/PaymentType';
+
+
 fbConnection();
 
 const PrivateRoute = ({ component: Component, authed, ...rest }) => {
@@ -40,8 +40,10 @@ const PublicRoute = ({ component: Component, authed, ...rest }) => {
                 <Component {...props} />
             }
         />
+
     );
 };
+
 
 class App extends Component {
     displayName = App.name
@@ -80,22 +82,29 @@ class App extends Component {
                         <div>
                             <Switch>
                                 <Route path="/" exact component={Home} />
-                            </Switch>
-                            <PublicRoute
+                                <Route component={Shop} path="/shop" />
+                              <PublicRoute
                                 path="/register"
                                 authed={this.state.authed}
                                 component={Register}
-                            />
-                            <PublicRoute
+                              />
+                              <PublicRoute
                                 path="/login"
                                 authed={this.state.authed}
                                 component={Login}
-                            />
+
+                              />
+                              <PrivateRoute path="/user" authed={this.state.authed} component={Users} />
+                              <PrivateRoute path="/paymentTypes" authed={this.state.authed} component={PaymentType} />
+                            </Switch>
+
+                           
                             <PublicRoute
                                 path="/shop"
                                 authed={this.state.authed}
                                 component={Shop}
                             />
+
                         </div>
                     </div>
                 </BrowserRouter>

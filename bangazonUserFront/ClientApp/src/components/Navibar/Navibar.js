@@ -9,8 +9,7 @@ import authRequests from '../../firebaseRequests/auth';
 import './Navibar.css';
 
 export class Navibar extends Component {
-    render()
-    {
+    render() {
         const { authed, runAway } = this.props;
 
         const signoutClickEvent = () => {
@@ -32,7 +31,7 @@ export class Navibar extends Component {
                             <NavItem className="nav navbar-left">View Categories</NavItem>
                         </LinkContainer>
 
-                        <LinkContainer to="/myAccount">
+                        <LinkContainer to="/user">
                             <NavItem>My Account</NavItem>
                         </LinkContainer>
 
@@ -40,17 +39,17 @@ export class Navibar extends Component {
                             <NavItem>Cart</NavItem>
                         </LinkContainer>
 
-                        { authed ? (
+                        {authed ? (
                             <LinkContainer to="/" onClick={signoutClickEvent}>
                                 <NavItem>Sign Out</NavItem>
                             </LinkContainer>
                         ) : (
-                            <LinkContainer to="/login">
-                                <NavItem>Login</NavItem>
-                            </LinkContainer>
-                        )
+                                <LinkContainer to="/login">
+                                    <NavItem>Login</NavItem>
+                                </LinkContainer>
+                            )
                         }
-                                
+
                         <LinkContainer to="/search">
                             <NavItem>
                                 <Navbar.Form pullLeft>
@@ -62,7 +61,7 @@ export class Navibar extends Component {
                             </NavItem>
                         </LinkContainer>
 
-                        </Nav>
+                    </Nav>
                 </Navbar.Collapse>
             </Navbar>
 

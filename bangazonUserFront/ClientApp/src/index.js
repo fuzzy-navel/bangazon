@@ -14,7 +14,7 @@ ReactDOM.render(
   <BrowserRouter basename={baseUrl}>
     <App />
   </BrowserRouter>,
-  rootElement);
+    rootElement);
 
 registerServiceWorker();
 {/*ReactDOM.render(<App />, document.getElementById('root'));
