@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
-import Login from '../Login/Login';
 
 import authRequests from '../../firebaseRequests/auth';
 
@@ -28,7 +27,6 @@ export class Navibar extends Component {
                 </Navbar.Header>
                 <Navbar.Collapse>
                     <Nav>
-                        authed ? (
                         <LinkContainer to="/myAccount">
                             <NavItem href="/myAccount">My Account</NavItem>
                         </LinkContainer>
@@ -40,11 +38,9 @@ export class Navibar extends Component {
                         <LinkContainer to="/" onClick={signoutClickEvent}>
                             <NavItem href="/">Sign Out</NavItem>
                         </LinkContainer>
-                        )
-                        :
-                        (
-                        <LinkContainer to="/products">
-                            <NavItem className="nav navbar-left" href="/products">View Categories</NavItem>
+
+                        <LinkContainer to="/shop">
+                            <NavItem className="nav navbar-left" href="/shop">View Categories</NavItem>
                         </LinkContainer>
 
                         <LinkContainer to="/login">
@@ -57,7 +53,6 @@ export class Navibar extends Component {
                             </form>
                         </LinkContainer>
 
-                        )
                         </Nav>
                 </Navbar.Collapse>
             </Navbar>

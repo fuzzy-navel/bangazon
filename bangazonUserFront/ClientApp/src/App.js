@@ -8,6 +8,7 @@ import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import Home from './components/Home/Home';
 import Navibar from './components/Navibar/Navibar';
+import Shop from './components/Shop/Shop';
 //import { Layout } from './components/Layout';
 //import { Home } from './components/Home';
 //import { FetchData } from './components/FetchData';
@@ -36,13 +37,7 @@ const PublicRoute = ({ component: Component, authed, ...rest }) => {
         <Route
             {...rest}
             render={props =>
-                authed === false ? (
-                    <Component {...props} />
-                ) : (
-                        <Redirect
-                            to={{ pathname: '/orders', state: { from: props.location } }}
-                        />
-                    )
+                <Component {...props} />
             }
         />
     );
@@ -95,6 +90,11 @@ class App extends Component {
                                 path="/login"
                                 authed={this.state.authed}
                                 component={Login}
+                            />
+                            <PublicRoute
+                                path="/shop"
+                                authed={this.state.authed}
+                                component={Shop}
                             />
                         </div>
                     </div>

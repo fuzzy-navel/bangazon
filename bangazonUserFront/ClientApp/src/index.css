@@ -1,3 +1,26 @@
+.reset-margin-padding {
+    margin: 0;
+    padding: 0;
+  }
+
+body {
+color: #2d2d2d;
+}
+
+p,
+a,
+body {
+font-family: "Montserrat", sans-serif;
+}
+
+h1, h2, h3,
+h4, h5, h6,
+nav, NavItem,
+link,
+{
+font-family: "Staatliches", cursive;
+}
+
 @media (max-width: 767px) {
     /* On small screens, the nav menu spans the full width of the screen. Leave a space for it. */
     body {

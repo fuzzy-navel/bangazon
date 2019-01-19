@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 
 namespace bangazon.Models
 {
-    public class ProductType
+    public class ProductTypeLastThreeProducts
     {
         public string category { get; set; }
         public int? id { get; set; }
         public int? count { get; set; }
-        public string title { get; set; }
     }
 }
