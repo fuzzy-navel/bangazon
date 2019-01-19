@@ -31,16 +31,7 @@ export class Navibar extends Component {
                             <NavItem className="nav navbar-left" >View Categories</NavItem>
                         </LinkContainer>
 
-                        <LinkContainer to="/search">
-                            <NavItem>
-                            <Navbar.Form pullLeft> 
-                                <FormGroup>
-                                    <FormControl type="text" placeholder="search for product" />
-                                </FormGroup>{' '}
-                                <Button type="submit">Submit</Button>
-                                </Navbar.Form>
-                                </NavItem>
-                        </LinkContainer>
+                        
 
                         <LinkContainer to="/myAccount">
                             <NavItem >My Account</NavItem>
@@ -61,6 +52,16 @@ export class Navibar extends Component {
                             <NavItem >Login</NavItem>
                         </LinkContainer>
                         )
+                        <LinkContainer to="/search">
+                            <NavItem>
+                                <Navbar.Form pullRight >
+                                    <FormGroup>
+                                        <FormControl type="text" placeholder="search for product" />
+                                    </FormGroup>{' '}
+                                    <Button type="submit">Submit</Button>
+                                </Navbar.Form>
+                            </NavItem>
+                        </LinkContainer>
                         </Nav>
                 </Navbar.Collapse>
             </Navbar>
