@@ -26,6 +26,12 @@ namespace bangazon.Controllers
             return Ok(_storage.GetAllProductTypes());
         }
 
+        [HttpGet("lastproducts")]
+        public IActionResult GetLastThreeProductsByCategory()
+        {
+            return Ok(_storage.GetLastThreeProductsByCategory());
+        }
+
         [HttpGet("{id}")]
         public IActionResult GetSingleProductType(int id)
         {

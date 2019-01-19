@@ -1,0 +1,17 @@
+.checkbox-instock {
+  /* background-color: red; */
+}
+
+.checkbox {
+  display: inline-block;
+  vertical-align: middle;
+  padding: 4px 0px 0px 5px;
+}
+
+.checkbox-label {
+  background: none;
+  color: black;
+  font-weight: normal;
+  vertical-align: middle;
+  margin: 0px 0px 0px 30px;
+}

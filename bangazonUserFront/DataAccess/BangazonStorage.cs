@@ -13,32 +13,39 @@ namespace bangazon.DataAccess
     {
         private const string ConnectionInfo = "Server = (local); Database=Bangazon; Trusted_Connection=True";
 
-        public List<ProductType> GetAllProductTypes()
+        public IEnumerable<ProductType> GetAllProductTypes()
         {
             using (var db = new SqlConnection(ConnectionInfo))
             {
                 db.Open();
+                var result = db.Query<ProductType>(
+                    @"SELECT category, COUNT(*) as Count
+                    FROM product_types
+	                    INNER JOIN dbo.product ON dbo.product_types.id = dbo.product.categoryId
+                    GROUP BY category");
+                return result;
+            }
+        }
 
-                List<ProductType> ProductTypes = new List<ProductType>();
-
-                var command = db.CreateCommand();
-                command.CommandText = @"SELECT *
-                                        FROM product_types";
-
-                var reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    var currentProductType = new ProductType()
-                    {
-                        category = reader["category"].ToString(),
-                        id = (int)reader["id"]
-                    };
-
-                    ProductTypes.Add(currentProductType);
-                }
-
-                return ProductTypes;
+        public IEnumerable<ProductType> GetLastThreeProductsByCategory()
+        {
+            using (var db = new SqlConnection(ConnectionInfo))
+            {
+                db.Open();
+                var result = db.Query<ProductType>(
+                    @"WITH TOPTHREE AS (
+	                SELECT *, ROW_NUMBER()
+	                over (
+		                PARTITION BY product.categoryId
+		                ORDER BY product.id desc
+	                ) AS RowNo
+	                FROM product
+                )
+                SELECT * 
+                FROM TOPTHREE 
+	                JOIN product_types ON TOPTHREE.categoryId = product_types.id
+                WHERE RowNo <= 3");
+                return result;
             }
         }
 

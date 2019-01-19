@@ -6,6 +6,7 @@ import Users from './components/User/Users';
 import Login from './components/Login/Login';
 import Register from './components/Register/Register';
 import Home from './components/Home/Home';
+import Shop from './components/Shop/Shop';
 import Navibar from './components/Navibar/Navibar';
 import PaymentType from './components/PaymentType/PaymentType';
 
@@ -42,9 +43,8 @@ const PublicRoute = ({ component: Component, authed, ...rest }) => {
                     )
             }
         />
-
-    );
-};
+        )
+        };
 
 class App extends Component {
     displayName = App.name
@@ -82,7 +82,8 @@ class App extends Component {
                         />
                         <div>
                             <Switch>
-                              <Route path="/" exact component={Home} />
+                                <Route path="/" exact component={Home} />
+                                <Route component={Shop} path="/shop" />
                               <PublicRoute
                                 path="/register"
                                 authed={this.state.authed}

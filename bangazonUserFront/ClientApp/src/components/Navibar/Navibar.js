@@ -10,6 +10,10 @@ import authRequests from '../../firebaseRequests/auth';
 import './Navibar.css';
 
 export class Navibar extends Component {
+<<<<<<< HEAD
+=======
+
+>>>>>>> master
     render()
     {
         const { authed, runAway } = this.props;
@@ -43,7 +47,7 @@ export class Navibar extends Component {
                         :
                         (
                         <LinkContainer to="/products">
-                            <NavItem className="nav navbar-left" href="/products">View Categories</NavItem>
+                            <NavItem className="nav navbar-left" href="/shop">View Categories</NavItem>
                         </LinkContainer>
 
                         <LinkContainer to="/login">
