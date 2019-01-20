@@ -10,6 +10,7 @@ class Products extends Component {
     activeProduct: "",
     sidebar: "",
     showInStockOnly: false,
+    showMostRecentProducts: false,
     title: "",
     category: 0,
     description: "",
@@ -29,7 +30,8 @@ class Products extends Component {
         })
         this.setState({
           sidebar: this.props.sidebar,
-          showInStockOnly: this.props.showInStockOnly
+          showInStockOnly: this.props.showInStockOnly,
+          showMostRecentProducts: this.props.showMostRecentProducts
         });
         resolve (products);
       })
@@ -40,7 +42,8 @@ class Products extends Component {
   componentWillReceiveProps() {
     this.setState((state, props) => ({
       sidebar: props.sidebar,
-      showInStockOnly: props.showInStockOnly
+      showInStockOnly: props.showInStockOnly,
+      showMostRecentProducts: props.showMostRecentProducts
     }));
   }
 
@@ -52,7 +55,18 @@ class Products extends Component {
 
   render() {
     const { products } = this.state;
+    let i = 0;
     let output = products
+      // Show 20 newest products or not?
+      .filter(product => {
+        if (this.state.showMostRecentProducts && i < 20) {
+          i++;
+          return product;
+        } else if (!this.state.showMostRecentProducts) {
+          return product;
+        }
+      })
+      // Show in stock only?
       .filter(product => {
         if (this.state.showInStockOnly) {
           return product.quantity > 0;
@@ -60,12 +74,14 @@ class Products extends Component {
           return product;
         }
       })
+      // Shows All Products, if selected. Otherwise, it matches the sidebar state
       .filter(product => {
         return (
           product.category === this.state.sidebar ||
           this.state.sidebar === "All Products"
         );
       })
+      // Iterate through and build up each product for display
       .map(product => {
         const { title, category, description, price, quantity, id } = product;
         return (

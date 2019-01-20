@@ -34,7 +34,7 @@ namespace bangazon.DataAccess
                         product.quantity as quantity
                     FROM product
                         INNER JOIN dbo.product_types ON dbo.product.categoryId = dbo.product_types.id
-                    ORDER BY id");
+                    ORDER BY id desc");
                 return result;
             }
         }

@@ -10,24 +10,13 @@ class FilterProducts extends Component {
 
   toggleInStockCheckbox = e => {
     const { name } = e.target;
-    this.props.callbackFromParent(!this.state.inStock);
+    this.props.callbackFromParent(!this.state[name]);
     this.setState({ [name]: !this.state[name] });
   };
 
   toggleMostRecentCheckbox = e => {
-    if (this.state.mostRecent === false) {
-      // this will now show the 20 latest products
-      this.setState({mostRecent: true})
-      this.props.callbackFromParent(true);
-    }
-    else {
-      // this will show ALL products
-      this.setState({mostRecent: false})
-      this.props.callbackFromParentRecentProducts(false);
-    }
-
     const { name } = e.target;
-    this.props.callbackFromParentRecentProducts(!this.state.inStock);
+    this.props.callbackFromParentRecentProducts(!this.state[name]);
     this.setState({ [name]: !this.state[name] });
   };
 
