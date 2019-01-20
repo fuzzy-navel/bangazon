@@ -9,6 +9,7 @@ import Register from './components/Register/Register';
 import Home from './components/Home/Home';
 import Navibar from './components/Navibar/Navibar';
 import Shop from './components/Shop/Shop';
+import BrowseCategories from './components/Browse/BrowseCategories';
 //import { Layout } from './components/Layout';
 //import { Home } from './components/Home';
 //import { FetchData } from './components/FetchData';
@@ -96,6 +97,13 @@ class App extends Component {
                                 authed={this.state.authed}
                                 component={Shop}
                             />
+
+                            <PublicRoute
+                                path="/browseCategories"
+                                authed={this.state.authed}
+                                component={BrowseCategories}
+                            />
+
                         </div>
                     </div>
                 </BrowserRouter>

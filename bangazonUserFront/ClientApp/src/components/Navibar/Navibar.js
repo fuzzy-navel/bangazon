@@ -68,7 +68,7 @@ export class Navibar extends Component {
                         )
                         }
                                 
-                        <LinkContainer to="/search">
+                        <LinkContainer to="/browseCategories">
                             <NavItem>
                                 <Navbar.Form pullLeft>
                                     <FormGroup>
