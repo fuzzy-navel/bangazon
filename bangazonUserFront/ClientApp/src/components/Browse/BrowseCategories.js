@@ -2,12 +2,36 @@
 
 import './Search.css';
 
-//import fb...
+//import placeholder for firebase
 
-class Search extends React.Component {
+class BrowseCategories extends React.Component {
     state = {
-        value: '',
+        categories: [],
+        originalCategories: [],
+        value: ''
+    };
+
+    //*********SEARCH DATABASE FOR USER INPUT AND COLLECT MATCHES*******//
+    componentDidMount() {
+        const keepers = [];
+
     }
 
 
+    //***********STANDARDIZE CASE OF SEARCH & DATABASE INPUT************//
+    componentWillReceiveProps() {
+        const searchInput = this.props.value;
+        const categories = [...this.state.originalCategories];
+        const filterCategories;
+    }
+
+    render() {
+
+    }
+
+    return(
+
+    );
 }
+
+export default BrowseCategories
