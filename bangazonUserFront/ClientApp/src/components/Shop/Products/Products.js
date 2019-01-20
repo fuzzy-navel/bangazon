@@ -57,20 +57,20 @@ class Products extends Component {
     const { products } = this.state;
     let i = 0;
     let output = products
+    // Show in stock only?
+      .filter(product => {
+        if (this.state.showInStockOnly) {
+          return product.quantity > 0;
+        } else {
+          return product;
+        }
+      })
       // Show 20 newest products or not?
       .filter(product => {
         if (this.state.showMostRecentProducts && i < 20) {
           i++;
           return product;
         } else if (!this.state.showMostRecentProducts) {
-          return product;
-        }
-      })
-      // Show in stock only?
-      .filter(product => {
-        if (this.state.showInStockOnly) {
-          return product.quantity > 0;
-        } else {
           return product;
         }
       })
