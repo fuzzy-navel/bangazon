@@ -56,9 +56,8 @@ class ProductsAndCategories extends Component {
   };
 
   productsCallback = productId => {
-    console.log("products callback", productId);
-    this.determineDisplayedComponent(productId);
     this.setState({ productId });
+    this.determineDisplayedComponent(productId);
   };
 
   filterCallback = showInStockOnly => {
@@ -102,7 +101,8 @@ class ProductsAndCategories extends Component {
             <Categories
               className="reset-margin-padding"
               sidebar={this.state.sidebar}
-              callbackFromParent={this.sidebarCallback}
+              callbackFromParentCategory={this.sidebarCallback}
+              callbackFromParentProduct={this.productsCallback}
             />
           ) : null}
         </Col>
