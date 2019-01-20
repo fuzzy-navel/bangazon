@@ -9,6 +9,23 @@ import authRequests from '../../firebaseRequests/auth';
 import './Navibar.css';
 
 export class Navibar extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { value: '' };
+
+        this.handleInputChange = this.handleInputChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    handleInputChange = (event) => {
+        this.setState({ value: event.target.value });
+        
+    }
+
+    handleSubmit = (event) => {
+        alert('A search term was submitted: ' + this.state.value);
+        event.preventDefault();
+    }
+
     render()
     {
         const { authed, runAway } = this.props;
@@ -55,7 +72,13 @@ export class Navibar extends Component {
                             <NavItem>
                                 <Navbar.Form pullLeft>
                                     <FormGroup>
-                                        <FormControl type="text" placeholder="search for product" />
+                                        <FormControl
+                                            onSubmit={this.handleSubmit}
+                                            type="text"
+                                            placeholder="search for product"
+                                            value={this.state.value}
+                                            onChange={this.handleInputChange}
+                                        />
                                     </FormGroup>{' '}
                                     <Button type="submit">Submit</Button>
                                 </Navbar.Form>
