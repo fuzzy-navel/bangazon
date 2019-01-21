@@ -18,37 +18,42 @@ class BrowseCategories extends React.Component {
         ProductRequests
             .GetAll()
             .then((categories) => {
-                this.setState({ originalCategories: categories });
-                const copyOfOriginal = [...categories];
-                copyOfOriginal.forEach((category) => {
-                    const foundCategory = keepers.find((keepCategory) => {
-                        return keepCategory.uniqueCategoryKey === category.uniqueCategoryKey;
-                    });
-                    if (foundCategory === undefined) {
-                        keepers.push(category);
-                    }
+                this.setState({
+                    categories: categories
                 });
-                this.setState({ categories: keepers });
             })
-            .catch((error) => {
-                console.error('error with retrieving categories', error);
-            });
+            .catch(error => console.log(error));
+                //this.setState({ originalCategories: categories });
+            //    const copyOfOriginal = [...categories];
+            //    copyOfOriginal.forEach((categories) => {
+            //        const foundCategory = keepers.find((keepCategory) => {
+            //            return keepCategory.uniqueCategoryKey === categories.uniqueCategoryKey;
+            //        });
+            //        if (foundCategory === undefined) {
+            //            keepers.push(categories);
+            //        }
+            //    });
+            //    this.setState({ categories: keepers });
+            //})
+            //.catch((error) => {
+            //    console.error('error with retrieving categories', error);
+            //});
 
     }
 
 
     //***********STANDARDIZE CASE OF SEARCH & DATABASE INPUT************//
-    componentWillReceiveProps() {
-        const searchInput = this.props.value;
-        const categories = [...this.state.originalCategories];
-        const filterCategories = categories.filter(category => category.category.toLowerCase().includes(searchInput.toLowerCase()));
-        this.setState({ categories: filterCategories });
-    }
+    //componentWillReceiveProps() {
+    //    const searchInput = this.props.value;
+    //    const categories = [...this.state.originalCategories];
+    //    const filterCategories = categories.filter(category => category.category.toLowerCase().includes(searchInput.toLowerCase()));
+    //    this.setState({ categories: filterCategories });
+    //}
 
     render() {
         const { categories } = this.state;
         const categoryComponents = categories.map((category) => (
-            <div key={category.id}>
+            //<div key={categoryId}>
                 <table className="table table-bordered table-striped">
                     <tbody>
                         <tr>
@@ -56,7 +61,7 @@ class BrowseCategories extends React.Component {
                         </tr>
                     </tbody>
                 </table>
-            </div>
+            //</div>
 
 
         ));
