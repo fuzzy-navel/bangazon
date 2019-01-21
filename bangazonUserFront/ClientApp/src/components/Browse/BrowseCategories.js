@@ -1,4 +1,5 @@
 ﻿import React from 'react';
+import { Table } from 'react-bootstrap';
 
 import './BrowseCategories.css';
 import ProductRequests from '../Requests/ProductRequests';
@@ -23,21 +24,21 @@ class BrowseCategories extends React.Component {
                 });
             })
             .catch(error => console.log(error));
-                //this.setState({ originalCategories: categories });
-            //    const copyOfOriginal = [...categories];
-            //    copyOfOriginal.forEach((categories) => {
-            //        const foundCategory = keepers.find((keepCategory) => {
-            //            return keepCategory.uniqueCategoryKey === categories.uniqueCategoryKey;
-            //        });
-            //        if (foundCategory === undefined) {
-            //            keepers.push(categories);
-            //        }
-            //    });
-            //    this.setState({ categories: keepers });
-            //})
-            //.catch((error) => {
-            //    console.error('error with retrieving categories', error);
-            //});
+        //this.setState({ originalCategories: categories });
+        //    const copyOfOriginal = [...categories];
+        //    copyOfOriginal.forEach((categories) => {
+        //        const foundCategory = keepers.find((keepCategory) => {
+        //            return keepCategory.uniqueCategoryKey === categories.uniqueCategoryKey;
+        //        });
+        //        if (foundCategory === undefined) {
+        //            keepers.push(categories);
+        //        }
+        //    });
+        //    this.setState({ categories: keepers });
+        //})
+        //.catch((error) => {
+        //    console.error('error with retrieving categories', error);
+        //});
 
     }
 
@@ -54,7 +55,8 @@ class BrowseCategories extends React.Component {
         const { categories } = this.state;
         const categoryComponents = categories.map((category) => (
             <div key={category.categoryId}>
-                <table className="table table-bordered table-striped">
+                <Table className="table table-bordered table-striped">
+
                     <tbody>
                         <tr>
                             <td>{category.category}</td>
@@ -65,19 +67,32 @@ class BrowseCategories extends React.Component {
 
                         </tr>
                     </tbody>
-                </table>
+                </Table>
             </div>
 
 
         ));
 
         return (
-            <div className="panel panel-primary">
-                <div className="panel-heading">Categories</div>
-                <div className="panel-body">
-                    <ul className="categoryComp">{categoryComponents}</ul>
-                </div>
+            <div >
+
+                <Table hover>
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Item</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                            <th>Stock</th>
+                        </tr>
+                    </thead>
+
+            
+
+                </Table>
             </div>
+
+           
         );
     }
 }
