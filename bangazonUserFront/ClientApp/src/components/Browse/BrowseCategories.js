@@ -53,15 +53,20 @@ class BrowseCategories extends React.Component {
     render() {
         const { categories } = this.state;
         const categoryComponents = categories.map((category) => (
-            //<div key={categoryId}>
+            <div key={category.categoryId}>
                 <table className="table table-bordered table-striped">
                     <tbody>
                         <tr>
                             <td>{category.category}</td>
+                            <td>{category.title}</td>
+                            <td>{category.description}</td>
+                            <td>{category.price}</td>
+                            <td>{category.quantity}</td>
+
                         </tr>
                     </tbody>
                 </table>
-            //</div>
+            </div>
 
 
         ));
