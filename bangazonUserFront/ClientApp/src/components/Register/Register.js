@@ -28,7 +28,6 @@ class Register extends React.Component {
                 newCustomer.id = data.user.uid;
                 newCustomer.date_joined = new Date().toISOString();
                 newCustomer.active = true;
-                console.log(newCustomer);
                 customerRequests.setAuthStuff()
                     .then(() => {
                         customerRequests.addCustomer(newCustomer);
