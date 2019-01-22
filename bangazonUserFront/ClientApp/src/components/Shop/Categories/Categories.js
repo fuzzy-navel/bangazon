@@ -28,21 +28,7 @@ class Products extends Component {
       .catch(error => reject(error));
     });
   }
-  // componentDidMount() {
-  //   this.setState({
-  //     categories: [
-  //       "Automotive",
-  //       "Books",
-  //       "Computers",
-  //       "Food and Drink",
-  //       "Health and Beauty",
-  //       "Pet Supplies",
-  //       "Sports",
-  //       "Tools",
-  //       "Toys"
-  //     ]
-  //   });
-  // }
+
   buttonClicked = e => {
     const incomingIdOrCategory = e.target.id;
     // if incoming is a number, set the id and pass back the id
@@ -89,12 +75,15 @@ class Products extends Component {
                 alt={category.category}
                 id={category.category}
                 onClick={this.buttonClicked}
+                className="center-block"
                 responsive
               />
             </div>
-            <p id={id1} onClick={this.buttonClicked} >{title1}</p>
-            <p id={id2} onClick={this.buttonClicked} >{title2}</p>
-            <p id={id3} onClick={this.buttonClicked} >{title3}</p>
+            <div className="panel-category-new-items">
+              <p className="text-center" id={id1} onClick={this.buttonClicked} >{title1}</p>
+              <p className="text-center" id={id2} onClick={this.buttonClicked} >{title2}</p>
+              <p className="text-center" id={id3} onClick={this.buttonClicked} >{title3}</p>
+            </div>
           </Panel>
         </Col>
       );
