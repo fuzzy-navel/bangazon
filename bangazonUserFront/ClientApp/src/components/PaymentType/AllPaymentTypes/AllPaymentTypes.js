@@ -10,7 +10,7 @@ class AllPaymentTypes extends Component {
     }
 
     componentDidMount() {
-        paymentRequest.getPayments()
+        paymentRequest.getCustomerWithPaymentTypes(3)
             .then((res) => {
                 this.setState({ payments: res });
             })
@@ -18,6 +18,16 @@ class AllPaymentTypes extends Component {
                 console.error('No payments returned', err);
             })
     }
+
+    //deletePaymentClick = () => {
+    //    return new Promise((resolve, reject) => {
+    //        deletePayment
+    //            .then(response => {
+    //                resolve(response);
+    //            })
+    //            .catch(err => reject(err));
+    //    });
+    //};
 
     render() {
         const paymentComponents = this.state.payments.map((payment) => {
@@ -35,12 +45,12 @@ class AllPaymentTypes extends Component {
                         <div className="title col">Customer Id</div>
                         <div className="value col">{payment.customer_id}</div>
                         <div className="w-100"></div>
-                        <div className="col">Status</div>
-                        <div className="col value">{payment.active}</div>
-                        <div className="w-100"></div>
                         <div className="col">Card Name</div>
                         <div className="value col">{payment.title}</div>
                         <div className="w-100"></div>
+                        <Button
+                            onClick={this.deletePaymentClick}
+                        >Delete</Button>
                         
                     </div>
                 </div>

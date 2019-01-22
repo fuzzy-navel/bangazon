@@ -12,13 +12,16 @@ namespace bangazon.DataAccess
     {
         private const string ConnectionString = "Server = (local); Database=Bangazon; Trusted_Connection=True";
 
-       public IEnumerable<PaymentType>GetAllPaymentTypes()
+        public IEnumerable<PaymentType> GetAllPaymentTypes()
         {
             using (var connection = new SqlConnection(ConnectionString))
             {
                 connection.Open();
-                var result = connection.Query<PaymentType>(@"select * from payment_type where customer_id = 3");
 
+                var result = connection.Query<PaymentType>(@"select p.account_number, p.title, active = 1, c.first_name, c.last_name, p.customer_id
+                                                             from payment_type p
+                                                             join customer c on c.id = p.customer_id 
+                                                             where customer_id = @id");
                 return result;
 
             }
@@ -65,5 +68,16 @@ namespace bangazon.DataAccess
             }
         }
 
+        //public bool DeletePayment(int id)
+        //{
+        //    using (var connection = new SqlConnection(ConnectionSting))
+        //    {
+        //        connection.Open();
+
+        //        var result = connection.Execute(@"Delete 
+        //                                        from [dbo].[payment_types]
+        //                                        where id =@id")
+        //    }
+        //}
     }
 }

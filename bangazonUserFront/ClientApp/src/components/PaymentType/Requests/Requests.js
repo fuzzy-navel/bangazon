@@ -7,8 +7,8 @@ const postPayment = input => {
             .post(`api/paymentType`, {
                 account_number: input.account_number,
                 customer_id: input.customer_id,
-                
-                title: input.price,
+
+                title: input.title,
 
             })
             .then(res =>
@@ -18,22 +18,19 @@ const postPayment = input => {
     });
 }
 
-//const getPayment = id => {
-//    return new Promise((resolve, reject) => {
-//        axios
-//            .get(`api/paymentType/${id}`)
-//            .then(payment => resolve(payment.data[0]))
-//            .catch(error => reject(error));
-//    });
-//}
 
-const getPayments = () => {
+
+const getCustomerWithPaymentTypes = (id) => {
     return new Promise((resolve, reject) => {
         axios
-            .get(`/api/paymentType/`)
-            .then(payment => resolve(payment.data))
-            .catch(error => reject(error));
+            .get(`api/customer/${id}?include=payments`)
+            .then((res) => {
+                if (res !== null) {
+                    resolve(res.data[0].paymentTypes);
+                }
+            })
+            .catch((err) => reject(err));
     });
-}
+};
 
-export default { postPayment, getPayments};
+export default { postPayment, getCustomerWithPaymentTypes};
