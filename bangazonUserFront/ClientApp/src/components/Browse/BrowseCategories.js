@@ -4,96 +4,52 @@ import { Table } from 'react-bootstrap';
 import './BrowseCategories.css';
 import ProductRequests from '../Requests/ProductRequests';
 
-//import placeholder for firebase
 
 class BrowseCategories extends React.Component {
-    state = {
-        categories: [],
-        originalCategories: [],
-        value: ''
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            data: [],
+            filteredData: []
+        };
+    }
 
-    //*********SEARCH DATABASE FOR USER INPUT AND COLLECT MATCHES*******//
+    
     componentDidMount() {
-        const keepers = [];
         ProductRequests
             .GetAll()
-            .then((categories) => {
+            .then((data) => {
                 this.setState({
-                    categories: categories
+                    data: data
                 });
             })
             .catch(error => console.log(error));
-        //this.setState({ originalCategories: categories });
-        //    const copyOfOriginal = [...categories];
-        //    copyOfOriginal.forEach((categories) => {
-        //        const foundCategory = keepers.find((keepCategory) => {
-        //            return keepCategory.uniqueCategoryKey === categories.uniqueCategoryKey;
-        //        });
-        //        if (foundCategory === undefined) {
-        //            keepers.push(categories);
-        //        }
-        //    });
-        //    this.setState({ categories: keepers });
-        //})
-        //.catch((error) => {
-        //    console.error('error with retrieving categories', error);
-        //});
+    }
+
+    //*********SEARCH DATABASE FOR USER INPUT AND COLLECT MATCHES*******//
+
+    filterData = (dataFilter) => {
+        let filteredData = this.state.data;
+        filteredData = filteredData.filter((data) => {
+            const dataName = data.title.toLowerCase();
+            return dataFilter.indexOf(
+                dataFilter.toLowerCase()) !== -1;
+        });
+        this.setState({
+            filteredData
+        });
 
     }
 
-
-    //***********STANDARDIZE CASE OF SEARCH & DATABASE INPUT************//
-    //componentWillReceiveProps() {
-    //    const searchInput = this.props.value;
-    //    const categories = [...this.state.originalCategories];
-    //    const filterCategories = categories.filter(category => category.category.toLowerCase().includes(searchInput.toLowerCase()));
-    //    this.setState({ categories: filterCategories });
-    //}
-
     render() {
-        const { categories } = this.state;
-        const categoryComponents = categories.map((category) => (
-            <div key={category.categoryId}>
-                <Table className="table table-bordered table-striped">
-
-                    <tbody>
-                        <tr>
-                            <td>{category.category}</td>
-                            <td>{category.title}</td>
-                            <td>{category.description}</td>
-                            <td>{category.price}</td>
-                            <td>{category.quantity}</td>
-
-                        </tr>
-                    </tbody>
-                </Table>
-            </div>
-
-
-        ));
-
         return (
-            <div >
-
-                <Table hover>
-                    <thead>
-                        <tr>
-                            <th>Category</th>
-                            <th>Item</th>
-                            <th>Description</th>
-                            <th>Price</th>
-                            <th>Stock</th>
-                        </tr>
-                    </thead>
-
-            
-
-                </Table>
+            <div className="panel panel-primary">
+                <div className="panel-body">
+                    <ul className="categoryComp">{this.props.data.dataFilter}</ul>
+                </div>
             </div>
-
-           
-        );
+            );
+        
     }
 }
 

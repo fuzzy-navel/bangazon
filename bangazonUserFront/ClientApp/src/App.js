@@ -33,12 +33,12 @@ const PrivateRoute = ({ component: Component, authed, ...rest }) => {
     );
 };
 
-const PublicRoute = ({ component: Component, authed, ...rest }) => {
+const PublicRoute = ({ component: Component, data, ...rest }) => {
     return (
         <Route
             {...rest}
             render={props =>
-                <Component {...props} />
+                <Component data={data} {...props} />
             }
         />
     );
@@ -48,7 +48,14 @@ class App extends Component {
     displayName = App.name
 
     state = {
-        authed: false
+        authed: false,
+        dataFilter: 'blah'
+    }
+
+    handleInputChange = (e) => {
+        this.setState({
+            dataFilter: e.target.value
+        });
     }
 
     componentDidMount() {
@@ -77,6 +84,8 @@ class App extends Component {
                         <Navibar
                             authed={this.state.authed}
                             runAway={this.runAway}
+                            handleInputChange={this.handleInputChange}
+                            dataFilter={this.state.dataFilter}
                         />
                         <div>
                             <Switch>
@@ -102,6 +111,8 @@ class App extends Component {
                                 path="/browseCategories"
                                 authed={this.state.authed}
                                 component={BrowseCategories}
+                                data={this.state}
+                              
                             />
 
                         </div>
