@@ -8,7 +8,7 @@ class AddPaymentType extends Component {
     state = {
         account_number: 0,
         title: '',
-        customer_id: 3,
+        customer_id: '',
         active: true,
         id: 0,
     }
@@ -57,22 +57,6 @@ class AddPaymentType extends Component {
                         type="name"
                         name="title"
                         value={this.state.title}
-                        onChange={this.handleChange}
-                    /><br />
-                    <Label>Customer Id: </Label>
-                    <br/>
-                    <input
-                        type="number"
-                        name="customer_id"
-                        value={customer_id}
-                        onChange={this.handleChange}
-                    /><br />
-                    <Label>Status: </Label>
-                    <br/>
-                    <input
-                        type="number"
-                        name="active"
-                        value={this.state.active}
                         onChange={this.handleChange}
                     /><br />
                 </Form>
