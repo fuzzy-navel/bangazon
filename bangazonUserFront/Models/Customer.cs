@@ -11,7 +11,7 @@ namespace bangazon.Models
     [Required(ErrorMessage = "First name is Required")]
     public string first_name {get; set;}
 
-    public int id {get; set;}
+    public string id {get; set;}
 
     [Required(ErrorMessage = "Last name is required")]
     public string last_name { get; set; }

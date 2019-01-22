@@ -128,8 +128,8 @@ namespace bangazon.DataAccess
       {
         connection.Open();
 
-        var result = connection.Execute(@"INSERT INTO [dbo].[customer]([first_name],[last_name],[date_joined],[active])
-                             VALUES (@first_name,@last_name,@date_joined,@active)", customer);
+        var result = connection.Execute(@"INSERT INTO [dbo].[customer]([first_name],[last_name],[date_joined],[active],[id])
+                             VALUES (@first_name,@last_name,@date_joined,@active,@id)", customer);
 
         return result == 1;
       }
