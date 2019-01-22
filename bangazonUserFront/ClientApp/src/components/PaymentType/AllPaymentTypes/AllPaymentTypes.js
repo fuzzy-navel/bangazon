@@ -10,7 +10,7 @@ class AllPaymentTypes extends Component {
     }
 
     componentDidMount() {
-        paymentRequest.getCustomerWithPaymentTypes(3)
+        paymentRequest.getCustomerWithPaymentTypes()
             .then((res) => {
                 this.setState({ payments: res });
             })

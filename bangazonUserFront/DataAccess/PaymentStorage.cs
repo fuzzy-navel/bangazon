@@ -18,7 +18,7 @@ namespace bangazon.DataAccess
             {
                 connection.Open();
 
-                var result = connection.Query<PaymentType>(@"select p.account_number, p.title, active = 1, c.first_name, c.last_name, p.customer_id
+                var result = connection.Query<PaymentType>(@"select p.account_number, p.title, c.first_name, c.last_name, p.customer_id
                                                              from payment_type p
                                                              join customer c on c.id = p.customer_id 
                                                              where customer_id = @id");

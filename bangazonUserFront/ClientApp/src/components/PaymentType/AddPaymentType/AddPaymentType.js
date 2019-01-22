@@ -29,7 +29,7 @@ class AddPaymentType extends Component {
             addPayment
                 .postPayment(this.state)
                 .then(response => {
-                    
+                    this.props.history.push('/paymentTypes/')
                     resolve(response);
                 })
                 .catch(err => reject(err));

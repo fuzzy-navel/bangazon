@@ -5,7 +5,6 @@ class SinglePaymentType extends Component {
     render() {
         return (
             <div className="SinglePay">
-                <h2>SinglePay</h2>
             </div>
             );
     }

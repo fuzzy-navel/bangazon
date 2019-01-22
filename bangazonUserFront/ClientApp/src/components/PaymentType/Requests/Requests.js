@@ -7,7 +7,6 @@ const postPayment = input => {
             .post(`api/paymentType`, {
                 account_number: input.account_number,
                 customer_id: input.customer_id,
-
                 title: input.title,
 
             })
