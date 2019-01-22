@@ -16,9 +16,12 @@
   width: 100%;
   box-shadow: 0px 0px 0px 0px black;
   transition: box-shadow 0.15s linear;
-  margin: 0.5em; /* Increased margin since the box-shado expands outside the element, like outline */
-  border: 3px solid white;
-  background-color: white;
+  margin: 0.5em;
+  border: none;
+  background: #fffcfc; /* Old browsers */
+  background: -moz-linear-gradient(left, #fffcfc 0%, #e5ebee 33%, #d7dee3 61%, #fffcfc 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(left, #fffcfc 0%,#e5ebee 33%,#d7dee3 61%,#fffcfc 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, #fffcfc 0%,#e5ebee 33%,#d7dee3 61%,#fffcfc 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
 .sidebar-button:hover {
