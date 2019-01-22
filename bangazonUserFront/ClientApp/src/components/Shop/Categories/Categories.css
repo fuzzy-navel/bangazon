@@ -1,7 +1,15 @@
 .panel-category {
-  height: 400px;
+  min-height: 430px;
 }
 
 .categories {
   margin-top: 29px;
+}
+
+.image-category {
+  text-align: center;
+}
+
+.panel-category-new-items {
+  overflow: auto;
 }

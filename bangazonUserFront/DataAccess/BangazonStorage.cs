@@ -34,17 +34,17 @@ namespace bangazon.DataAccess
                 db.Open();
                 var result = db.Query<ProductType>(
                     @"WITH TOPTHREE AS (
-	                SELECT *, ROW_NUMBER()
-	                over (
-		                PARTITION BY product.categoryId
-		                ORDER BY product.id desc
-	                ) AS RowNo
-	                FROM product
-                )
-                SELECT * 
-                FROM TOPTHREE 
-	                JOIN product_types ON TOPTHREE.categoryId = product_types.id
-                WHERE RowNo <= 3");
+	                    SELECT *, ROW_NUMBER()
+	                    over (
+		                    PARTITION BY product.categoryId
+		                    ORDER BY product.id desc
+	                    ) AS RowNo
+	                    FROM product
+                        )
+                        SELECT TOPTHREE.id as prodId, TOPTHREE.price, TOPTHREE.title, TOPTHREE.description, TOPTHREE.quantity, product_types.category, product_types.id
+                        FROM TOPTHREE 
+	                        JOIN product_types ON TOPTHREE.categoryId = product_types.id
+                        WHERE RowNo <= 3");
                 return result;
             }
         }

@@ -13,13 +13,15 @@ class ProductsAndCategories extends Component {
   state = {
     products: [],
     sidebar: "All Categories",
-    showInStockOnly: false,
     activeProduct: 0,
     productId: null,
     displaySingleProduct: false,
     displayProducts: false,
     displayCategories: true,
-    displayCart: false
+    displayCart: false,
+    // product display filters:
+    showInStockOnly: false,
+    showMostRecentProducts: false,
   };
 
   determineDisplayedComponent = a => {
@@ -56,13 +58,16 @@ class ProductsAndCategories extends Component {
   };
 
   productsCallback = productId => {
-    console.log("products callback", productId);
-    this.determineDisplayedComponent(productId);
     this.setState({ productId });
+    this.determineDisplayedComponent(productId);
   };
 
-  filterCallback = showInStockOnly => {
+  filterInStockCallback = showInStockOnly => {
     this.setState({ showInStockOnly });
+  };
+
+  filterMostRecentProducts = showMostRecentProducts => {
+    this.setState({ showMostRecentProducts });
   };
 
   render() {
@@ -88,12 +93,14 @@ class ProductsAndCategories extends Component {
             <div>
               <FilterProducts
                 className="reset-margin-padding"
-                callbackFromParent={this.filterCallback}
+                callbackFromParent={this.filterInStockCallback}
+                callbackFromParentRecentProducts={this.filterMostRecentProducts}
               />
               <Products
                 className="reset-margin-padding"
                 sidebar={this.state.sidebar}
                 showInStockOnly={this.state.showInStockOnly}
+                showMostRecentProducts={this.state.showMostRecentProducts}
                 callbackFromParent={this.productsCallback}
               />
             </div>
@@ -102,7 +109,8 @@ class ProductsAndCategories extends Component {
             <Categories
               className="reset-margin-padding"
               sidebar={this.state.sidebar}
-              callbackFromParent={this.sidebarCallback}
+              callbackFromParentCategory={this.sidebarCallback}
+              callbackFromParentProduct={this.productsCallback}
             />
           ) : null}
         </Col>
