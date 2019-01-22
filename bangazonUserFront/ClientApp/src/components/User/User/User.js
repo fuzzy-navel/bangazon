@@ -16,7 +16,7 @@ class User extends Component
   { 
     requests.setAuthStuff();
 
-    requests.getUser(3).then((res) =>
+    requests.getUser().then((res) =>
     {
       this.setState({ user: res });
     }).catch((err) =>
@@ -32,18 +32,17 @@ class User extends Component
         <h3>User Page</h3>
         <div className="row">
           <div className="col-md-3">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <h3 class="panel-title userName">{this.state.user.first_name} {this.state.user.last_name}</h3>
+            <div className="panel panel-default">
+              <div className="panel-heading">
+                <h3 className="panel-title userName">{this.state.user.first_name} {this.state.user.last_name}</h3>
               </div>
-              <div class="panel-body">
+              <div className="panel-body">
                 <h4>Customer Since: {this.state.user.date_joined}</h4>
                 <h4>Id: {this.state.user.id}</h4>
               </div>
             </div>
             <AllPaymentTypes />
             <AddPaymentTypes />
-            <SinglePaymentType />
           </div>
         </div>
       </div>
