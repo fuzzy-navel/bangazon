@@ -1,0 +1,27 @@
+html {
+  background: url("https://images.unsplash.com/photo-1472851294608-062f824d29cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2250&q=80") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-color: hsla(0,0%,100%,0.70);
+  background-blend-mode: overlay;
+  background-repeat: no-repeat;
+}
+
+html::after {
+  content: "";
+  display: block;
+  position: absolute;
+  z-index: -1;
+  top: -2;
+  left: -2;
+  bottom: 0;
+  right: 0;
+  /* background:rgba(255,255,255,0.25); */
+  background-repeat: repeat;
+  height: 100%;
+  /* background-attachment: fixed; */
+  /* filter: alpha(opacity=20); */
+  /* opacity: 0.5; */
+}

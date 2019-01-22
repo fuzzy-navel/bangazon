@@ -63,6 +63,10 @@ namespace bangazon.Controllers
             string message = "You need to fill out both first and last name fields, before submitting the form.";
             return BadRequest(message);
          }
+         if (customer.date_joined == null)
+         {
+             customer.date_joined = DateTime.Now;
+         }
         return Ok(_storage.AddCustomer(customer));
       }
 

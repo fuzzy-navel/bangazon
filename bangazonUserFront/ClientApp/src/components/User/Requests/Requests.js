@@ -48,4 +48,17 @@ const getUser = (id) =>
   });
 };
 
-export default { getUser, setAuthStuff }
+const addCustomer = (customer) => {
+    setAuthStuff();
+    return new Promise((resolve, reject) => {
+        axios.post(`api/customer`, customer)
+            .then((result) => {
+                resolve(result);
+            })
+            .catch((err) => {
+                reject(err);
+            });
+    });
+};
+
+export default { getUser, addCustomer, setAuthStuff }

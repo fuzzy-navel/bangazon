@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'; 
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import firebase from 'firebase';
 import fbConnection from './firebaseRequests/connection';
 import Users from './components/User/Users';
@@ -82,7 +82,6 @@ class App extends Component {
                         <div>
                             <Switch>
                                 <Route path="/" exact component={Home} />
-                                <Route component={Shop} path="/shop" />
                               <PublicRoute
                                 path="/register"
                                 authed={this.state.authed}
@@ -98,7 +97,7 @@ class App extends Component {
                               <PrivateRoute path="/paymentTypes" authed={this.state.authed} component={PaymentType} />
                             </Switch>
 
-                           
+
                             <PublicRoute
                                 path="/shop"
                                 authed={this.state.authed}

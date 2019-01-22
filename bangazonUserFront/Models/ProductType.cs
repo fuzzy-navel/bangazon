@@ -9,6 +9,7 @@ namespace bangazon.Models
     {
         public string category { get; set; }
         public int? id { get; set; }
+        public int? prodId { get; set; }
         public int? count { get; set; }
         public string title { get; set; }
     }
