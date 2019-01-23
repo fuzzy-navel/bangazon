@@ -42,15 +42,28 @@ class BrowseCategories extends React.Component {
     }
 
     render() {
+        const { data } = this.state;
+        const dataComponent = data.map((data) => (
+            <div key={data.id}>
+                <table className="table table-bordered table-striped">
+                    <tbody>
+                        <tr>
+                            <td>{data.title}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        ));
         return (
             <div className="panel panel-primary">
                 <div className="panel-body">
-                    <ul className="categoryComp">{this.props.data.dataFilter}</ul>
+                    <ul className="categoryComp">{dataComponent}</ul>
                 </div>
             </div>
             );
         
-    }
+    }//this.props.data.dataFilter
 }
 
 export default BrowseCategories;
