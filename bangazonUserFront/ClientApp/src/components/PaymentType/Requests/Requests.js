@@ -1,15 +1,15 @@
 ﻿import axios from 'axios';
+import firebase from 'firebase';
 
 
 const postPayment = input => {
+  var user = firebase.auth().currentUser;
     return new Promise((resolve, reject) => {
         axios
             .post(`api/paymentType`, {
                 account_number: input.account_number,
-                customer_id: input.customer_id,
-                
-                title: input.price,
-
+                customer_id: user.uid,                
+                title: input.title,
             })
             .then(res =>
                 resolve(res))
@@ -36,4 +36,18 @@ const getPayments = () => {
     });
 }
 
-export default { postPayment, getPayments};
+const getCustomerWithPaymentTypes = () => {
+  var user = firebase.auth().currentUser;
+  return new Promise((resolve, reject) => {
+    axios
+      .get(`api/customer/${user.uid}?include=payments`)
+      .then((res) => {
+        if (res !== null) {
+          resolve(res.data[0].paymentTypes);
+        }
+      })
+      .catch((err) => reject(err));
+  });
+};
+
+export default { postPayment, getPayments, getCustomerWithPaymentTypes};

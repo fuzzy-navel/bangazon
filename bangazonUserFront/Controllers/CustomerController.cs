@@ -39,7 +39,7 @@ namespace bangazon.Controllers
       }
 
       [HttpGet("{id}")]
-      public IActionResult GetCustomerById(int id, [FromQuery] string include)
+      public IActionResult GetCustomerById(string id, [FromQuery] string include)
       {
         if (include == "products")
         {
@@ -71,7 +71,7 @@ namespace bangazon.Controllers
       }
 
       [HttpPut("{id}")]
-      public IActionResult UpdateCustomer(Customer customer, int id)
+      public IActionResult UpdateCustomer(Customer customer, string id)
       {
           if (customer.first_name == "" || customer.last_name == "")
           {

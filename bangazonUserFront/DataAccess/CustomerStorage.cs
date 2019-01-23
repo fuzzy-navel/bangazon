@@ -30,7 +30,7 @@ namespace bangazon.DataAccess
       }
     }
 
-    public IEnumerable<Customer> GetCustomerById(int id)
+    public IEnumerable<Customer> GetCustomerById(string id)
     {
       using (var connection = new SqlConnection(conString))
       {
@@ -44,7 +44,7 @@ namespace bangazon.DataAccess
       }
     }
 
-    public IEnumerable<CustomerandProduct> GetCustomerandProduct(int id)
+    public IEnumerable<CustomerandProduct> GetCustomerandProduct(string id)
     {
       using (var connection = new SqlConnection(conString))
       {
@@ -65,7 +65,7 @@ namespace bangazon.DataAccess
       }
     }
 
-    public IEnumerable<CustomerandPayment> GetCustomerandPayments(int id)
+    public IEnumerable<CustomerandPayment> GetCustomerandPayments(string id)
     {
       using (var connection = new SqlConnection(conString))
       {
@@ -135,7 +135,7 @@ namespace bangazon.DataAccess
       }
     }
 
-    public bool UpdateCustomer(Customer customer, int id)
+    public bool UpdateCustomer(Customer customer, string id)
     {
       using (var connection = new SqlConnection(conString))
       {

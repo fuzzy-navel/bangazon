@@ -32,12 +32,13 @@ const setAuthStuff = () =>
   });
 };
 
-const getUser = (id) =>
+const getUser = () =>
 {
+  var user = firebase.auth().currentUser.uid;
   setAuthStuff();
   return new Promise((resolve, reject) =>
   {
-    axios.get(`api/customer/${id}`)
+    axios.get(`api/customer/${user}`)
       .then((result) =>
       {
         if (result !== null)
